@@ -72,6 +72,7 @@ include('init.php');
 // Before we get on with the functions, we need to define the initial style used for Calendar
 include('styles.php');
 
+include(RPBCALENDAR_ABSPATH.'admin.php');
 
 
 // Function to deal with events posted by a user when that user is deleted
@@ -136,6 +137,8 @@ function calendar_menu()
        // Note only admin can change calendar options
        add_submenu_page('calendar', __('Manage Categories','calendar'), __('Manage Categories','calendar'), 'manage_options', 'calendar-categories', 'manage_categories');
        add_submenu_page('calendar', __('Calendar Config','calendar'), __('Calendar Options','calendar'), 'manage_options', 'calendar-config', 'edit_calendar_config');
+
+       add_submenu_page('calendar', __('Manage Categories','calendar'), __('Manage Categories','calendar'), 'manage_options', 'rpbcalendar-categories', 'rpbcalendar_manage_categories');
      }
 }
 
