@@ -31,6 +31,8 @@ load_plugin_textdomain( 'calendar','wp-content/plugins/'.$plugin_dir, $plugin_di
 
 define('RPBCALENDAR_PLUGIN_DIR', basename(dirname(__FILE__)));
 define('RPBCALENDAR_ABSPATH'   , ABSPATH.'wp-content/plugins/'.RPBCALENDAR_PLUGIN_DIR.'/');
+define('RPBCALENDAR_URL'       , site_url().'/wp-content/plugins/'.RPBCALENDAR_PLUGIN_DIR.'/');
+
 
 // Define the tables used in Calendar
 global $wpdb;
@@ -138,7 +140,10 @@ function calendar_menu()
        add_submenu_page('calendar', __('Manage Categories','calendar'), __('Manage Categories','calendar'), 'manage_options', 'calendar-categories', 'manage_categories');
        add_submenu_page('calendar', __('Calendar Config','calendar'), __('Calendar Options','calendar'), 'manage_options', 'calendar-config', 'edit_calendar_config');
 
-       add_submenu_page('calendar', __('Manage Categories','calendar'), __('Manage Categories','calendar'), 'manage_options', 'rpbcalendar-categories', 'rpbcalendar_manage_categories');
+       add_submenu_page('calendar', __('Manage categories','calendar'), __('Manage categories','calendar'), 'manage_options', 'rpbcalendar-categories', 'rpbcalendar_manage_categories');
+       add_submenu_page('calendar', __('Manage highdays'  ,'calendar'), __('Manage highdays'  ,'calendar'), 'manage_options', 'rpbcalendar-highdays'  , 'rpbcalendar_manage_highdays'  );
+       add_submenu_page('calendar', __('Manage holidays'  ,'calendar'), __('Manage holidays'  ,'calendar'), 'manage_options', 'rpbcalendar-holidays'  , 'rpbcalendar_manage_holidays'  );
+       add_submenu_page('calendar', __('Manage events'    ,'calendar'), __('Manage events'    ,'calendar'), 'manage_options', 'rpbcalendar-events'    , 'rpbcalendar_manage_events'    );
      }
 }
 
@@ -2357,8 +2362,8 @@ function calendar($cat_list = '')
 	$current_year  = isset($_GET['year' ]) ? $_GET['year' ] : date("Y",ctwo());
 	$current_month = isset($_GET['month']) ? $_GET['month'] : date("m",ctwo());
 	$current_day   = isset($_GET['day'  ]) ? $_GET['day'  ] : date("d",ctwo());
-	$current_highdays = array(); //array(15, 17);
-	$current_holidays = array(); //range(3, 20);
+	$current_highdays = array(15, 17);
+	$current_holidays = range(3, 20);
 	$switch_date_link = permalink_prefix() . 'year=%u&month=%u';
 
 	$days_in_month = (int)(date("t", mktime(0, 0, 0, $current_month, 1, $current_year)));
@@ -2376,6 +2381,21 @@ function calendar($cat_list = '')
 
 	ob_start();
 	include 'thecalendar.php';
+	echo '<h2>Légende</h2>';
+
+
+	global $wpdb;
+
+	// Retrieving categories
+	$categories = $wpdb->get_results(
+		"SELECT category_id, category_name ".
+		"FROM ".RPBCALENDAR_CATEGORY_TABLE." ".
+		"ORDER BY category_name;"
+	);
+	rpbcalendar_error_message('Une erreur pour rire !');
+	include 'templates/categories.php';
+	include 'templates/explorer.php';
+	include 'templates/filter.php';
 	return ob_get_clean();
 }
 

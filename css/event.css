@@ -1,0 +1,72 @@
+
+a.rpbcalendar-event,
+a.rpbcalendar-event:hover,
+a.rpbcalendar-event:visited {
+	color: inherit;
+	text-decoration: none;
+}
+
+a.rpbcalendar-event .rpbcalendar-event-tooltip {
+	display: none;
+}
+
+a.rpbcalendar-event:hover .rpbcalendar-event-tooltip {
+	display    : block;
+	position   : absolute;
+	z-index    : 100;
+	margin-top :  5px;
+	margin-left: 12px;
+}
+
+.rpbcalendar-event-summary {
+	margin: 1px;
+	padding-left : 1px;
+	padding-right: 1px;
+	border: 1px solid;
+	-moz-border-radius   : 3px;
+	-khtml-border-radius : 3px;
+	-webkit-border-radius: 3px;
+	border-radius        : 3px;
+}
+
+.rpbcalendar-event-tooltip {
+	font-size: 9pt;
+	padding: 3px 5px 4px;
+	min-width: 100px;
+	border: 1px solid;
+	-moz-box-shadow   : 1px 1px 1px #555;
+	-webkit-box-shadow: 1px 1px 1px #555;
+	box-shadow        : 1px 1px 1px #555;
+	-moz-border-radius   : 5px;
+	-khtml-border-radius : 5px;
+	-webkit-border-radius: 5px;
+	border-radius        : 5px;
+}
+
+.rpbcalendar-event-title {
+	font-weight: bold;
+}
+
+.rpbcalendar-event-time {
+	font-weight: normal;
+}
+
+.rpbcalendar-event-summary .rpbcalendar-event-title {
+	text-align : left;
+}
+
+.rpbcalendar-event-tooltip .rpbcalendar-event-title {
+	text-align : center;
+}
+
+.rpbcalendar-event-tooltip hr {
+	color : inherit;
+	border: 1px solid;
+	height: 0px;
+}
+
+.rpbcalendar-event-tooltip .rpbcalendar-event-author {
+	font-size : 7pt;
+	font-style: italic;
+	margin-bottom: 4px;
+}

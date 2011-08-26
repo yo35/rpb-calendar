@@ -1,13 +1,19 @@
 <?php
 
-	/*
-	 * Variables used by the template
-	 *  - $event
-	 *  - $opts
-	 */
+	// Checks
+	if(!isset($event)) {
+		rpbcalendar_error_message(
+			__('Unable to print the requested event', 'rpbcalendar');
+		);
+		return;
+	}
 
-	// Utilities
-	require_once(RPBCALENDAR_ABSPATH.'tools.php');
+	// Options
+	if(!isset($opts['time_format'])) {
+		$opts['time_format'] = get_option('time_format');
+	}
+
+
 
 	// Data
 	//if($opts['show_category']) {
@@ -34,10 +40,14 @@
 	$description = rpbcalendar_format_event_desc($event->event_desc);
 
 	// Event link (may be empty)
-	$link = htmlspecialchars($event->event_link);
-	$href = empty($link) ?
-		'' :
-		'href="'.$link.'" target="_blank"';
+	$link =
+	$href = '';
+	if(!empty($event->event_link)) {
+		$href = 'href="'.htmlspecialchars($event->event_link).'"';
+		if(true) {
+			$href .= '" target="_blank"';
+		}
+	}
 
 	// Author (may be empty)
 	$author_string = $opts['show_author'] ?
@@ -77,7 +87,7 @@
 		?>
 	</div>
 
-	<!-- Event -->
+	<!-- Event summary -->
 	<div class="rpbcalendar-event-summary <? echo $category_class; ?>">
 		<?php
 			echo '<div class="rpbcalendar-event-title">'.$title;

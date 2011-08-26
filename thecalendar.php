@@ -142,12 +142,11 @@
 			if($is_highday) {
 				echo ' rpbcalendar-highday';
 			}
+			if($is_holiday) {
+				echo ' rpbcalendar-holiday';
+			}
 		?>">
-			<div class="rpbcalendar-holiday-bar<?php
-				if($is_holiday) {
-					echo ' rpbcalendar-holiday';
-				}
-			?>">
+			<div class="rpbcalendar-cell-bar">
 				<div class="rpbcalendar-day-label"><?php echo $day; ?></div>
 			</div>
 			<div class="rpbcalendar-cell-content"><?php

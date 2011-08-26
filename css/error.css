@@ -1,0 +1,10 @@
+
+.rpbcalendar-error-message {
+	padding-left  : 3px;
+	padding-right : 3px;
+	padding-top   : 1px;
+	padding-bottom: 1px;
+	background-color: #ffe0e0;
+	border: 1px solid #c00000;
+	margin-bottom: 3px;
+}
