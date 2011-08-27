@@ -157,7 +157,6 @@ function rpbcalendar_process_delete_category_request()
 require_once(RPBCALENDAR_ABSPATH.'admin/column.class.php');
 require_once(RPBCALENDAR_ABSPATH.'admin/colorcolumn.class.php');
 require_once(RPBCALENDAR_ABSPATH.'admin/categorypreviewcolumn.class.php');
-require_once(RPBCALENDAR_ABSPATH.'admin/table.class.php');
 require_once(RPBCALENDAR_ABSPATH.'admin/field.class.php');
 require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
 
@@ -189,12 +188,6 @@ function rpbcalendar_manage_categories()
 		$col_background_color = new RpbcColorColumn('category_background_color', __('Background color', 'rpbcalendar'));
 		$col_preview = new RpbcCategoryPreviewColumn('category_preview', __('Preview', 'rpbcalendar'));
 
-		// Table
-		$table                   = new RpbcTable($sql, 'rpbcalendar-categories');
-		$table->default_order_by = 'category_name';
-		$table->columns          = array($col_name, $col_text_color, $col_background_color, $col_preview);
-		$table->print_table();
-
 		// Fields
 		$fld_name          = new RpbcField('category_name', __('Name', 'rpbcalendar'), 'text');
 		$fld_name->options = array('maxlength'=>30);
@@ -203,10 +196,12 @@ function rpbcalendar_manage_categories()
 		$fld_text_color->legend  = __('Use HTML hexa format (ex: #0000ff for blue or #ffff00 for yellow)', 'rpbcalendar');
 
 		// Form
-		$form         = new RpbcForm('categoryform', $sql, 'rpbcalendar-categories',
-			__('category', 'rpbcalendar'), 'category_id');
-		$form->fields = array($fld_name, $fld_text_color);
-		$form->print_form(false);
+		$form = new RpbcForm('categoryform', $sql, 'rpbcalendar-categories', __('category', 'rpbcalendar'), 'category_id');
+		$form->fields           = array($fld_name, $fld_text_color);
+		$form->columns          = array($col_name, $col_text_color, $col_background_color, $col_preview);
+		$form->default_order_by = 'category_name';
+		$form->print_view();
+		$form->print_edit(false);
 		$form->print_delete();
 
 	//}

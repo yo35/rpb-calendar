@@ -1,14 +1,17 @@
 <?php
 
-// Form object for editing category / event / holiday ...
+// Form object for editing or displaying a category / an event / a holiday ...
 class RpbcForm
 {
-	public $name            ; // Name of the form
-	public $sql             ; // SQL SELECT statement (without the ordering part)
-	public $base_link       ; // Link to the current admin page
-	public $elem_name       ; // Type name of the editted element
-	public $id_field_key    ; // SQL key of the ID field
-	public $fields = array(); // List of fields
+	public $name                    ; // Name of the form
+	public $sql                     ; // SQL SELECT statement (without the ordering part)
+	public $base_link               ; // Link to the current admin page
+	public $elem_name               ; // Type name of the editted element
+	public $id_field_key            ; // SQL key of the ID field
+	public $fields  = array()       ; // List of fields
+	public $columns = array()       ; // List of columns
+	public $default_order_by  = NULL; // Default column used to sort the table
+	public $default_order_asc = true; // Default sort direction
 
 
 	// Constructor
@@ -22,7 +25,7 @@ class RpbcForm
 	}
 
 	// Rendering
-	public function print_form($in_table)
+	public function print_edit($in_table)
 	{
 		// Retrieve the editted object
 		$elem = NULL;
@@ -100,6 +103,115 @@ class RpbcForm
 				$this->elem_name, htmlspecialchars($element_id)), $this->base_link);
 		}
 		return $elem;
+	}
+
+
+	// Rendering function
+	public function print_view()
+	{
+		// Compose the SQL query
+		$sort_column = $this->search_sort_column();
+		$sort_sql    = '';
+		$sort_key    = NULL;
+		$sort_asc    = $this->order_asc();
+		if(isset($sort_column)) {
+			$sort_key = $sort_column->key;
+			$sort_sql = ' '.$sort_column->sql_sort_code($sort_asc);
+		}
+		$full_sql = $this->sql . $sort_sql . ';';
+
+		// Retrieve the data
+		global $wpdb;
+		$elems = $wpdb->get_results($full_sql);
+
+		// Printing
+		echo '<table class="wp-list-table widefat fixed"><thead>';
+		$this->print_headers($sort_key, $sort_asc);
+		echo '</thead><tfoot>';
+		$this->print_headers($sort_key, $sort_asc);
+		echo '</tfoot><tbody>';
+		$this->print_records($elems);
+		echo '</tbody></table>';
+	}
+
+	// Rendering headers
+	private function print_headers($sort_key, $sort_asc)
+	{
+		echo '<tr>';
+		foreach($this->columns as $column) {
+			$sorting_class = ($column->sortable ? 'sortable desc' : '');
+			$link_suffix   = '&order=asc';
+			if($column->key==$sort_key) {
+				$sorting_class = 'sorted '.($sort_asc ? 'asc' : 'desc');
+				$link_suffix   = '&order='.($sort_asc ? 'desc' : 'asc');
+			}
+			echo '<th class="'.$sorting_class.'" scope="col">';
+			if($column->sortable) {
+				echo '<a href="'.$this->base_link.'&orderby='.$column->key.$link_suffix.'">';
+				echo '<span>'.$column->label.'</span><span class="sorting-indicator"></span>';
+				echo '</a>';
+			} else {
+				echo $column->label;
+			}
+			echo '</th>';
+		}
+		echo '</tr>';
+	}
+
+	// Rendering records
+	private function print_records($elems)
+	{
+		// Special case for empty lists
+		if(empty($elems)) {
+			echo '<tr><td colspan="'.count($this->columns).'">';
+			echo sprintf(__('No %s found.', 'rpbcalendar'), $this->elem_name);
+			echo '</td></tr>';
+			return;
+		}
+
+		// General case
+		foreach($elems as $elem) {
+			echo '<tr>';
+			foreach($this->columns as $column) {
+				echo '<td>';
+				if($column->row_title) {
+					echo '<span class="row-title">';
+					$column->print_cell_content($elem);
+					echo '</span>';
+				} else {
+					$column->print_cell_content($elem);
+				}
+				echo '</td>';
+			}
+			echo '</tr>';
+		}
+	}
+
+	// Search the column to use to sort the table
+	private function search_sort_column()
+	{
+		$order_by = $_GET['orderby'];
+		$default_column = NULL;
+		foreach($this->columns as $column) {
+			if($column->key==$order_by) {
+				return $column;
+			} elseif($column->key==$this->default_order_by) {
+				$default_column = $column;
+			}
+		}
+		return $default_column;
+	}
+
+	// Retrieve the order asc argument
+	private function order_asc()
+	{
+		if(isset($_GET['order']) && $_GET['order']=='desc') {
+			return false;
+		} elseif(isset($_GET['order']) && $_GET['order']=='asc') {
+			return true;
+		} else {
+			return $this->default_order_asc;
+		}
 	}
 }
 
