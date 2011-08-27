@@ -271,25 +271,75 @@ function rpbcalendar_manage_events()
 // Function to adjust the plugin options
 function rpbcalendar_manage_options()
 {
+	// Save user rights
+	$permissions     = get_option('rpbcalendar-permissions', 'manage_options');
+	$new_permissions = $_POST['permissions'];
+	if(isset($new_permissions) && $permissions!=$new_permissions && (
+		$new_permissions=='manage_options' ||
+		$new_permissions=='edit_pages'     ||
+		$new_permissions=='publish_posts'  ||
+		$new_permissions=='edit_posts'     ||
+		$new_permissions=='read'
+	)) {
+		$permissions = $new_permissions;
+		update_option('rpbcalendar-permissions', $permissions);
+		rpbcalendar_admin_notification_message(__('Option &quot;Permissions&quot; saved', 'rpbcalendar'));
+	}
+
+	// Save display author
+	$display_author     = get_option('rpbcalendar-display-author', 'true');
+	$new_display_author = isset($_POST['display-author']) ? 'true' : 'false';
+	if(isset($_POST['rpbcalendar-options']) && $display_author!=$new_display_author) {
+		$display_author = $new_display_author;
+		update_option('rpbcalendar-display-author', $display_author);
+		rpbcalendar_admin_notification_message(__('Option &quot;Display author&quot; saved', 'rpbcalendar'));
+	}
+
+	// Save display category
+	$display_category     = get_option('rpbcalendar-display-category', 'true');
+	$new_display_category = isset($_POST['display-category']) ? 'true' : 'false';
+	if(isset($_POST['rpbcalendar-options']) && $display_category!=$new_display_category) {
+		$display_category = $new_display_category;
+		update_option('rpbcalendar-display-category', $display_category);
+		rpbcalendar_admin_notification_message(__('Option &quot;Display category&quot; saved', 'rpbcalendar'));
+	}
+
 	// Begin of form
 	$target_link = site_url().'/wp-admin/admin.php?page=rpbcalendar-options';
 	echo '<div class="wrap">';
 	echo '<h2>'.__('Calendar options', 'rpbcalendar').'</h2>';
 	echo '<form class="form-wrap" name="rpbcalendaroptions" method="post" action="'.$target_link.'">';
 	echo '<table class="form-table"><tbody>';
+	echo '<input type="hidden" name="rpbcalendar-options" value="1" />';
 
 	// User rights
-	$current_permissions = get_option('rpbcalendar-permissions', 'manage_options');
 	echo '<tr class="form-field"><th scope="row">';
-	echo __('Choose the lowest user group that is allowed to manage events and holidays', 'rpbcalendar');
+	echo '<label for="permissions">'.__('Permissions', 'rpbcalendar').'</label>';
 	echo '</th><td>';
-	echo '<select name="rpbcalendar-permissions">';
-	echo '<option value="manage_options">'.__('Administrator', 'rpbcalendar').'</option>';
-	echo '<option value="manage_options">'.__('Editor'       , 'rpbcalendar').'</option>';
-	echo '<option value="manage_options">'.__('Author'       , 'rpbcalendar').'</option>';
-	echo '<option value="manage_options">'.__('Contributor'  , 'rpbcalendar').'</option>';
-	echo '<option value="manage_options">'.__('Subscriber'   , 'rpbcalendar').'</option>';
+	echo '<select name="permissions">';
+	echo '<option value="manage_options"'.($permissions=='manage_options'?' selected="1"':'').'>'.__('Administrator', 'rpbcalendar').'</option>';
+	echo '<option value="edit_pages"'    .($permissions=='edit_pages'    ?' selected="1"':'').'>'.__('Editor'       , 'rpbcalendar').'</option>';
+	echo '<option value="publish_posts"' .($permissions=='publish_posts' ?' selected="1"':'').'>'.__('Author'       , 'rpbcalendar').'</option>';
+	echo '<option value="edit_posts"'    .($permissions=='edit_posts'    ?' selected="1"':'').'>'.__('Contributor'  , 'rpbcalendar').'</option>';
+	echo '<option value="read"'          .($permissions=='read'          ?' selected="1"':'').'>'.__('Subscriber'   , 'rpbcalendar').'</option>';
 	echo '</select>';
+	echo '<p>'.__('Choose the lowest user group that is allowed to manage events and holidays', 'rpbcalendar').'</p>';
+	echo '</td></tr>';
+
+	// Display author name
+	echo '<tr class="form-field"><th scope="row">';
+	echo '<label for="display-author">'.__('Author name', 'rpbcalendar').'</label>';
+	echo '</th><td>';
+	echo '<input type="checkbox" name="display-author" '.($display_author=='true'?'checked="1"':'').' />';
+	echo '<p>'.__('Display the name of the author name on events', 'rpbcalendar').'</p>';
+	echo '</td></tr>';
+
+	// Use categories
+	echo '<tr class="form-field"><th scope="row">';
+	echo '<label for="display-category">'.__('Categories', 'rpbcalendar').'</label>';
+	echo '</th><td>';
+	echo '<input type="checkbox" name="display-category" '.($display_category=='true'?'checked="1"':'').' />';
+	echo '<p>'.__('Use event categories', 'rpbcalendar').'</p>';
 	echo '</td></tr>';
 
 	// End of form
