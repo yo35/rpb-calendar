@@ -164,10 +164,6 @@ require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
 // Function to handle the management of categories
 function rpbcalendar_manage_categories()
 {
-	rpbcalendar_process_add_category_request();
-	rpbcalendar_process_update_category_request();
-	rpbcalendar_process_delete_category_request();
-
 	// SQL
 	$sql = 'SELECT category_id, category_name, category_text_color, category_background_color FROM '
 		.RPBCALENDAR_CATEGORY_TABLE;
@@ -186,10 +182,14 @@ function rpbcalendar_manage_categories()
 	$fld_background_color = new RpbcColorField('category_background_color', __('Background color', 'rpbcalendar'));
 
 	// Form
-	$form = new RpbcForm('categoryform', $sql, 'rpbcalendar-categories', __('category', 'rpbcalendar'), 'category_id');
+	$form = new RpbcForm('categoryform', RPBCALENDAR_CATEGORY_TABLE, $sql, 'rpbcalendar-categories',
+		__('category', 'rpbcalendar'), 'category_id');
 	$form->fields           = array($fld_name, $fld_text_color, $fld_background_color);
 	$form->columns          = array($col_name, $col_text_color, $col_background_color, $col_preview);
 	$form->default_order_by = 'category_name';
+
+	// Process requests
+	$form->process_all();
 
 	// Printing
 	$form->print_all(
@@ -198,9 +198,6 @@ function rpbcalendar_manage_categories()
 		__('Edit the event category' , 'rpbcalendar'),
 		__('Delete an event category', 'rpbcalendar')
 	);
-
-	//}
-	//echo '</div>';
 }
 
 // Deal with add holiday requests

@@ -4,6 +4,7 @@
 class RpbcForm
 {
 	public $name                    ; // Name of the form
+	public $table                   ; // SQL table used for INSERT/UPDATE/DELETE requests
 	public $sql                     ; // SQL SELECT statement (without the ordering part)
 	public $base_link               ; // Link to the current admin page
 	public $elem_name               ; // Type name of the editted element
@@ -15,10 +16,11 @@ class RpbcForm
 
 
 	// Constructor
-	public function __construct($name, $sql, $admin_page_key, $elem_name, $id_field_key)
+	public function __construct($name, $table, $sql, $admin_page_key, $elem_name, $id_field_key)
 	{
 		$this->name         = $name;
-		$this->sql          = $sql ;
+		$this->table        = $table;
+		$this->sql          = $sql;
 		$this->elem_name    = $elem_name;
 		$this->base_link    = site_url().'/wp-admin/admin.php?page='.$admin_page_key;
 		$this->id_field_key = $id_field_key;
@@ -116,21 +118,6 @@ class RpbcForm
 		echo '</form>';
 	}
 
-	// Retrieve the editted element
-	private function retrieve_element($element_id)
-	{
-		global $wpdb;
-		$full_sql = $this->sql.' WHERE '.$this->id_field_key.'='.mysql_escape_string($element_id).' LIMIT 1;';
-		$elem     = $wpdb->get_row($full_sql);
-		if(!isset($elem)) {
-			rpbcalendar_admin_error_message(sprintf(
-				__('Unable to retrieve the %1$s with ID &quot;%2$s&quot;', 'rpbcalendar'),
-				$this->elem_name, htmlspecialchars($element_id)), $this->base_link);
-		}
-		return $elem;
-	}
-
-
 	// Rendering function
 	public function print_view()
 	{
@@ -217,6 +204,20 @@ class RpbcForm
 		}
 	}
 
+	// Retrieve the editted element
+	private function retrieve_element($element_id)
+	{
+		global $wpdb;
+		$full_sql = $this->sql.' WHERE '.$this->id_field_key.'='.mysql_escape_string($element_id).' LIMIT 1;';
+		$elem     = $wpdb->get_row($full_sql);
+		if(!isset($elem)) {
+			rpbcalendar_admin_error_message(sprintf(
+				__('Unable to retrieve the %1$s with ID &quot;%2$s&quot;', 'rpbcalendar'),
+				$this->elem_name, htmlspecialchars($element_id)), $this->base_link);
+		}
+		return $elem;
+	}
+
 	// Search the column to use to sort the table
 	private function search_sort_column()
 	{
@@ -241,6 +242,108 @@ class RpbcForm
 			return true;
 		} else {
 			return $this->default_order_asc;
+		}
+	}
+
+	// Validate an id string
+	private function validate_id($element_id)
+	{
+		if(!isset($element_id) || empty($element_id) || !is_numeric($element_id)) {
+			rpbcalendar_admin_error_message(
+				__('Unspecified or badly formatted ID string', 'rpbcalendar'));
+			return false;
+		}
+		return true;
+	}
+
+	// Process all requests
+	public function process_all()
+	{
+		$this->process_insert();
+		$this->process_update();
+		$this->process_delete();
+	}
+
+	// Process an insert request
+	public function process_insert()
+	{
+		// Checks
+		if(!(isset($_POST['mode']) && $_POST['mode']=='add')) {
+			return;
+		}
+		$field_part = '';
+		$value_part = '';
+		foreach($this->fields as $field) {
+			if(!$field->validation($_POST)) {
+				return;
+			}
+			$field_part .= (empty($field_part) ? '' : ', ') . $field->key;
+			$value_part .= (empty($value_part) ? '' : ', ') . "'".mysql_escape_string($_POST[$field->key])."'";
+		}
+
+		// Execute the request
+		global $wpdb;
+		$retval = $wpdb->query(
+			'INSERT INTO '.$this->table.' ('.$field_part.') VALUES ('.$value_part.');'
+		);
+		if($retval==1) {
+			rpbcalendar_admin_notification_message(sprintf(__('1 %s successfully added', 'rpbcalendar'),
+				$this->elem_name));
+		}
+	}
+
+	// Process an update request
+	public function process_update()
+	{
+		// Checks
+		if(!(isset($_POST['mode']) && $_POST['mode']=='update')) {
+			return;
+		}
+		if(!$this->validate_id($_POST[$this->id_field_key])) {
+			return;
+		}
+		$where_part = $this->id_field_key.'='.mysql_escape_string($_POST[$this->id_field_key]);
+		$set_part   = '';
+		foreach($this->fields as $field) {
+			if(!$field->validation($_POST)) {
+				return;
+			}
+			$set_part .= (empty($set_part) ? '' : ', ') . $field->key . '=' .
+				"'".mysql_escape_string($_POST[$field->key])."'";
+		}
+		var_dump($set_part);
+
+		// Execute the request
+		global $wpdb;
+		$retval = $wpdb->query(
+			'UPDATE '.$this->table.' SET '.$set_part.' WHERE '.$where_part.';'
+		);
+		if($retval==1) {
+			rpbcalendar_admin_notification_message(sprintf(__('1 %s successfully updated', 'rpbcalendar'),
+				$this->elem_name));
+		}
+	}
+
+	// Process a delete request
+	public function process_delete()
+	{
+		// Checks
+		if(!(isset($_POST['mode']) && $_POST['mode']=='delete')) {
+			return;
+		}
+		if(!$this->validate_id($_POST[$this->id_field_key])) {
+			return;
+		}
+		$where_part = $this->id_field_key.'='.mysql_escape_string($_POST[$this->id_field_key]);
+
+		// Execute the request
+		global $wpdb;
+		$retval = $wpdb->query(
+			'DELETE FROM '.$this->table.' WHERE '.$where_part.';'
+		);
+		if($retval==1) {
+			rpbcalendar_admin_notification_message(sprintf(__('1 %s successfully deleted', 'rpbcalendar'),
+				$this->elem_name));
 		}
 	}
 }
