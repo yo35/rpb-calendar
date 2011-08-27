@@ -123,7 +123,8 @@ class RpbcForm
 		$full_sql = $this->sql.' WHERE '.$this->id_field_key.'='.mysql_escape_string($element_id).' LIMIT 1;';
 		$elem     = $wpdb->get_row($full_sql);
 		if(!isset($elem)) {
-			rpbcalendar_admin_error_message(sprintf(__('Unable to retrieve the %1$s with ID %2$s', 'rpbcalendar'),
+			rpbcalendar_admin_error_message(sprintf(
+				__('Unable to retrieve the %1$s with ID &quot;%2$s&quot;', 'rpbcalendar'),
 				$this->elem_name, htmlspecialchars($element_id)), $this->base_link);
 		}
 		return $elem;

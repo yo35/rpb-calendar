@@ -9,6 +9,7 @@ class RpbcField
 	public $options       = array(); // Field options (ex: array('maxlength' => 30))
 	public $legend        = NULL   ; // Optional field legend
 	public $default_value = NULL   ; // Default value for the field
+	public $allow_empty   = false  ; // Option to allow empty fields
 
 
 	// Constructor
@@ -57,6 +58,23 @@ class RpbcField
 		} else {
 			echo '</div>';
 		}
+	}
+
+	// Validation function
+	public function validation($values)
+	{
+		if(!isset($values[$this->key]) || (!$this->allow_empty && empty($values[$this->key]))) {
+			rpbcalendar_admin_error_message(sprintf(
+				__('Empty or undefined field: &quot;%s&quot;', 'rpbcalendar'), $this->label));
+			return false;
+		}
+		return $this->additional_validation($values);
+	}
+
+	// Additional validation function (exist for sub-classing purposes)
+	public function additional_validation($values)
+	{
+		return true;
 	}
 }
 
