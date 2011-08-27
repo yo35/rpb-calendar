@@ -163,7 +163,7 @@ require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
 // Function to handle the management of categories
 function rpbcalendar_manage_categories()
 {
-	echo '<div class="wrap">';
+	//echo '<div class="wrap">';
 	//if(isset($_GET['edit'])) {
 	//	echo '<h2>'.__('Edit the event category', 'rpbcalendar').'</h2>';
 	//	include(RPBCALENDAR_ABSPATH.'admin/edit-category.php');
@@ -171,7 +171,6 @@ function rpbcalendar_manage_categories()
 	//	echo '<h2>'.__('Delete an event category', 'rpbcalendar').'</h2>';
 	//	include(RPBCALENDAR_ABSPATH.'admin/delete-category.php');
 	//} else {
-		echo '<h2>'.__('Event categories', 'rpbcalendar').'</h2>';
 		rpbcalendar_process_add_category_request();
 		rpbcalendar_process_update_category_request();
 		rpbcalendar_process_delete_category_request();
@@ -192,20 +191,28 @@ function rpbcalendar_manage_categories()
 		$fld_name          = new RpbcField('category_name', __('Name', 'rpbcalendar'), 'text');
 		$fld_name->options = array('maxlength'=>30);
 		$fld_text_color          = new RpbcField('category_text_color'      , __('Text color'      , 'rpbcalendar'), 'text');
-		$fld_text_color->options = array('maxlength'=>7);
-		$fld_text_color->legend  = __('Use HTML hexa format (ex: #0000ff for blue or #ffff00 for yellow)', 'rpbcalendar');
+		$fld_background_color    = new RpbcField('category_background_color', __('Background color', 'rpbcalendar'), 'text');
+		$fld_text_color      ->options = array('maxlength'=>7);
+		$fld_background_color->options = array('maxlength'=>7);
+		$fld_text_color      ->legend = __('Use HTML hexa format (ex: #0000ff for blue or #ffff00 for yellow)', 'rpbcalendar');
+		$fld_background_color->legend = __('Use HTML hexa format (ex: #0000ff for blue or #ffff00 for yellow)', 'rpbcalendar');
 
 		// Form
 		$form = new RpbcForm('categoryform', $sql, 'rpbcalendar-categories', __('category', 'rpbcalendar'), 'category_id');
-		$form->fields           = array($fld_name, $fld_text_color);
+		$form->fields           = array($fld_name, $fld_text_color, $fld_background_color);
 		$form->columns          = array($col_name, $col_text_color, $col_background_color, $col_preview);
 		$form->default_order_by = 'category_name';
-		$form->print_view();
-		$form->print_edit(false);
-		$form->print_delete();
+
+		// Printing
+		$form->print_all(
+			__('Event categories'        , 'rpbcalendar'),
+			__('Add a new category'      , 'rpbcalendar'),
+			__('Edit the event category' , 'rpbcalendar'),
+			__('Delete an event category', 'rpbcalendar')
+		);
 
 	//}
-	echo '</div>';
+	//echo '</div>';
 }
 
 // Deal with add holiday requests

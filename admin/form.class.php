@@ -24,7 +24,31 @@ class RpbcForm
 		$this->id_field_key = $id_field_key;
 	}
 
-	// Rendering
+
+	// Rendering all
+	public function print_all($general_title, $add_title, $edit_title, $delete_title)
+	{
+		echo '<div class="wrap">';
+		if(isset($_GET['edit'])) {
+			echo '<h2>'.$edit_title.'</h2>';
+			$this->print_edit(true);
+		} elseif(isset($_GET['delete'])) {
+			echo '<h2>'.$delete_title.'</h2>';
+			$this->print_delete();
+		} else {
+			echo '<h2>'.$general_title.'</h2>';
+			echo '<div id="col-container"><div id="col-right"><div class="col-wrap">';
+			$this->print_view();
+			echo '</div></div><div id="col-left"><div class="col-wrap">';
+			echo '<h3>'.$add_title.'</h3>';
+			$this->print_edit(false);
+			echo '</div></div></div>';
+		}
+		echo '</div>';
+	}
+
+
+	// Rendering edit/add form
 	public function print_edit($in_table)
 	{
 		// Retrieve the editted object
@@ -175,9 +199,14 @@ class RpbcForm
 			foreach($this->columns as $column) {
 				echo '<td>';
 				if($column->row_title) {
+					$id_field = $this->id_field_key;
+					$id_value = htmlspecialchars($elem->$id_field);
 					echo '<span class="row-title">';
 					$column->print_cell_content($elem);
-					echo '</span>';
+					echo '</span><br /><div class=row-actions>';
+					echo '<a href="'.$this->base_link.'&edit='.$id_value.'">'.__('Edit').'</a> | ';
+					echo '<a href="'.$this->base_link.'&delete='.$id_value.'">'.__('Delete').'</a>';
+					echo '</div>';
 				} else {
 					$column->print_cell_content($elem);
 				}
