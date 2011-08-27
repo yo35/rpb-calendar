@@ -98,7 +98,7 @@ function rpbcalendar_manage_categories()
 	$form->process_all();
 
 	// Printing
-	$form->print_all(
+	$form->print_all(true,
 		__('Event categories'        , 'rpbcalendar'),
 		__('Add a new category'      , 'rpbcalendar'),
 		__('Edit the event category' , 'rpbcalendar'),
@@ -143,7 +143,7 @@ function rpbcalendar_manage_holidays()
 	$form->process_all();
 
 	// Printing
-	$form->print_all(
+	$form->print_all(true,
 		__('Holidays'         , 'rpbcalendar'),
 		__('Add a new holiday', 'rpbcalendar'),
 		__('Edit the holiday' , 'rpbcalendar'),
@@ -188,7 +188,7 @@ function rpbcalendar_manage_events()
 			if($begin_date==$end_date) {
 				echo $begin_date;
 			} else {
-				echo sprintf(__('From %1$s to %2$s', 'rpbcalendar'), $begin_date, $end_date);
+				echo sprintf(__('%1$s<br />to %2$s', 'rpbcalendar'), $begin_date, $end_date);
 			}
 			if(isset($elem->event_time)) {
 				$event_time = date_i18n(get_option('time_format'), strtotime($elem->event_time));
@@ -250,7 +250,7 @@ function rpbcalendar_manage_events()
 	$form->process_all();
 
 	// Printing
-	$form->print_all(
+	$form->print_all(false,
 		__('Events'         , 'rpbcalendar'),
 		__('Add a new event', 'rpbcalendar'),
 		__('Edit the event' , 'rpbcalendar'),

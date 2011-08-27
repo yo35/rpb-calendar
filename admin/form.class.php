@@ -28,7 +28,7 @@ class RpbcForm
 
 
 	// Rendering all
-	public function print_all($general_title, $add_title, $edit_title, $delete_title)
+	public function print_all($compact_forms, $general_title, $add_title, $edit_title, $delete_title)
 	{
 		echo '<div class="wrap">';
 		if(isset($_GET['edit'])) {
@@ -37,7 +37,7 @@ class RpbcForm
 		} elseif(isset($_GET['delete'])) {
 			echo '<h2>'.$delete_title.'</h2>';
 			$this->print_delete();
-		} else {
+		} elseif($compact_forms) {
 			echo '<h2>'.$general_title.'</h2>';
 			echo '<div id="col-container"><div id="col-right"><div class="col-wrap">';
 			$this->print_view();
@@ -45,6 +45,13 @@ class RpbcForm
 			echo '<h3>'.$add_title.'</h3>';
 			$this->print_edit(false);
 			echo '</div></div></div>';
+		} elseif(isset($_GET['add'])) {
+			echo '<h2>'.$add_title.'</h2>';
+			$this->print_edit(true);
+		} else {
+			echo '<h2>'.$general_title.'&nbsp;<a class="add-new-h2" href="'.$this->base_link.'&add">'.
+				__('Add', 'rpbcalendar').'</a></h2>';
+			$this->print_view();
 		}
 		echo '</div>';
 	}
