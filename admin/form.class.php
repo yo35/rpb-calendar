@@ -311,7 +311,6 @@ class RpbcForm
 			$set_part .= (empty($set_part) ? '' : ', ') . $field->key . '=' .
 				"'".mysql_escape_string($_POST[$field->key])."'";
 		}
-		var_dump($set_part);
 
 		// Execute the request
 		global $wpdb;
