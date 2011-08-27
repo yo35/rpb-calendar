@@ -165,6 +165,7 @@ function rpbcalendar_manage_events()
 	// Includes
 	require_once(RPBCALENDAR_ABSPATH.'admin/column.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/categorycolumn.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/linkcolumn.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/field.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/datefield.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
@@ -223,6 +224,7 @@ function rpbcalendar_manage_events()
 	$col_date = new RpbcEventDateColumn('event_begin', __('Date'       , 'rpbcalendar'));
 	$col_author = new RpbcColumn('author_name', __('Author', 'rpbcalendar'));
 	$col_category = new RpbcCategoryColumn('category_name', __('Category', 'rpbcalendar'));
+	$col_link = new RpbcLinkColumn('event_link', __('Link', 'rpbcalendar'));
 
 	// Fields
 	global $current_user;
@@ -234,15 +236,17 @@ function rpbcalendar_manage_events()
 	$fld_desc->allow_empty = true;
 	$fld_begin = new RpbcDateField('event_begin', __('Begin', 'rpbcalendar'), 'text');
 	$fld_end   = new RpbcDateField('event_end'  , __('End'  , 'rpbcalendar'), 'text');
-	$fld_category          = new RpbcField('event_category', __('Category', 'rpbcalendar'), 'select');
+	$fld_category              = new RpbcField('event_category', __('Category', 'rpbcalendar'), 'select');
 	$fld_category->options     = array('choices'=>$choices);
 	$fld_category->allow_empty = array('choices'=>$choices);
+	$fld_link              = new RpbcField('event_link', __('Link', 'rpbcalendar'), 'text');
+	$fld_link->allow_empty = true;
 
 	// Form
 	$form = new RpbcForm('eventform', RPBCALENDAR_EVENT_TABLE, $sql, 'rpbcalendar',
 		__('event', 'rpbcalendar'), 'event_id');
-	$form->fields            = array($fld_author, $fld_title, $fld_begin, $fld_end, $fld_category, $fld_desc);
-	$form->columns           = array($col_title, $col_desc, $col_date, $col_author, $col_category);
+	$form->fields            = array($fld_author, $fld_title, $fld_begin, $fld_end, $fld_category, $fld_link, $fld_desc);
+	$form->columns           = array($col_title, $col_desc, $col_date, $col_author, $col_category, $col_link);
 	$form->default_order_by  = 'event_begin';
 	$form->default_order_asc = false;
 
