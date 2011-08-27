@@ -51,6 +51,12 @@ function rpbcalendar_build_menu()
 	$page = add_submenu_page('rpbcalendar', __('Manage categories', 'rpbcalendar'), __('Manage categories', 'rpbcalendar'),
 		'manage_options', 'rpbcalendar-categories', 'rpbcalendar_manage_categories');
 	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
+
+	// Options page
+	$page = add_submenu_page('rpbcalendar', __('Calendar options', 'rpbcalendar'), __('Calendar options', 'rpbcalendar'),
+		'manage_options', 'rpbcalendar-options', 'rpbcalendar_manage_options');
+	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
+
 }
 
 // Register admin styles
@@ -200,7 +206,7 @@ function rpbcalendar_manage_events()
 
 	// SQL
 	global $wpdb;
-	$sql = 'SELECT event_id, event_title, event_desc, event_begin, event_end, event_time, event_link, '.
+	$sql = 'SELECT event_id, event_title, event_desc, event_begin, event_end, event_time, event_link, event_category, '.
 		'wpu.display_name AS author_name, '.
 		'rpbc.category_name AS category_name, rpbc.category_text_color AS category_text_color, '.
 		'rpbc.category_background_color AS category_background_color '.
@@ -260,6 +266,38 @@ function rpbcalendar_manage_events()
 		__('Edit the event' , 'rpbcalendar'),
 		__('Delete an event', 'rpbcalendar')
 	);
+}
+
+// Function to adjust the plugin options
+function rpbcalendar_manage_options()
+{
+	// Begin of form
+	$target_link = site_url().'/wp-admin/admin.php?page=rpbcalendar-options';
+	echo '<div class="wrap">';
+	echo '<h2>'.__('Calendar options', 'rpbcalendar').'</h2>';
+	echo '<form class="form-wrap" name="rpbcalendaroptions" method="post" action="'.$target_link.'">';
+	echo '<table class="form-table"><tbody>';
+
+	// User rights
+	$current_permissions = get_option('rpbcalendar-permissions', 'manage_options');
+	echo '<tr class="form-field"><th scope="row">';
+	echo __('Choose the lowest user group that is allowed to manage events and holidays', 'rpbcalendar');
+	echo '</th><td>';
+	echo '<select name="rpbcalendar-permissions">';
+	echo '<option value="manage_options">'.__('Administrator', 'rpbcalendar').'</option>';
+	echo '<option value="manage_options">'.__('Editor'       , 'rpbcalendar').'</option>';
+	echo '<option value="manage_options">'.__('Author'       , 'rpbcalendar').'</option>';
+	echo '<option value="manage_options">'.__('Contributor'  , 'rpbcalendar').'</option>';
+	echo '<option value="manage_options">'.__('Subscriber'   , 'rpbcalendar').'</option>';
+	echo '</select>';
+	echo '</td></tr>';
+
+	// End of form
+	echo '</tbody></table>';
+	echo '<p class="submit"><input class="button-primary" type="submit" value="'
+		.__('Save changes', 'rpbcalendar').'" /></p>';
+	echo '</form>';
+	echo '</div>';
 }
 
 ?>

@@ -10,17 +10,17 @@ add_action('plugins_loaded', 'rpbcalendar_check_install');
 function rpbcalendar_install()
 {
 	rpbcalendar_create_tables();
-	add_option('rpbcalendar_version', RPBCALENDAR_VERSION);
+	add_option('rpbcalendar-version', RPBCALENDAR_VERSION);
 }
 
 // Check install procedure
 function rpbcalendar_check_install()
 {
-	if(get_option('rpbcalendar_version')==RPBCALENDAR_VERSION) {
+	if(get_option('rpbcalendar-version')==RPBCALENDAR_VERSION) {
 		return;
 	}
 	rpbcalendar_create_tables();
-	update_option('rpbcalendar_version', RPBCALENDAR_VERSION);
+	update_option('rpbcalendar-version', RPBCALENDAR_VERSION);
 }
 
 // Create or upgrade the tables

@@ -77,7 +77,11 @@ class RpbcField
 			$this->print_option_attributes();
 			echo '>';
 			foreach($this->options['choices'] as $choice) {
-				echo '<option value="'.$choice['key'].'">'.$choice['value'].'</option>';
+				echo '<option value="'.$choice['key'].'"';
+				if($choice['key']==$value) {
+					echo ' selected="1"';
+				}
+				echo '>'.$choice['value'].'</option>';
 			}
 			echo '</select>';
 
