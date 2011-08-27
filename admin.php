@@ -1,8 +1,8 @@
 <?php
 
 // Hooks
-add_action('admin_init'        , 'rpbcalendar_admin_init' );
-add_action('admin_print_styles', 'rpbcalendar_admin_style');
+add_action('admin_init', 'rpbcalendar_admin_init');
+add_action('admin_menu', 'rpbcalendar_build_menu');
 
 // Function to report an error
 function rpbcalendar_admin_error_message($message, $go_back_link)
@@ -23,13 +23,40 @@ function rpbcalendar_admin_notification_message($message)
 // Init admin interface
 function rpbcalendar_admin_init()
 {
-	wp_register_style('rpbcalendar_admin_style', WP_PLUGIN_URL.'/calendar/css/admin.css');
+	wp_register_style('rpbcalendar-admin', WP_PLUGIN_URL.'/calendar/css/admin.css');
+}
+
+// Build the administration menu
+function rpbcalendar_build_menu()
+{
+	// Set admin as the only one who can use RpbCalendar for security
+	$allowed_group = 'manage_options';
+
+	// Main menu
+	$page = add_menu_page(__('Calendar', 'rpbcalendar'), __('Calendar', 'rpbcalendar'),
+		$allowed_group, 'rpbcalendar', 'rpbcalendar_manage_events');
+	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
+
+	// Event page
+	$page = add_submenu_page('rpbcalendar', __('Manage events', 'rpbcalendar'), __('Manage event', 'rpbcalendar'),
+		$allowed_group, 'rpbcalendar', 'rpbcalendar_manage_events');
+	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
+
+	// Holiday page
+	$page = add_submenu_page('rpbcalendar', __('Manage holidays', 'rpbcalendar'), __('Manage holidays', 'rpbcalendar'),
+		$allowed_group, 'rpbcalendar-holidays', 'rpbcalendar_manage_holidays');
+	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
+
+	// Category page
+	$page = add_submenu_page('rpbcalendar', __('Manage categories', 'rpbcalendar'), __('Manage categories', 'rpbcalendar'),
+		'manage_options', 'rpbcalendar-categories', 'rpbcalendar_manage_categories');
+	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
 }
 
 // Register admin styles
-function rpbcalendar_admin_style()
+function rpbcalendar_admin_print_styles()
 {
-	wp_enqueue_style('rpbcalendar_admin_style');
+	wp_enqueue_style('rpbcalendar-admin');
 }
 
 // Function to handle the management of categories

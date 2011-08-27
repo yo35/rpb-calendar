@@ -139,11 +139,6 @@ function calendar_menu()
        // Note only admin can change calendar options
        add_submenu_page('calendar', __('Manage Categories','calendar'), __('Manage Categories','calendar'), 'manage_options', 'calendar-categories', 'manage_categories');
        add_submenu_page('calendar', __('Calendar Config','calendar'), __('Calendar Options','calendar'), 'manage_options', 'calendar-config', 'edit_calendar_config');
-
-       add_submenu_page('calendar', __('Manage categories','calendar'), __('Manage categories','calendar'), 'manage_options', 'rpbcalendar-categories', 'rpbcalendar_manage_categories');
-       add_submenu_page('calendar', __('Manage highdays'  ,'calendar'), __('Manage highdays'  ,'calendar'), 'manage_options', 'rpbcalendar-highdays'  , 'rpbcalendar_manage_highdays'  );
-       add_submenu_page('calendar', __('Manage holidays'  ,'calendar'), __('Manage holidays'  ,'calendar'), 'manage_options', 'rpbcalendar-holidays'  , 'rpbcalendar_manage_holidays'  );
-       add_submenu_page('calendar', __('Manage events'    ,'calendar'), __('Manage events'    ,'calendar'), 'manage_options', 'rpbcalendar-events'    , 'rpbcalendar_manage_events'    );
      }
 }
 
