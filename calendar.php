@@ -72,7 +72,7 @@ include('init.php');
 
 
 // Before we get on with the functions, we need to define the initial style used for Calendar
-include('styles.php');
+include(RPBCALENDAR_ABSPATH.'styles.php');
 
 include(RPBCALENDAR_ABSPATH.'admin.php');
 
@@ -2380,7 +2380,7 @@ function calendar($cat_list = '')
 	$opts['time_format'  ] = get_option('time_format');
 
 	ob_start();
-	include 'thecalendar.php';
+	include(RPBCALENDAR_ABSPATH.'thecalendar.php');
 	echo '<h2>Légende</h2>';
 
 

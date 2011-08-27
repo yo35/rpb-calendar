@@ -154,6 +154,11 @@ function rpbcalendar_process_delete_category_request()
 	}
 }
 
+require_once(RPBCALENDAR_ABSPATH.'admin/column.class.php');
+require_once(RPBCALENDAR_ABSPATH.'admin/colorcolumn.class.php');
+require_once(RPBCALENDAR_ABSPATH.'admin/categorypreviewcolumn.class.php');
+require_once(RPBCALENDAR_ABSPATH.'admin/table.class.php');
+
 // Function to handle the management of categories
 function rpbcalendar_manage_categories()
 {
@@ -169,7 +174,25 @@ function rpbcalendar_manage_categories()
 		rpbcalendar_process_add_category_request();
 		rpbcalendar_process_update_category_request();
 		rpbcalendar_process_delete_category_request();
-		include(RPBCALENDAR_ABSPATH.'admin/manage-categories.php');
+		//include(RPBCALENDAR_ABSPATH.'admin/manage-categories.php');
+
+		// SQL
+		$sql = 'SELECT category_id, category_name, category_text_color, category_background_color FROM '
+			.RPBCALENDAR_CATEGORY_TABLE;
+
+		// Columns
+		$col_name            = new RpbcColumn('category_name', __('Name', 'rpbcalendar'));
+		$col_name->row_title = true;
+		$col_text_color       = new RpbcColorColumn('category_text_color'      , __('Text color'      , 'rpbcalendar'));
+		$col_background_color = new RpbcColorColumn('category_background_color', __('Background color', 'rpbcalendar'));
+		$col_preview = new RpbcCategoryPreviewColumn('category_preview', __('Preview', 'rpbcalendar'));
+
+		// Table
+		$table                   = new RpbcTable($sql, 'rpbcalendar-categories');
+		$table->default_order_by = 'category_name';
+		$table->columns          = array($col_name, $col_text_color, $col_background_color, $col_preview);
+		$table->print_table();
+
 	}
 	echo '</div>';
 }

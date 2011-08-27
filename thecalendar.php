@@ -150,7 +150,7 @@
 				<div class="rpbcalendar-day-label"><?php echo $day; ?></div>
 			</div>
 			<div class="rpbcalendar-cell-content"><?php
-				 include('theevents.php');
+				 include(RPBCALENDAR_ABSPATH.'theevents.php');
 			?></div>
 		</td>
 		<?php

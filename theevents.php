@@ -11,6 +11,6 @@
 
 	// Loop
 	foreach($events as $event) {
-		include('theevent.php');
+		include(RPBCALENDAR_ABSPATH.'theevent.php');
 	}
 ?>
