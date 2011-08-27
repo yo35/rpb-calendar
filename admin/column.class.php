@@ -20,7 +20,11 @@ class RpbcColumn
 	public function print_cell_content($elem)
 	{
 		$field = $this->key;
-		echo htmlspecialchars($elem->$field);
+		if(isset($elem->$field)) {
+			echo htmlspecialchars($elem->$field);
+		} else {
+			echo 'N/A';
+		}
 	}
 
 	// SQL sorting code generator

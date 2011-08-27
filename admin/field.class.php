@@ -23,6 +23,12 @@ class RpbcField
 	// Rendering function
 	public function print_field($in_table, $elem)
 	{
+		// Special case for hidden fields
+		if($this->type=='hidden') {
+			$this->print_hidden_field();
+			return;
+		}
+
 		// Prefix + label
 		if($in_table) {
 			echo '<tr class="form-field">';
@@ -43,15 +49,7 @@ class RpbcField
 		} elseif(isset($this->default_value)) {
 			$value = $this->default_value;
 		}
-		if($this->type=='textarea') {
-			echo '<textarea ';
-			$this->print_option_attributes();
-			echo '>'.$value.'</textarea>';
-		} else {
-			echo '<input type="'.$this->type.'" ';
-			$this->print_option_attributes();
-			echo ' value="'.$value.'" />';
-		}
+		$this->print_actual_field($value);
 		if(isset($this->legend)) {
 			echo '<p class="description">'.$this->legend.'</p>';
 		}
@@ -64,11 +62,53 @@ class RpbcField
 		}
 	}
 
+	// Rendering the actual field
+	private function print_actual_field($value)
+	{
+		// Textarea
+		if($this->type=='textarea') {
+			echo '<textarea ';
+			$this->print_option_attributes();
+			echo '>'.$value.'</textarea>';
+
+		// Select
+		} elseif($this->type=='select') {
+			echo '<select ';
+			$this->print_option_attributes();
+			echo '>';
+			foreach($this->options['choices'] as $choice) {
+				echo '<option value="'.$choice['key'].'">'.$choice['value'].'</option>';
+			}
+			echo '</select>';
+
+		// General input field
+		} else {
+			echo '<input type="'.$this->type.'" ';
+			$this->print_option_attributes();
+			echo ' value="'.$value.'" />';
+		}
+	}
+
+	// Rendering function for hidden fields
+	private function print_hidden_field()
+	{
+		$value = '';
+		if(isset($this->default_value)) {
+			$value = $this->default_value;
+		}
+		echo '<input type="hidden" ';
+		$this->print_option_attributes();
+		echo ' value="'.$value.'" />';
+	}
+
 	// Print the option attributes and the name associated to the field
 	private function print_option_attributes()
 	{
 		echo 'name="'.$this->key.'"';
 		foreach($this->options as $opt_key => $opt_val) {
+			if($opt_key=='choices') {
+				continue;
+			}
 			echo ' '.$opt_key.'="'.$opt_val.'"';
 		}
 	}

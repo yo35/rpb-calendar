@@ -9,7 +9,7 @@ class RpbcDateColumn extends RpbcColumn
 	{
 		$field = $this->key;
 		$data  = date_i18n(get_option('date_format'), strtotime($elem->$field));
-		echo htmlspecialchars($data);
+		echo $data;
 	}
 }
 

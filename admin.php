@@ -184,28 +184,96 @@ function rpbcalendar_manage_events()
 	require_once(RPBCALENDAR_ABSPATH.'admin/datefield.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
 
+	// Specialized version of RpbcColumn to display the description field
+	class RpbcEventDescColumn extends RpbcColumn
+	{
+		public function print_cell_content($elem)
+		{
+			echo rpbcalendar_format_event_desc($elem->event_desc);
+		}
+	}
+
+	// Specialized version of RpbcColumn to display the date and time fields
+	class RpbcEventDateColumn extends RpbcColumn
+	{
+		public function print_cell_content($elem)
+		{
+			$begin_date = date_i18n(get_option('date_format'), strtotime($elem->event_begin));
+			$end_date   = date_i18n(get_option('date_format'), strtotime($elem->event_end  ));
+			if($begin_date==$end_date) {
+				echo $begin_date;
+			} else {
+				echo sprintf(__('From %1$s to %2$s', 'rpbcalendar'), $begin_date, $end_date);
+			}
+			if(isset($elem->event_time)) {
+				$event_time = date_i18n(get_option('time_format'), strtotime($elem->event_time));
+				echo '<br />'.sprintf(__('At %s', 'rpbcalendar'), $event_time);
+			}
+		}
+	}
+
+	// Specialized version of RpbcColumn to display a category field
+	class RpbcCategoryPreviewColumn extends RpbcColumn
+	{
+		public function print_cell_content($elem)
+		{
+			if(isset($elem->category_name)) {
+				echo '<div class="rpbcalendar-category-preview" style="background-color: '
+					.htmlspecialchars($elem->category_background_color).'; color: '
+					.htmlspecialchars($elem->category_text_color      ).';">'
+					.htmlspecialchars($elem->category_name            ).'</div>';
+			} else {
+				echo 'N/A';
+			}
+		}
+	}
+
 	// SQL
-	$sql = 'SELECT event_id, event_title, event_desc, event_begin, event_end, event_time, '.
-		'event_link, event_category, event_author FROM '.RPBCALENDAR_EVENT_TABLE;
+	global $wpdb;
+	$sql = 'SELECT event_id, event_title, event_desc, event_begin, event_end, event_time, event_link, '.
+		'wpu.display_name AS author_name, '.
+		'rpbc.category_name AS category_name, rpbc.category_text_color AS category_text_color, '.
+		'rpbc.category_background_color AS category_background_color '.
+		'FROM '.RPBCALENDAR_EVENT_TABLE.' '.
+		'LEFT OUTER JOIN '.$wpdb->users.' wpu ON event_author=wpu.ID '.
+		'LEFT OUTER JOIN '.RPBCALENDAR_CATEGORY_TABLE.' rpbc ON event_category=rpbc.category_id';
+
+	// Category list
+	$categories = $wpdb->get_results(
+		'SELECT category_id, category_name FROM '.RPBCALENDAR_CATEGORY_TABLE.' ORDER BY category_name;'
+	);
+	$choices = array(array('key'=>'', 'value'=>__('No category', 'rpbcalendar')));
+	foreach($categories as $category) {
+		array_push($choices, array('key'=>$category->category_id, 'value'=>$category->category_name));
+	}
 
 	// Columns
 	$col_title            = new RpbcColumn('event_title', __('Title', 'rpbcalendar'));
 	$col_title->row_title = true;
-	$col_desc = new RpbcColumn('event_desc', __('Description', 'rpbcalendar'));
+	$col_desc = new RpbcEventDescColumn('event_desc' , __('Description', 'rpbcalendar'));
+	$col_date = new RpbcEventDateColumn('event_begin', __('Date'       , 'rpbcalendar'));
+	$col_author = new RpbcColumn('author_name', __('Author', 'rpbcalendar'));
+	$col_category = new RpbcCategoryPreviewColumn('category_name', __('Category', 'rpbcalendar'));
 
 	// Fields
+	global $current_user;
+	$fld_author                = new RpbcField('event_author', __('Author', 'rpbcalendar'), 'hidden');
+	$fld_author->default_value = $current_user->ID;
 	$fld_title          = new RpbcField('event_title', __('Title', 'rpbcalendar'), 'text');
 	$fld_title->options = array('maxlength'=>30);
 	$fld_desc              = new RpbcField('event_desc', __('Description', 'rpbcalendar'), 'textarea');
 	$fld_desc->allow_empty = true;
 	$fld_begin = new RpbcDateField('event_begin', __('Begin', 'rpbcalendar'), 'text');
 	$fld_end   = new RpbcDateField('event_end'  , __('End'  , 'rpbcalendar'), 'text');
+	$fld_category          = new RpbcField('event_category', __('Category', 'rpbcalendar'), 'select');
+	$fld_category->options     = array('choices'=>$choices);
+	$fld_category->allow_empty = array('choices'=>$choices);
 
 	// Form
 	$form = new RpbcForm('eventform', RPBCALENDAR_EVENT_TABLE, $sql, 'rpbcalendar',
 		__('event', 'rpbcalendar'), 'event_id');
-	$form->fields            = array($fld_title, $fld_begin, $fld_end, $fld_desc);
-	$form->columns           = array($col_title, $col_desc);
+	$form->fields            = array($fld_author, $fld_title, $fld_begin, $fld_end, $fld_category, $fld_desc);
+	$form->columns           = array($col_title, $col_desc, $col_date, $col_author, $col_category);
 	$form->default_order_by  = 'event_begin';
 	$form->default_order_asc = false;
 
