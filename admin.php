@@ -178,10 +178,47 @@ function rpbcalendar_manage_highdays()
 // Function to handle the management of events
 function rpbcalendar_manage_events()
 {
-	echo '<div class="wrap">';
-	echo '<h2>'.__('Events', 'rpbcalendar').'</h2>';
-	include(RPBCALENDAR_ABSPATH.'admin/manage-events.php');
-	echo '</div>';
+	// Includes
+	require_once(RPBCALENDAR_ABSPATH.'admin/column.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/field.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/datefield.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
+
+	// SQL
+	$sql = 'SELECT event_id, event_title, event_desc, event_begin, event_end, event_time, '.
+		'event_link, event_category, event_author FROM '.RPBCALENDAR_EVENT_TABLE;
+
+	// Columns
+	$col_title            = new RpbcColumn('event_title', __('Title', 'rpbcalendar'));
+	$col_title->row_title = true;
+	$col_desc = new RpbcColumn('event_desc', __('Description', 'rpbcalendar'));
+
+	// Fields
+	$fld_title          = new RpbcField('event_title', __('Title', 'rpbcalendar'), 'text');
+	$fld_title->options = array('maxlength'=>30);
+	$fld_desc              = new RpbcField('event_desc', __('Description', 'rpbcalendar'), 'textarea');
+	$fld_desc->allow_empty = true;
+	$fld_begin = new RpbcDateField('event_begin', __('Begin', 'rpbcalendar'), 'text');
+	$fld_end   = new RpbcDateField('event_end'  , __('End'  , 'rpbcalendar'), 'text');
+
+	// Form
+	$form = new RpbcForm('eventform', RPBCALENDAR_EVENT_TABLE, $sql, 'rpbcalendar',
+		__('event', 'rpbcalendar'), 'event_id');
+	$form->fields            = array($fld_title, $fld_begin, $fld_end, $fld_desc);
+	$form->columns           = array($col_title, $col_desc);
+	$form->default_order_by  = 'event_begin';
+	$form->default_order_asc = false;
+
+	// Process requests
+	$form->process_all();
+
+	// Printing
+	$form->print_all(
+		__('Events'         , 'rpbcalendar'),
+		__('Add a new event', 'rpbcalendar'),
+		__('Edit the event' , 'rpbcalendar'),
+		__('Delete an event', 'rpbcalendar')
+	);
 }
 
 ?>

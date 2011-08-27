@@ -1,7 +1,7 @@
 <?php
 
 // Plugin version
-define('RPBCALENDAR_VERSION', '0.2');
+define('RPBCALENDAR_VERSION', '0.1');
 
 // Define the tables used by the plugin
 global $wpdb;

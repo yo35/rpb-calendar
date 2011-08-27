@@ -283,6 +283,7 @@ class RpbcForm
 
 		// Execute the request
 		global $wpdb;
+		var_dump('INSERT INTO '.$this->table.' ('.$field_part.') VALUES ('.$value_part.');');
 		$retval = $wpdb->query(
 			'INSERT INTO '.$this->table.' ('.$field_part.') VALUES ('.$value_part.');'
 		);

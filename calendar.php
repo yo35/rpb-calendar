@@ -74,6 +74,7 @@ include('init.php');
 // Before we get on with the functions, we need to define the initial style used for Calendar
 include(RPBCALENDAR_ABSPATH.'styles.php');
 
+require_once(RPBCALENDAR_ABSPATH.'tools.php');
 include(RPBCALENDAR_ABSPATH.'admin.php');
 
 

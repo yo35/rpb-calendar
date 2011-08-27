@@ -43,11 +43,15 @@ class RpbcField
 		} elseif(isset($this->default_value)) {
 			$value = $this->default_value;
 		}
-		echo '<input type="'.$this->type.'" name="'.$this->key.'" value="'.$value.'" ';
-		foreach($this->options as $opt_key => $opt_val) {
-			echo $opt_key.'="'.$opt_val.'" ';
+		if($this->type=='textarea') {
+			echo '<textarea ';
+			$this->print_option_attributes();
+			echo '>'.$value.'</textarea>';
+		} else {
+			echo '<input type="'.$this->type.'" ';
+			$this->print_option_attributes();
+			echo ' value="'.$value.'" />';
 		}
-		echo '/>';
 		if(isset($this->legend)) {
 			echo '<p class="description">'.$this->legend.'</p>';
 		}
@@ -57,6 +61,15 @@ class RpbcField
 			echo '</td></tr>';
 		} else {
 			echo '</div>';
+		}
+	}
+
+	// Print the option attributes and the name associated to the field
+	private function print_option_attributes()
+	{
+		echo 'name="'.$this->key.'"';
+		foreach($this->options as $opt_key => $opt_val) {
+			echo ' '.$opt_key.'="'.$opt_val.'"';
 		}
 	}
 
