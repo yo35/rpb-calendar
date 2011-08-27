@@ -65,26 +65,10 @@ function rpbcalendar_manage_categories()
 	// Includes
 	require_once(RPBCALENDAR_ABSPATH.'admin/column.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/colorcolumn.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/categorycolumn.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/field.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/colorfield.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
-
-	// Specialized version of RpbcColumn to display color field
-	class RpbcCategoryPreviewColumn extends RpbcColumn
-	{
-		public function print_cell_content($elem)
-		{
-			echo '<div class="rpbcalendar-category-preview" style="background-color: '
-				.htmlspecialchars($elem->category_background_color).'; color: '
-				.htmlspecialchars($elem->category_text_color      ).';">'
-				.htmlspecialchars($elem->category_name            ).'</div>';
-		}
-
-		public function sql_sort_code($order_asc)
-		{
-			return 'ORDER BY category_name '.($order_asc ? 'ASC' : 'DESC');
-		}
-	}
 
 	// SQL
 	$sql = 'SELECT category_id, category_name, category_text_color, category_background_color FROM '
@@ -95,7 +79,7 @@ function rpbcalendar_manage_categories()
 	$col_name->row_title = true;
 	$col_text_color       = new RpbcColorColumn('category_text_color'      , __('Text color'      , 'rpbcalendar'));
 	$col_background_color = new RpbcColorColumn('category_background_color', __('Background color', 'rpbcalendar'));
-	$col_preview = new RpbcCategoryPreviewColumn('category_preview', __('Preview', 'rpbcalendar'));
+	$col_preview = new RpbcCategoryColumn('category_preview', __('Preview', 'rpbcalendar'));
 
 	// Fields
 	$fld_name          = new RpbcField('category_name', __('Name', 'rpbcalendar'), 'text');
@@ -180,6 +164,7 @@ function rpbcalendar_manage_events()
 {
 	// Includes
 	require_once(RPBCALENDAR_ABSPATH.'admin/column.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/categorycolumn.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/field.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/datefield.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
@@ -212,22 +197,6 @@ function rpbcalendar_manage_events()
 		}
 	}
 
-	// Specialized version of RpbcColumn to display a category field
-	class RpbcCategoryPreviewColumn extends RpbcColumn
-	{
-		public function print_cell_content($elem)
-		{
-			if(isset($elem->category_name)) {
-				echo '<div class="rpbcalendar-category-preview" style="background-color: '
-					.htmlspecialchars($elem->category_background_color).'; color: '
-					.htmlspecialchars($elem->category_text_color      ).';">'
-					.htmlspecialchars($elem->category_name            ).'</div>';
-			} else {
-				echo 'N/A';
-			}
-		}
-	}
-
 	// SQL
 	global $wpdb;
 	$sql = 'SELECT event_id, event_title, event_desc, event_begin, event_end, event_time, event_link, '.
@@ -253,7 +222,7 @@ function rpbcalendar_manage_events()
 	$col_desc = new RpbcEventDescColumn('event_desc' , __('Description', 'rpbcalendar'));
 	$col_date = new RpbcEventDateColumn('event_begin', __('Date'       , 'rpbcalendar'));
 	$col_author = new RpbcColumn('author_name', __('Author', 'rpbcalendar'));
-	$col_category = new RpbcCategoryPreviewColumn('category_name', __('Category', 'rpbcalendar'));
+	$col_category = new RpbcCategoryColumn('category_name', __('Category', 'rpbcalendar'));
 
 	// Fields
 	global $current_user;
