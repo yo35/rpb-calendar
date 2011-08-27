@@ -158,18 +158,20 @@ require_once(RPBCALENDAR_ABSPATH.'admin/column.class.php');
 require_once(RPBCALENDAR_ABSPATH.'admin/colorcolumn.class.php');
 require_once(RPBCALENDAR_ABSPATH.'admin/categorypreviewcolumn.class.php');
 require_once(RPBCALENDAR_ABSPATH.'admin/table.class.php');
+require_once(RPBCALENDAR_ABSPATH.'admin/field.class.php');
+require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
 
 // Function to handle the management of categories
 function rpbcalendar_manage_categories()
 {
 	echo '<div class="wrap">';
-	if(isset($_GET['edit'])) {
-		echo '<h2>'.__('Edit the event category', 'rpbcalendar').'</h2>';
-		include(RPBCALENDAR_ABSPATH.'admin/edit-category.php');
-	} elseif(isset($_GET['delete'])) {
-		echo '<h2>'.__('Delete an event category', 'rpbcalendar').'</h2>';
-		include(RPBCALENDAR_ABSPATH.'admin/delete-category.php');
-	} else {
+	//if(isset($_GET['edit'])) {
+	//	echo '<h2>'.__('Edit the event category', 'rpbcalendar').'</h2>';
+	//	include(RPBCALENDAR_ABSPATH.'admin/edit-category.php');
+	//} elseif(isset($_GET['delete'])) {
+	//	echo '<h2>'.__('Delete an event category', 'rpbcalendar').'</h2>';
+	//	include(RPBCALENDAR_ABSPATH.'admin/delete-category.php');
+	//} else {
 		echo '<h2>'.__('Event categories', 'rpbcalendar').'</h2>';
 		rpbcalendar_process_add_category_request();
 		rpbcalendar_process_update_category_request();
@@ -193,7 +195,21 @@ function rpbcalendar_manage_categories()
 		$table->columns          = array($col_name, $col_text_color, $col_background_color, $col_preview);
 		$table->print_table();
 
-	}
+		// Fields
+		$fld_name          = new RpbcField('category_name', __('Name', 'rpbcalendar'), 'text');
+		$fld_name->options = array('maxlength'=>30);
+		$fld_text_color          = new RpbcField('category_text_color'      , __('Text color'      , 'rpbcalendar'), 'text');
+		$fld_text_color->options = array('maxlength'=>7);
+		$fld_text_color->legend  = __('Use HTML hexa format (ex: #0000ff for blue or #ffff00 for yellow)', 'rpbcalendar');
+
+		// Form
+		$form         = new RpbcForm('categoryform', $sql, 'rpbcalendar-categories',
+			__('category', 'rpbcalendar'), 'category_id');
+		$form->fields = array($fld_name, $fld_text_color);
+		$form->print_form(false);
+		$form->print_delete();
+
+	//}
 	echo '</div>';
 }
 

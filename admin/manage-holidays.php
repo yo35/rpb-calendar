@@ -119,9 +119,9 @@
 </div></div>
 
 <!-- Add holiday -->
-<div id="col-left"><div class="col-wrap"><div class="form-wrap">
+<div id="col-left"><div class="col-wrap">
 	<h3><?php _e('Add a new holiday', 'rpbcalendar'); ?></h3>
-	<form name="holidayform" method="post" action="<?php echo $base_link; ?>">
+	<form class="form-wrap" name="holidayform" method="post" action="<?php echo $base_link; ?>">
 		<input type="hidden" name="mode" value="add" />
 		<div class="form-field">
 			<label for="holiday_name"><?php _e('Name', 'rpbcalendar'); ?></label>
@@ -143,7 +143,7 @@
 		</div>
 		<input class="button" type="submit" value="<?php _e('Add', 'rpbcalendar'); ?>" />
 	</form>
-</div></div></div>
+</div></div>
 
 <!-- Closing the container -->
 </div>
