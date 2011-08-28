@@ -1,28 +1,5 @@
 <?php
 
-// Utilities
-require_once(RPBCALENDAR_ABSPATH.'tools.php');
-
-// Hooks
-add_action('plugins_loaded', 'rpbcalendar_check_install');
-
-// Install procedure
-function rpbcalendar_install()
-{
-	rpbcalendar_create_tables();
-	add_option('rpbcalendar-version', RPBCALENDAR_VERSION);
-}
-
-// Check install procedure
-function rpbcalendar_check_install()
-{
-	if(get_option('rpbcalendar-version')==RPBCALENDAR_VERSION) {
-		return;
-	}
-	rpbcalendar_create_tables();
-	update_option('rpbcalendar-version', RPBCALENDAR_VERSION);
-}
-
 // Create or upgrade the tables
 function rpbcalendar_create_tables()
 {
