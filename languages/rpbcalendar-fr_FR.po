@@ -88,7 +88,7 @@ msgstr "Supprimer une période de vacances"
 #: admin.php:156
 #, php-format
 msgid "%1$s<br />to %2$s"
-msgstr "%1$s<br />à %2$s"
+msgstr "%1$s<br />au %2$s"
 
 #: admin.php:160
 #, php-format
@@ -408,4 +408,4 @@ msgstr "Événement"
 #: templates/upcomingwidget.php:49
 #, php-format
 msgid "From %1$s to %2$s"
-msgstr "De %1$s à %2$s"
+msgstr "Du %1$s au %2$s"

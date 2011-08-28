@@ -12,7 +12,7 @@ define('RPBCALENDAR_ABSPATH'   , ABSPATH.'wp-content/plugins/'.RPBCALENDAR_PLUGI
 define('RPBCALENDAR_URL'       , site_url().'/wp-content/plugins/'.RPBCALENDAR_PLUGIN_DIR.'/');
 
 // Enable internationalization
-load_plugin_textdomain('rpbcalendar', false, RPBCALENDAR_PLUGIN_DIR);
+load_plugin_textdomain('rpbcalendar', false, RPBCALENDAR_PLUGIN_DIR.'/languages/');
 
 // Plugin version
 define('RPBCALENDAR_VERSION', '0.1');
@@ -187,7 +187,7 @@ function rpbcalendar_build_admin_menu()
 	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
 
 	// Event page
-	$page = add_submenu_page('rpbcalendar', __('Manage events', 'rpbcalendar'), __('Manage event', 'rpbcalendar'),
+	$page = add_submenu_page('rpbcalendar', __('Manage events', 'rpbcalendar'), __('Manage events', 'rpbcalendar'),
 		$allowed_group, 'rpbcalendar', 'rpbcalendar_manage_events');
 	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
 
