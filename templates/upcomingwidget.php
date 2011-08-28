@@ -2,7 +2,7 @@
 
 	// First and last days
 	$current_time   = rpbcalendar_time();
-	$upcoming_range = max((int)get_option('rbpcalendar_upcoming_range', 7), 1);
+	$upcoming_range = max($instance['upcoming_range'], 1);
 	$first_day      = date('Y-m-d', $current_time + 86400);
 	$last_day       = date('Y-m-d', $current_time + 86400*$upcoming_range);
 	$first_day_sql  = "'".mysql_escape_string($first_day)."'";
