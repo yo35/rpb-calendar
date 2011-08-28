@@ -1,20 +1,19 @@
 <?php
 
+	// Input
+	$current_time  = rpbcalendar_time();
+	$current_year  = isset($_GET['year' ]) ? $_GET['year' ] : date('Y', $current_time);
+	$current_month = isset($_GET['month']) ? $_GET['month'] : date('n', $current_time);
+
 	// Validate the year
-	if(!isset($current_year)) {
-		rpbcalendar_error_message(__('No year defined', 'rpbcalendar'));
-		return;
-	} elseif(!is_numeric($current_year)) {
+	if(!is_numeric($current_year)) {
 		rpbcalendar_error_message(__('The year must be a numeric value', 'rpbcalendar'));
 		return;
 	}
 	$current_year = (int)$current_year;
 
 	// Validate the month
-	if(!isset($current_month)) {
-		rpbcalendar_error_message(__('No month defined', 'rpbcalendar'));
-		return;
-	} elseif(!is_numeric($current_month)) {
+	if(!is_numeric($current_month)) {
 		rpbcalendar_error_message(__('The month must be a numeric value', 'rpbcalendar'));
 		return;
 	}

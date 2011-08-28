@@ -255,12 +255,39 @@ function rpbcalendar_shortcode_rpbcategories($atts)
 add_shortcode('rpbcalendar', 'rpbcalendar_shortcode_rpbcalendar');
 function rpbcalendar_shortcode_rpbcalendar($atts)
 {
-	$current_time  = rpbcalendar_time();
-	$current_year  = isset($_GET['year' ]) ? $_GET['year' ] : date('Y', $current_time);
-	$current_month = isset($_GET['month']) ? $_GET['month'] : date('n', $current_time);
 	ob_start();
 	include(RPBCALENDAR_ABSPATH.'templates/calendar.php');
 	return ob_get_clean();
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Widgets
+
+// Init widgets
+add_action('widgets_init', 'rpbcalendar_register_widgets');
+function rpbcalendar_register_widgets()
+{
+	// Today's events
+	wp_register_sidebar_widget('rpbcalendar_todays_events', __('Today\'s events', 'rpbcalendar'), 'rpbcalendar_today_widget',
+		array('description'=>__('Display the list of today\'s events', 'rpbcalendar')));
+
+	// Upcoming events
+	wp_register_sidebar_widget('rpbcalendar_upcoming_events', __('Upcoming events', 'rpbcalendar'), 'rpbcalendar_upcoming_widget',
+		array('description'=>__('Display a list of upcoming events', 'rpbcalendar')));
+}
+
+// Print today's events
+function rpbcalendar_today_widget($args)
+{
+	include(RPBCALENDAR_ABSPATH.'templates/todaywidget.php');
+}
+
+// Print upcoming events
+function rpbcalendar_upcoming_widget($args)
+{
+	include(RPBCALENDAR_ABSPATH.'templates/upcomingwidget.php');
 }
 
 ?>
