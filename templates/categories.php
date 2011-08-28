@@ -15,4 +15,5 @@
 		echo htmlspecialchars($category->category_name);
 		echo '</div>';
 	}
+
 ?>

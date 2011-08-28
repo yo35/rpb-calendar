@@ -57,7 +57,7 @@ function rpbcalendar_display_category() { return get_option('rpbcalendar_display
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Setup
+// Setup tables
 
 // Install procedure
 register_activation_hook(__FILE__, 'rpbcalendar_install');
@@ -127,6 +127,64 @@ function rpbcalendar_register_admin_css()
 }
 
 
+
+////////////////////////////////////////////////////////////////////////////////
+// Setup CSS
+
+// Inline category style
+add_action('wp_print_styles', 'rpbcalendar_setup_category_colors');
+function rpbcalendar_setup_category_colors()
+{
+	// Retrieve category info
+	global $wpdb;
+	$categories = $wpdb->get_results(
+		'SELECT category_id, category_text_color, category_background_color FROM '.RPBCALENDAR_CATEGORY_TABLE.';'
+	);
+
+	// Display
+	echo '<style type="text/css">';
+	foreach($categories as $category) {
+		$output  = "";
+		$output .= ".rpbcalendar-category-".htmlspecialchars($category->category_id)." {\n";
+		$output .= "    color: ".htmlspecialchars($category->category_text_color).";\n";
+		$output .= "    background-color: ".htmlspecialchars($category->category_background_color).";\n";
+		$output .= "}\n";
+		echo $output;
+	}
+	echo '</style>';
+}
+
+// Enqueue general styles
+add_action('wp_print_styles', 'rpbcalendar_enqueue_general_css');
+function rpbcalendar_enqueue_general_css()
+{
+	wp_register_style('rpbcalendar_event_style'   , RPBCALENDAR_URL.'/css/event.css');
+	wp_register_style('rpbcalendar_calendar_style', RPBCALENDAR_URL.'/css/calendar.css');
+	wp_register_style('rpbcalendar_category_style', RPBCALENDAR_URL.'/css/category.css');
+	wp_register_style('rpbcalendar_error_style'   , RPBCALENDAR_URL.'/css/error.css');
+	wp_enqueue_style ('rpbcalendar_event_style'   );
+	wp_enqueue_style ('rpbcalendar_calendar_style');
+	wp_enqueue_style ('rpbcalendar_category_style');
+	wp_enqueue_style ('rpbcalendar_error_style'   );
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Shortcodes
+
+// List of categories
+add_shortcode('rpbcategories', 'rpbcalendar_shortcode_rpbcategories');
+function rpbcalendar_shortcode_rpbcategories($atts)
+{
+	global $wpdb;
+	$categories = $wpdb->get_results(
+		'SELECT category_id, category_name FROM '.RPBCALENDAR_CATEGORY_TABLE.' ORDER BY category_name;'
+	);
+	ob_start();
+	include(RPBCALENDAR_ABSPATH.'templates/categories.php');
+	return ob_get_clean();
+}
 
 
 ?>

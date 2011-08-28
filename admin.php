@@ -239,25 +239,25 @@ function rpbcalendar_manage_options()
 		$new_permissions=='read'
 	)) {
 		$permissions = $new_permissions;
-		update_option('rpbcalendar-permissions', $permissions);
+		update_option('rpbcalendar_permissions', $permissions);
 		rpbcalendar_admin_notification_message(__('Option &quot;Permissions&quot; saved', 'rpbcalendar'));
 	}
 
 	// Save display author
-	$display_author     = get_option('rpbcalendar-display-author', 'true');
+	$display_author     = get_option('rpbcalendar_display_author', 'true');
 	$new_display_author = isset($_POST['display-author']) ? 'true' : 'false';
 	if(isset($_POST['rpbcalendar-options']) && $display_author!=$new_display_author) {
 		$display_author = $new_display_author;
-		update_option('rpbcalendar-display-author', $display_author);
+		update_option('rpbcalendar_display_author', $display_author);
 		rpbcalendar_admin_notification_message(__('Option &quot;Display author&quot; saved', 'rpbcalendar'));
 	}
 
 	// Save display category
-	$display_category     = get_option('rpbcalendar-display-category', 'true');
+	$display_category     = get_option('rpbcalendar_display_category', 'true');
 	$new_display_category = isset($_POST['display-category']) ? 'true' : 'false';
 	if(isset($_POST['rpbcalendar-options']) && $display_category!=$new_display_category) {
 		$display_category = $new_display_category;
-		update_option('rpbcalendar-display-category', $display_category);
+		update_option('rpbcalendar_display_category', $display_category);
 		rpbcalendar_admin_notification_message(__('Option &quot;Display category&quot; saved', 'rpbcalendar'));
 	}
 
