@@ -77,53 +77,50 @@
 		);
 	}
 
-	/*
-	// Print a link to the previous month
-	function previous_month_link($switch_date_link, $current_year, $current_month)
-	{
-		if(!isset($switch_date_link)) {
-			return;
-		}
-		$target_year  = $current_year;
-		$target_month = $current_month-1;
-		if($target_month==0) {
-			$target_year  = $target_year-1;
-			$target_month = 12;
-		}
-		$target_link = sprintf($switch_date_link, $target_year, $target_month);
-		?>
-		<div class="rpbcalendar-previous-month">
-			<a href="<?php echo htmlspecialchars($target_link); ?>">
-				<? echo htmlspecialchars('« '.__('Previous', 'calendar')); ?>
-			</a>
-		</div>
-		<?php
+	// Parameters for the navigation form
+	$prev_month_params = array('month'=>$current_month-1, 'year'=>$current_year);
+	$next_month_params = array('month'=>$current_month+1, 'year'=>$current_year);
+	if($prev_month_params['month']==0) {
+		$prev_month_params['month'] = 12;
+		$prev_month_params['year' ] = $current_year-1;
 	}
+	if($next_month_params['month']==13) {
+		$next_month_params['month'] = 1;
+		$next_month_params['year' ] = $current_year+1;
+	}
+	$prev_year_params = array('month'=>$current_month, 'year'=>$current_year-1);
+	$next_year_params = array('month'=>$current_month, 'year'=>$current_year+1);
 
-	// Print a link to the next month
-	function next_month_link($switch_date_link, $current_year, $current_month)
-	{
-		if(!isset($switch_date_link)) {
-			return;
-		}
-		$target_year  = $current_year;
-		$target_month = $current_month+1;
-		if($target_month==13) {
-			$target_year  = $target_year+1;
-			$target_month = 1;
-		}
-		$target_link = sprintf($switch_date_link, $target_year, $target_month);
-		?>
-		<div class="rpbcalendar-next-month">
-			<a href="<?php echo htmlspecialchars($target_link); ?>">
-				<? echo htmlspecialchars(__('Next', 'calendar').' »'); ?>
-			</a>
-		</div>
-		<?php
-	}
-	*/
+	// Tooltip for the navigation form
+	$prev_month_tooltip = date_i18n('F Y', mktime(0, 0, 0, $prev_month_params['month'], 1, $prev_month_params['year']));
+	$next_month_tooltip = date_i18n('F Y', mktime(0, 0, 0, $next_month_params['month'], 1, $next_month_params['year']));
+	$prev_year_tooltip  = date_i18n('F Y', mktime(0, 0, 0, $prev_year_params ['month'], 1, $prev_year_params ['year']));
+	$next_year_tooltip  = date_i18n('F Y', mktime(0, 0, 0, $next_year_params ['month'], 1, $next_year_params ['year']));
 
 ?>
+
+<div class="rpbcalendar-button-bar">
+	<?php
+
+		// Change month and year buttons
+		rpbcalendar_navigate_form('prevyear' , $prev_year_params , '&lt;&lt;', $prev_year_tooltip );
+		rpbcalendar_navigate_form('prevmonth', $prev_month_params, '&lt;'    , $prev_month_tooltip);
+		rpbcalendar_navigate_form('nextmonth', $next_month_params, '&gt;'    , $next_month_tooltip);
+		rpbcalendar_navigate_form('nextyear' , $next_year_params , '&gt;&gt;', $next_year_tooltip );
+
+		// Change date form
+		rpbcalendar_begin_navigate_form('changedate', array('month', 'year'));
+		echo '<select name="month">';
+		for($k=1; $k<12; $k++) {
+			$label    = date_i18n('F', mktime(0, 0, 0, $k, 1, 2000));
+			$selected = ($k==$current_month) ? ' selected="1"' : '';
+			echo '<option value="'.$k.'"'.$selected.'>'.$label.'</option>';
+		}
+		echo '</select>';
+		echo '<input name="year" value="'.$current_year.'" maxlength="4" />';
+		rpbcalendar_end_navigate_form  (__('Go', 'rpbcalendar'));
+	?>
+</div>
 
 <div class="rpbcalendar-very-large-content">
 	<table class="rpbcalendar-table">
@@ -133,9 +130,7 @@
 			<tr>
 				<th colspan="7" class="rpbcalendar-month-header">
 					<?php
-						//previous_month_link($switch_date_link, $current_year, $current_month);
 						echo date_i18n('F Y', mktime(0, 0, 0, $current_month, 1, $current_year));
-						//next_month_link($switch_date_link, $current_year, $current_month);
 					?>
 				</th>
 			</tr>

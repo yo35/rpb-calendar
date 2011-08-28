@@ -29,6 +29,12 @@ define('RPBCALENDAR_HOLIDAY_TABLE' , $wpdb->prefix . 'rpbcalendar_holidays'  );
 ////////////////////////////////////////////////////////////////////////////////
 // Utilities
 
+// Return the local time
+function rpbcalendar_time()
+{
+  return time() + 3600*get_option('gmt_offset');
+}
+
 // Display an error message
 function rpbcalendar_error_message($error_message)
 {
@@ -83,6 +89,41 @@ function rpbcalendar_weekday_info($weekday_idx, $info)
 function rpbcalendar_permissions     () { return get_option('rpbcalendar_permissions', 'manage_options'); }
 function rpbcalendar_display_author  () { return get_option('rpbcalendar_display_author'  , 'true')=='true'; }
 function rpbcalendar_display_category() { return get_option('rpbcalendar_display_category', 'true')=='true'; }
+
+// Navigate form (begin)
+function rpbcalendar_begin_navigate_form($form_name, $fields_to_skip)
+{
+	$current_url   = get_permalink();
+	$question_mark = strpos($current_url, '?');
+	$base_url      = ($question_mark===false) ? $current_url : substr($current_url, 0, $question_mark);
+	$form_id       = 'rpbcalendar-'.$form_name.'-form';
+	echo '<form id="'.$form_id.'" name="'.$form_name.'" method="get" action="'.$base_url.'">';
+	foreach($_GET as $key => $value) {
+		if(array_search($key, $fields_to_skip)===false) {
+			echo '<input type="hidden" name="'.htmlspecialchars($key).'" value="'.htmlspecialchars($value).'" />';
+		}
+	}
+}
+
+// Navigate form (end)
+function rpbcalendar_end_navigate_form($submit_label, $submit_title)
+{
+	if(isset($submit_label)) {
+		$title = isset($submit_title) ? ' title="'.$submit_title.'"' : '';
+		echo '<input type="submit" value="'.$submit_label.'"'.$title.' />';
+	}
+	echo '</form>';
+}
+
+// Navigate form (simple version)
+function rpbcalendar_navigate_form($form_name, $params, $submit_label, $submit_title)
+{
+	rpbcalendar_begin_navigate_form($form_name, array_keys($params));
+	foreach($params as $key => $value) {
+		echo '<input type="hidden" name="'.htmlspecialchars($key).'" value="'.htmlspecialchars($value).'" />';
+	}
+	rpbcalendar_end_navigate_form($submit_label, $submit_title);
+}
 
 
 
@@ -214,20 +255,11 @@ function rpbcalendar_shortcode_rpbcategories($atts)
 add_shortcode('rpbcalendar', 'rpbcalendar_shortcode_rpbcalendar');
 function rpbcalendar_shortcode_rpbcalendar($atts)
 {
+	$current_time  = rpbcalendar_time();
+	$current_year  = isset($_GET['year' ]) ? $_GET['year' ] : date('Y', $current_time);
+	$current_month = isset($_GET['month']) ? $_GET['month'] : date('n', $current_time);
 	ob_start();
-	//echo 'blah: ';
-	//$myarray = array_fill(1, 10, false);
-	//foreach(range(2,4) as $k) {
-	//	$myarray[$k] = true;
-	//}
-	//$myarray[2] = true;
-	//var_dump($myarray);
-	//var_dump(date('Y-m-d', mktime(0, 0, 0, 8, 1, 2011)));
-	$current_year = 2011;
-	$current_month = 8;
-
 	include(RPBCALENDAR_ABSPATH.'templates/calendar.php');
-
 	return ob_get_clean();
 }
 

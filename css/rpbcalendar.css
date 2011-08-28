@@ -41,6 +41,32 @@
 
 
 /******************************************************************************/
+/*** Navigation bar ***/
+
+.rpbcalendar-button-bar {
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.rpbcalendar-button-bar form {
+	display: inline;
+}
+
+.rpbcalendar-button-bar form#rpbcalendar-changedate-form {
+	float: right;
+}
+
+.rpbcalendar-button-bar form#rpbcalendar-changedate-form input {
+	margin-left: 5px;
+}
+
+.rpbcalendar-button-bar form#rpbcalendar-changedate-form input[name="year"] {
+	width: 60px;
+}
+
+
+
+/******************************************************************************/
 /*** Calendar table ***/
 
 table.rpbcalendar-table {
@@ -68,18 +94,6 @@ table.rpbcalendar-table th {
 
 table.rpbcalendar-table th.rpbcalendar-month-header {
 	font-weight: bold;
-}
-
-table.rpbcalendar-table div.rpbcalendar-next-month {
-	float: right;
-	margin-right: 50px;
-	font-weight: normal;
-}
-
-table.rpbcalendar-table div.rpbcalendar-previous-month {
-	float: left;
-	margin-left: 50px;
-	font-weight: normal;
 }
 
 table.rpbcalendar-table th.rpbcalendar-weekend-day-header {
