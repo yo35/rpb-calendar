@@ -1,0 +1,413 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-29 00:41+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin.php:9
+msgid "Go back"
+msgstr ""
+
+#: admin.php:41 admin.php:48 admin.php:86 admin.php:92
+msgid "Name"
+msgstr ""
+
+#: admin.php:43 admin.php:50
+msgid "Text color"
+msgstr ""
+
+#: admin.php:44 admin.php:51
+msgid "Background color"
+msgstr ""
+
+#: admin.php:45
+msgid "Preview"
+msgstr ""
+
+#: admin.php:55
+msgid "category"
+msgstr ""
+
+#: admin.php:65
+msgid "Event categories"
+msgstr ""
+
+#: admin.php:66
+msgid "Add a new category"
+msgstr ""
+
+#: admin.php:67
+msgid "Edit the event category"
+msgstr ""
+
+#: admin.php:68
+msgid "Delete an event category"
+msgstr ""
+
+#: admin.php:88 admin.php:94
+msgid "First day"
+msgstr ""
+
+#: admin.php:89 admin.php:95
+msgid "Last day"
+msgstr ""
+
+#: admin.php:99
+msgid "holiday"
+msgstr ""
+
+#: admin.php:110
+msgid "Holidays"
+msgstr ""
+
+#: admin.php:111
+msgid "Add a new holiday"
+msgstr ""
+
+#: admin.php:112
+msgid "Edit the holiday"
+msgstr ""
+
+#: admin.php:113
+msgid "Delete a holiday"
+msgstr ""
+
+#: admin.php:156
+#, php-format
+msgid "%1$s<br />to %2$s"
+msgstr ""
+
+#: admin.php:160
+#, php-format
+msgid "At %s"
+msgstr ""
+
+#: admin.php:186
+msgid "No category"
+msgstr ""
+
+#: admin.php:192 admin.php:204
+msgid "Title"
+msgstr ""
+
+#: admin.php:194 admin.php:206 templates/explorer.php:26
+msgid "Description"
+msgstr ""
+
+#: admin.php:195 templates/explorer.php:27
+msgid "Date"
+msgstr ""
+
+#: admin.php:196 admin.php:202 admin.php:289
+msgid "Author"
+msgstr ""
+
+#: admin.php:197 admin.php:212
+msgid "Category"
+msgstr ""
+
+#: admin.php:198 admin.php:215
+msgid "Link"
+msgstr ""
+
+#: admin.php:208
+msgid "Begin"
+msgstr ""
+
+#: admin.php:209
+msgid "End"
+msgstr ""
+
+#: admin.php:210 templates/explorer.php:28
+msgid "Time"
+msgstr ""
+
+#: admin.php:220
+msgid "event"
+msgstr ""
+
+#: admin.php:231
+msgid "Events"
+msgstr ""
+
+#: admin.php:232
+msgid "Add a new event"
+msgstr ""
+
+#: admin.php:233
+msgid "Edit the event"
+msgstr ""
+
+#: admin.php:234
+msgid "Delete an event"
+msgstr ""
+
+#: admin.php:253
+msgid "Option &quot;Permissions&quot; saved"
+msgstr ""
+
+#: admin.php:262
+msgid "Option &quot;Display author&quot; saved"
+msgstr ""
+
+#: admin.php:271
+msgid "Option &quot;Display category&quot; saved"
+msgstr ""
+
+#: admin.php:277 rpbcalendar.php:205
+msgid "Calendar options"
+msgstr ""
+
+#: admin.php:284
+msgid "Permissions"
+msgstr ""
+
+#: admin.php:287
+msgid "Administrator"
+msgstr ""
+
+#: admin.php:288
+msgid "Editor"
+msgstr ""
+
+#: admin.php:290
+msgid "Contributor"
+msgstr ""
+
+#: admin.php:291
+msgid "Subscriber"
+msgstr ""
+
+#: admin.php:293
+msgid ""
+"Choose the lowest user group that is allowed to manage events and holidays"
+msgstr ""
+
+#: admin.php:298
+msgid "Author name"
+msgstr ""
+
+#: admin.php:301
+msgid "Display the name of the author name on events"
+msgstr ""
+
+#: admin.php:306
+msgid "Categories"
+msgstr ""
+
+#: admin.php:309
+msgid "Use event categories"
+msgstr ""
+
+#: admin.php:315
+msgid "Save changes"
+msgstr ""
+
+#: rpbcalendar.php:76
+msgid "Sunday"
+msgstr ""
+
+#: rpbcalendar.php:77
+msgid "Monday"
+msgstr ""
+
+#: rpbcalendar.php:78
+msgid "Tuesday"
+msgstr ""
+
+#: rpbcalendar.php:79
+msgid "Wednesday"
+msgstr ""
+
+#: rpbcalendar.php:80
+msgid "Thursday"
+msgstr ""
+
+#: rpbcalendar.php:81
+msgid "Friday"
+msgstr ""
+
+#: rpbcalendar.php:82
+msgid "Saturday"
+msgstr ""
+
+#: rpbcalendar.php:185
+msgid "Calendar"
+msgstr ""
+
+#: rpbcalendar.php:190
+msgid "Manage events"
+msgstr ""
+
+#: rpbcalendar.php:190
+msgid "Manage event"
+msgstr ""
+
+#: rpbcalendar.php:195
+msgid "Manage holidays"
+msgstr ""
+
+#: rpbcalendar.php:200
+msgid "Manage categories"
+msgstr ""
+
+#: todaysevents.class.php:10
+msgid "Display the list of today's events"
+msgstr ""
+
+#: todaysevents.class.php:12 todaysevents.class.php:32
+msgid "Today's events"
+msgstr ""
+
+#: todaysevents.class.php:37 upcomingevents.class.php:44
+msgid "Title:"
+msgstr ""
+
+#: upcomingevents.class.php:10
+msgid "Display a list of upcoming events"
+msgstr ""
+
+#: upcomingevents.class.php:12 upcomingevents.class.php:35
+msgid "Upcoming events"
+msgstr ""
+
+#: upcomingevents.class.php:49
+msgid "Length of the upcoming period (in days):"
+msgstr ""
+
+#: admin/colorfield.class.php:12
+msgid "Use HTML hexa format (ex: #0000ff for blue or #ffff00 for yellow)"
+msgstr ""
+
+#: admin/colorfield.class.php:22
+#, php-format
+msgid "Badly formatted color field: &quot;%s&quot;"
+msgstr ""
+
+#: admin/datefield.class.php:12
+msgid "Use the following format: yyyy-mm-dd"
+msgstr ""
+
+#: admin/datefield.class.php:22
+#, php-format
+msgid "Badly formatted date field: &quot;%s&quot;"
+msgstr ""
+
+#: admin/field.class.php:125
+#, php-format
+msgid "Empty or undefined field: &quot;%s&quot;"
+msgstr ""
+
+#: admin/form.class.php:53 admin/form.class.php:96
+msgid "Add"
+msgstr ""
+
+#: admin/form.class.php:96
+msgid "Update"
+msgstr ""
+
+#: admin/form.class.php:107
+#, php-format
+msgid "No %1$s ID provided"
+msgstr ""
+
+#: admin/form.class.php:121
+#, php-format
+msgid "Are you sure that you want to delete the %1$s with ID %2$s?"
+msgstr ""
+
+#: admin/form.class.php:124 admin/form.class.php:203
+msgid "Delete"
+msgstr ""
+
+#: admin/form.class.php:186
+#, php-format
+msgid "No %s found."
+msgstr ""
+
+#: admin/form.class.php:202
+msgid "Edit"
+msgstr ""
+
+#: admin/form.class.php:222
+#, php-format
+msgid "Unable to retrieve the %1$s with ID &quot;%2$s&quot;"
+msgstr ""
+
+#: admin/form.class.php:260
+msgid "Unspecified or badly formatted ID string"
+msgstr ""
+
+#: admin/form.class.php:297
+#, php-format
+msgid "1 %s successfully added"
+msgstr ""
+
+#: admin/form.class.php:328
+#, php-format
+msgid "1 %s successfully updated"
+msgstr ""
+
+#: admin/form.class.php:351
+#, php-format
+msgid "1 %s successfully deleted"
+msgstr ""
+
+#: admin/timefield.class.php:12
+msgid "Use the following format: hh:mm"
+msgstr ""
+
+#: admin/timefield.class.php:22
+#, php-format
+msgid "Badly formatted time field: &quot;%s&quot;"
+msgstr ""
+
+#: templates/calendar.php:10
+msgid "The year must be a numeric value"
+msgstr ""
+
+#: templates/calendar.php:17
+msgid "The month must be a numeric value"
+msgstr ""
+
+#: templates/calendar.php:22
+msgid "The month must be valued between 1 and 12"
+msgstr ""
+
+#: templates/calendar.php:111
+msgid "Go"
+msgstr ""
+
+#: templates/categories.php:6
+msgid "Unable to print the list of categories"
+msgstr ""
+
+#: templates/events.php:6
+msgid "Unable to print the list of events"
+msgstr ""
+
+#: templates/events.php:41
+msgid " at "
+msgstr ""
+
+#: templates/explorer.php:25
+msgid "Event"
+msgstr ""
+
+#: templates/upcomingwidget.php:49
+#, php-format
+msgid "From %1$s to %2$s"
+msgstr ""
