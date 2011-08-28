@@ -8,3 +8,10 @@
 	border: 1px solid #c00000;
 	margin-bottom: 3px;
 }
+
+.rpbcalendar-very-large-content {
+	overflow: auto !important;
+	-moz-box-shadow   : 1px 1px 1px #555;
+	-webkit-box-shadow: 1px 1px 1px #555;
+	box-shadow        : 1px 1px 1px #555;
+}

@@ -49,6 +49,36 @@ function rpbcalendar_format_event_desc($raw_desc)
 	return $retval;
 }
 
+// Check whether a given link targets a page in the current website
+function rpbcalendar_is_internal_link($link)
+{
+	$home_link    = site_url();
+	$lg_home_link = strlen($home_link);
+	if(strlen($link)<$lg_home_link) {
+		return false;
+	} else {
+		return substr_compare($link, $home_link, 0, $lg_home_link, true)==0;
+	}
+}
+
+// Weekday info
+function rpbcalendar_weekday_info($weekday_idx, $info)
+{
+	static $retval = NULL;
+	if(!isset($reval)) {
+		$retval = array(
+			0 => array('name'=>__('Sunday'   , 'rpbcalendar'), 'weekend'=>true ),
+			1 => array('name'=>__('Monday'   , 'rpbcalendar'), 'weekend'=>false),
+			2 => array('name'=>__('Tuesday'  , 'rpbcalendar'), 'weekend'=>false),
+			3 => array('name'=>__('Wednesday', 'rpbcalendar'), 'weekend'=>false),
+			4 => array('name'=>__('Thursday' , 'rpbcalendar'), 'weekend'=>false),
+			5 => array('name'=>__('Friday'   , 'rpbcalendar'), 'weekend'=>false),
+			6 => array('name'=>__('Saturday' , 'rpbcalendar'), 'weekend'=>true )
+		);
+	}
+	return isset($retval[$weekday_idx]) ? $retval[$weekday_idx][$info] : NULL;
+}
+
 // Plugin options
 function rpbcalendar_permissions     () { return get_option('rpbcalendar_permissions', 'manage_options'); }
 function rpbcalendar_display_author  () { return get_option('rpbcalendar_display_author'  , 'true')=='true'; }
@@ -186,5 +216,25 @@ function rpbcalendar_shortcode_rpbcategories($atts)
 	return ob_get_clean();
 }
 
+// Calendar
+add_shortcode('rpbcalendar', 'rpbcalendar_shortcode_rpbcalendar');
+function rpbcalendar_shortcode_rpbcalendar($atts)
+{
+	ob_start();
+	//echo 'blah: ';
+	//$myarray = array_fill(1, 10, false);
+	//foreach(range(2,4) as $k) {
+	//	$myarray[$k] = true;
+	//}
+	//$myarray[2] = true;
+	//var_dump($myarray);
+	//var_dump(date('Y-m-d', mktime(0, 0, 0, 8, 1, 2011)));
+	$current_year = 2011;
+	$current_month = 8;
+
+	include(RPBCALENDAR_ABSPATH.'templates/calendar.php');
+
+	return ob_get_clean();
+}
 
 ?>
