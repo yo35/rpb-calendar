@@ -34,8 +34,8 @@
 }
 
 .rpbcalendar-default-category {
-	background-color: #ffffc0;
-	color           : #604000;
+	background-color: #ffffd0;
+	color           : #404040;
 }
 
 
@@ -122,8 +122,7 @@ table.rpbcalendar-table td.rpbcalendar-normal-day-cell {
 }
 
 table.rpbcalendar-table td.rpbcalendar-holiday div.rpbcalendar-cell-bar {
-	background-color: #d2691e;
-	background-color: #e0a020;
+	background-color: #60d020;
 }
 
 table.rpbcalendar-table div.rpbcalendar-day-label {

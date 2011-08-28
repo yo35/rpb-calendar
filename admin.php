@@ -91,8 +91,8 @@ function rpbcalendar_manage_holidays()
 	// Fields
 	$fld_name          = new RpbcField('holiday_name', __('Name', 'rpbcalendar'), 'text');
 	$fld_name->options = array('maxlength'=>30);
-	$fld_begin = new RpbcDateField('holiday_begin', __('First day', 'rpbcalendar'), 'text');
-	$fld_end   = new RpbcDateField('holiday_end'  , __('Last day' , 'rpbcalendar'), 'text');
+	$fld_begin = new RpbcDateField('holiday_begin', __('First day', 'rpbcalendar'));
+	$fld_end   = new RpbcDateField('holiday_end'  , __('Last day' , 'rpbcalendar'));
 
 	// Form
 	$form = new RpbcForm('holidayform', RPBCALENDAR_HOLIDAY_TABLE, $sql, 'rpbcalendar-holidays',
@@ -131,6 +131,7 @@ function rpbcalendar_manage_events()
 	require_once(RPBCALENDAR_ABSPATH.'admin/linkcolumn.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/field.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/datefield.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/timefield.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
 
 	// Specialized version of RpbcColumn to display the description field
@@ -158,6 +159,13 @@ function rpbcalendar_manage_events()
 				$event_time = date_i18n(get_option('time_format'), strtotime($elem->event_time));
 				echo '<br />'.sprintf(__('At %s', 'rpbcalendar'), $event_time);
 			}
+		}
+
+		public function sql_sort_code($order_asc)
+		{
+			$order_asc_code = $order_asc ? 'ASC' : 'DESC';
+			return 'ORDER BY event_begin '.$order_asc_code.', event_end '.$order_asc_code.
+				', event_time '.$order_asc_code;
 		}
 	}
 
@@ -197,8 +205,10 @@ function rpbcalendar_manage_events()
 	$fld_title->options = array('maxlength'=>30);
 	$fld_desc              = new RpbcField('event_desc', __('Description', 'rpbcalendar'), 'textarea');
 	$fld_desc->allow_empty = true;
-	$fld_begin = new RpbcDateField('event_begin', __('Begin', 'rpbcalendar'), 'text');
-	$fld_end   = new RpbcDateField('event_end'  , __('End'  , 'rpbcalendar'), 'text');
+	$fld_begin = new RpbcDateField('event_begin', __('Begin', 'rpbcalendar'));
+	$fld_end   = new RpbcDateField('event_end'  , __('End'  , 'rpbcalendar'));
+	$fld_time              = new RpbcTimeField('event_time', __('Time' , 'rpbcalendar'));
+	$fld_time->allow_empty = true;
 	$fld_category              = new RpbcField('event_category', __('Category', 'rpbcalendar'), 'select');
 	$fld_category->options     = array('choices'=>$choices);
 	$fld_category->allow_empty = array('choices'=>$choices);
@@ -208,7 +218,7 @@ function rpbcalendar_manage_events()
 	// Form
 	$form = new RpbcForm('eventform', RPBCALENDAR_EVENT_TABLE, $sql, 'rpbcalendar',
 		__('event', 'rpbcalendar'), 'event_id');
-	$form->fields            = array($fld_author, $fld_title, $fld_begin, $fld_end, $fld_category, $fld_link, $fld_desc);
+	$form->fields            = array($fld_author, $fld_title, $fld_begin, $fld_end, $fld_time, $fld_category, $fld_link, $fld_desc);
 	$form->columns           = array($col_title, $col_desc, $col_date, $col_author, $col_category, $col_link);
 	$form->default_order_by  = 'event_begin';
 	$form->default_order_asc = false;
