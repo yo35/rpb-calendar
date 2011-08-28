@@ -22,9 +22,10 @@
 	}
 
 	// Display the title
-	$widget_title = get_option('rpbcalendar_upcoming_widget_title', __('Upcoming events', 'rpbcalendar'));
 	echo $args['before_widget'];
-	echo $args['before_title'].htmlspecialchars($widget_title).$args['after_title'];
+	if(!empty($instance['title'])) {
+		echo $args['before_title'].htmlspecialchars($instance['title']).$args['after_title'];
+	}
 	echo '<ul>';
 
 	// Display events grouped by period ranges

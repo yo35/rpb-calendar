@@ -282,29 +282,94 @@ function rpbcalendar_shortcode_rpbcalendar($atts)
 ////////////////////////////////////////////////////////////////////////////////
 // Widgets
 
-// Init widgets
+// Today's events
+class RpbcTodaysEvents extends WP_Widget
+{
+	// Constructor
+	function __construct()
+	{
+		$widget_ops = array(
+			'description' => __('Display the list of today\'s events', 'rpbcalendar')
+		);
+		parent::__construct('rpbcalendar_todays_events', __('Today\'s events', 'rpbcalendar'), $widget_ops);
+	}
+
+	// Display
+	function widget($args, $instance)
+	{
+		include(RPBCALENDAR_ABSPATH.'templates/todaywidget.php');
+	}
+
+	// Update
+	function update($new_instance, $old_instance)
+	{
+		$instance          = $old_instance;
+		$instance['title'] = $new_instance['title'];
+		return $instance;
+	}
+
+	// Configuration
+	function form($instance)
+	{
+		$title = __('Today\'s events', 'rpbcalendar');
+		if(isset($instance['title'])) {
+			$title = htmlspecialchars($instance['title']);
+		}
+		echo '<p>';
+		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'rpbcalendar').'</label>';
+		echo '<input type="text" class="widefat" id="'.$this->get_field_id('title').'" name="'.
+			$this->get_field_name('title').'" value="'.$title.'" />';
+		echo '</p>';
+	}
+}
+
+// Upcoming events
+class RpbcUpcomingEvents extends WP_Widget
+{
+	// Constructor
+	function __construct()
+	{
+		$widget_ops = array(
+			'description' => __('Display a list of upcoming events', 'rpbcalendar')
+		);
+		parent::__construct('rpbcalendar_upcoming_events', __('Upcoming events', 'rpbcalendar'), $widget_ops);
+	}
+
+	// Display
+	function widget($args, $instance)
+	{
+		include(RPBCALENDAR_ABSPATH.'templates/upcomingwidget.php');
+	}
+
+	// Update
+	function update($new_instance, $old_instance)
+	{
+		$instance          = $old_instance;
+		$instance['title'] = $new_instance['title'];
+		return $instance;
+	}
+
+	// Configuration
+	function form($instance)
+	{
+		$title = __('Upcoming events', 'rpbcalendar');
+		if(isset($instance['title'])) {
+			$title = htmlspecialchars($instance['title']);
+		}
+		echo '<p>';
+		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'rpbcalendar').'</label>';
+		echo '<input type="text" class="widefat" id="'.$this->get_field_id('title').'" name="'.
+			$this->get_field_name('title').'" value="'.$title.'" />';
+		echo '</p>';
+	}
+}
+
+// Register widgets
 add_action('widgets_init', 'rpbcalendar_register_widgets');
 function rpbcalendar_register_widgets()
 {
-	// Today's events
-	wp_register_sidebar_widget('rpbcalendar_todays_events', __('Today\'s events', 'rpbcalendar'), 'rpbcalendar_today_widget',
-		array('description'=>__('Display the list of today\'s events', 'rpbcalendar')));
-
-	// Upcoming events
-	wp_register_sidebar_widget('rpbcalendar_upcoming_events', __('Upcoming events', 'rpbcalendar'), 'rpbcalendar_upcoming_widget',
-		array('description'=>__('Display a list of upcoming events', 'rpbcalendar')));
-}
-
-// Print today's events
-function rpbcalendar_today_widget($args)
-{
-	include(RPBCALENDAR_ABSPATH.'templates/todaywidget.php');
-}
-
-// Print upcoming events
-function rpbcalendar_upcoming_widget($args)
-{
-	include(RPBCALENDAR_ABSPATH.'templates/upcomingwidget.php');
+	register_widget('RpbcTodaysEvents'  );
+	register_widget('RpbcUpcomingEvents');
 }
 
 ?>

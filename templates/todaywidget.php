@@ -17,12 +17,11 @@
 		return;
 	}
 
-	// Widget title
-	$widget_title = get_option('rpbcalendar_today_widget_title', __('Today\'s events', 'rpbcalendar'));
-
 	// Display
 	echo $args['before_widget'];
-	echo $args['before_title'].htmlspecialchars($widget_title).$args['after_title'];
+	if(!empty($instance['title'])) {
+		echo $args['before_title'].htmlspecialchars($instance['title']).$args['after_title'];
+	}
 	include(RPBCALENDAR_ABSPATH.'templates/events.php');
 	echo $args['after_widget'];
 
