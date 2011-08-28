@@ -12,13 +12,12 @@ class RpbcColorField extends RpbcField
 		$this->legend        = __('Use HTML hexa format (ex: #0000ff for blue or #ffff00 for yellow)', 'rpbcalendar');
 		$this->options       = array('maxlength'=>7);
 		$this->default_value = '#';
-		$this->allow_empty   = true;
 	}
 
 	// Validation
 	public function additional_validation($values)
 	{
-		if(!preg_match('/#[0-9a-fA-F]{6}/', $values[$this->key])) {
+		if(!( preg_match('/#[0-9a-fA-F]{6}/', $values[$this->key]) || ($this->allow_empty && empty($values[$this->key])) )) {
 			rpbcalendar_admin_error_message(sprintf(
 				__('Badly formatted color field: &quot;%s&quot;', 'rpbcalendar'), $this->label));
 			return false;
