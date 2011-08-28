@@ -188,14 +188,8 @@ function rpbcalendar_setup_category_colors()
 add_action('wp_print_styles', 'rpbcalendar_enqueue_general_css');
 function rpbcalendar_enqueue_general_css()
 {
-	wp_register_style('rpbcalendar_event_style'   , RPBCALENDAR_URL.'/css/event.css');
-	wp_register_style('rpbcalendar_calendar_style', RPBCALENDAR_URL.'/css/calendar.css');
-	wp_register_style('rpbcalendar_category_style', RPBCALENDAR_URL.'/css/category.css');
-	wp_register_style('rpbcalendar_error_style'   , RPBCALENDAR_URL.'/css/error.css');
-	wp_enqueue_style ('rpbcalendar_event_style'   );
-	wp_enqueue_style ('rpbcalendar_calendar_style');
-	wp_enqueue_style ('rpbcalendar_category_style');
-	wp_enqueue_style ('rpbcalendar_error_style'   );
+	wp_register_style('rpbcalendar-general', RPBCALENDAR_URL.'/css/rpbcalendar.css');
+	wp_enqueue_style ('rpbcalendar-general');
 }
 
 
