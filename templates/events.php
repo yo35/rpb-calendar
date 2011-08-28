@@ -38,7 +38,7 @@
 		// Time (may be empty)
 		$time_string = '';
 		if(isset($event->event_time) && !empty($event->event_time)) {
-			$time_string = __(' at ', 'calendar') . date_i18n(get_option('time_format'),
+			$time_string = __(' at ', 'rpbcalendar') . date_i18n(get_option('time_format'),
 				strtotime($event->event_time));
 		}
 

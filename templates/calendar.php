@@ -2,8 +2,8 @@
 
 	// Input
 	$current_time  = rpbcalendar_time();
-	$current_year  = isset($_GET['year' ]) ? $_GET['year' ] : date('Y', $current_time);
-	$current_month = isset($_GET['month']) ? $_GET['month'] : date('n', $current_time);
+	$current_year  = isset($_GET['rpbyear' ]) ? $_GET['rpbyear' ] : date('Y', $current_time);
+	$current_month = isset($_GET['rpbmonth']) ? $_GET['rpbmonth'] : date('n', $current_time);
 
 	// Validate the year
 	if(!is_numeric($current_year)) {
@@ -68,24 +68,24 @@
 	}
 
 	// Parameters for the navigation form
-	$prev_month_params = array('month'=>$current_month-1, 'year'=>$current_year);
-	$next_month_params = array('month'=>$current_month+1, 'year'=>$current_year);
-	if($prev_month_params['month']==0) {
-		$prev_month_params['month'] = 12;
-		$prev_month_params['year' ] = $current_year-1;
+	$prev_month_params = array('rpbmonth'=>$current_month-1, 'rpbyear'=>$current_year);
+	$next_month_params = array('rpbmonth'=>$current_month+1, 'rpbyear'=>$current_year);
+	if($prev_month_params['rpbmonth']==0) {
+		$prev_month_params['rpbmonth'] = 12;
+		$prev_month_params['rpbyear' ] = $current_year-1;
 	}
-	if($next_month_params['month']==13) {
-		$next_month_params['month'] = 1;
-		$next_month_params['year' ] = $current_year+1;
+	if($next_month_params['rpbmonth']==13) {
+		$next_month_params['rpbmonth'] = 1;
+		$next_month_params['rpbyear' ] = $current_year+1;
 	}
-	$prev_year_params = array('month'=>$current_month, 'year'=>$current_year-1);
-	$next_year_params = array('month'=>$current_month, 'year'=>$current_year+1);
+	$prev_year_params = array('rpbmonth'=>$current_month, 'rpbyear'=>$current_year-1);
+	$next_year_params = array('rpbmonth'=>$current_month, 'rpbyear'=>$current_year+1);
 
 	// Tooltip for the navigation form
-	$prev_month_tooltip = date_i18n('F Y', mktime(0, 0, 0, $prev_month_params['month'], 1, $prev_month_params['year']));
-	$next_month_tooltip = date_i18n('F Y', mktime(0, 0, 0, $next_month_params['month'], 1, $next_month_params['year']));
-	$prev_year_tooltip  = date_i18n('F Y', mktime(0, 0, 0, $prev_year_params ['month'], 1, $prev_year_params ['year']));
-	$next_year_tooltip  = date_i18n('F Y', mktime(0, 0, 0, $next_year_params ['month'], 1, $next_year_params ['year']));
+	$prev_month_tooltip = date_i18n('F Y', mktime(0, 0, 0, $prev_month_params['rpbmonth'], 1, $prev_month_params['rpbyear']));
+	$next_month_tooltip = date_i18n('F Y', mktime(0, 0, 0, $next_month_params['rpbmonth'], 1, $next_month_params['rpbyear']));
+	$prev_year_tooltip  = date_i18n('F Y', mktime(0, 0, 0, $prev_year_params ['rpbmonth'], 1, $prev_year_params ['rpbyear']));
+	$next_year_tooltip  = date_i18n('F Y', mktime(0, 0, 0, $next_year_params ['rpbmonth'], 1, $next_year_params ['rpbyear']));
 
 ?>
 
@@ -99,15 +99,15 @@
 		rpbcalendar_navigate_form('nextyear' , $next_year_params , '&gt;&gt;', $next_year_tooltip );
 
 		// Change date form
-		rpbcalendar_begin_navigate_form('changedate', array('month', 'year'));
-		echo '<select name="month">';
-		for($k=1; $k<12; $k++) {
+		rpbcalendar_begin_navigate_form('changedate', array('rpbmonth', 'rpbyear'));
+		echo '<select name="rpbmonth">';
+		for($k=1; $k<=12; $k++) {
 			$label    = date_i18n('F', mktime(0, 0, 0, $k, 1, 2000));
 			$selected = ($k==$current_month) ? ' selected="1"' : '';
 			echo '<option value="'.$k.'"'.$selected.'>'.$label.'</option>';
 		}
 		echo '</select>';
-		echo '<input name="year" value="'.$current_year.'" maxlength="4" />';
+		echo '<input name="rpbyear" value="'.$current_year.'" maxlength="4" />';
 		rpbcalendar_end_navigate_form  (__('Go', 'rpbcalendar'));
 	?>
 </div>

@@ -106,7 +106,7 @@ function rpbcalendar_begin_navigate_form($form_name, $fields_to_skip)
 }
 
 // Navigate form (end)
-function rpbcalendar_end_navigate_form($submit_label, $submit_title)
+function rpbcalendar_end_navigate_form($submit_label, $submit_title=NULL)
 {
 	if(isset($submit_label)) {
 		$title = isset($submit_title) ? ' title="'.$submit_title.'"' : '';
@@ -116,7 +116,7 @@ function rpbcalendar_end_navigate_form($submit_label, $submit_title)
 }
 
 // Navigate form (simple version)
-function rpbcalendar_navigate_form($form_name, $params, $submit_label, $submit_title)
+function rpbcalendar_navigate_form($form_name, $params, $submit_label, $submit_title=NULL)
 {
 	rpbcalendar_begin_navigate_form($form_name, array_keys($params));
 	foreach($params as $key => $value) {
