@@ -7,17 +7,7 @@
 
 	// Retrieve events
 	global $wpdb;
-	$select_part = 'SELECT event_title, event_desc, event_time, event_link ';
-	$from_part   = 'FROM '.RPBCALENDAR_EVENT_TABLE.' ';
-	if(rpbcalendar_display_author()) {
-		$select_part .= ', wpu.display_name AS author_name ';
-		$from_part   .= 'LEFT OUTER JOIN '.$wpdb->users.' wpu ON event_author=wpu.ID ';
-	}
-	if(rpbcalendar_display_category()) {
-		$select_part .= ', rpbc.category_id AS category_id ';
-		$from_part   .= 'LEFT OUTER JOIN '.RPBCALENDAR_CATEGORY_TABLE.' rpbc ON event_category=rpbc.category_id ';
-	}
-	$events = $wpdb->get_results($select_part.$from_part.
+	$events = $wpdb->get_results(rpbcalendar_select_events_base_sql().
 		'WHERE event_begin<='.$current_day_sql.' AND event_end>='.$current_day_sql.' '.
 		'ORDER BY event_time;'
 	);

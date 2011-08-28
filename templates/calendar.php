@@ -56,21 +56,12 @@
 	}
 
 	// Events
-	$event_map   = array_fill(1, $days_in_month, NULL);
-	$select_part = 'SELECT event_title, event_desc, event_time, event_link ';
-	$from_part   = 'FROM '.RPBCALENDAR_EVENT_TABLE.' ';
-	if(rpbcalendar_display_author()) {
-		$select_part .= ', wpu.display_name AS author_name ';
-		$from_part   .= 'LEFT OUTER JOIN '.$wpdb->users.' wpu ON event_author=wpu.ID ';
-	}
-	if(rpbcalendar_display_category()) {
-		$select_part .= ', rpbc.category_id AS category_id ';
-		$from_part   .= 'LEFT OUTER JOIN '.RPBCALENDAR_CATEGORY_TABLE.' rpbc ON event_category=rpbc.category_id ';
-	}
+	$event_map        = array_fill(1, $days_in_month, NULL);
+	$select_from_part = rpbcalendar_select_events_base_sql();
 	for($k=1; $k<=$days_in_month; $k++) {
 		$current_day     = date('Y-m-d', mktime(0, 0, 0, $current_month, $k, $current_year));
 		$current_day_sql = "'".mysql_escape_string($current_day)."'";
-		$event_map[$k] = $wpdb->get_results($select_part.$from_part.
+		$event_map[$k] = $wpdb->get_results($select_from_part.
 			'WHERE event_begin<='.$current_day_sql.' AND event_end>='.$current_day_sql.' '.
 			'ORDER BY event_time;'
 		);

@@ -125,6 +125,23 @@ function rpbcalendar_navigate_form($form_name, $params, $submit_label, $submit_t
 	rpbcalendar_end_navigate_form($submit_label, $submit_title);
 }
 
+// SELECT ... FROM ... part of the query to use to retrieve events from the database
+function rpbcalendar_select_events_base_sql()
+{
+	global $wpdb;
+	$select_part = 'SELECT event_title, event_desc, event_time, event_link ';
+	$from_part   = 'FROM '.RPBCALENDAR_EVENT_TABLE.' ';
+	if(rpbcalendar_display_author()) {
+		$select_part .= ', wpu.display_name AS author_name ';
+		$from_part   .= 'LEFT OUTER JOIN '.$wpdb->users.' wpu ON event_author=wpu.ID ';
+	}
+	if(rpbcalendar_display_category()) {
+		$select_part .= ', rpbc.category_id AS category_id ';
+		$from_part   .= 'LEFT OUTER JOIN '.RPBCALENDAR_CATEGORY_TABLE.' rpbc ON event_category=rpbc.category_id ';
+	}
+	return $select_part.$from_part;
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
