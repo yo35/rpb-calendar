@@ -58,7 +58,7 @@ function rpbcalendar_format_event_desc($raw_desc)
 // Check whether a given link targets a page in the current website
 function rpbcalendar_is_internal_link($link)
 {
-	$home_link    = site_url();
+	$home_link    = site_url().'/';
 	$lg_home_link = strlen($home_link);
 	if(strlen($link)<$lg_home_link) {
 		return false;

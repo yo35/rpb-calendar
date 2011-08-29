@@ -25,7 +25,7 @@
 		$href = '';
 		if(isset($event->event_link) && !empty($event->event_link)) {
 			$href = 'href="'.htmlspecialchars($event->event_link).'"';
-			if(rpbcalendar_is_internal_link($event->event_link)) {
+			if(!rpbcalendar_is_internal_link($event->event_link)) {
 				$href .= ' target="_blank"';
 			}
 		}
