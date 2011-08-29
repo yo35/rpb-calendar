@@ -107,7 +107,7 @@
 			echo '<option value="'.$k.'"'.$selected.'>'.$label.'</option>';
 		}
 		echo '</select>';
-		echo '<input name="rpbyear" value="'.$current_year.'" maxlength="4" />';
+		echo '<input type="text" name="rpbyear" value="'.$current_year.'" maxlength="4" />';
 		rpbcalendar_end_navigate_form  (__('Go', 'rpbcalendar'));
 	?>
 </div>

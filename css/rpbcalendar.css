@@ -60,7 +60,7 @@
 	margin-left: 5px;
 }
 
-.rpbcalendar-button-bar form#rpbcalendar-changedate-form input[name="year"] {
+.rpbcalendar-button-bar form#rpbcalendar-changedate-form input[name="rpbyear"] {
 	width: 60px;
 }
 
