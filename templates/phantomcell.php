@@ -6,7 +6,7 @@
 	}
 
 	// Actual cell
-	echo '<td class="rpbcalendar-phantom-cell">&nbsp;</td>';
+	echo '<td class="rpbcalendar-phantom-cell"></td>';
 
 	// End of line
 	if($current_column==6) {

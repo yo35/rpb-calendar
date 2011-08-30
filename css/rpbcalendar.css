@@ -104,8 +104,16 @@ table.rpbcalendar-table th.rpbcalendar-normal-day-header {
 	width: 12%;
 }
 
+table.rpbcalendar-table td {
+	vertical-align: top;
+}
+
 table.rpbcalendar-table td.rpbcalendar-phantom-cell {
 	background-color: #808080;
+}
+
+table.rpbcalendar-table td.rpbcalendar-normal-day-cell {
+	width: 12%;
 }
 
 table.rpbcalendar-table td.rpbcalendar-weekend-day-cell {
@@ -117,8 +125,8 @@ table.rpbcalendar-table td.rpbcalendar-highday {
 	background-color: #f0e0c0;
 }
 
-table.rpbcalendar-table td.rpbcalendar-normal-day-cell {
-	width: 12%;
+table.rpbcalendar-table div.rpbcalendar-cell-bar {
+	height: 10px;
 }
 
 table.rpbcalendar-table td.rpbcalendar-holiday div.rpbcalendar-cell-bar {
@@ -126,12 +134,19 @@ table.rpbcalendar-table td.rpbcalendar-holiday div.rpbcalendar-cell-bar {
 }
 
 table.rpbcalendar-table div.rpbcalendar-day-label {
-	width: 20px;
+	float: left;
+	width : 20px;
+	padding-top   : 1px;
+	padding-bottom: 1px;
 	font-weight: bold;
 	text-align : center;
 	background-color: #e8e8e8;
 	border-right : 1px solid #404040;
 	border-bottom: 1px solid #404040;
+	-moz-border-radius-bottomright    : 6px;
+	-khtml-border-bottom-right-radius : 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	border-bottom-right-radius        : 6px;
 }
 
 table.rpbcalendar-table td.rpbcalendar-weekend-day-cell div.rpbcalendar-day-label,
@@ -142,6 +157,7 @@ table.rpbcalendar-table td.rpbcalendar-highday          div.rpbcalendar-day-labe
 
 table.rpbcalendar-table div.rpbcalendar-cell-content {
 	padding: 1px;
+	clear: both;
 }
 
 
