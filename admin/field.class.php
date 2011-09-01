@@ -118,18 +118,23 @@ class RpbcField
 	}
 
 	// Validation function
-	public function validation($values)
+	public function validation(&$values)
 	{
-		if(!isset($values[$this->key]) || (!$this->allow_empty && empty($values[$this->key]))) {
-			rpbcalendar_admin_error_message(sprintf(
-				__('Empty or undefined field: &quot;%s&quot;', 'rpbcalendar'), $this->label));
-			return false;
+		if(!isset($values[$this->key]) || empty($values[$this->key])) {
+			if($this->allow_empty) {
+				$values[$this->key] = NULL;
+				return true;
+			} else {
+				rpbcalendar_admin_error_message(sprintf(
+					__('Empty or undefined field: &quot;%s&quot;', 'rpbcalendar'), $this->label));
+				return false;
+			}
 		}
 		return $this->additional_validation($values);
 	}
 
 	// Additional validation function (exist for sub-classing purposes)
-	public function additional_validation($values)
+	public function additional_validation(&$values)
 	{
 		return true;
 	}

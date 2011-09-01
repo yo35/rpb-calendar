@@ -316,7 +316,7 @@ class RpbcForm
 				return;
 			}
 			$set_part .= (empty($set_part) ? '' : ', ') . $field->key . '=' .
-				"'".mysql_escape_string($_POST[$field->key])."'";
+				(isset($_POST[$field->key]) ? "'".mysql_escape_string($_POST[$field->key])."'" : 'NULL');
 		}
 
 		// Execute the request
