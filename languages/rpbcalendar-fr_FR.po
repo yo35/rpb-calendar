@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-29 00:43+0200\n"
+"POT-Creation-Date: 2011-09-01 20:35+0200\n"
 "PO-Revision-Date: 2011-08-29 00:37+0200\n"
 "Last-Translator: Yoann <yoann.le-montagner@m4x.org>\n"
 "Language-Team: French\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Go back"
 msgstr "Revenir"
 
-#: admin.php:41 admin.php:48 admin.php:86 admin.php:92
+#: admin.php:41 admin.php:48 admin.php:87 admin.php:93
 msgid "Name"
 msgstr "Nom"
 
@@ -57,164 +57,164 @@ msgstr "Éditer la catégorie d'événement"
 msgid "Delete an event category"
 msgstr "Supprimer une catégorie d'événement"
 
-#: admin.php:88 admin.php:94
+#: admin.php:89 admin.php:95
 msgid "First day"
 msgstr "Premier jour"
 
-#: admin.php:89 admin.php:95
+#: admin.php:90 admin.php:96
 msgid "Last day"
 msgstr "Dernier jour"
 
-#: admin.php:99
+#: admin.php:100
 msgid "holiday"
 msgstr "période de vacance"
 
-#: admin.php:110
+#: admin.php:111
 msgid "Holidays"
 msgstr "Vacances"
 
-#: admin.php:111
+#: admin.php:112
 msgid "Add a new holiday"
 msgstr "Ajouter une nouvelle période de vacances"
 
-#: admin.php:112
+#: admin.php:113
 msgid "Edit the holiday"
 msgstr "Éditer "
 
-#: admin.php:113
+#: admin.php:114
 msgid "Delete a holiday"
 msgstr "Supprimer une période de vacances"
 
-#: admin.php:156
+#: admin.php:158
 #, php-format
 msgid "%1$s<br />to %2$s"
 msgstr "%1$s<br />au %2$s"
 
-#: admin.php:160
+#: admin.php:162
 #, php-format
 msgid "At %s"
 msgstr "À %s"
 
-#: admin.php:186
+#: admin.php:188
 msgid "No category"
 msgstr "Aucune catégorie"
 
-#: admin.php:192 admin.php:204
+#: admin.php:194 admin.php:206
 msgid "Title"
 msgstr "Titre"
 
-#: admin.php:194 admin.php:206 templates/explorer.php:26
+#: admin.php:196 admin.php:208 templates/explorer.php:26
 msgid "Description"
 msgstr "Description"
 
-#: admin.php:195 templates/explorer.php:27
+#: admin.php:197 templates/explorer.php:27
 msgid "Date"
 msgstr "Date"
 
-#: admin.php:196 admin.php:202 admin.php:289
+#: admin.php:198 admin.php:204 admin.php:291
 msgid "Author"
 msgstr "Auteur"
 
-#: admin.php:197 admin.php:212
+#: admin.php:199 admin.php:214
 msgid "Category"
 msgstr "Catégorie"
 
-#: admin.php:198 admin.php:215
+#: admin.php:200 admin.php:217
 msgid "Link"
 msgstr "Lien"
 
-#: admin.php:208
+#: admin.php:210
 msgid "Begin"
 msgstr "Début"
 
-#: admin.php:209
+#: admin.php:211
 msgid "End"
 msgstr "Fin"
 
-#: admin.php:210 templates/explorer.php:28
+#: admin.php:212 templates/explorer.php:28
 msgid "Time"
 msgstr "Heure"
 
-#: admin.php:220
+#: admin.php:222
 msgid "event"
 msgstr "événement"
 
-#: admin.php:231
+#: admin.php:233
 msgid "Events"
 msgstr "Événements"
 
-#: admin.php:232
+#: admin.php:234
 msgid "Add a new event"
 msgstr "Ajouter un nouvel événement"
 
-#: admin.php:233
+#: admin.php:235
 msgid "Edit the event"
 msgstr "Éditer l'événement"
 
-#: admin.php:234
+#: admin.php:236
 msgid "Delete an event"
 msgstr "Supprimer un événement"
 
-#: admin.php:253
+#: admin.php:255
 msgid "Option &quot;Permissions&quot; saved"
 msgstr "Option &quot;Permissions&quot; enregistrée"
 
-#: admin.php:262
+#: admin.php:264
 msgid "Option &quot;Display author&quot; saved"
 msgstr "Option &quot;Afficher l'auteur&quot; enregistrée"
 
-#: admin.php:271
+#: admin.php:273
 msgid "Option &quot;Display category&quot; saved"
 msgstr "Option &quot;Afficher la catégorie&quot; enregistrée"
 
-#: admin.php:277 rpbcalendar.php:205
+#: admin.php:279 rpbcalendar.php:205
 msgid "Calendar options"
 msgstr "Options de l'agenda"
 
-#: admin.php:284
+#: admin.php:286
 msgid "Permissions"
 msgstr "Permissions"
 
-#: admin.php:287
+#: admin.php:289
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: admin.php:288
+#: admin.php:290
 msgid "Editor"
 msgstr "Éditeur"
 
-#: admin.php:290
+#: admin.php:292
 msgid "Contributor"
 msgstr "Contributeur"
 
-#: admin.php:291
+#: admin.php:293
 msgid "Subscriber"
 msgstr "Abonné"
 
-#: admin.php:293
+#: admin.php:295
 msgid ""
 "Choose the lowest user group that is allowed to manage events and holidays"
 msgstr ""
 "Choisissez le niveau d'autorisation minimum à partir duquel un utilisateur "
 "est autorisé à gérer les événements et les vacances"
 
-#: admin.php:298
+#: admin.php:300
 msgid "Author name"
 msgstr "Nom de l'auteur"
 
-#: admin.php:301
+#: admin.php:303
 msgid "Display the name of the author name on events"
 msgstr "Afficher le nom de l'auteur avec les événements"
 
-#: admin.php:306
+#: admin.php:308
 msgid "Categories"
 msgstr "Catégories"
 
-#: admin.php:309
+#: admin.php:311
 msgid "Use event categories"
 msgstr "Utiliser les catégories"
 
-#: admin.php:315
+#: admin.php:317
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
@@ -288,7 +288,8 @@ msgstr "Durée de la période à venir (en jours) :"
 
 #: admin/colorfield.class.php:12
 msgid "Use HTML hexa format (ex: #0000ff for blue or #ffff00 for yellow)"
-msgstr "Utilisez le format hex HTML (ex : #0000ff pour bleu ou #ffff00 pour jaune)"
+msgstr ""
+"Utilisez le format hex HTML (ex : #0000ff pour bleu ou #ffff00 pour jaune)"
 
 #: admin/colorfield.class.php:22
 #, php-format
@@ -299,15 +300,28 @@ msgstr "Champ de couleur mal formaté : &quot;%s&quot;"
 msgid "Use the following format: yyyy-mm-dd"
 msgstr "Utilisez le format suivant : aaaa-mm-jj"
 
-#: admin/datefield.class.php:22
+#: admin/datefield.class.php:30
 #, php-format
 msgid "Badly formatted date field: &quot;%s&quot;"
 msgstr "Champ de date mal formaté : &quot;%s&quot;"
 
-#: admin/field.class.php:125
+#: admin/datefield.class.php:36
+msgid "Wrong date value in the date field: &quot;%s&quot;"
+msgstr "Valeur de date incorrecte dans le champ date : &quot;%s&quot;"
+
+#: admin/enddatefield.class.php:25
+#, php-format
+msgid ""
+"End date unconsistent with respect to the corresponding day range: &quot;"
+"%s&quot;"
+msgstr ""
+"Date de fin incohérente par rapport à l'interval de jours correspondant : &quot;"
+"%s&quot;"
+
+#: admin/field.class.php:136
 #, php-format
 msgid "Empty or undefined field: &quot;%s&quot;"
-msgstr "Champ vide ou non-défini: &quot;%s&quot;"
+msgstr "Champ vide ou non-défini : &quot;%s&quot;"
 
 #: admin/form.class.php:53 admin/form.class.php:96
 msgid "Add"
@@ -349,17 +363,17 @@ msgstr "Impossible de récupérer le/la %1$s d'identifiant &quot;%2$s&quot;"
 msgid "Unspecified or badly formatted ID string"
 msgstr "Identifiant non-spécifié ou mal-formaté"
 
-#: admin/form.class.php:297
+#: admin/form.class.php:298
 #, php-format
 msgid "1 %s successfully added"
 msgstr "1 %s ajouté"
 
-#: admin/form.class.php:328
+#: admin/form.class.php:329
 #, php-format
 msgid "1 %s successfully updated"
 msgstr "1 %s modifié"
 
-#: admin/form.class.php:351
+#: admin/form.class.php:352
 #, php-format
 msgid "1 %s successfully deleted"
 msgstr "1 %s supprimé"
@@ -368,10 +382,14 @@ msgstr "1 %s supprimé"
 msgid "Use the following format: hh:mm"
 msgstr "Utilisez le format suivant : hh:mm"
 
-#: admin/timefield.class.php:22
+#: admin/timefield.class.php:30
 #, php-format
 msgid "Badly formatted time field: &quot;%s&quot;"
 msgstr "Champ d'heure mal formaté : &quot;%s&quot;"
+
+#: admin/timefield.class.php:34
+msgid "Wrong time value in the time field: &quot;%s&quot;"
+msgstr "Valeur d'heure incorrecte dans le champ d'heure : &quot;%s&quot;"
 
 #: templates/calendar.php:10
 msgid "The year must be a numeric value"
@@ -405,7 +423,7 @@ msgstr " à "
 msgid "Event"
 msgstr "Événement"
 
-#: templates/upcomingwidget.php:49
+#: templates/upcomingwidget.php:48
 #, php-format
 msgid "From %1$s to %2$s"
 msgstr "Du %1$s au %2$s"
