@@ -8,11 +8,11 @@ function rpbcalendar_create_tables()
 		CREATE TABLE " . RPBCALENDAR_EVENT_TABLE . " (
 			event_id       INT(11)     NOT NULL AUTO_INCREMENT,
 			event_title    VARCHAR(30) NOT NULL,
-			event_desc     TEXT        NOT NULL,
 			event_begin    DATE        NOT NULL,
 			event_end      DATE        NOT NULL,
 			event_time     TIME,
 			event_link     TEXT,
+			event_desc     TEXT,
 			event_category INT(11),
 			event_author   BIGINT(20) UNSIGNED,
 			PRIMARY KEY (event_id)

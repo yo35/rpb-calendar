@@ -15,11 +15,15 @@ class RpbcTimeField extends RpbcField
 	}
 
 	// Validation
-	public function additional_validation($values)
+	public function additional_validation(&$values)
 	{
-		if(!( preg_match('/[0-9]{2}:[0-9]{2}/', $values[$this->key]) || ($this->allow_empty && empty($values[$this->key])) )) {
+		if(!preg_match('/([0-9]{2}):([0-9]{2})/', $values[$this->key], $matches)) {
 			rpbcalendar_admin_error_message(sprintf(
 				__('Badly formatted time field: &quot;%s&quot;', 'rpbcalendar'), $this->label));
+			return false;
+		} elseif( !($matches[1]<24 && $matches[2]<60) ) {
+			rpbcalendar_admin_error_message(sprintf(
+				__('Wrong time value in the time field: &quot;%s&quot;', 'rpbcalendar'), $this->label));
 			return false;
 		}
 		return true;
