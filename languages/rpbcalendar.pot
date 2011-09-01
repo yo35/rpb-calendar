@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-01 20:35+0200\n"
+"POT-Creation-Date: 2011-09-01 21:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,7 +167,7 @@ msgstr ""
 msgid "Option &quot;Display category&quot; saved"
 msgstr ""
 
-#: admin.php:279 rpbcalendar.php:205
+#: admin.php:279 rpbcalendar.php:206
 msgid "Calendar options"
 msgstr ""
 
@@ -216,47 +216,47 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#: rpbcalendar.php:76
-msgid "Sunday"
-msgstr ""
-
 #: rpbcalendar.php:77
-msgid "Monday"
+msgid "sunday"
 msgstr ""
 
 #: rpbcalendar.php:78
-msgid "Tuesday"
+msgid "monday"
 msgstr ""
 
 #: rpbcalendar.php:79
-msgid "Wednesday"
+msgid "tuesday"
 msgstr ""
 
 #: rpbcalendar.php:80
-msgid "Thursday"
+msgid "wednesday"
 msgstr ""
 
 #: rpbcalendar.php:81
-msgid "Friday"
+msgid "thursday"
 msgstr ""
 
 #: rpbcalendar.php:82
-msgid "Saturday"
+msgid "friday"
 msgstr ""
 
-#: rpbcalendar.php:185
+#: rpbcalendar.php:83
+msgid "saturday"
+msgstr ""
+
+#: rpbcalendar.php:186
 msgid "Calendar"
 msgstr ""
 
-#: rpbcalendar.php:190
+#: rpbcalendar.php:191
 msgid "Manage events"
 msgstr ""
 
-#: rpbcalendar.php:195
+#: rpbcalendar.php:196
 msgid "Manage holidays"
 msgstr ""
 
-#: rpbcalendar.php:200
+#: rpbcalendar.php:201
 msgid "Manage categories"
 msgstr ""
 

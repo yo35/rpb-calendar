@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-01 20:35+0200\n"
+"POT-Creation-Date: 2011-09-01 21:45+0200\n"
 "PO-Revision-Date: 2011-08-29 00:37+0200\n"
 "Last-Translator: Yoann <yoann.le-montagner@m4x.org>\n"
 "Language-Team: French\n"
@@ -167,7 +167,7 @@ msgstr "Option &quot;Afficher l'auteur&quot; enregistrée"
 msgid "Option &quot;Display category&quot; saved"
 msgstr "Option &quot;Afficher la catégorie&quot; enregistrée"
 
-#: admin.php:279 rpbcalendar.php:205
+#: admin.php:279 rpbcalendar.php:206
 msgid "Calendar options"
 msgstr "Options de l'agenda"
 
@@ -218,47 +218,47 @@ msgstr "Utiliser les catégories"
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
-#: rpbcalendar.php:76
-msgid "Sunday"
-msgstr "Dimanche"
-
 #: rpbcalendar.php:77
-msgid "Monday"
-msgstr "Lundi"
+msgid "sunday"
+msgstr "dimanche"
 
 #: rpbcalendar.php:78
-msgid "Tuesday"
-msgstr "Mardi"
+msgid "monday"
+msgstr "lundi"
 
 #: rpbcalendar.php:79
-msgid "Wednesday"
-msgstr "Mercredi"
+msgid "tuesday"
+msgstr "mardi"
 
 #: rpbcalendar.php:80
-msgid "Thursday"
-msgstr "Jeudi"
+msgid "wednesday"
+msgstr "mercredi"
 
 #: rpbcalendar.php:81
-msgid "Friday"
-msgstr "Vendredi"
+msgid "thursday"
+msgstr "jeudi"
 
 #: rpbcalendar.php:82
-msgid "Saturday"
-msgstr "Samedi"
+msgid "friday"
+msgstr "vendredi"
 
-#: rpbcalendar.php:185
+#: rpbcalendar.php:83
+msgid "saturday"
+msgstr "samedi"
+
+#: rpbcalendar.php:186
 msgid "Calendar"
 msgstr "Agenda"
 
-#: rpbcalendar.php:190
+#: rpbcalendar.php:191
 msgid "Manage events"
 msgstr "Gérer les événements"
 
-#: rpbcalendar.php:195
+#: rpbcalendar.php:196
 msgid "Manage holidays"
 msgstr "Gérer les vacances"
 
-#: rpbcalendar.php:200
+#: rpbcalendar.php:201
 msgid "Manage categories"
 msgstr "Gérer les catégories"
 
@@ -306,6 +306,7 @@ msgid "Badly formatted date field: &quot;%s&quot;"
 msgstr "Champ de date mal formaté : &quot;%s&quot;"
 
 #: admin/datefield.class.php:36
+#, php-format
 msgid "Wrong date value in the date field: &quot;%s&quot;"
 msgstr "Valeur de date incorrecte dans le champ date : &quot;%s&quot;"
 
@@ -315,8 +316,8 @@ msgid ""
 "End date unconsistent with respect to the corresponding day range: &quot;"
 "%s&quot;"
 msgstr ""
-"Date de fin incohérente par rapport à l'interval de jours correspondant : &quot;"
-"%s&quot;"
+"Date de fin incohérente par rapport à l'interval de jours correspondant : "
+"&quot;%s&quot;"
 
 #: admin/field.class.php:136
 #, php-format
@@ -388,6 +389,7 @@ msgid "Badly formatted time field: &quot;%s&quot;"
 msgstr "Champ d'heure mal formaté : &quot;%s&quot;"
 
 #: admin/timefield.class.php:34
+#, php-format
 msgid "Wrong time value in the time field: &quot;%s&quot;"
 msgstr "Valeur d'heure incorrecte dans le champ d'heure : &quot;%s&quot;"
 

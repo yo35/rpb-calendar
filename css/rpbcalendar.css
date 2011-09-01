@@ -112,8 +112,9 @@ table.rpbcalendar-table td {
 }
 
 table.rpbcalendar-table th {
-	font-weight: normal;
-	text-align : center;
+	font-weight   : normal;
+	text-align    : center;
+	text-transform: capitalize;
 	background-color: #404040;
 	color           : #e8e8e8;
 }

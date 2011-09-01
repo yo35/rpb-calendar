@@ -74,13 +74,13 @@ function rpbcalendar_weekday_info($weekday_idx, $info)
 	static $retval = NULL;
 	if(!isset($reval)) {
 		$retval = array(
-			0 => array('name'=>__('Sunday'   , 'rpbcalendar'), 'weekend'=>true ),
-			1 => array('name'=>__('Monday'   , 'rpbcalendar'), 'weekend'=>false),
-			2 => array('name'=>__('Tuesday'  , 'rpbcalendar'), 'weekend'=>false),
-			3 => array('name'=>__('Wednesday', 'rpbcalendar'), 'weekend'=>false),
-			4 => array('name'=>__('Thursday' , 'rpbcalendar'), 'weekend'=>false),
-			5 => array('name'=>__('Friday'   , 'rpbcalendar'), 'weekend'=>false),
-			6 => array('name'=>__('Saturday' , 'rpbcalendar'), 'weekend'=>true )
+			0 => array('name'=>__('sunday'   , 'rpbcalendar'), 'weekend'=>true ),
+			1 => array('name'=>__('monday'   , 'rpbcalendar'), 'weekend'=>false),
+			2 => array('name'=>__('tuesday'  , 'rpbcalendar'), 'weekend'=>false),
+			3 => array('name'=>__('wednesday', 'rpbcalendar'), 'weekend'=>false),
+			4 => array('name'=>__('thursday' , 'rpbcalendar'), 'weekend'=>false),
+			5 => array('name'=>__('friday'   , 'rpbcalendar'), 'weekend'=>false),
+			6 => array('name'=>__('saturday' , 'rpbcalendar'), 'weekend'=>true )
 		);
 	}
 	return isset($retval[$weekday_idx]) ? $retval[$weekday_idx][$info] : NULL;
