@@ -26,7 +26,6 @@
 	if(!empty($instance['title'])) {
 		echo $args['before_title'].htmlspecialchars($instance['title']).$args['after_title'];
 	}
-	echo '<ul>';
 
 	// Display events grouped by period ranges
 	$select_from_part = rpbcalendar_select_events_base_sql();
@@ -51,13 +50,14 @@
 		}
 
 		// Display events
-		echo '<li>'.$date_range_label;
+		echo '<div class="rpbcalendar-upcoming-period">';
+		echo '<div class="rpbcalendar-upcoming-period-title">'.$date_range_label.'</div>';
+		echo '<div class="rpbcalendar-upcoming-period-content">';
 		include(RPBCALENDAR_ABSPATH.'templates/events.php');
-		echo '</li>';
+		echo '</div></div>';
 	}
 
 	// End of the widget
-	echo '</ul>';
 	echo $args['after_widget'];
 
 ?>
