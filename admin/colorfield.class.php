@@ -15,7 +15,7 @@ class RpbcColorField extends RpbcField
 	}
 
 	// Validation
-	public function additional_validation(&$values)
+	protected function additional_validation(&$values)
 	{
 		if(!preg_match('/#[0-9a-fA-F]{6}/', $values[$this->key])) {
 			rpbcalendar_admin_error_message(sprintf(

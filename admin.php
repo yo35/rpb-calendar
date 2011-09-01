@@ -77,6 +77,7 @@ function rpbcalendar_manage_holidays()
 	require_once(RPBCALENDAR_ABSPATH.'admin/datecolumn.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/field.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/datefield.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/enddatefield.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
 
 	// SQL
@@ -92,7 +93,7 @@ function rpbcalendar_manage_holidays()
 	$fld_name          = new RpbcField('holiday_name', __('Name', 'rpbcalendar'), 'text');
 	$fld_name->options = array('maxlength'=>30);
 	$fld_begin = new RpbcDateField('holiday_begin', __('First day', 'rpbcalendar'));
-	$fld_end   = new RpbcDateField('holiday_end'  , __('Last day' , 'rpbcalendar'));
+	$fld_end   = new RpbcEndDateField('holiday_end', __('Last day' , 'rpbcalendar'), 'holiday_begin');
 
 	// Form
 	$form = new RpbcForm('holidayform', RPBCALENDAR_HOLIDAY_TABLE, $sql, 'rpbcalendar-holidays',
@@ -131,6 +132,7 @@ function rpbcalendar_manage_events()
 	require_once(RPBCALENDAR_ABSPATH.'admin/linkcolumn.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/field.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/datefield.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/enddatefield.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/timefield.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
 
@@ -206,7 +208,7 @@ function rpbcalendar_manage_events()
 	$fld_desc              = new RpbcField('event_desc', __('Description', 'rpbcalendar'), 'textarea');
 	$fld_desc->allow_empty = true;
 	$fld_begin = new RpbcDateField('event_begin', __('Begin', 'rpbcalendar'));
-	$fld_end   = new RpbcDateField('event_end'  , __('End'  , 'rpbcalendar'));
+	$fld_end   = new RpbcEndDateField('event_end', __('End'  , 'rpbcalendar'), 'event_begin');
 	$fld_time              = new RpbcTimeField('event_time', __('Time' , 'rpbcalendar'));
 	$fld_time->allow_empty = true;
 	$fld_category              = new RpbcField('event_category', __('Category', 'rpbcalendar'), 'select');

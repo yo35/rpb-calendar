@@ -21,7 +21,7 @@ class RpbcField
 	}
 
 	// Rendering function
-	public function print_field($in_table, $elem)
+	public function print_field($in_table, $elem=NULL)
 	{
 		// Special case for hidden fields
 		if($this->type=='hidden') {
@@ -44,8 +44,7 @@ class RpbcField
 		// Field
 		$value = '';
 		if(isset($elem)) {
-			$field = $this->key;
-			$value = htmlspecialchars($elem->$field);
+			$value = $this->retrieve_value($elem);
 		} elseif(isset($this->default_value)) {
 			$value = $this->default_value;
 		}
@@ -60,6 +59,13 @@ class RpbcField
 		} else {
 			echo '</div>';
 		}
+	}
+
+	// Convert the data read from the database for editing
+	protected function retrieve_value($elem)
+	{
+		$field = $this->key;
+		return htmlspecialchars($elem->$field);
 	}
 
 	// Rendering the actual field
@@ -120,6 +126,7 @@ class RpbcField
 	// Validation function
 	public function validation(&$values)
 	{
+		$this->prepare_validation($values);
 		if(!isset($values[$this->key]) || empty($values[$this->key])) {
 			if($this->allow_empty) {
 				$values[$this->key] = NULL;
@@ -134,9 +141,15 @@ class RpbcField
 	}
 
 	// Additional validation function (exist for sub-classing purposes)
-	public function additional_validation(&$values)
+	protected function additional_validation(&$values)
 	{
 		return true;
+	}
+
+	// Pre-validation operation
+	protected function prepare_validation(&$values)
+	{
+		return;
 	}
 }
 

@@ -14,8 +14,16 @@ class RpbcTimeField extends RpbcField
 		$this->default_value = '';
 	}
 
+	// Format the value coming out of the database
+	protected function retrieve_value($elem)
+	{
+		$field = $this->key;
+		$data  = $elem->$field;
+		return isset($data) ? date('H:i', strtotime($data)) : '';
+	}
+
 	// Validation
-	public function additional_validation(&$values)
+	protected function additional_validation(&$values)
 	{
 		if(!preg_match('/([0-9]{2}):([0-9]{2})/', $values[$this->key], $matches)) {
 			rpbcalendar_admin_error_message(sprintf(
