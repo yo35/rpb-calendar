@@ -1,7 +1,7 @@
 <?php
 
 // Function to report an error
-function rpbcalendar_admin_error_message($message, $go_back_link)
+function rpbcalendar_admin_error_message($message, $go_back_link=NULL)
 {
 	echo '<div class="error"><p>'.$message.'</p></div>';
 	if(isset($go_back_link)) {
