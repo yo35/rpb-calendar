@@ -185,34 +185,47 @@ function rpbcalendar_build_admin_menu()
 	// Main menu
 	$page = add_menu_page(__('Calendar', 'rpbcalendar'), __('Calendar', 'rpbcalendar'),
 		$allowed_group, 'rpbcalendar', 'rpbcalendar_manage_events');
-	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
+	add_action('admin_print_styles-' . $page, 'rpbcalendar_admin_print_css'    );
+	add_action('admin_print_scripts-'. $page, 'rpbcalendar_admin_print_scripts');
 
 	// Event page
 	$page = add_submenu_page('rpbcalendar', __('Manage events', 'rpbcalendar'), __('Manage events', 'rpbcalendar'),
 		$allowed_group, 'rpbcalendar', 'rpbcalendar_manage_events');
-	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
+	add_action('admin_print_styles-' . $page, 'rpbcalendar_admin_print_css'    );
+	add_action('admin_print_scripts-'. $page, 'rpbcalendar_admin_print_scripts');
 
 	// Holiday page
 	$page = add_submenu_page('rpbcalendar', __('Manage holidays', 'rpbcalendar'), __('Manage holidays', 'rpbcalendar'),
 		$allowed_group, 'rpbcalendar-holidays', 'rpbcalendar_manage_holidays');
-	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
+	add_action('admin_print_styles-' . $page, 'rpbcalendar_admin_print_css'    );
+	add_action('admin_print_scripts-'. $page, 'rpbcalendar_admin_print_scripts');
 
 	// Category page
 	$page = add_submenu_page('rpbcalendar', __('Manage categories', 'rpbcalendar'), __('Manage categories', 'rpbcalendar'),
 		'manage_options', 'rpbcalendar-categories', 'rpbcalendar_manage_categories');
-	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
+	add_action('admin_print_styles-' . $page, 'rpbcalendar_admin_print_css'    );
+	add_action('admin_print_scripts-'. $page, 'rpbcalendar_admin_print_scripts');
 
 	// Options page
 	$page = add_submenu_page('rpbcalendar', __('Calendar options', 'rpbcalendar'), __('Calendar options', 'rpbcalendar'),
 		'manage_options', 'rpbcalendar-options', 'rpbcalendar_manage_options');
-	add_action('admin_print_styles-'. $page, 'rpbcalendar_admin_print_styles');
+	add_action('admin_print_styles-' . $page, 'rpbcalendar_admin_print_css'    );
+	add_action('admin_print_scripts-'. $page, 'rpbcalendar_admin_print_scripts');
 }
 
 // Register admin CSS
 add_action('admin_init', 'rpbcalendar_register_admin_css');
 function rpbcalendar_register_admin_css()
 {
-	wp_register_style('rpbcalendar-admin', RPBCALENDAR_URL.'/css/admin.css');
+	wp_register_style('rpbcalendar-admin'         , RPBCALENDAR_URL.'/css/admin.css'         );
+	wp_register_style('rpbcalendar-calendar-popup', RPBCALENDAR_URL.'/css/calendar-popup.css');
+}
+
+// Register admin scripts
+add_action('admin_init', 'rpbcalendar_register_admin_scripts');
+function rpbcalendar_register_admin_scripts()
+{
+	wp_register_script('rpbcalendar-calendar-popup', RPBCALENDAR_URL.'/javascript/CalendarPopup.js');
 }
 
 
@@ -231,16 +244,16 @@ function rpbcalendar_setup_category_colors()
 	);
 
 	// Display
-	echo '<style type="text/css">';
-	foreach($categories as $category) {
-		$output  = "";
-		$output .= ".rpbcalendar-category-".htmlspecialchars($category->category_id)." {\n";
-		$output .= "    color: ".htmlspecialchars($category->category_text_color).";\n";
-		$output .= "    background-color: ".htmlspecialchars($category->category_background_color).";\n";
-		$output .= "}\n";
-		echo $output;
-	}
-	echo '</style>';
+	?>
+		<style type="text/css">
+		<?php foreach($categories as $category) { ?>
+			.rpbcalendar-category-<?php echo htmlspecialchars($category->category_id); ?> {
+				color           : <?php echo htmlspecialchars($category->category_text_color      ); ?>;
+				background-color: <?php echo htmlspecialchars($category->category_background_color); ?>;
+			}
+		<?php } ?>
+		</style>
+	<?php
 }
 
 // Enqueue general styles

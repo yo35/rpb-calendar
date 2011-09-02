@@ -16,10 +16,28 @@ function rpbcalendar_admin_notification_message($message)
 	echo '<div class="updated"><p>'.$message.'</p></div>';
 }
 
-// Register admin styles
-function rpbcalendar_admin_print_styles()
+// Enqueue admin styles
+function rpbcalendar_admin_print_css()
 {
-	wp_enqueue_style('rpbcalendar-admin');
+	wp_enqueue_style('rpbcalendar-admin'         );
+	wp_enqueue_style('rpbcalendar-calendar-popup');
+}
+
+// Enqueue admin scripts
+function rpbcalendar_admin_print_scripts()
+{
+	wp_enqueue_script('rpbcalendar-calendar-popup');
+	?>
+		<script type="text/javascript">
+			function rpbcCalendarPopup(field, anchorName)
+			{
+				var popup = new CalendarPopup('rpbcalendar-calendar-popup');
+				popup.select(field, anchorName, 'yyyy-MM-dd');
+				return false;
+			}
+		</script>
+		<div id="rpbcalendar-calendar-popup"></div>
+	<?php
 }
 
 // Function to handle the management of categories
@@ -94,6 +112,8 @@ function rpbcalendar_manage_holidays()
 	$fld_name->options = array('maxlength'=>30);
 	$fld_begin = new RpbcDateField('holiday_begin', __('First day', 'rpbcalendar'));
 	$fld_end   = new RpbcEndDateField('holiday_end', __('Last day' , 'rpbcalendar'), 'holiday_begin');
+	$fld_begin->form = 'holidayform';
+	$fld_end  ->form = 'holidayform';
 
 	// Form
 	$form = new RpbcForm('holidayform', RPBCALENDAR_HOLIDAY_TABLE, $sql, 'rpbcalendar-holidays',
@@ -209,6 +229,8 @@ function rpbcalendar_manage_events()
 	$fld_desc->allow_empty = true;
 	$fld_begin = new RpbcDateField('event_begin', __('Begin', 'rpbcalendar'));
 	$fld_end   = new RpbcEndDateField('event_end', __('End'  , 'rpbcalendar'), 'event_begin');
+	$fld_begin->form = 'eventform';
+	$fld_end  ->form = 'eventform';
 	$fld_time              = new RpbcTimeField('event_time', __('Time' , 'rpbcalendar'));
 	$fld_time->allow_empty = true;
 	$fld_category              = new RpbcField('event_category', __('Category', 'rpbcalendar'), 'select');

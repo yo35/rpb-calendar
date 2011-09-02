@@ -6,6 +6,7 @@ class RpbcField
 	public $key  ;                   // Key to identify the field (must correspond to the SQL key)
 	public $label;                   // Field label;
 	public $type ;                   // Type of field (text, checkbox, ...)
+	public $form          = NULL   ; // Name of the parent form
 	public $options       = array(); // Field options (ex: array('maxlength' => 30))
 	public $legend        = NULL   ; // Optional field legend
 	public $default_value = NULL   ; // Default value for the field
@@ -61,15 +62,8 @@ class RpbcField
 		}
 	}
 
-	// Convert the data read from the database for editing
-	protected function retrieve_value($elem)
-	{
-		$field = $this->key;
-		return htmlspecialchars($elem->$field);
-	}
-
 	// Rendering the actual field
-	private function print_actual_field($value)
+	protected function print_actual_field($value)
 	{
 		// Textarea
 		if($this->type=='textarea') {
@@ -99,6 +93,13 @@ class RpbcField
 		}
 	}
 
+	// Convert the data read from the database for editing
+	protected function retrieve_value($elem)
+	{
+		$field = $this->key;
+		return htmlspecialchars($elem->$field);
+	}
+
 	// Rendering function for hidden fields
 	private function print_hidden_field()
 	{
@@ -112,7 +113,7 @@ class RpbcField
 	}
 
 	// Print the option attributes and the name associated to the field
-	private function print_option_attributes()
+	protected function print_option_attributes()
 	{
 		echo 'name="'.$this->key.'"';
 		foreach($this->options as $opt_key => $opt_val) {

@@ -20,3 +20,11 @@
 	-webkit-border-radius: 5px;
 	border-radius        : 5px;
 }
+
+#rpbcalendar-calendar-popup {
+	position  : absolute;
+	visibility: hidden;
+	z-index   : 1;
+	margin-left: 150px;
+	background-color: white;
+}

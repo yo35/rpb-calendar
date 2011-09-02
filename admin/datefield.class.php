@@ -12,6 +12,8 @@ class RpbcDateField extends RpbcField
 		$this->legend        = __('Use the following format: yyyy-mm-dd', 'rpbcalendar');
 		$this->options       = array('maxlength'=>10);
 		$this->default_value = '';
+		$this->legend .=
+			'<br />';
 	}
 
 	// Format the value coming out of the database
@@ -20,6 +22,23 @@ class RpbcDateField extends RpbcField
 		$field = $this->key;
 		$data  = $elem->$field;
 		return isset($data) ? date('Y-m-d', strtotime($data)) : '';
+	}
+
+	// Rendering the actual field
+	protected function print_actual_field($value)
+	{
+		// Print the input field
+		echo '<input type="text" ';
+		$this->print_option_attributes();
+		echo ' value="'.$value.'" />';
+
+		// Button to select the date
+		if(isset($this->form)) {
+			$link_id        = $this->key.'-link';
+			$java_statement = "return rpbcCalendarPopup(document.forms['".$this->form."'].".$this->key.", '".$link_id."');";
+			$select_label   = __('Select', 'rpbcalendar');
+			echo '<br /><a href="#" id="'.$link_id.'" onClick="'.$java_statement.'">'.$select_label.'</a>';
+		}
 	}
 
 	// Validation
