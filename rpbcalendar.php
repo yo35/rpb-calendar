@@ -69,21 +69,57 @@ function rpbcalendar_is_internal_link($link)
 }
 
 // Weekday info
-function rpbcalendar_weekday_info($weekday_idx, $info)
+function rpbcalendar_weekday_info($info, $weekday_idx=NULL)
 {
 	static $retval = NULL;
 	if(!isset($reval)) {
 		$retval = array(
-			0 => array('name'=>__('sunday'   , 'rpbcalendar'), 'weekend'=>true ),
-			1 => array('name'=>__('monday'   , 'rpbcalendar'), 'weekend'=>false),
-			2 => array('name'=>__('tuesday'  , 'rpbcalendar'), 'weekend'=>false),
-			3 => array('name'=>__('wednesday', 'rpbcalendar'), 'weekend'=>false),
-			4 => array('name'=>__('thursday' , 'rpbcalendar'), 'weekend'=>false),
-			5 => array('name'=>__('friday'   , 'rpbcalendar'), 'weekend'=>false),
-			6 => array('name'=>__('saturday' , 'rpbcalendar'), 'weekend'=>true )
+			'name' => array(
+				0=>__('sunday'   , 'rpbcalendar'),
+				1=>__('monday'   , 'rpbcalendar'),
+				2=>__('tuesday'  , 'rpbcalendar'),
+				3=>__('wednesday', 'rpbcalendar'),
+				4=>__('thursday' , 'rpbcalendar'),
+				5=>__('friday'   , 'rpbcalendar'),
+				6=>__('saturday' , 'rpbcalendar')
+			),
+			'weekend' => array(
+				0=>true ,
+				1=>false,
+				2=>false,
+				3=>false,
+				4=>false,
+				5=>false,
+				6=>true
+			)
 		);
 	}
-	return isset($retval[$weekday_idx]) ? $retval[$weekday_idx][$info] : NULL;
+	return isset($weekday_idx) ? $retval[$info][$weekday_idx] : $retval[$info];
+}
+
+// Month info
+function rpbcalendar_month_info($info, $month_idx=NULL)
+{
+	static $retval = NULL;
+	if(!isset($reval)) {
+		$retval = array(
+			'name' => array(
+				 1=>__('january'  , 'rpbcalendar'),
+				 2=>__('february' , 'rpbcalendar'),
+				 3=>__('march'    , 'rpbcalendar'),
+				 4=>__('april'    , 'rpbcalendar'),
+				 5=>__('may'      , 'rpbcalendar'),
+				 6=>__('june'     , 'rpbcalendar'),
+				 7=>__('july'     , 'rpbcalendar'),
+				 8=>__('august'   , 'rpbcalendar'),
+				 9=>__('september', 'rpbcalendar'),
+				10=>__('october'  , 'rpbcalendar'),
+				11=>__('november' , 'rpbcalendar'),
+				12=>__('december' , 'rpbcalendar')
+			)
+		);
+	}
+	return isset($month_idx) ? $retval[$info][$month_idx] : $retval[$info];
 }
 
 // Plugin options

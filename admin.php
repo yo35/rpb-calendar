@@ -27,11 +27,34 @@ function rpbcalendar_admin_print_css()
 function rpbcalendar_admin_print_scripts()
 {
 	wp_enqueue_script('rpbcalendar-calendar-popup');
+
+	// Retrieve month names
+	$month_names = '';
+	for($k=1; $k<=12; $k++) {
+		if($k!=1) {
+			$month_names .= ', ';
+		}
+		$month_names .= '"'.rpbcalendar_month_info('name', $k).'"';
+	}
+
+	// Retrieve weekday names
+	$weekday_names = '';
+	for($k=0; $k<=6; $k++) {
+		if($k!=0) {
+			$weekday_names .= ', ';
+		}
+		$weekday_names .= '"'.substr(rpbcalendar_weekday_info('name', $k), 0, 1).'"';
+	}
+
 	?>
 		<script type="text/javascript">
 			function rpbcCalendarPopup(field, anchorName)
 			{
 				var popup = new CalendarPopup('rpbcalendar-calendar-popup');
+				popup.setDayHeaders(<?php echo $weekday_names; ?>);
+				popup.setMonthNames(<?php echo $month_names; ?>);
+				popup.setWeekStartDay(<?php echo get_option('start_of_week'); ?>);
+				popup.setTodayText("<?php _e('Today', 'rpbcalendar'); ?>");
 				popup.select(field, anchorName, 'yyyy-MM-dd');
 				return false;
 			}

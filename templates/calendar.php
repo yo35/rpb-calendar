@@ -82,10 +82,10 @@
 	$next_year_params = array('rpbmonth'=>$current_month, 'rpbyear'=>$current_year+1);
 
 	// Tooltip for the navigation form
-	$prev_month_tooltip = date_i18n('F Y', mktime(0, 0, 0, $prev_month_params['rpbmonth'], 1, $prev_month_params['rpbyear']));
-	$next_month_tooltip = date_i18n('F Y', mktime(0, 0, 0, $next_month_params['rpbmonth'], 1, $next_month_params['rpbyear']));
-	$prev_year_tooltip  = date_i18n('F Y', mktime(0, 0, 0, $prev_year_params ['rpbmonth'], 1, $prev_year_params ['rpbyear']));
-	$next_year_tooltip  = date_i18n('F Y', mktime(0, 0, 0, $next_year_params ['rpbmonth'], 1, $next_year_params ['rpbyear']));
+	$prev_month_tooltip = rpbcalendar_month_info('name', $prev_month_params['rpbmonth']).' '.$prev_month_params['rpbyear'];
+	$next_month_tooltip = rpbcalendar_month_info('name', $next_month_params['rpbmonth']).' '.$next_month_params['rpbyear'];
+	$prev_year_tooltip  = rpbcalendar_month_info('name', $prev_year_params ['rpbmonth']).' '.$prev_year_params ['rpbyear'];
+	$next_year_tooltip  = rpbcalendar_month_info('name', $next_year_params ['rpbmonth']).' '.$next_year_params ['rpbyear'];
 
 ?>
 
@@ -102,7 +102,7 @@
 		rpbcalendar_begin_navigate_form('changedate', array('rpbmonth', 'rpbyear'));
 		echo '<select name="rpbmonth">';
 		for($k=1; $k<=12; $k++) {
-			$label    = date_i18n('F', mktime(0, 0, 0, $k, 1, 2000));
+			$label    = rpbcalendar_month_info('name', $k);
 			$selected = ($k==$current_month) ? ' selected="1"' : '';
 			echo '<option value="'.$k.'"'.$selected.'>'.$label.'</option>';
 		}
@@ -120,7 +120,7 @@
 			<tr>
 				<th colspan="7" class="rpbcalendar-month-header">
 					<?php
-						echo date_i18n('F Y', mktime(0, 0, 0, $current_month, 1, $current_year));
+						echo rpbcalendar_month_info('name', $current_month).' '.$current_year;
 					?>
 				</th>
 			</tr>
@@ -130,8 +130,8 @@
 				<?php
 					for($k=0; $k<7; $k++) {
 						$weekday      = ($k + $start_of_week) % 7;
-						$weekday_name = rpbcalendar_weekday_info($weekday, 'name'   );
-						$is_weekend   = rpbcalendar_weekday_info($weekday, 'weekend');
+						$weekday_name = rpbcalendar_weekday_info('name'   , $weekday);
+						$is_weekend   = rpbcalendar_weekday_info('weekend', $weekday);
 						echo '<th class="rpbcalendar-'.($is_weekend ? 'weekend' : 'normal').'-day-header">';
 						echo htmlspecialchars($weekday_name);
 						echo '</th>';
@@ -155,7 +155,7 @@
 					if($current_column==7) {
 						$current_column = 0;
 					}
-					$is_weekend = rpbcalendar_weekday_info($current_weekday, 'weekend');
+					$is_weekend = rpbcalendar_weekday_info('weekend', $current_weekday);
 					$is_highday = $highday_map[$current_day];
 					$is_holiday = $holiday_map[$current_day];
 					$events     = $event_map  [$current_day];
