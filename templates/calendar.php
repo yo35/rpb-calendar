@@ -30,21 +30,36 @@
 	$days_in_month = (int)(date("t", mktime(0, 0, 0, $current_month, 1, $current_year)));
 	$first_weekday = (int)(date("w", mktime(0, 0, 0, $current_month, 1, $current_year)));
 	$start_of_week = (int)get_option('start_of_week');
-	$first_day     = date('Y-m-d', mktime(0, 0, 0, $current_month, 1, $current_year));
-	$last_day      = date('Y-m-d', mktime(0, 0, 0, $current_month, $days_in_month, $current_year));
-	$first_day_sql = "'".mysql_escape_string($first_day)."'";
-	$last_day_sql  = "'".mysql_escape_string($last_day )."'";
+	$first_day     = mktime(0, 0, 0, $current_month, 1, $current_year);
+	$last_day      = mktime(0, 0, 0, $current_month, $days_in_month, $current_year);
+	$easter_day    = rpbcalendar_easter_date($current_year);
+	$rel_first_day = ($first_day-$easter_day) / 86400;
+	$rel_last_day  = ($last_day -$easter_day) / 86400;
+	$sql_first_day = "'".mysql_escape_string(date('Y-m-d', $first_day))."'";
+	$sql_last_day  = "'".mysql_escape_string(date('Y-m-d', $last_day ))."'";
 
 	// Highdays
+	$highdays = $wpdb->get_col('SELECT '.
+		'CASE highday_month '.
+			'WHEN 13 THEN highday_day'.($rel_first_day>=0 ? '-' : '+').abs($rel_first_day).'+1 '.
+			'ELSE highday_day '.
+		'END '.
+		'FROM '.RPBCALENDAR_HIGHDAY_TABLE.' '.
+		'WHERE highday_month='.$current_month.' '.
+		'OR (highday_month=13 AND highday_day>='.$rel_first_day.' AND highday_day<='.$rel_last_day.');'
+	);
 	$highday_map = array_fill(1, $days_in_month, false);
+	foreach($highdays as $highday) {
+		$highday_map[$highday] = true;
+	}
 
 	// Holidays
 	$holidays = $wpdb->get_results('SELECT '.
-		'DAY(CASE holiday_begin<'.$first_day_sql.' WHEN TRUE THEN '.$first_day_sql.' ELSE holiday_begin END) AS actual_begin, '.
-		'DAY(CASE holiday_end  >'.$last_day_sql .' WHEN TRUE THEN '.$last_day_sql .' ELSE holiday_end   END) AS actual_end '.
+		'DAY(CASE holiday_begin<'.$sql_first_day.' WHEN TRUE THEN '.$sql_first_day.' ELSE holiday_begin END) AS actual_begin, '.
+		'DAY(CASE holiday_end  >'.$sql_last_day .' WHEN TRUE THEN '.$sql_last_day .' ELSE holiday_end   END) AS actual_end '.
 		'FROM '.RPBCALENDAR_HOLIDAY_TABLE.' '.
-		'WHERE holiday_end>='.$first_day_sql.' '.
-		'AND holiday_begin<='.$last_day_sql.';'
+		'WHERE holiday_end>='.$sql_first_day.' '.
+		'AND holiday_begin<='.$sql_last_day.';'
 	);
 	$holiday_map = array_fill(1, $days_in_month, false);
 	foreach($holidays as $holiday) {
@@ -60,9 +75,9 @@
 	$select_from_part = rpbcalendar_select_events_base_sql();
 	for($k=1; $k<=$days_in_month; $k++) {
 		$current_day     = date('Y-m-d', mktime(0, 0, 0, $current_month, $k, $current_year));
-		$current_day_sql = "'".mysql_escape_string($current_day)."'";
+		$sql_current_day = "'".mysql_escape_string($current_day)."'";
 		$event_map[$k] = $wpdb->get_results($select_from_part.
-			'WHERE event_begin<='.$current_day_sql.' AND event_end>='.$current_day_sql.' '.
+			'WHERE event_begin<='.$sql_current_day.' AND event_end>='.$sql_current_day.' '.
 			'ORDER BY event_time;'
 		);
 	}

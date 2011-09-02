@@ -25,7 +25,7 @@ class RpbcTimeField extends RpbcField
 	// Validation
 	protected function additional_validation(&$values)
 	{
-		if(!preg_match('/([0-9]{2}):([0-9]{2})/', $values[$this->key], $matches)) {
+		if(!preg_match('/^([0-9]{2}):([0-9]{2})$/', $values[$this->key], $matches)) {
 			rpbcalendar_admin_error_message(sprintf(
 				__('Badly formatted time field: &quot;%s&quot;', 'rpbcalendar'), $this->label));
 			return false;

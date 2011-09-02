@@ -8,8 +8,8 @@ class RpbcDateColumn extends RpbcColumn
 	public function print_cell_content($elem)
 	{
 		$field = $this->key;
-		$data  = date_i18n(get_option('date_format'), strtotime($elem->$field));
-		echo $data;
+		$data  = $elem->$field;
+		echo isset($data) ? date_i18n(get_option('date_format'), strtotime($data)) : 'N/A';
 	}
 }
 

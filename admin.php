@@ -161,9 +161,67 @@ function rpbcalendar_manage_holidays()
 // Function to handle the management of highdays
 function rpbcalendar_manage_highdays()
 {
-	echo '<div class="wrap">';
-	echo 'TODO';
-	echo '</div>';
+	// Includes
+	require_once(RPBCALENDAR_ABSPATH.'admin/column.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/datecolumn.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/field.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/intfield.class.php');
+	require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
+
+	// Current year and easter date
+	$current_time   = rpbcalendar_time();
+	$current_year   = date('Y', $current_time);
+	$current_easter = date('Y-m-d', rpbcalendar_easter_date($current_year));
+	$sql_current_year   = "'".$current_year  ."'";
+	$sql_current_easter = "'".$current_easter."'";
+
+	// SQL
+	$sql = 'SELECT highday_id, highday_name, highday_month, highday_day, '.
+		'CASE highday_month '.
+			'WHEN 13 THEN DATE_ADD(DATE('.$sql_current_easter.'), INTERVAL highday_day DAY) '.
+			'ELSE DATE(CONCAT('.$sql_current_year.', \'-\', highday_month, \'-\', highday_day)) '.
+		'END AS actual_date '.
+		'FROM '.RPBCALENDAR_HIGHDAY_TABLE;
+
+	// Columns
+	$col_name            = new RpbcColumn('highday_name', __('Name', 'rpbcalendar'));
+	$col_name->row_title = true;
+	$col_month = new RpbcColumn('highday_month', __('Month'         , 'rpbcalendar'));
+	$col_day   = new RpbcColumn('highday_day'  , __('Day'           , 'rpbcalendar'));
+	$col_date  = new RpbcDateColumn('actual_date', __('Date this year', 'rpbcalendar'));
+
+	// Fields
+	$fld_name          = new RpbcField('highday_name', __('Name', 'rpbcalendar'), 'text');
+	$fld_name->options = array('maxlength'=>30);
+	$fld_month                   = new RpbcIntField('highday_month', __('Month', 'rpbcalendar'), 'text');
+	$fld_month->legend           = __('Use 13 to specify a day relative to the easter date', 'rpbcalendar');
+	$fld_month->negative_allowed = false;
+	$fld_month->minimum_value    = 1;
+	$fld_month->maximum_value    = 13;
+	$fld_day = new RpbcIntField('highday_day', __('Day', 'rpbcalendar'), 'text');
+
+	// Form
+	$form = new RpbcForm('highdayform', RPBCALENDAR_HIGHDAY_TABLE, $sql, 'rpbcalendar-highdays',
+		__('highday', 'rpbcalendar'), 'highday_id');
+	$form->fields            = array($fld_name, $fld_month, $fld_day);
+	$form->columns           = array($col_name, $col_month, $col_day, $col_date);
+	$form->default_order_by  = 'actual_date';
+	$form->default_order_asc = true;
+
+	// Process requests
+	$form->process_all();
+
+	// Printing
+	$form->print_all(true,
+		__('Highdays'         , 'rpbcalendar'),
+		__('Add a new highday', 'rpbcalendar'),
+		__('Edit the highday' , 'rpbcalendar'),
+		__('Delete a highday' , 'rpbcalendar')
+	);
+
+	//echo '<div class="wrap">';
+	//echo date('l j F Y', mktime(0,0,0, 3, 21, 2011) + 86400*easter_days(2011));
+	//echo '</div>';
 }
 
 // Function to handle the management of events

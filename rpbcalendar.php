@@ -36,6 +36,12 @@ function rpbcalendar_time()
   return time() + 3600*get_option('gmt_offset');
 }
 
+// Easter date for the given year
+function rpbcalendar_easter_date($year)
+{
+	return mktime(0, 0, 0, 3, 21, $year) + 86400*easter_days($year);
+}
+
 // Display an error message
 function rpbcalendar_error_message($error_message)
 {
@@ -233,6 +239,12 @@ function rpbcalendar_build_admin_menu()
 	// Holiday page
 	$page = add_submenu_page('rpbcalendar', __('Manage holidays', 'rpbcalendar'), __('Manage holidays', 'rpbcalendar'),
 		$allowed_group, 'rpbcalendar-holidays', 'rpbcalendar_manage_holidays');
+	add_action('admin_print_styles-' . $page, 'rpbcalendar_admin_print_css'    );
+	add_action('admin_print_scripts-'. $page, 'rpbcalendar_admin_print_scripts');
+
+	// Highday page
+	$page = add_submenu_page('rpbcalendar', __('Manage highdays', 'rpbcalendar'), __('Manage highdays', 'rpbcalendar'),
+		$allowed_group, 'rpbcalendar-highdays', 'rpbcalendar_manage_highdays');
 	add_action('admin_print_styles-' . $page, 'rpbcalendar_admin_print_css'    );
 	add_action('admin_print_scripts-'. $page, 'rpbcalendar_admin_print_scripts');
 

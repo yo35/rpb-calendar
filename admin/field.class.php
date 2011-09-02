@@ -128,7 +128,7 @@ class RpbcField
 	public function validation(&$values)
 	{
 		$this->prepare_validation($values);
-		if(!isset($values[$this->key]) || empty($values[$this->key])) {
+		if(!isset($values[$this->key]) || strlen($values[$this->key])==0) {
 			if($this->allow_empty) {
 				$values[$this->key] = NULL;
 				return true;
