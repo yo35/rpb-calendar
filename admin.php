@@ -194,7 +194,7 @@ function rpbcalendar_manage_highdays()
 	$fld_name          = new RpbcField('highday_name', __('Name', 'rpbcalendar'), 'text');
 	$fld_name->options = array('maxlength'=>30);
 	$fld_month                   = new RpbcIntField('highday_month', __('Month', 'rpbcalendar'), 'text');
-	$fld_month->legend           = __('Use 13 to specify a day relative to the easter date', 'rpbcalendar');
+	$fld_month->legend           = __('Use 13 to specify a day relative to the Easter date', 'rpbcalendar');
 	$fld_month->negative_allowed = false;
 	$fld_month->minimum_value    = 1;
 	$fld_month->maximum_value    = 13;

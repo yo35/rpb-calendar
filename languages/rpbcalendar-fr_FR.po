@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-02 21:39+0200\n"
+"POT-Creation-Date: 2011-09-03 00:21+0200\n"
 "PO-Revision-Date: 2011-08-29 00:37+0200\n"
 "Last-Translator: Yoann <yoann.le-montagner@m4x.org>\n"
 "Language-Team: French\n"
@@ -25,7 +25,8 @@ msgstr "Revenir"
 msgid "Today"
 msgstr "Aujourd'hui"
 
-#: admin.php:82 admin.php:89 admin.php:128 admin.php:134
+#: admin.php:82 admin.php:89 admin.php:128 admin.php:134 admin.php:187
+#: admin.php:194
 msgid "Name"
 msgstr "Nom"
 
@@ -89,228 +90,269 @@ msgstr "Éditer "
 msgid "Delete a holiday"
 msgstr "Supprimer une période de vacances"
 
-#: admin.php:201
+#: admin.php:189 admin.php:196
+msgid "Month"
+msgstr "Mois"
+
+#: admin.php:190 admin.php:201
+msgid "Day"
+msgstr "Jour"
+
+#: admin.php:191
+msgid "Date this year"
+msgstr "Date cette année"
+
+#: admin.php:197
+msgid "Use 13 to specify a day relative to the Easter date"
+msgstr ""
+"Mettre 13 pour spécifier un jour défini relativement à la date de Pâques"
+
+#: admin.php:205
+msgid "highday"
+msgstr "jour férié"
+
+#: admin.php:216
+msgid "Highdays"
+msgstr "Jours fériés"
+
+#: admin.php:217
+msgid "Add a new highday"
+msgstr "Ajouter un nouveau jour férié"
+
+#: admin.php:218
+msgid "Edit the highday"
+msgstr "Éditer le jour férié"
+
+#: admin.php:219
+msgid "Delete a highday"
+msgstr "Supprimer un jour férié"
+
+#: admin.php:259
 #, php-format
 msgid "%1$s<br />to %2$s"
 msgstr "%1$s<br />au %2$s"
 
-#: admin.php:205
+#: admin.php:263
 #, php-format
 msgid "At %s"
 msgstr "À %s"
 
-#: admin.php:231
+#: admin.php:289
 msgid "No category"
 msgstr "Aucune catégorie"
 
-#: admin.php:237 admin.php:249
+#: admin.php:295 admin.php:307
 msgid "Title"
 msgstr "Titre"
 
-#: admin.php:239 admin.php:251 templates/explorer.php:26
+#: admin.php:297 admin.php:309 templates/explorer.php:26
 msgid "Description"
 msgstr "Description"
 
-#: admin.php:240 templates/explorer.php:27
+#: admin.php:298 templates/explorer.php:27
 msgid "Date"
 msgstr "Date"
 
-#: admin.php:241 admin.php:247 admin.php:336
+#: admin.php:299 admin.php:305 admin.php:394
 msgid "Author"
 msgstr "Auteur"
 
-#: admin.php:242 admin.php:259
+#: admin.php:300 admin.php:317
 msgid "Category"
 msgstr "Catégorie"
 
-#: admin.php:243 admin.php:262
+#: admin.php:301 admin.php:320
 msgid "Link"
 msgstr "Lien"
 
-#: admin.php:253
+#: admin.php:311
 msgid "Begin"
 msgstr "Début"
 
-#: admin.php:254
+#: admin.php:312
 msgid "End"
 msgstr "Fin"
 
-#: admin.php:257 templates/explorer.php:28
+#: admin.php:315 templates/explorer.php:28
 msgid "Time"
 msgstr "Heure"
 
-#: admin.php:267
+#: admin.php:325
 msgid "event"
 msgstr "événement"
 
-#: admin.php:278
+#: admin.php:336
 msgid "Events"
 msgstr "Événements"
 
-#: admin.php:279
+#: admin.php:337
 msgid "Add a new event"
 msgstr "Ajouter un nouvel événement"
 
-#: admin.php:280
+#: admin.php:338
 msgid "Edit the event"
 msgstr "Éditer l'événement"
 
-#: admin.php:281
+#: admin.php:339
 msgid "Delete an event"
 msgstr "Supprimer un événement"
 
-#: admin.php:300
+#: admin.php:358
 msgid "Option &quot;Permissions&quot; saved"
 msgstr "Option &quot;Permissions&quot; enregistrée"
 
-#: admin.php:309
+#: admin.php:367
 msgid "Option &quot;Display author&quot; saved"
 msgstr "Option &quot;Afficher l'auteur&quot; enregistrée"
 
-#: admin.php:318
+#: admin.php:376
 msgid "Option &quot;Display category&quot; saved"
 msgstr "Option &quot;Afficher la catégorie&quot; enregistrée"
 
-#: admin.php:324 rpbcalendar.php:246
+#: admin.php:382 rpbcalendar.php:258
 msgid "Calendar options"
 msgstr "Options de l'agenda"
 
-#: admin.php:331
+#: admin.php:389
 msgid "Permissions"
 msgstr "Permissions"
 
-#: admin.php:334
+#: admin.php:392
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: admin.php:335
+#: admin.php:393
 msgid "Editor"
 msgstr "Éditeur"
 
-#: admin.php:337
+#: admin.php:395
 msgid "Contributor"
 msgstr "Contributeur"
 
-#: admin.php:338
+#: admin.php:396
 msgid "Subscriber"
 msgstr "Abonné"
 
-#: admin.php:340
+#: admin.php:398
 msgid ""
 "Choose the lowest user group that is allowed to manage events and holidays"
 msgstr ""
 "Choisissez le niveau d'autorisation minimum à partir duquel un utilisateur "
 "est autorisé à gérer les événements et les vacances"
 
-#: admin.php:345
+#: admin.php:403
 msgid "Author name"
 msgstr "Nom de l'auteur"
 
-#: admin.php:348
+#: admin.php:406
 msgid "Display the name of the author name on events"
 msgstr "Afficher le nom de l'auteur avec les événements"
 
-#: admin.php:353
+#: admin.php:411
 msgid "Categories"
 msgstr "Catégories"
 
-#: admin.php:356
+#: admin.php:414
 msgid "Use event categories"
 msgstr "Utiliser les catégories"
 
-#: admin.php:362
+#: admin.php:420
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
-#: rpbcalendar.php:78
+#: rpbcalendar.php:84
 msgid "sunday"
 msgstr "dimanche"
 
-#: rpbcalendar.php:79
+#: rpbcalendar.php:85
 msgid "monday"
 msgstr "lundi"
 
-#: rpbcalendar.php:80
+#: rpbcalendar.php:86
 msgid "tuesday"
 msgstr "mardi"
 
-#: rpbcalendar.php:81
+#: rpbcalendar.php:87
 msgid "wednesday"
 msgstr "mercredi"
 
-#: rpbcalendar.php:82
+#: rpbcalendar.php:88
 msgid "thursday"
 msgstr "jeudi"
 
-#: rpbcalendar.php:83
+#: rpbcalendar.php:89
 msgid "friday"
 msgstr "vendredi"
 
-#: rpbcalendar.php:84
+#: rpbcalendar.php:90
 msgid "saturday"
 msgstr "samedi"
 
-#: rpbcalendar.php:107
+#: rpbcalendar.php:113
 msgid "january"
 msgstr "janvier"
 
-#: rpbcalendar.php:108
+#: rpbcalendar.php:114
 msgid "february"
 msgstr "février"
 
-#: rpbcalendar.php:109
+#: rpbcalendar.php:115
 msgid "march"
 msgstr "mars"
 
-#: rpbcalendar.php:110
+#: rpbcalendar.php:116
 msgid "april"
 msgstr "avril"
 
-#: rpbcalendar.php:111
+#: rpbcalendar.php:117
 msgid "may"
 msgstr "mai"
 
-#: rpbcalendar.php:112
+#: rpbcalendar.php:118
 msgid "june"
 msgstr "juin"
 
-#: rpbcalendar.php:113
+#: rpbcalendar.php:119
 msgid "july"
 msgstr "juillet"
 
-#: rpbcalendar.php:114
+#: rpbcalendar.php:120
 msgid "august"
 msgstr "août"
 
-#: rpbcalendar.php:115
+#: rpbcalendar.php:121
 msgid "september"
 msgstr "septembre"
 
-#: rpbcalendar.php:116
+#: rpbcalendar.php:122
 msgid "october"
 msgstr "octobre"
 
-#: rpbcalendar.php:117
+#: rpbcalendar.php:123
 msgid "november"
 msgstr "novembre"
 
-#: rpbcalendar.php:118
+#: rpbcalendar.php:124
 msgid "december"
 msgstr "décembre"
 
-#: rpbcalendar.php:222
+#: rpbcalendar.php:228
 msgid "Calendar"
 msgstr "Agenda"
 
-#: rpbcalendar.php:228
+#: rpbcalendar.php:234
 msgid "Manage events"
 msgstr "Gérer les événements"
 
-#: rpbcalendar.php:234
+#: rpbcalendar.php:240
 msgid "Manage holidays"
 msgstr "Gérer les vacances"
 
-#: rpbcalendar.php:240
+#: rpbcalendar.php:246
+msgid "Manage highdays"
+msgstr "Gérer les jours fériés"
+
+#: rpbcalendar.php:252
 msgid "Manage categories"
 msgstr "Gérer les catégories"
 
@@ -435,6 +477,17 @@ msgstr "1 %s modifié"
 msgid "1 %s successfully deleted"
 msgstr "1 %s supprimé"
 
+#: admin/intfield.class.php:27
+#, php-format
+msgid "Badly formatted integer field: &quot;%s&quot;"
+msgstr "Champ entier mal formaté : &quot;%s&quot;"
+
+#: admin/intfield.class.php:33
+#, php-format
+msgid "Value out of the valid range in the following field: &quot;%s&quot;"
+msgstr ""
+"Valeur hors de l'interval authorisé dans le champ suivant : &quot;%s&quot;"
+
 #: admin/timefield.class.php:12
 msgid "Use the following format: hh:mm"
 msgstr "Utilisez le format suivant : hh:mm"
@@ -461,7 +514,7 @@ msgstr "Le mois doit être une valeur numérique"
 msgid "The month must be valued between 1 and 12"
 msgstr "Le mois doit avoir une valeur comprise entre 1 et 12"
 
-#: templates/calendar.php:111
+#: templates/calendar.php:126
 msgid "Go"
 msgstr "Go"
 
@@ -481,7 +534,7 @@ msgstr " à "
 msgid "Event"
 msgstr "Événement"
 
-#: templates/upcomingwidget.php:48
+#: templates/upcomingwidget.php:59
 #, php-format
 msgid "From %1$s to %2$s"
 msgstr "Du %1$s au %2$s"

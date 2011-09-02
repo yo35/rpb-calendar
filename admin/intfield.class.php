@@ -18,9 +18,6 @@ class RpbcIntField extends RpbcField
 	// Validation
 	protected function additional_validation(&$values)
 	{
-		var_dump($values[$this->key]);
-		$val = '';
-		var_dump(strlen($val)==0);
 		$matching_pattern = $this->negative_allowed ? '/^(-?[0-9]+)$/' : '/^([0-9]+)$/';
 		if(!preg_match($matching_pattern, $values[$this->key], $matches)) {
 			rpbcalendar_admin_error_message(sprintf(
@@ -34,7 +31,6 @@ class RpbcIntField extends RpbcField
 				$this->label));
 			return false;
 		}
-		var_dump($matches[1]);
 		return true;
 	}
 }
