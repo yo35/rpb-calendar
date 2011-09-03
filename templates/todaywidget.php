@@ -3,12 +3,12 @@
 	// Current day
 	$current_time    = rpbcalendar_time();
 	$current_day     = date('Y-m-d', $current_time);
-	$current_day_sql = "'".mysql_escape_string($current_day)."'";
+	$sql_current_day = "'".mysql_escape_string($current_day)."'";
 
 	// Retrieve events
 	global $wpdb;
 	$events = $wpdb->get_results(rpbcalendar_select_events_base_sql().
-		'WHERE event_begin<='.$current_day_sql.' AND event_end>='.$current_day_sql.' '.
+		'WHERE event_begin<='.$sql_current_day.' AND event_end>='.$sql_current_day.' '.
 		'ORDER BY event_time;'
 	);
 

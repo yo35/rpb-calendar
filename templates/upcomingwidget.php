@@ -5,14 +5,14 @@
 	$upcoming_range = max($instance['upcoming_range'], 1);
 	$first_day      = date('Y-m-d', $current_time + 86400);
 	$last_day       = date('Y-m-d', $current_time + 86400*$upcoming_range);
-	$first_day_sql  = "'".mysql_escape_string($first_day)."'";
-	$last_day_sql   = "'".mysql_escape_string($last_day )."'";
+	$sql_first_day  = "'".mysql_escape_string($first_day)."'";
+	$sql_last_day   = "'".mysql_escape_string($last_day )."'";
 
 	// All type of event date range encountered within the given interval
 	global $wpdb;
 	$date_ranges = $wpdb->get_results(
 		'SELECT DISTINCT event_begin, event_end FROM '.RPBCALENDAR_EVENT_TABLE.' '.
-		'WHERE event_begin<='.$last_day_sql.' AND event_end>='.$first_day_sql.' '.
+		'WHERE event_begin<='.$sql_last_day.' AND event_end>='.$sql_first_day.' '.
 		'ORDER BY event_begin, event_end;'
 	);
 
@@ -32,10 +32,10 @@
 	foreach($date_ranges as $date_range) {
 
 		// Retrieve the corresponding events
-		$current_begin_sql = "'".$date_range->event_begin."'";
-		$current_end_sql   = "'".$date_range->event_end  ."'";
+		$sql_current_begin = "'".$date_range->event_begin."'";
+		$sql_current_end   = "'".$date_range->event_end  ."'";
 		$events = $wpdb->get_results($select_from_part.
-			'WHERE event_begin='.$current_begin_sql.' AND event_end='.$current_end_sql.' '.
+			'WHERE event_begin='.$sql_current_begin.' AND event_end='.$sql_current_end.' '.
 			'ORDER BY event_time;'
 		);
 

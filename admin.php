@@ -218,10 +218,6 @@ function rpbcalendar_manage_highdays()
 		__('Edit the highday' , 'rpbcalendar'),
 		__('Delete a highday' , 'rpbcalendar')
 	);
-
-	//echo '<div class="wrap">';
-	//echo date('l j F Y', mktime(0,0,0, 3, 21, 2011) + 86400*easter_days(2011));
-	//echo '</div>';
 }
 
 // Function to handle the management of events
