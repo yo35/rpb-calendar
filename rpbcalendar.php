@@ -3,7 +3,7 @@
 Plugin Name: RpbCalendar
 Description: This plugin allows you to display a calendar of all your events and appointments as a page on your website.
 Author: Yoann Le Montagner
-Version: 0.5
+Version: 0.4
 */
 
 // Directories
@@ -16,7 +16,7 @@ load_plugin_textdomain('rpbcalendar', false, RPBCALENDAR_PLUGIN_DIR.'/languages/
 
 // Plugin version
 // Don't forget to update the version field at the top of this file
-define('RPBCALENDAR_VERSION', '0.5');
+define('RPBCALENDAR_VERSION', '0.4');
 
 // Define the tables used by the plugin
 global $wpdb;
@@ -244,7 +244,7 @@ function rpbcalendar_build_admin_menu()
 
 	// Highday page
 	$page = add_submenu_page('rpbcalendar', __('Manage highdays', 'rpbcalendar'), __('Manage highdays', 'rpbcalendar'),
-		$allowed_group, 'rpbcalendar-highdays', 'rpbcalendar_manage_highdays');
+		'manage_options', 'rpbcalendar-highdays', 'rpbcalendar_manage_highdays');
 	add_action('admin_print_styles-' . $page, 'rpbcalendar_admin_print_css'    );
 	add_action('admin_print_scripts-'. $page, 'rpbcalendar_admin_print_scripts');
 
