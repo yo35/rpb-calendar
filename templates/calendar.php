@@ -104,7 +104,7 @@
 
 ?>
 
-<div class="rpbcalendar-button-bar">
+<div id="rpbcalendar-navigation-bar">
 	<?php
 
 		// Change month and year buttons
@@ -127,8 +127,8 @@
 	?>
 </div>
 
-<div class="rpbcalendar-very-large-content">
-	<table class="rpbcalendar-table">
+<div id="rpbcalendar-calendar">
+	<table>
 		<tbody>
 
 			<!-- Month name -->

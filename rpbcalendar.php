@@ -140,7 +140,7 @@ function rpbcalendar_begin_navigate_form($form_name, $fields_to_skip)
 	$question_mark = strpos($current_url, '?');
 	$base_url      = ($question_mark===false) ? $current_url : substr($current_url, 0, $question_mark);
 	$form_id       = 'rpbcalendar-'.$form_name.'-form';
-	echo '<form id="'.$form_id.'" name="'.$form_name.'" method="get" action="'.$base_url.'">';
+	echo '<div id="'.$form_id.'"><form name="'.$form_name.'" method="get" action="'.$base_url.'">';
 	foreach($_GET as $key => $value) {
 		if(array_search($key, $fields_to_skip)===false) {
 			echo '<input type="hidden" name="'.htmlspecialchars($key).'" value="'.htmlspecialchars($value).'" />';
@@ -155,7 +155,7 @@ function rpbcalendar_end_navigate_form($submit_label, $submit_title=NULL)
 		$title = isset($submit_title) ? ' title="'.$submit_title.'"' : '';
 		echo '<input type="submit" value="'.$submit_label.'"'.$title.' />';
 	}
-	echo '</form>';
+	echo '</form></div>';
 }
 
 // Navigate form (simple version)

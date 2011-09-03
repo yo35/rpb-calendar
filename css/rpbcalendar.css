@@ -12,13 +12,6 @@
 	margin-bottom: 3px;
 }
 
-.rpbcalendar-very-large-content {
-	overflow: auto !important;
-	-moz-box-shadow   : 1px 1px 1px #555;
-	-webkit-box-shadow: 1px 1px 1px #555;
-	box-shadow        : 1px 1px 1px #555;
-}
-
 .rpbcalendar-category {
 	border: 1px solid;
 	font-weight: bold;
@@ -68,24 +61,24 @@
 /******************************************************************************/
 /*** Navigation bar ***/
 
-.rpbcalendar-button-bar {
+#rpbcalendar-navigation-bar {
 	width: 100%;
+}
+
+#rpbcalendar-navigation-bar div {
+	float: left;
 	margin-bottom: 5px;
 }
 
-.rpbcalendar-button-bar form {
-	display: inline;
-}
-
-.rpbcalendar-button-bar form#rpbcalendar-changedate-form {
+#rpbcalendar-navigation-bar div#rpbcalendar-changedate-form {
 	float: right;
 }
 
-.rpbcalendar-button-bar form#rpbcalendar-changedate-form input {
+#rpbcalendar-navigation-bar div#rpbcalendar-changedate-form input {
 	margin-left: 5px;
 }
 
-.rpbcalendar-button-bar form#rpbcalendar-changedate-form input[name="rpbyear"] {
+#rpbcalendar-navigation-bar div#rpbcalendar-changedate-form input[name="rpbyear"] {
 	width: 60px;
 }
 
@@ -94,16 +87,20 @@
 /******************************************************************************/
 /*** Calendar table ***/
 
-table.rpbcalendar-table {
-	border-collapse: collapse;
+#rpbcalendar-calendar {
+	clear: both;
+	overflow: auto !important;
 	-moz-box-shadow   : 1px 1px 1px #555;
 	-webkit-box-shadow: 1px 1px 1px #555;
 	box-shadow        : 1px 1px 1px #555;
-	clear: both;
 }
 
-table.rpbcalendar-table td {
-	padding: 0px !important;
+#rpbcalendar-calendar table {
+	border-collapse: collapse;
+}
+
+#rpbcalendar-calendar td {
+	padding: 0px;
 	font-size: 7pt;
 	height: 80px;
 	border: 1px solid #404040;
@@ -111,7 +108,7 @@ table.rpbcalendar-table td {
 	color           : #404040;
 }
 
-table.rpbcalendar-table th {
+#rpbcalendar-calendar th {
 	font-weight   : normal;
 	text-align    : center;
 	text-transform: capitalize;
@@ -119,48 +116,48 @@ table.rpbcalendar-table th {
 	color           : #e8e8e8;
 }
 
-table.rpbcalendar-table th.rpbcalendar-month-header {
+#rpbcalendar-calendar th.rpbcalendar-month-header {
 	font-weight: bold;
 }
 
-table.rpbcalendar-table th.rpbcalendar-weekend-day-header {
+#rpbcalendar-calendar th.rpbcalendar-weekend-day-header {
 	width: 20%;
 }
 
-table.rpbcalendar-table th.rpbcalendar-normal-day-header {
+#rpbcalendar-calendar th.rpbcalendar-normal-day-header {
 	width: 12%;
 }
 
-table.rpbcalendar-table td {
+#rpbcalendar-calendar td {
 	vertical-align: top;
 }
 
-table.rpbcalendar-table td.rpbcalendar-phantom-cell {
+#rpbcalendar-calendar td.rpbcalendar-phantom-cell {
 	background-color: #808080;
 }
 
-table.rpbcalendar-table td.rpbcalendar-normal-day-cell {
+#rpbcalendar-calendar td.rpbcalendar-normal-day-cell {
 	width: 12%;
 }
 
-table.rpbcalendar-table td.rpbcalendar-weekend-day-cell {
+#rpbcalendar-calendar td.rpbcalendar-weekend-day-cell {
 	width: 20%;
 	background-color: #f0e0c0;
 }
 
-table.rpbcalendar-table td.rpbcalendar-highday {
+#rpbcalendar-calendar td.rpbcalendar-highday {
 	background-color: #f0e0c0;
 }
 
-table.rpbcalendar-table div.rpbcalendar-cell-bar {
+#rpbcalendar-calendar div.rpbcalendar-cell-bar {
 	height: 10px;
 }
 
-table.rpbcalendar-table td.rpbcalendar-holiday div.rpbcalendar-cell-bar {
+#rpbcalendar-calendar td.rpbcalendar-holiday div.rpbcalendar-cell-bar {
 	background-color: #60d020;
 }
 
-table.rpbcalendar-table div.rpbcalendar-day-label {
+#rpbcalendar-calendar div.rpbcalendar-day-label {
 	float: left;
 	width : 22px;
 	padding-top   : 1px;
@@ -177,13 +174,13 @@ table.rpbcalendar-table div.rpbcalendar-day-label {
 	border-bottom-right-radius        : 8px;
 }
 
-table.rpbcalendar-table td.rpbcalendar-weekend-day-cell div.rpbcalendar-day-label,
-table.rpbcalendar-table td.rpbcalendar-highday          div.rpbcalendar-day-label {
+#rpbcalendar-calendar td.rpbcalendar-weekend-day-cell div.rpbcalendar-day-label,
+#rpbcalendar-calendar td.rpbcalendar-highday          div.rpbcalendar-day-label {
 	background-color: #404040;
 	color           : #e8e8e8;
 }
 
-table.rpbcalendar-table div.rpbcalendar-cell-content {
+#rpbcalendar-calendar div.rpbcalendar-cell-content {
 	padding: 1px;
 	clear: both;
 }
