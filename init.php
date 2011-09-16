@@ -22,7 +22,7 @@ function rpbcalendar_create_tables()
 	$sql_category_table =
 		"CREATE TABLE " . RPBCALENDAR_CATEGORY_TABLE . " (
 			category_id               INT(11)     NOT NULL AUTO_INCREMENT,
-			category_name             VARCHAR(30) NOT NULL,
+			category_name             VARCHAR(60) NOT NULL,
 			category_text_color       VARCHAR(7)  NOT NULL,
 			category_background_color VARCHAR(7)  NOT NULL,
 			PRIMARY KEY (category_id)
@@ -32,7 +32,7 @@ function rpbcalendar_create_tables()
 	$sql_highday_table =
 		"CREATE TABLE " . RPBCALENDAR_HIGHDAY_TABLE . " (
 			highday_id    INT(11)     NOT NULL AUTO_INCREMENT,
-			highday_name  VARCHAR(30) NOT NULL,
+			highday_name  VARCHAR(60) NOT NULL,
 			highday_month INT(3)      NOT NULL,
 			highday_day   INT(3)      NOT NULL,
 			PRIMARY KEY (highday_id)

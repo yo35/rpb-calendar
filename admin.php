@@ -87,7 +87,7 @@ function rpbcalendar_manage_categories()
 
 	// Fields
 	$fld_name          = new RpbcField('category_name', __('Name', 'rpbcalendar'), 'text');
-	$fld_name->options = array('maxlength'=>30);
+	$fld_name->options = array('maxlength'=>60);
 	$fld_text_color       = new RpbcColorField('category_text_color'      , __('Text color'      , 'rpbcalendar'));
 	$fld_background_color = new RpbcColorField('category_background_color', __('Background color', 'rpbcalendar'));
 
@@ -192,7 +192,7 @@ function rpbcalendar_manage_highdays()
 
 	// Fields
 	$fld_name          = new RpbcField('highday_name', __('Name', 'rpbcalendar'), 'text');
-	$fld_name->options = array('maxlength'=>30);
+	$fld_name->options = array('maxlength'=>60);
 	$fld_month                   = new RpbcIntField('highday_month', __('Month', 'rpbcalendar'), 'text');
 	$fld_month->legend           = __('Use 13 to specify a day relative to the Easter date', 'rpbcalendar');
 	$fld_month->negative_allowed = false;
