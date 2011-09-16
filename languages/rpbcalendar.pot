@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-03 00:21+0200\n"
+"POT-Creation-Date: 2011-09-16 23:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,134 +126,134 @@ msgstr ""
 msgid "Delete a highday"
 msgstr ""
 
-#: admin.php:259
+#: admin.php:255
 #, php-format
 msgid "%1$s<br />to %2$s"
 msgstr ""
 
-#: admin.php:263
+#: admin.php:259
 #, php-format
 msgid "At %s"
 msgstr ""
 
-#: admin.php:289
+#: admin.php:285
 msgid "No category"
 msgstr ""
 
-#: admin.php:295 admin.php:307
+#: admin.php:291 admin.php:303
 msgid "Title"
 msgstr ""
 
-#: admin.php:297 admin.php:309 templates/explorer.php:26
+#: admin.php:293 admin.php:305 templates/explorer.php:26
 msgid "Description"
 msgstr ""
 
-#: admin.php:298 templates/explorer.php:27
+#: admin.php:294 templates/explorer.php:27
 msgid "Date"
 msgstr ""
 
-#: admin.php:299 admin.php:305 admin.php:394
+#: admin.php:295 admin.php:301 admin.php:390
 msgid "Author"
 msgstr ""
 
-#: admin.php:300 admin.php:317
+#: admin.php:296 admin.php:313
 msgid "Category"
 msgstr ""
 
-#: admin.php:301 admin.php:320
+#: admin.php:297 admin.php:316
 msgid "Link"
 msgstr ""
 
-#: admin.php:311
+#: admin.php:307
 msgid "Begin"
 msgstr ""
 
-#: admin.php:312
+#: admin.php:308
 msgid "End"
 msgstr ""
 
-#: admin.php:315 templates/explorer.php:28
+#: admin.php:311 templates/explorer.php:28
 msgid "Time"
 msgstr ""
 
-#: admin.php:325
+#: admin.php:321
 msgid "event"
 msgstr ""
 
-#: admin.php:336
+#: admin.php:332
 msgid "Events"
 msgstr ""
 
-#: admin.php:337
+#: admin.php:333
 msgid "Add a new event"
 msgstr ""
 
-#: admin.php:338
+#: admin.php:334
 msgid "Edit the event"
 msgstr ""
 
-#: admin.php:339
+#: admin.php:335
 msgid "Delete an event"
 msgstr ""
 
-#: admin.php:358
+#: admin.php:354
 msgid "Option &quot;Permissions&quot; saved"
 msgstr ""
 
-#: admin.php:367
+#: admin.php:363
 msgid "Option &quot;Display author&quot; saved"
 msgstr ""
 
-#: admin.php:376
+#: admin.php:372
 msgid "Option &quot;Display category&quot; saved"
 msgstr ""
 
-#: admin.php:382 rpbcalendar.php:258
+#: admin.php:378 rpbcalendar.php:258
 msgid "Calendar options"
 msgstr ""
 
-#: admin.php:389
+#: admin.php:385
 msgid "Permissions"
 msgstr ""
 
-#: admin.php:392
+#: admin.php:388
 msgid "Administrator"
 msgstr ""
 
-#: admin.php:393
+#: admin.php:389
 msgid "Editor"
 msgstr ""
 
-#: admin.php:395
+#: admin.php:391
 msgid "Contributor"
 msgstr ""
 
-#: admin.php:396
+#: admin.php:392
 msgid "Subscriber"
 msgstr ""
 
-#: admin.php:398
+#: admin.php:394
 msgid ""
 "Choose the lowest user group that is allowed to manage events and holidays"
 msgstr ""
 
-#: admin.php:403
+#: admin.php:399
 msgid "Author name"
 msgstr ""
 
-#: admin.php:406
+#: admin.php:402
 msgid "Display the name of the author name on events"
 msgstr ""
 
-#: admin.php:411
+#: admin.php:407
 msgid "Categories"
 msgstr ""
 
-#: admin.php:414
+#: admin.php:410
 msgid "Use event categories"
 msgstr ""
 
-#: admin.php:420
+#: admin.php:416
 msgid "Save changes"
 msgstr ""
 
@@ -471,12 +471,12 @@ msgstr ""
 msgid "1 %s successfully deleted"
 msgstr ""
 
-#: admin/intfield.class.php:27
+#: admin/intfield.class.php:24
 #, php-format
 msgid "Badly formatted integer field: &quot;%s&quot;"
 msgstr ""
 
-#: admin/intfield.class.php:33
+#: admin/intfield.class.php:30
 #, php-format
 msgid "Value out of the valid range in the following field: &quot;%s&quot;"
 msgstr ""
@@ -507,7 +507,11 @@ msgstr ""
 msgid "The month must be valued between 1 and 12"
 msgstr ""
 
-#: templates/calendar.php:126
+#: templates/calendar.php:118
+msgid "Print"
+msgstr ""
+
+#: templates/calendar.php:131
 msgid "Go"
 msgstr ""
 
