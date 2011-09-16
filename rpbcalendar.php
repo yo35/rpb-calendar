@@ -62,6 +62,43 @@ function rpbcalendar_format_event_desc($raw_desc)
 	return $retval;
 }
 
+// Format a date range
+function rpbcalendar_format_date_range($date_begin, $date_end, $display_year=false)
+{
+	// One day event
+	if($date_begin==$date_end) {
+		$str_date = strtotime($date_begin);
+		$retval   = date('j', $str_date).' '.rpbcalendar_month_info('name', date('n', $str_date));
+		if($display_year) {
+			$retval .= ' '.$year_begin  = date('Y', $str_date);
+		}
+		return $retval;
+
+	// Long event
+	} else {
+		$str_begin   = strtotime($date_begin);
+		$str_end     = strtotime($date_end  );
+		$day_begin   = date('j', $str_begin);
+		$day_end     = date('j', $str_end  );
+		$month_begin = date('n', $str_begin);
+		$month_end   = date('n', $str_end  );
+		$year_begin  = date('Y', $str_begin);
+		$year_end    = date('Y', $str_end  );
+		$range_begin = $day_begin;
+		if($month_begin!=$month_end || $year_begin!=$year_end) {
+			$range_begin .= ' '.rpbcalendar_month_info('name', $month_begin);
+			if($display_year && $year_begin!=$year_end) {
+				$range_begin .= ' '.$year_begin;
+			}
+		}
+		$range_end = $day_end.' '.rpbcalendar_month_info('name', $month_end);
+		if($display_year) {
+			$range_end .= ' '.$year_end;
+		}
+		return sprintf(__('From %1$s to %2$s', 'rpbcalendar'), $range_begin, $range_end);
+	}
+}
+
 // Check whether a given link targets a page in the current website
 function rpbcalendar_is_internal_link($link)
 {

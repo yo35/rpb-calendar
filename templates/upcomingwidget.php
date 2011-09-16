@@ -40,24 +40,7 @@
 		);
 
 		// Date range label
-		$event_begin = strtotime($date_range->event_begin);
-		$event_end   = strtotime($date_range->event_end  );
-		$day_begin   = date('j', $event_begin);
-		$day_end     = date('j', $event_end  );
-		$month_begin = date('n', $event_begin);
-		$month_end   = date('n', $event_end  );
-		$year_begin  = date('Y', $event_begin);
-		$year_end    = date('Y', $event_end  );
-		if($event_begin==$event_end) {
-			$date_range_label = $day_begin.' '.rpbcalendar_month_info('name', $month_begin);
-		} else {
-			$range_begin = $day_begin;
-			if($month_begin!=$month_end || $year_begin!=$year_end) {
-				$range_begin .= ' '.rpbcalendar_month_info('name', $month_begin);
-			}
-			$range_end = $day_end.' '.rpbcalendar_month_info('name', $month_end);
-			$date_range_label = sprintf(__('From %1$s to %2$s', 'rpbcalendar'), $range_begin, $range_end);
-		}
+		$date_range_label = rpbcalendar_format_date_range($date_range->event_begin, $date_range->event_end);
 
 		// Display events
 		echo '<div class="rpbcalendar-upcoming-period">';
