@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-16 23:02+0200\n"
+"POT-Creation-Date: 2011-09-17 01:07+0200\n"
 "PO-Revision-Date: 2011-08-29 00:37+0200\n"
 "Last-Translator: Yoann <yoann.le-montagner@m4x.org>\n"
 "Language-Team: French\n"
@@ -145,11 +145,11 @@ msgstr "Aucune catégorie"
 msgid "Title"
 msgstr "Titre"
 
-#: admin.php:293 admin.php:305 templates/explorer.php:26
+#: admin.php:293 admin.php:305 templates/explorer.php:21
 msgid "Description"
 msgstr "Description"
 
-#: admin.php:294 templates/explorer.php:27
+#: admin.php:294 templates/explorer.php:22
 msgid "Date"
 msgstr "Date"
 
@@ -173,7 +173,7 @@ msgstr "Début"
 msgid "End"
 msgstr "Fin"
 
-#: admin.php:311 templates/explorer.php:28
+#: admin.php:311 templates/explorer.php:23
 msgid "Time"
 msgstr "Heure"
 
@@ -209,7 +209,7 @@ msgstr "Option &quot;Afficher l'auteur&quot; enregistrée"
 msgid "Option &quot;Display category&quot; saved"
 msgstr "Option &quot;Afficher la catégorie&quot; enregistrée"
 
-#: admin.php:378 rpbcalendar.php:258
+#: admin.php:378 rpbcalendar.php:295
 msgid "Calendar options"
 msgstr "Options de l'agenda"
 
@@ -260,99 +260,104 @@ msgstr "Utiliser les catégories"
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
-#: rpbcalendar.php:84
+#: rpbcalendar.php:98
+#, php-format
+msgid "From %1$s to %2$s"
+msgstr "Du %1$s au %2$s"
+
+#: rpbcalendar.php:121
 msgid "sunday"
 msgstr "dimanche"
 
-#: rpbcalendar.php:85
+#: rpbcalendar.php:122
 msgid "monday"
 msgstr "lundi"
 
-#: rpbcalendar.php:86
+#: rpbcalendar.php:123
 msgid "tuesday"
 msgstr "mardi"
 
-#: rpbcalendar.php:87
+#: rpbcalendar.php:124
 msgid "wednesday"
 msgstr "mercredi"
 
-#: rpbcalendar.php:88
+#: rpbcalendar.php:125
 msgid "thursday"
 msgstr "jeudi"
 
-#: rpbcalendar.php:89
+#: rpbcalendar.php:126
 msgid "friday"
 msgstr "vendredi"
 
-#: rpbcalendar.php:90
+#: rpbcalendar.php:127
 msgid "saturday"
 msgstr "samedi"
 
-#: rpbcalendar.php:113
+#: rpbcalendar.php:150
 msgid "january"
 msgstr "janvier"
 
-#: rpbcalendar.php:114
+#: rpbcalendar.php:151
 msgid "february"
 msgstr "février"
 
-#: rpbcalendar.php:115
+#: rpbcalendar.php:152
 msgid "march"
 msgstr "mars"
 
-#: rpbcalendar.php:116
+#: rpbcalendar.php:153
 msgid "april"
 msgstr "avril"
 
-#: rpbcalendar.php:117
+#: rpbcalendar.php:154
 msgid "may"
 msgstr "mai"
 
-#: rpbcalendar.php:118
+#: rpbcalendar.php:155
 msgid "june"
 msgstr "juin"
 
-#: rpbcalendar.php:119
+#: rpbcalendar.php:156
 msgid "july"
 msgstr "juillet"
 
-#: rpbcalendar.php:120
+#: rpbcalendar.php:157
 msgid "august"
 msgstr "août"
 
-#: rpbcalendar.php:121
+#: rpbcalendar.php:158
 msgid "september"
 msgstr "septembre"
 
-#: rpbcalendar.php:122
+#: rpbcalendar.php:159
 msgid "october"
 msgstr "octobre"
 
-#: rpbcalendar.php:123
+#: rpbcalendar.php:160
 msgid "november"
 msgstr "novembre"
 
-#: rpbcalendar.php:124
+#: rpbcalendar.php:161
 msgid "december"
 msgstr "décembre"
 
-#: rpbcalendar.php:228
+#: rpbcalendar.php:265
 msgid "Calendar"
 msgstr "Agenda"
 
-#: rpbcalendar.php:234
+#: rpbcalendar.php:271
 msgid "Manage events"
 msgstr "Gérer les événements"
 
-#: rpbcalendar.php:240
+#: rpbcalendar.php:277
 msgid "Manage holidays"
 msgstr "Gérer les vacances"
 
-#: rpbcalendar.php:246
+#: rpbcalendar.php:283
 msgid "Manage highdays"
 msgstr "Gérer les jours fériés"
 
-#: rpbcalendar.php:252
+#: rpbcalendar.php:289
 msgid "Manage categories"
 msgstr "Gérer les catégories"
 
@@ -534,11 +539,18 @@ msgstr "Impossible d'afficher la liste d'événements"
 msgid " at "
 msgstr " à "
 
-#: templates/explorer.php:25
+#: templates/explorer.php:20
 msgid "Event"
 msgstr "Événement"
 
-#: templates/upcomingwidget.php:59
-#, php-format
-msgid "From %1$s to %2$s"
-msgstr "Du %1$s au %2$s"
+#: templates/explorer.php:29
+msgid "No event found"
+msgstr "Aucun événement trouvé"
+
+#: templates/explorer.php:63
+msgid "Search for an event:"
+msgstr "Chercher un événement :"
+
+#: templates/explorer.php:65
+msgid "Search"
+msgstr "Rechercher"

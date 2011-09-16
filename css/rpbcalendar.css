@@ -59,6 +59,24 @@
 
 
 /******************************************************************************/
+/*** Search form ***/
+
+#rpbcalendar-searchevent-form {
+	float: right;
+	margin-top: 5px;
+}
+
+#rpbcalendar-searchevent-form input {
+	margin-left: 5px;
+}
+
+#rpbcalendar-after-searchevent-form {
+	clear: both;
+}
+
+
+
+/******************************************************************************/
 /*** Navigation bar ***/
 
 #rpbcalendar-navigation-bar {

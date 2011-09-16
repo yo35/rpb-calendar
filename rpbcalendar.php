@@ -353,7 +353,7 @@ function rpbcalendar_enqueue_general_css()
 add_action('wp_print_styles', 'rpbcalendar_enqueue_print_css');
 function rpbcalendar_enqueue_print_css()
 {
-	wp_register_style('rpbcalendar-print', RPBCALENDAR_URL.'/css/print.css', null, false, 'print');
+	wp_register_style('rpbcalendar-print', RPBCALENDAR_URL.'/css/print.css', NULL, false, 'print');
 	wp_enqueue_style ('rpbcalendar-print');
 }
 
@@ -381,6 +381,15 @@ function rpbcalendar_shortcode_rpbcalendar($atts)
 {
 	ob_start();
 	include(RPBCALENDAR_ABSPATH.'templates/calendar.php');
+	return ob_get_clean();
+}
+
+// Event explorer
+add_shortcode('rpbexplorer', 'rpbcalendar_shortcode_rpbexplorer');
+function rpbcalendar_shortcode_rpbexplorer($atts)
+{
+	ob_start();
+	include(RPBCALENDAR_ABSPATH.'templates/explorer.php');
 	return ob_get_clean();
 }
 
