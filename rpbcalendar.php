@@ -149,7 +149,7 @@ function rpbcalendar_begin_navigate_form($form_name, $fields_to_skip)
 }
 
 // Navigate form (end)
-function rpbcalendar_end_navigate_form($submit_label, $submit_title=NULL)
+function rpbcalendar_end_navigate_form($submit_label=NULL, $submit_title=NULL)
 {
 	if(isset($submit_label)) {
 		$title = isset($submit_title) ? ' title="'.$submit_title.'"' : '';
