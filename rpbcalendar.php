@@ -312,6 +312,14 @@ function rpbcalendar_enqueue_general_css()
 	wp_enqueue_style ('rpbcalendar-general');
 }
 
+// Enqueue print styles
+add_action('wp_print_styles', 'rpbcalendar_enqueue_print_css');
+function rpbcalendar_enqueue_print_css()
+{
+	wp_register_style('rpbcalendar-print', RPBCALENDAR_URL.'/css/print.css', null, false, 'print');
+	wp_enqueue_style ('rpbcalendar-print');
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -97,6 +97,7 @@
 
 #rpbcalendar-calendar table {
 	border-collapse: collapse;
+	width: 100%;
 }
 
 #rpbcalendar-calendar td {
@@ -112,6 +113,7 @@
 	font-weight   : normal;
 	text-align    : center;
 	text-transform: capitalize;
+	border: 1px solid #404040;
 	background-color: #404040;
 	color           : #e8e8e8;
 }

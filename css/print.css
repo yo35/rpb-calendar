@@ -1,0 +1,27 @@
+
+/******************************************************************************/
+/*** Navigation bar ***/
+
+#rpbcalendar-navigation-bar {
+	display: none;
+}
+
+
+
+/******************************************************************************/
+/*** Calendar table ***/
+
+#rpbcalendar-calendar {
+	-moz-box-shadow   : none;
+	-webkit-box-shadow: none;
+	box-shadow        : none;
+}
+
+
+
+/******************************************************************************/
+/*** Event boxes ***/
+
+a.rpbcalendar-event .rpbcalendar-event-tooltip {
+	display: none;
+}
