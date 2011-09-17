@@ -166,11 +166,11 @@
 
 #rpbcalendar-calendar td.rpbcalendar-weekend-day-cell {
 	width: 20%;
-	background-color: #f0e0c0;
+	background-color: #f4e8cc;
 }
 
 #rpbcalendar-calendar td.rpbcalendar-highday {
-	background-color: #f0e0c0;
+	background-color: #f4e8cc;
 }
 
 #rpbcalendar-calendar div.rpbcalendar-cell-bar {
