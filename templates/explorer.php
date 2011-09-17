@@ -5,7 +5,7 @@
 
 		// Retrieve events
 		global $wpdb;
-		$event_filter = "'".mysql_escape_string($_GET['rpbfilter'])."'";
+		$event_filter = "'".mysql_escape_string(stripslashes($_GET['rpbfilter']))."'";
 		$events       = $wpdb->get_results(
 			'SELECT event_title, event_desc, event_begin, event_end, event_time, event_link '.
 			'FROM '.RPBCALENDAR_EVENT_TABLE.' '.
@@ -59,7 +59,7 @@
 
 	// Search form
 	rpbcalendar_begin_navigate_form('searchevent', array('rpbfilter'));
-	$default_search_value = isset($_GET['rpbfilter']) ? htmlspecialchars($_GET['rpbfilter']) : '';
+	$default_search_value = isset($_GET['rpbfilter']) ? htmlspecialchars(stripslashes($_GET['rpbfilter'])) : '';
 	echo __('Search for an event:', 'rpbcalendar').' ';
 	echo '<input type="text" name="rpbfilter" value="'.$default_search_value.'" />';
 	rpbcalendar_end_navigate_form(__('Search', 'rpbcalendar'));
