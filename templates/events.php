@@ -8,11 +8,6 @@
 		return;
 	}
 
-	// Option for non-interactive printing
-	if(!isset($non_interactive)) {
-		$non_interactive = false;
-	}
-
 	// Displaying events
 	foreach($events as $event) {
 
@@ -61,24 +56,22 @@
 		echo '<a '.$href.' class="rpbcalendar-event">';
 
 		// Tooltip
-		if(!$non_interactive) {
-			echo '<div class="rpbcalendar-event-tooltip '.$category_class.'">';
-			echo '<div class="rpbcalendar-event-title">'.$title;
-			if(!empty($time_string)) {
-				echo '<span class="rpbcalendar-event-time">'.$time_string.'</span>';
-			}
-			echo '</div>';
-			$rule_printed = false;
-			if(rpbcalendar_display_author()) {
-				if(!$rule_printed) { echo '<hr/>'; $rule_printed=true; }
-				echo '<div class="rpbcalendar-event-author">'.$author.'</div>';
-			}
-			if(!empty($description)) {
-				if(!$rule_printed) { echo '<hr/>'; $rule_printed=true; }
-				echo '<div class="rpbcalendar-event-desc">'.$description.'</div>';
-			}
-			echo '</div>';
+		echo '<div class="rpbcalendar-event-tooltip '.$category_class.'">';
+		echo '<div class="rpbcalendar-event-title">'.$title;
+		if(!empty($time_string)) {
+			echo '<span class="rpbcalendar-event-time">'.$time_string.'</span>';
 		}
+		echo '</div>';
+		$rule_printed = false;
+		if(rpbcalendar_display_author()) {
+			if(!$rule_printed) { echo '<hr/>'; $rule_printed=true; }
+			echo '<div class="rpbcalendar-event-author">'.$author.'</div>';
+		}
+		if(!empty($description)) {
+			if(!$rule_printed) { echo '<hr/>'; $rule_printed=true; }
+			echo '<div class="rpbcalendar-event-desc">'.$description.'</div>';
+		}
+		echo '</div>';
 
 		// Event summary
 		echo '<div class="rpbcalendar-event-summary '.$category_class.'">';

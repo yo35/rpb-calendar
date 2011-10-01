@@ -1,19 +1,19 @@
 <?php
 
-	// Option for non-interactive printing
-	if(!isset($non_interactive)) {
-		$non_interactive = false;
-	}
+	// Input
+	$current_time  = rpbcalendar_time();
+	$current_year  = isset($_GET['rpbyear' ]) ? $_GET['rpbyear' ] : date('Y', $current_time);
+	$current_month = isset($_GET['rpbmonth']) ? $_GET['rpbmonth'] : date('n', $current_time);
 
 	// Validate the year
-	if(!isset($current_year) || !is_numeric($current_year)) {
+	if(!is_numeric($current_year)) {
 		rpbcalendar_error_message(__('The year must be a numeric value', 'rpbcalendar'));
 		return;
 	}
 	$current_year = (int)$current_year;
 
 	// Validate the month
-	if(!isset($current_month) || !is_numeric($current_month)) {
+	if(!is_numeric($current_month)) {
 		rpbcalendar_error_message(__('The month must be a numeric value', 'rpbcalendar'));
 		return;
 	}
@@ -104,35 +104,33 @@
 
 ?>
 
-<?php if(!$non_interactive) { ?>
-	<div id="rpbcalendar-navigation-bar">
-		<?php
+<div id="rpbcalendar-navigation-bar">
+	<?php
 
-			// Change month and year buttons
-			rpbcalendar_navigate_form('prevyear' , $prev_year_params , '&lt;&lt;', $prev_year_tooltip );
-			rpbcalendar_navigate_form('prevmonth', $prev_month_params, '&lt;'    , $prev_month_tooltip);
-			rpbcalendar_navigate_form('nextmonth', $next_month_params, '&gt;'    , $next_month_tooltip);
-			rpbcalendar_navigate_form('nextyear' , $next_year_params , '&gt;&gt;', $next_year_tooltip );
+		// Change month and year buttons
+		rpbcalendar_navigate_form('prevyear' , $prev_year_params , '&lt;&lt;', $prev_year_tooltip );
+		rpbcalendar_navigate_form('prevmonth', $prev_month_params, '&lt;'    , $prev_month_tooltip);
+		rpbcalendar_navigate_form('nextmonth', $next_month_params, '&gt;'    , $next_month_tooltip);
+		rpbcalendar_navigate_form('nextyear' , $next_year_params , '&gt;&gt;', $next_year_tooltip );
 
-			// Print button
-			rpbcalendar_begin_navigate_form('print', array());
-			echo '<input type="button" onclick="javascript: window.print();" value="'.__('Print', 'rpbcalendar').'" />';
-			rpbcalendar_end_navigate_form();
+		// Print button
+		rpbcalendar_begin_navigate_form('print', array());
+		echo '<input type="button" onclick="javascript: window.print();" value="'.__('Print', 'rpbcalendar').'" />';
+		rpbcalendar_end_navigate_form();
 
-			// Change date form
-			rpbcalendar_begin_navigate_form('changedate', array('rpbmonth', 'rpbyear'));
-			echo '<select name="rpbmonth">';
-			for($k=1; $k<=12; $k++) {
-				$label    = rpbcalendar_month_info('name', $k);
-				$selected = ($k==$current_month) ? ' selected="1"' : '';
-				echo '<option value="'.$k.'"'.$selected.'>'.$label.'</option>';
-			}
-			echo '</select>';
-			echo '<input type="text" name="rpbyear" value="'.$current_year.'" maxlength="4" />';
-			rpbcalendar_end_navigate_form  (__('Go', 'rpbcalendar'));
-		?>
-	</div>
-<?php } ?>
+		// Change date form
+		rpbcalendar_begin_navigate_form('changedate', array('rpbmonth', 'rpbyear'));
+		echo '<select name="rpbmonth">';
+		for($k=1; $k<=12; $k++) {
+			$label    = rpbcalendar_month_info('name', $k);
+			$selected = ($k==$current_month) ? ' selected="1"' : '';
+			echo '<option value="'.$k.'"'.$selected.'>'.$label.'</option>';
+		}
+		echo '</select>';
+		echo '<input type="text" name="rpbyear" value="'.$current_year.'" maxlength="4" />';
+		rpbcalendar_end_navigate_form  (__('Go', 'rpbcalendar'));
+	?>
+</div>
 
 <div id="rpbcalendar-calendar">
 	<table>
