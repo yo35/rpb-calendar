@@ -1,8 +1,8 @@
 <?php
 
-require(RPBCALENDAR_ABSPATH.'fpdf/fpdf.php');
+require(RPBCALENDAR_ABSPATH.'tcpdf/tcpdf.php');
 
-class RpbCalendarPDF extends FPDF
+class RpbCalendarPDF extends TCPDF
 {
 	// Constants
 	private $text_width;
@@ -13,10 +13,8 @@ class RpbCalendarPDF extends FPDF
 	private $margin_bottom = 10;
 	private $normal_font_size = 8;
 	private $small_font_size  = 6;
-	private $header_cell_height =  5  ;
-	private $normal_cell_height = 18  ;
+	private $cell_height        = 18;
 	private $holiday_bar_height =  1.7;
-	private $day_label_height   =  2.5;
 	private $day_label_width    =  5  ;
 	private $separator_height   =  7  ;
 
@@ -31,11 +29,13 @@ class RpbCalendarPDF extends FPDF
 		// Margins
 		$this->SetMargins($this->margin_left, $this->margin_top, $this->margin_right);
 		$this->SetAutoPageBreak(false, $this->margin_bottom);
-		$this->text_width = 210 - $this->margin_left - $this->margin_right;
+		$this->text_width = $this->getPageWidth() - $this->margin_left - $this->margin_right;
 
 		// Initialization
 		$this->table_on_page_count = 2;
-		$this->SetFont('Arial', '', $this->normal_font_size);
+		$this->SetFont('helvetica', '', $this->normal_font_size);
+
+		$this->SetLineWidth(0.1);
 	}
 
 	// Function used to print a month table
@@ -123,8 +123,7 @@ class RpbCalendarPDF extends FPDF
 
 		// Month header
 		$month_header_text = rpbcalendar_month_info('name', $current_month).' '.$current_year;
-		$this->Cell($this->text_width, $this->header_cell_height,
-			ucwords($month_header_text), 1, 1, 'C', true);
+		$this->Cell($this->text_width, 0, ucwords($month_header_text), 1, 1, 'C', true);
 
 		// Weekday headers
 		$this->cell_width  = array_fill(0, 7, 0);
@@ -135,8 +134,7 @@ class RpbCalendarPDF extends FPDF
 			$weekday_name  = rpbcalendar_weekday_info('name'   , $weekday);
 			$is_weekend    = rpbcalendar_weekday_info('weekend', $weekday);
 			$current_width = $is_weekend ? $weekend_day_width : $normal_day_width;
-			$this->Cell($current_width, $this->header_cell_height,
-				ucwords($weekday_name), 1, 0, 'C', true);
+			$this->Cell($current_width, 0, ucwords($weekday_name), 1, 0, 'C', true);
 			$this->cell_width[$k] = $current_width;
 		}
 		$this->Ln();
@@ -155,7 +153,7 @@ class RpbCalendarPDF extends FPDF
 		for($current_day=1; $current_day<=$days_in_month; $current_day++) {
 			if($current_column==7) {
 				$current_column = 0;
-				$this->Ln($this->normal_cell_height);
+				$this->Ln();
 			}
 			$is_weekend = rpbcalendar_weekday_info('weekend', $current_weekday);
 			$is_highday = $highday_map[$current_day];
@@ -173,15 +171,14 @@ class RpbCalendarPDF extends FPDF
 		for( ; $current_column<7; $current_column++) {
 			$this->PushPhantomCell($current_column);
 		}
-		$this->Ln($this->normal_cell_height);
+		$this->Ln();
 	}
 
 	// Append a phantom cell to the current table
 	private function PushPhantomCell($current_column)
 	{
 		$this->SetFillColor(128);
-		$this->Cell($this->cell_width[$current_column], $this->normal_cell_height,
-			'', 1, 0, '', true);
+		$this->Cell($this->cell_width[$current_column], $this->cell_height, '', 1, 0, '', true);
 	}
 
 	// Append a regular day cell to the current table
@@ -196,7 +193,7 @@ class RpbCalendarPDF extends FPDF
 			$this->SetFillColor(244, 232, 210);
 		else
 			$this->SetFillColor(255);
-		$this->Cell($this->cell_width[$current_column], $this->normal_cell_height, '', 0, 0, '', true);
+		$this->Cell($this->cell_width[$current_column], $this->cell_height, '', 0, 0, '', true);
 
 		// Holiday bar
 		if($is_holiday) {
@@ -213,12 +210,17 @@ class RpbCalendarPDF extends FPDF
 			$this->SetFillColor(255);
 			$this->SetTextColor(0);
 		}
-		$this->AbsoluteCell($x, $y, $this->day_label_width, $this->day_label_height,
-			$current_day, 'BR', 'C', true);
+		$this->AbsoluteCell($x, $y, $this->day_label_width, 0, $current_day, 'BR', 'C', true);
 
 		// Border
 		$this->SetXY($x, $y);
-		$this->Cell($this->cell_width[$current_column], $this->normal_cell_height, '', 1, 0, '', false);
+		$this->Cell($this->cell_width[$current_column], $this->cell_height, '', 1, 0, '', false);
+	}
+
+	// Append an event to the current cell
+	private function PushEvent($event)
+	{
+
 	}
 
 	// Append a cell with absolute positionning
