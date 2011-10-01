@@ -150,4 +150,73 @@ function rpbcalendar_month_info($info, $month_idx=NULL)
 	return isset($month_idx) ? $retval[$info][$month_idx] : $retval[$info];
 }
 
+// Display an error message
+function rpbcalendar_error_message($error_message)
+{
+	echo '<div class="rpbcalendar-error-message">'.htmlspecialchars($error_message).'</div>';
+}
+
+// Plugin options
+function rpbcalendar_permissions     () { return get_option('rpbcalendar_permissions', 'manage_options'); }
+function rpbcalendar_display_author  () { return get_option('rpbcalendar_display_author'  , 'true')=='true'; }
+function rpbcalendar_display_category() { return get_option('rpbcalendar_display_category', 'true')=='true'; }
+
+// Navigate form (begin)
+function rpbcalendar_begin_navigate_form($form_name, $fields_to_skip)
+{
+	$current_url   = get_permalink();
+	$question_mark = strpos($current_url, '?');
+	$base_url      = ($question_mark===false) ? $current_url : substr($current_url, 0, $question_mark);
+	$form_id       = 'rpbcalendar-'.$form_name.'-form';
+	echo '<div id="'.$form_id.'"><form name="'.$form_name.'" method="get" action="'.$base_url.'">';
+	foreach($_GET as $key => $value) {
+		if(array_search($key, $fields_to_skip)===false) {
+			echo '<input type="hidden" name="'.htmlspecialchars($key).'" value="'.htmlspecialchars($value).'" />';
+		}
+	}
+}
+
+// Navigate form (end)
+function rpbcalendar_end_navigate_form($submit_label=NULL, $submit_title=NULL)
+{
+	if(isset($submit_label)) {
+		$title = isset($submit_title) ? ' title="'.$submit_title.'"' : '';
+		echo '<input type="submit" value="'.$submit_label.'"'.$title.' />';
+	}
+	echo '</form></div>';
+}
+
+// Navigate form (simple version)
+function rpbcalendar_navigate_form($form_name, $params, $submit_label, $submit_title=NULL)
+{
+	rpbcalendar_begin_navigate_form($form_name, array_keys($params));
+	foreach($params as $key => $value) {
+		echo '<input type="hidden" name="'.htmlspecialchars($key).'" value="'.htmlspecialchars($value).'" />';
+	}
+	rpbcalendar_end_navigate_form($submit_label, $submit_title);
+}
+
+// SELECT ... FROM ... part of the query to use to retrieve events from the database
+function rpbcalendar_select_events_base_sql()
+{
+	global $wpdb;
+	$select_part = 'SELECT event_title, event_desc, event_time, event_link ';
+	$from_part   = 'FROM '.RPBCALENDAR_EVENT_TABLE.' ';
+	if(rpbcalendar_display_author()) {
+		$select_part .= ', wpu.display_name AS author_name ';
+		$from_part   .= 'LEFT OUTER JOIN '.$wpdb->users.' wpu ON event_author=wpu.ID ';
+	}
+	if(rpbcalendar_display_category()) {
+		$select_part .= ', rpbc.category_id AS category_id ';
+		$from_part   .= 'LEFT OUTER JOIN '.RPBCALENDAR_CATEGORY_TABLE.' rpbc ON event_category=rpbc.category_id ';
+	}
+	return $select_part.$from_part;
+}
+
+// Remove the comments from a CSS string
+function rpbcalendar_clean_up_css($css)
+{
+	return preg_replace('/\/\*.*\*\//','', $css);
+}
+
 ?>
