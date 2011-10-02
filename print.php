@@ -16,9 +16,9 @@ require(RPBCALENDAR_ABSPATH.'rpbcalendarpdf.class.php');
 
 $pdf = new RpbCalendarPDF();
 $pdf->PrintMonthTable(10, 2011);
-$pdf->Cell(0, 0, 'Hello World !', 1);
-//$pdf->PrintMonthTable(8, 2011);
-//$pdf->PrintMonthTable(9, 2011);
+$pdf->PrintMonthTable( 8, 2011);
+$pdf->PrintMonthTable( 9, 2011);
+$pdf->PrintMonthTable( 7, 2011);
 $pdf->Output();
 
 ?>
