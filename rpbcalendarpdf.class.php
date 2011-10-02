@@ -22,7 +22,7 @@ class RpbCalendarPDF extends TCPDF
 	private $margin_bottom = 10;
 	private $normal_font_size = 8;
 	private $small_font_size  = 6;
-	private $minimum_cell_height = 18  ;
+	private $minimum_cell_height = 16  ;
 	private $holiday_bar_height  =  1.7;
 	private $day_label_width     =  5  ;
 	private $separator_height    =  7  ;
@@ -221,7 +221,7 @@ class RpbCalendarPDF extends TCPDF
 	private function RetrieveEvents()
 	{
 		global $wpdb;
-		$this->event_map = array_fill(1, $days_in_month, NULL);
+		$this->event_map = array_fill(1, $this->days_in_month, NULL);
 		for($k=1; $k<=$this->days_in_month; $k++) {
 			$current_day         = date('Y-m-d', mktime(0, 0, 0, $this->month, $k, $this->year));
 			$sql_current_day     = "'".mysql_escape_string($current_day)."'";

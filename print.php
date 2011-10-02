@@ -50,6 +50,10 @@ while($current_year<$last_year || ($current_year==$last_year && $current_month<=
 		$current_year++;
 	}
 }
-$pdf->Output();
+if(isset($_GET['filename'])) {
+	$pdf->Output($_GET['filename']);
+} else {
+	$pdf->Output();
+}
 
 ?>

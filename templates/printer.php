@@ -18,6 +18,9 @@
 			if(isset($atts['title'])) {
 				echo '<input type="hidden" name="title" value="'.htmlspecialchars($atts['title']).'" />';
 			}
+			if(isset($atts['filename'])) {
+				echo '<input type="hidden" name="filename" value="'.htmlspecialchars($atts['filename']).'" />';
+			}
 			echo '<span>'.__('From', 'rpbcalendar').'</span>';
 			echo '<select name="firstmonth">';
 			for($k=1; $k<=12; $k++) {
