@@ -106,7 +106,7 @@ class RpbCalendarPDF extends TCPDF
 		$footer_height = $this->GetY();
 		$this->rollbackTransaction(true);
 		$this->SetY($this->getPageHeight() - $this->footer_margin_bottom - $footer_height);
-		$text_left  = sprintf(__('Generated from %s on %s', 'rpbcalendar'), site_url(), $this->creation_date_string);
+		$text_left  = sprintf(__('Generated from %s on %s', 'rpbcalendar'), site_url().'/', $this->creation_date_string);
 		$text_right = sprintf(__('Page %d on %d', 'rpbcalendar'), $this->PageNo(), ceil($this->total_number_of_tables / 2));
 		$this->Cell($this->text_width/2, 0, $text_left , 0, 0, 'L');
 		$this->Cell($this->text_width/2, 0, $text_right, 0, 0, 'R');
