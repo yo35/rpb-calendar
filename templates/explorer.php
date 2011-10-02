@@ -5,11 +5,11 @@
 
 		// Retrieve events
 		global $wpdb;
-		$event_filter = "'".mysql_escape_string(stripslashes($_GET['rpbfilter']))."'";
+		$event_filter = "'%".mysql_escape_string(stripslashes($_GET['rpbfilter']))."%'";
 		$events       = $wpdb->get_results(
 			'SELECT event_title, event_desc, event_begin, event_end, event_time, event_link '.
 			'FROM '.RPBCALENDAR_EVENT_TABLE.' '.
-			'WHERE event_title='.$event_filter.' '.
+			'WHERE event_title LIKE '.$event_filter.' '.
 			'ORDER BY event_begin ASC, event_end ASC, event_time ASC;'
 		);
 ?>
