@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-17 01:07+0200\n"
+"POT-Creation-Date: 2011-10-02 14:30+0200\n"
 "PO-Revision-Date: 2011-08-29 00:37+0200\n"
 "Last-Translator: Yoann <yoann.le-montagner@m4x.org>\n"
 "Language-Team: French\n"
@@ -209,7 +209,7 @@ msgstr "Option &quot;Afficher l'auteur&quot; enregistrée"
 msgid "Option &quot;Display category&quot; saved"
 msgstr "Option &quot;Afficher la catégorie&quot; enregistrée"
 
-#: admin.php:378 rpbcalendar.php:295
+#: admin.php:378 rpbcalendar.php:152
 msgid "Calendar options"
 msgstr "Options de l'agenda"
 
@@ -260,106 +260,139 @@ msgstr "Utiliser les catégories"
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
-#: rpbcalendar.php:98
+#: config.php:83 print.php:40
 #, php-format
 msgid "From %1$s to %2$s"
 msgstr "Du %1$s au %2$s"
 
-#: rpbcalendar.php:121
+#: config.php:106
 msgid "sunday"
 msgstr "dimanche"
 
-#: rpbcalendar.php:122
+#: config.php:107
 msgid "monday"
 msgstr "lundi"
 
-#: rpbcalendar.php:123
+#: config.php:108
 msgid "tuesday"
 msgstr "mardi"
 
-#: rpbcalendar.php:124
+#: config.php:109
 msgid "wednesday"
 msgstr "mercredi"
 
-#: rpbcalendar.php:125
+#: config.php:110
 msgid "thursday"
 msgstr "jeudi"
 
-#: rpbcalendar.php:126
+#: config.php:111
 msgid "friday"
 msgstr "vendredi"
 
-#: rpbcalendar.php:127
+#: config.php:112
 msgid "saturday"
 msgstr "samedi"
 
-#: rpbcalendar.php:150
+#: config.php:135
 msgid "january"
 msgstr "janvier"
 
-#: rpbcalendar.php:151
+#: config.php:136
 msgid "february"
 msgstr "février"
 
-#: rpbcalendar.php:152
+#: config.php:137
 msgid "march"
 msgstr "mars"
 
-#: rpbcalendar.php:153
+#: config.php:138
 msgid "april"
 msgstr "avril"
 
-#: rpbcalendar.php:154
+#: config.php:139
 msgid "may"
 msgstr "mai"
 
-#: rpbcalendar.php:155
+#: config.php:140
 msgid "june"
 msgstr "juin"
 
-#: rpbcalendar.php:156
+#: config.php:141
 msgid "july"
 msgstr "juillet"
 
-#: rpbcalendar.php:157
+#: config.php:142
 msgid "august"
 msgstr "août"
 
-#: rpbcalendar.php:158
+#: config.php:143
 msgid "september"
 msgstr "septembre"
 
-#: rpbcalendar.php:159
+#: config.php:144
 msgid "october"
 msgstr "octobre"
 
-#: rpbcalendar.php:160
+#: config.php:145
 msgid "november"
 msgstr "novembre"
 
-#: rpbcalendar.php:161
+#: config.php:146
 msgid "december"
 msgstr "décembre"
 
-#: rpbcalendar.php:265
+#: print.php:21
+msgid "Cannot print more than 12 months in the same PDF"
+msgstr "Impossible d'imprimer plus de 12 mois dans un même PDF"
+
+#: print.php:23
+msgid "The stop date must be greater than the start date"
+msgstr "La date de fin doit être plus grande que la date de début"
+
+#: print.php:31 rpbcalendar.php:122
 msgid "Calendar"
 msgstr "Agenda"
 
-#: rpbcalendar.php:271
+#: rpbcalendar.php:128
 msgid "Manage events"
 msgstr "Gérer les événements"
 
-#: rpbcalendar.php:277
+#: rpbcalendar.php:134
 msgid "Manage holidays"
 msgstr "Gérer les vacances"
 
-#: rpbcalendar.php:283
+#: rpbcalendar.php:140
 msgid "Manage highdays"
 msgstr "Gérer les jours fériés"
 
-#: rpbcalendar.php:289
+#: rpbcalendar.php:146
 msgid "Manage categories"
 msgstr "Gérer les catégories"
+
+#: rpbcalendarpdf.class.php:109
+msgid "Generated from %1$s on %2$s"
+msgstr "Généré depuis %1$s le %2$s"
+
+#: rpbcalendarpdf.class.php:110
+#, php-format
+msgid "Page %d on %d"
+msgstr "Page %d sur %d"
+
+#: rpbcalendarpdf.class.php:151 templates/calendar.php:10
+msgid "The year must be a numeric value"
+msgstr "L'année doit être une valeur numérique"
+
+#: rpbcalendarpdf.class.php:158 templates/calendar.php:17
+msgid "The month must be a numeric value"
+msgstr "Le mois doit être une valeur numérique"
+
+#: rpbcalendarpdf.class.php:163 templates/calendar.php:22
+msgid "The month must be valued between 1 and 12"
+msgstr "Le mois doit avoir une valeur comprise entre 1 et 12"
+
+#: rpbcalendarpdf.class.php:376 templates/events.php:41
+msgid " at "
+msgstr " à "
 
 #: todaysevents.class.php:10
 msgid "Display the list of today's events"
@@ -507,23 +540,7 @@ msgstr "Champ d'heure mal formaté : &quot;%s&quot;"
 msgid "Wrong time value in the time field: &quot;%s&quot;"
 msgstr "Valeur d'heure incorrecte dans le champ d'heure : &quot;%s&quot;"
 
-#: templates/calendar.php:10
-msgid "The year must be a numeric value"
-msgstr "L'année doit être une valeur numérique"
-
-#: templates/calendar.php:17
-msgid "The month must be a numeric value"
-msgstr "Le mois doit être une valeur numérique"
-
-#: templates/calendar.php:22
-msgid "The month must be valued between 1 and 12"
-msgstr "Le mois doit avoir une valeur comprise entre 1 et 12"
-
-#: templates/calendar.php:118
-msgid "Print"
-msgstr "Imprimer"
-
-#: templates/calendar.php:131
+#: templates/calendar.php:126
 msgid "Go"
 msgstr "Go"
 
@@ -534,10 +551,6 @@ msgstr "Impossible d'afficher la liste de catégories"
 #: templates/events.php:6
 msgid "Unable to print the list of events"
 msgstr "Impossible d'afficher la liste d'événements"
-
-#: templates/events.php:41
-msgid " at "
-msgstr " à "
 
 #: templates/explorer.php:20
 msgid "Event"
@@ -554,3 +567,19 @@ msgstr "Chercher un événement :"
 #: templates/explorer.php:65
 msgid "Search"
 msgstr "Rechercher"
+
+#: templates/printer.php:21
+msgid "From"
+msgstr "Du"
+
+#: templates/printer.php:30
+msgid "to"
+msgstr "au"
+
+#: templates/printer.php:39
+msgid "Print"
+msgstr "Imprimer"
+
+#: templates/printer.php:40
+msgid "Generate the PDF for printing"
+msgstr "Générer le PDF à imprimer"

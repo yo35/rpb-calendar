@@ -37,7 +37,7 @@ if($first_year!=$last_year) {
 	$start_label .= ' '.$first_year;
 }
 $stop_label = rpbcalendar_month_info('name', $last_month).' '.$last_year;
-$pdf->subtitle = sprintf(__('From %s to %s', 'rpbcalendar'), $start_label, $stop_label);
+$pdf->subtitle = sprintf(__('From %1$s to %2$s', 'rpbcalendar'), $start_label, $stop_label);
 
 // Generates the PDF
 $current_month = $first_month;

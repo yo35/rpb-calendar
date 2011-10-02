@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-17 01:07+0200\n"
+"POT-Creation-Date: 2011-10-02 14:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -208,7 +208,7 @@ msgstr ""
 msgid "Option &quot;Display category&quot; saved"
 msgstr ""
 
-#: admin.php:378 rpbcalendar.php:295
+#: admin.php:378 rpbcalendar.php:152
 msgid "Calendar options"
 msgstr ""
 
@@ -257,105 +257,139 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#: rpbcalendar.php:98
+#: config.php:83 print.php:40
 #, php-format
 msgid "From %1$s to %2$s"
 msgstr ""
 
-#: rpbcalendar.php:121
+#: config.php:106
 msgid "sunday"
 msgstr ""
 
-#: rpbcalendar.php:122
+#: config.php:107
 msgid "monday"
 msgstr ""
 
-#: rpbcalendar.php:123
+#: config.php:108
 msgid "tuesday"
 msgstr ""
 
-#: rpbcalendar.php:124
+#: config.php:109
 msgid "wednesday"
 msgstr ""
 
-#: rpbcalendar.php:125
+#: config.php:110
 msgid "thursday"
 msgstr ""
 
-#: rpbcalendar.php:126
+#: config.php:111
 msgid "friday"
 msgstr ""
 
-#: rpbcalendar.php:127
+#: config.php:112
 msgid "saturday"
 msgstr ""
 
-#: rpbcalendar.php:150
+#: config.php:135
 msgid "january"
 msgstr ""
 
-#: rpbcalendar.php:151
+#: config.php:136
 msgid "february"
 msgstr ""
 
-#: rpbcalendar.php:152
+#: config.php:137
 msgid "march"
 msgstr ""
 
-#: rpbcalendar.php:153
+#: config.php:138
 msgid "april"
 msgstr ""
 
-#: rpbcalendar.php:154
+#: config.php:139
 msgid "may"
 msgstr ""
 
-#: rpbcalendar.php:155
+#: config.php:140
 msgid "june"
 msgstr ""
 
-#: rpbcalendar.php:156
+#: config.php:141
 msgid "july"
 msgstr ""
 
-#: rpbcalendar.php:157
+#: config.php:142
 msgid "august"
 msgstr ""
 
-#: rpbcalendar.php:158
+#: config.php:143
 msgid "september"
 msgstr ""
 
-#: rpbcalendar.php:159
+#: config.php:144
 msgid "october"
 msgstr ""
 
-#: rpbcalendar.php:160
+#: config.php:145
 msgid "november"
 msgstr ""
 
-#: rpbcalendar.php:161
+#: config.php:146
 msgid "december"
 msgstr ""
 
-#: rpbcalendar.php:265
+#: print.php:21
+msgid "Cannot print more than 12 months in the same PDF"
+msgstr ""
+
+#: print.php:23
+msgid "The stop date must be greater than the start date"
+msgstr ""
+
+#: print.php:31 rpbcalendar.php:122
 msgid "Calendar"
 msgstr ""
 
-#: rpbcalendar.php:271
+#: rpbcalendar.php:128
 msgid "Manage events"
 msgstr ""
 
-#: rpbcalendar.php:277
+#: rpbcalendar.php:134
 msgid "Manage holidays"
 msgstr ""
 
-#: rpbcalendar.php:283
+#: rpbcalendar.php:140
 msgid "Manage highdays"
 msgstr ""
 
-#: rpbcalendar.php:289
+#: rpbcalendar.php:146
 msgid "Manage categories"
+msgstr ""
+
+#: rpbcalendarpdf.class.php:109
+#, php-format
+msgid "Generated from %1$s on %2$s"
+msgstr ""
+
+#: rpbcalendarpdf.class.php:110
+#, php-format
+msgid "Page %d on %d"
+msgstr ""
+
+#: rpbcalendarpdf.class.php:151 templates/calendar.php:10
+msgid "The year must be a numeric value"
+msgstr ""
+
+#: rpbcalendarpdf.class.php:158 templates/calendar.php:17
+msgid "The month must be a numeric value"
+msgstr ""
+
+#: rpbcalendarpdf.class.php:163 templates/calendar.php:22
+msgid "The month must be valued between 1 and 12"
+msgstr ""
+
+#: rpbcalendarpdf.class.php:376 templates/events.php:41
+msgid " at "
 msgstr ""
 
 #: todaysevents.class.php:10
@@ -500,23 +534,7 @@ msgstr ""
 msgid "Wrong time value in the time field: &quot;%s&quot;"
 msgstr ""
 
-#: templates/calendar.php:10
-msgid "The year must be a numeric value"
-msgstr ""
-
-#: templates/calendar.php:17
-msgid "The month must be a numeric value"
-msgstr ""
-
-#: templates/calendar.php:22
-msgid "The month must be valued between 1 and 12"
-msgstr ""
-
-#: templates/calendar.php:118
-msgid "Print"
-msgstr ""
-
-#: templates/calendar.php:131
+#: templates/calendar.php:126
 msgid "Go"
 msgstr ""
 
@@ -526,10 +544,6 @@ msgstr ""
 
 #: templates/events.php:6
 msgid "Unable to print the list of events"
-msgstr ""
-
-#: templates/events.php:41
-msgid " at "
 msgstr ""
 
 #: templates/explorer.php:20
@@ -546,4 +560,20 @@ msgstr ""
 
 #: templates/explorer.php:65
 msgid "Search"
+msgstr ""
+
+#: templates/printer.php:21
+msgid "From"
+msgstr ""
+
+#: templates/printer.php:30
+msgid "to"
+msgstr ""
+
+#: templates/printer.php:39
+msgid "Print"
+msgstr ""
+
+#: templates/printer.php:40
+msgid "Generate the PDF for printing"
 msgstr ""
