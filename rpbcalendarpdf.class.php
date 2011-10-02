@@ -46,7 +46,8 @@ class RpbCalendarPDF extends TCPDF
 	private $weekend_cell      ;
 	private $first_pass_row    ;
 	private $current_row_height;
-
+	private $lookup_fill_color ;
+	private $lookup_text_color ;
 
 	// Constructor
 	function __construct()
@@ -62,6 +63,8 @@ class RpbCalendarPDF extends TCPDF
 		$this->table_on_page_count = 2;
 		$this->SetFont('helvetica', '', $this->normal_font_size);
 		$this->SetLineWidth(0.1);
+		$this->lookup_fill_color = array();
+		$this->lookup_text_color = array();
 	}
 
 	// Function used to print a month table
@@ -321,17 +324,15 @@ class RpbCalendarPDF extends TCPDF
 	// Append an event to the current cell
 	private function PushEvent($event, $w, $x)
 	{
-		// Colors
-		$this->SetDrawColor(0,0,255);
-		$this->SetFillColor(255, 255, 0);
-		$this->SetTextColor(64,0,0);
-
-		// Texte
-		$text = '<div style="color: red; "><b>' . $event->event_title . '</b>';
+		// Content
+		$this->SetEventColors($event);
+		$text = '<b>' . $event->event_title . '</b>';
+		if(isset($event->event_time) && !empty($event->event_time)) {
+			$text .= __(' at ', 'rpbcalendar') . date_i18n(get_option('time_format'), strtotime($event->event_time));
+		}
 		if(strlen($event->event_desc)!=0) {
 			$text .= '<br/>' . rpbcalendar_format_event_desc($event->event_desc);
 		}
-		$text .= '</div>';
 
 		// Rendering
 		$y = $this->GetY();
@@ -345,6 +346,39 @@ class RpbCalendarPDF extends TCPDF
 		}
 		$this->MultiCell($w-2*$this->event_margin_lr, 0, $text, 0, 'L', false, 1, null, null, true, 0, true);
 		$this->SetX($x);
+	}
+
+	// Setup event colors
+	private function SetEventColors($event)
+	{
+		if(isset($event->category_id)) {
+			if(!array_key_exists($event->category_id, $this->lookup_fill_color)) {
+				$this->lookup_fill_color[$event->category_id] = $this->ConvertColor($event->category_background_color);
+			}
+			if(!array_key_exists($event->category_id, $this->lookup_text_color)) {
+				$this->lookup_text_color[$event->category_id] = $this->ConvertColor($event->category_text_color);
+			}
+			$fill_color = $this->lookup_fill_color[$event->category_id];
+			$text_color = $this->lookup_text_color[$event->category_id];
+			$this->SetDrawColor($text_color[0], $text_color[1], $text_color[2]);
+			$this->SetTextColor($text_color[0], $text_color[1], $text_color[2]);
+			$this->SetFillColor($fill_color[0], $fill_color[1], $fill_color[2]);
+		} else {
+			$this->SetDrawColor(0);
+			$this->SetTextColor(0);
+			$this->SetFillColor(255, 255, 208);
+		}
+	}
+
+	// Convert a color given by its hex code (such as '#ff8000') to a RVB array
+	// (such as 'array(255, 128, 0)')
+	private function ConvertColor($hex_color)
+	{
+		$value = hexdec($hex_color);
+		$r     = floor($value / 65536) % 256;
+		$v     = floor($value / 256  ) % 256;
+		$b     =       $value          % 256;
+		return array($r, $v, $b);
 	}
 }
 
