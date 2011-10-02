@@ -3,7 +3,7 @@
 Plugin Name: RpbCalendar
 Description: This plugin allows you to display a calendar of all your events and appointments as a page on your website.
 Author: Yoann Le Montagner
-Version: 0.11
+Version: 0.10
 */
 
 // Don't forget to update the version field at the top of config.php
