@@ -113,11 +113,6 @@
 		rpbcalendar_navigate_form('nextmonth', $next_month_params, '&gt;'    , $next_month_tooltip);
 		rpbcalendar_navigate_form('nextyear' , $next_year_params , '&gt;&gt;', $next_year_tooltip );
 
-		// Print button
-		rpbcalendar_begin_navigate_form('print', array());
-		echo '<input type="button" onclick="javascript: window.print();" value="'.__('Print', 'rpbcalendar').'" />';
-		rpbcalendar_end_navigate_form();
-
 		// Change date form
 		rpbcalendar_begin_navigate_form('changedate', array('rpbmonth', 'rpbyear'));
 		echo '<select name="rpbmonth">';
