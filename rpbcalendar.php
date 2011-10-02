@@ -242,6 +242,15 @@ function rpbcalendar_shortcode_rpbexplorer($atts)
 	return ob_get_clean();
 }
 
+// Printer
+add_shortcode('rpbprinter', 'rpbcalendar_shortcode_printer');
+function rpbcalendar_shortcode_printer($atts)
+{
+	ob_start();
+	include(RPBCALENDAR_ABSPATH.'templates/printer.php');
+	return ob_get_clean();
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////////////

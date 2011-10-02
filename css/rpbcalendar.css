@@ -59,6 +59,31 @@
 
 
 /******************************************************************************/
+/*** Print form ***/
+
+#rpbcalendar-printer-form {
+	float: right;
+	margin-top: 5px;
+}
+
+#rpbcalendar-printer-form input,
+#rpbcalendar-printer-form select,
+#rpbcalendar-printer-form span {
+	margin-left : 5px;
+}
+
+#rpbcalendar-printer-form input[name="firstyear"],
+#rpbcalendar-printer-form input[name="lastyear"] {
+	width: 60px;
+}
+
+#rpbcalendar-after-printer-form {
+	clear: both;
+}
+
+
+
+/******************************************************************************/
 /*** Search form ***/
 
 #rpbcalendar-searchevent-form {
