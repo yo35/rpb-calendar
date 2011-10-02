@@ -83,24 +83,34 @@
 	}
 
 	// Parameters for the navigation form
-	$prev_month_params = array('rpbmonth'=>$current_month-1, 'rpbyear'=>$current_year);
-	$next_month_params = array('rpbmonth'=>$current_month+1, 'rpbyear'=>$current_year);
-	if($prev_month_params['rpbmonth']==0) {
-		$prev_month_params['rpbmonth'] = 12;
-		$prev_month_params['rpbyear' ] = $current_year-1;
+	$prev2_params = array('rpbmonth'=>$current_month-3, 'rpbyear'=>$current_year);
+	$prev1_params = array('rpbmonth'=>$current_month-1, 'rpbyear'=>$current_year);
+	$next1_params = array('rpbmonth'=>$current_month+1, 'rpbyear'=>$current_year);
+	$next2_params = array('rpbmonth'=>$current_month+3, 'rpbyear'=>$current_year);
+	if($prev2_params['rpbmonth']<=0) {
+		$prev2_params['rpbmonth'] += 12;
+		$prev2_params['rpbyear' ]--;
 	}
-	if($next_month_params['rpbmonth']==13) {
-		$next_month_params['rpbmonth'] = 1;
-		$next_month_params['rpbyear' ] = $current_year+1;
+	if($prev1_params['rpbmonth']<=0) {
+		$prev1_params['rpbmonth'] += 12;
+		$prev1_params['rpbyear' ]--;
 	}
-	$prev_year_params = array('rpbmonth'=>$current_month, 'rpbyear'=>$current_year-1);
-	$next_year_params = array('rpbmonth'=>$current_month, 'rpbyear'=>$current_year+1);
+	if($next1_params['rpbmonth']>12) {
+		$next1_params['rpbmonth'] -= 12;
+		$next1_params['rpbyear' ]++;
+	}
+	if($next2_params['rpbmonth']>12) {
+		$next2_params['rpbmonth'] -= 12;
+		$next2_params['rpbyear' ]++;
+	}
+	$today_params = array('rpbmonth'=>date('n', $current_time), 'rpbyear'=>date('Y', $current_time));
 
 	// Tooltip for the navigation form
-	$prev_month_tooltip = rpbcalendar_month_info('name', $prev_month_params['rpbmonth']).' '.$prev_month_params['rpbyear'];
-	$next_month_tooltip = rpbcalendar_month_info('name', $next_month_params['rpbmonth']).' '.$next_month_params['rpbyear'];
-	$prev_year_tooltip  = rpbcalendar_month_info('name', $prev_year_params ['rpbmonth']).' '.$prev_year_params ['rpbyear'];
-	$next_year_tooltip  = rpbcalendar_month_info('name', $next_year_params ['rpbmonth']).' '.$next_year_params ['rpbyear'];
+	$prev2_tooltip = rpbcalendar_month_info('name', $prev2_params['rpbmonth']).' '.$prev2_params['rpbyear'];
+	$prev1_tooltip = rpbcalendar_month_info('name', $prev1_params['rpbmonth']).' '.$prev1_params['rpbyear'];
+	$today_tooltip = rpbcalendar_month_info('name', $today_params['rpbmonth']).' '.$today_params['rpbyear'];
+	$next1_tooltip = rpbcalendar_month_info('name', $next1_params['rpbmonth']).' '.$next1_params['rpbyear'];
+	$next2_tooltip = rpbcalendar_month_info('name', $next2_params['rpbmonth']).' '.$next2_params['rpbyear'];
 
 ?>
 
@@ -108,10 +118,12 @@
 	<?php
 
 		// Change month and year buttons
-		rpbcalendar_navigate_form('prevyear' , $prev_year_params , '&lt;&lt;', $prev_year_tooltip );
-		rpbcalendar_navigate_form('prevmonth', $prev_month_params, '&lt;'    , $prev_month_tooltip);
-		rpbcalendar_navigate_form('nextmonth', $next_month_params, '&gt;'    , $next_month_tooltip);
-		rpbcalendar_navigate_form('nextyear' , $next_year_params , '&gt;&gt;', $next_year_tooltip );
+		$today_label = __('Today', 'rpbcalendar');
+		rpbcalendar_navigate_form('prev3month', $prev2_params, '&lt;&lt;'  , $prev2_tooltip);
+		rpbcalendar_navigate_form('prevmonth' , $prev1_params, '&lt;'      , $prev1_tooltip);
+		rpbcalendar_navigate_form('nextmonth' , $today_params, $today_label, $today_tooltip);
+		rpbcalendar_navigate_form('nextmonth' , $next1_params, '&gt;'      , $next1_tooltip);
+		rpbcalendar_navigate_form('next3month', $next2_params, '&gt;&gt;'  , $next2_tooltip);
 
 		// Change date form
 		rpbcalendar_begin_navigate_form('changedate', array('rpbmonth', 'rpbyear'));
