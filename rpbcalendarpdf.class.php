@@ -4,11 +4,21 @@ require(RPBCALENDAR_ABSPATH.'tcpdf/tcpdf.php');
 
 class RpbCalendarPDF extends TCPDF
 {
+	// Header and footer parameters
+	private $title_margin_top     = 3;
+	private $title_margin_bottom  = 1;
+	public  $footer_margin_bottom = 6;
+	private $title_font_size    = 14;
+	private $subtitle_font_size = 10;
+	private $footer_font_size   = 8 ;
+	public  $title    = null;
+	public  $subtitle = null;
+
 	// Constants
 	private $text_width;
 	private $margin_left   =  5;
 	private $margin_right  =  5;
-	private $margin_top    =  8;
+	private $margin_top    =  4;
 	private $margin_bottom = 10;
 	private $normal_font_size = 8;
 	private $small_font_size  = 6;
@@ -19,8 +29,10 @@ class RpbCalendarPDF extends TCPDF
 	private $event_margin_lr = 0.6;
 	private $event_margin_tb = 0.5;
 
-	// Control of page breaks
+	// Misc
 	private $table_on_page_count;
+	private $creation_date_string;
+	public  $total_number_of_tables = 0;
 
 	// Current table parameters
 	private $year         ;
@@ -60,11 +72,44 @@ class RpbCalendarPDF extends TCPDF
 		$this->text_width = $this->getPageWidth() - $this->margin_left - $this->margin_right;
 
 		// Initialization
-		$this->table_on_page_count = 2;
+		$this->table_on_page_count  = 2;
+		$this->creation_date_string = date_i18n(get_option('date_format'), rpbcalendar_time());
 		$this->SetFont('helvetica', '', $this->normal_font_size);
 		$this->SetLineWidth(0.1);
 		$this->lookup_fill_color = array();
 		$this->lookup_text_color = array();
+	}
+
+	// Header
+	function Header()
+	{
+		if(isset($this->title)) {
+			$this->SetFont('helvetica', 'B', $this->title_font_size);
+			$this->Ln($this->title_margin_top);
+			$this->Cell(0, 0, $this->title, 0, 1, 'C');
+			if(isset($this->subtitle)) {
+				$this->Ln($this->title_margin_bottom);
+				$this->SetFont('', 'I', $this->subtitle_font_size);
+				$this->Cell(0, 0, $this->subtitle, 0, 1, 'C');
+			}
+		}
+		$this->SetTopMargin($this->GetY() + $this->margin_top);
+	}
+
+	// Footer
+	function Footer()
+	{
+		$this->setXY($this->margin_left, 0);
+		$this->SetFont('helvetica', 'I', $this->footer_font_size);
+		$this->startTransaction();
+		$this->Cell(0, 0, 'Test cell', 0, 1);
+		$footer_height = $this->GetY();
+		$this->rollbackTransaction(true);
+		$this->SetY($this->getPageHeight() - $this->footer_margin_bottom - $footer_height);
+		$text_left  = sprintf(__('Generated from %s on %s', 'rpbcalendar'), site_url(), $this->creation_date_string);
+		$text_right = sprintf(__('Page %d on %d', 'rpbcalendar'), $this->PageNo(), ceil($this->total_number_of_tables / 2));
+		$this->Cell($this->text_width/2, 0, $text_left , 0, 0, 'L');
+		$this->Cell($this->text_width/2, 0, $text_right, 0, 0, 'R');
 	}
 
 	// Function used to print a month table
