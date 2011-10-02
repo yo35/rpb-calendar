@@ -9,7 +9,7 @@
 	global $wpdb;
 	$events = $wpdb->get_results(rpbcalendar_select_events_base_sql().
 		'WHERE event_begin<='.$sql_current_day.' AND event_end>='.$sql_current_day.' '.
-		'ORDER BY event_time;'
+		'ORDER BY event_title;'
 	);
 
 	// Special case if no event to display

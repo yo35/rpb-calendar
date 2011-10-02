@@ -233,7 +233,7 @@ class RpbCalendarPDF extends TCPDF
 				'FROM '.RPBCALENDAR_EVENT_TABLE.' '.
 				'LEFT OUTER JOIN '.RPBCALENDAR_CATEGORY_TABLE.' c ON event_category=c.category_id '.
 				'WHERE event_begin<='.$sql_current_day.' AND event_end>='.$sql_current_day.' '.
-				'ORDER BY event_time, event_title;'
+				'ORDER BY event_title;'
 			);
 		}
 	}

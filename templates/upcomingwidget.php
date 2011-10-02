@@ -36,7 +36,7 @@
 		$sql_current_end   = "'".$date_range->event_end  ."'";
 		$events = $wpdb->get_results($select_from_part.
 			'WHERE event_begin='.$sql_current_begin.' AND event_end='.$sql_current_end.' '.
-			'ORDER BY event_time;'
+			'ORDER BY event_title;'
 		);
 
 		// Date range label

@@ -78,7 +78,7 @@
 		$sql_current_day = "'".mysql_escape_string($current_day)."'";
 		$event_map[$k] = $wpdb->get_results($select_from_part.
 			'WHERE event_begin<='.$sql_current_day.' AND event_end>='.$sql_current_day.' '.
-			'ORDER BY event_time, event_title;'
+			'ORDER BY event_title;'
 		);
 	}
 
