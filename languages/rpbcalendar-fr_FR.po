@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 14:30+0200\n"
+"POT-Creation-Date: 2011-10-02 14:45+0200\n"
 "PO-Revision-Date: 2011-08-29 00:37+0200\n"
 "Last-Translator: Yoann <yoann.le-montagner@m4x.org>\n"
 "Language-Team: French\n"
@@ -260,7 +260,7 @@ msgstr "Utiliser les catégories"
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
-#: config.php:83 print.php:40
+#: config.php:83
 #, php-format
 msgid "From %1$s to %2$s"
 msgstr "Du %1$s au %2$s"
@@ -353,6 +353,14 @@ msgstr "La date de fin doit être plus grande que la date de début"
 msgid "Calendar"
 msgstr "Agenda"
 
+#: print.php:40 templates/printer.php:21
+msgid "From"
+msgstr "De"
+
+#: print.php:40 templates/printer.php:30
+msgid "to"
+msgstr "à"
+
 #: rpbcalendar.php:128
 msgid "Manage events"
 msgstr "Gérer les événements"
@@ -370,6 +378,7 @@ msgid "Manage categories"
 msgstr "Gérer les catégories"
 
 #: rpbcalendarpdf.class.php:109
+#, php-format
 msgid "Generated from %1$s on %2$s"
 msgstr "Généré depuis %1$s le %2$s"
 
@@ -567,14 +576,6 @@ msgstr "Chercher un événement :"
 #: templates/explorer.php:65
 msgid "Search"
 msgstr "Rechercher"
-
-#: templates/printer.php:21
-msgid "From"
-msgstr "Du"
-
-#: templates/printer.php:30
-msgid "to"
-msgstr "au"
 
 #: templates/printer.php:39
 msgid "Print"

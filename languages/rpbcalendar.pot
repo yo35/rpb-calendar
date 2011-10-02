@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 14:30+0200\n"
+"POT-Creation-Date: 2011-10-02 14:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -257,7 +257,7 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#: config.php:83 print.php:40
+#: config.php:83
 #, php-format
 msgid "From %1$s to %2$s"
 msgstr ""
@@ -348,6 +348,14 @@ msgstr ""
 
 #: print.php:31 rpbcalendar.php:122
 msgid "Calendar"
+msgstr ""
+
+#: print.php:40 templates/printer.php:21
+msgid "From"
+msgstr ""
+
+#: print.php:40 templates/printer.php:30
+msgid "to"
 msgstr ""
 
 #: rpbcalendar.php:128
@@ -560,14 +568,6 @@ msgstr ""
 
 #: templates/explorer.php:65
 msgid "Search"
-msgstr ""
-
-#: templates/printer.php:21
-msgid "From"
-msgstr ""
-
-#: templates/printer.php:30
-msgid "to"
 msgstr ""
 
 #: templates/printer.php:39
