@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 14:45+0200\n"
+"POT-Creation-Date: 2011-10-02 15:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Go back"
 msgstr ""
 
-#: admin.php:57
+#: admin.php:57 templates/calendar.php:121
 msgid "Today"
 msgstr ""
 
@@ -542,7 +542,7 @@ msgstr ""
 msgid "Wrong time value in the time field: &quot;%s&quot;"
 msgstr ""
 
-#: templates/calendar.php:126
+#: templates/calendar.php:138
 msgid "Go"
 msgstr ""
 
