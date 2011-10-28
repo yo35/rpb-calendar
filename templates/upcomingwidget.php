@@ -1,8 +1,9 @@
 <?php
 
 	// First and last days
-	$current_time   = rpbcalendar_time();
-	$upcoming_range = max($instance['upcoming_range'], 1);
+	$current_time      = rpbcalendar_time();
+	$upcoming_range    = max($instance['upcoming_range'], 1);
+	$show_today_events = ($instance['show_today_events']!=0);
 	$first_day      = date('Y-m-d', $current_time + 86400);
 	$last_day       = date('Y-m-d', $current_time + 86400*$upcoming_range);
 	$sql_first_day  = "'".mysql_escape_string($first_day)."'";
@@ -10,9 +11,15 @@
 
 	// All type of event date range encountered within the given interval
 	global $wpdb;
+	if($show_today_events) {
+		$where_sql = 'WHERE event_begin<='.$sql_last_day.' AND event_end>='.$sql_first_day.' ';
+	}
+	else {
+		$where_sql = 'WHERE event_begin<='.$sql_last_day.' AND event_begin>='.$sql_first_day.' ';
+	}
 	$date_ranges = $wpdb->get_results(
 		'SELECT DISTINCT event_begin, event_end FROM '.RPBCALENDAR_EVENT_TABLE.' '.
-		'WHERE event_begin<='.$sql_last_day.' AND event_end>='.$sql_first_day.' '.
+		$where_sql.
 		'ORDER BY event_begin, event_end;'
 	);
 

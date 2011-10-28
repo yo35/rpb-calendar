@@ -26,20 +26,28 @@ class RpbcUpcomingEvents extends WP_Widget
 		if(is_numeric($new_instance['upcoming_range'])) {
 			$instance['upcoming_range'] = $new_instance['upcoming_range'];
 		}
+		if(is_numeric($new_instance['show_today_events'])) {
+			$instance['show_today_events'] = $new_instance['show_today_events'];
+		}
 		return $instance;
 	}
 
 	// Configuration
 	function form($instance)
 	{
-		$title          = __('Upcoming events', 'rpbcalendar');
-		$upcoming_range = 7;
+		$title             = __('Upcoming events', 'rpbcalendar');
+		$upcoming_range    = 7;
+		$show_today_events = false;
 		if(isset($instance['title'])) {
 			$title = htmlspecialchars($instance['title']);
 		}
 		if(isset($instance['upcoming_range']) && is_numeric($instance['upcoming_range'])) {
 			$upcoming_range = $instance['upcoming_range'];
 		}
+		if(isset($instance['show_today_events']) && is_numeric($instance['show_today_events'])) {
+			$show_today_events = ($instance['show_today_events']!=0);
+		}
+		var_dump($instance);
 		echo '<p>';
 		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'rpbcalendar').'</label>';
 		echo '<input type="text" class="widefat" id="'.$this->get_field_id('title').'" name="'.
@@ -49,6 +57,11 @@ class RpbcUpcomingEvents extends WP_Widget
 			__('Length of the upcoming period (in days):', 'rpbcalendar').'</label>';
 		echo '<input type="text" class="widefat" id="'.$this->get_field_id('upcoming_range').'" name="'.
 			$this->get_field_name('upcoming_range').'" value="'.$upcoming_range.'" />';
+		echo '<label for="'.$this->get_field_id('show_today_events').'">'.
+			__('Show today events:', 'rpbcalendar').'</label>';
+		echo '<input type="hidden" name="'.$this->get_field_name('show_today_events').'" value="0" />';
+		echo '<input type="checkbox" class="widefat" id="'.$this->get_field_id('show_today_events').'" name="'.
+			$this->get_field_name('show_today_events').'" value="1"'.($show_today_events ? ' checked="1"' : '').' />';
 		echo '</p>';
 	}
 }
