@@ -47,7 +47,6 @@ class RpbcUpcomingEvents extends WP_Widget
 		if(isset($instance['show_today_events']) && is_numeric($instance['show_today_events'])) {
 			$show_today_events = ($instance['show_today_events']!=0);
 		}
-		var_dump($instance);
 		echo '<p>';
 		echo '<label for="'.$this->get_field_id('title').'">'.__('Title:', 'rpbcalendar').'</label>';
 		echo '<input type="text" class="widefat" id="'.$this->get_field_id('title').'" name="'.
