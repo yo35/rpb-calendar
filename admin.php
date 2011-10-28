@@ -132,7 +132,7 @@ function rpbcalendar_manage_holidays()
 
 	// Fields
 	$fld_name          = new RpbcField('holiday_name', __('Name', 'rpbcalendar'), 'text');
-	$fld_name->options = array('maxlength'=>30);
+	$fld_name->options = array('maxlength'=>60);
 	$fld_begin = new RpbcDateField('holiday_begin', __('First day', 'rpbcalendar'));
 	$fld_end   = new RpbcEndDateField('holiday_end', __('Last day' , 'rpbcalendar'), 'holiday_begin');
 	$fld_begin->form = 'holidayform';
@@ -301,7 +301,7 @@ function rpbcalendar_manage_events()
 	$fld_author                = new RpbcField('event_author', __('Author', 'rpbcalendar'), 'hidden');
 	$fld_author->default_value = $current_user->ID;
 	$fld_title          = new RpbcField('event_title', __('Title', 'rpbcalendar'), 'text');
-	$fld_title->options = array('maxlength'=>30);
+	$fld_title->options = array('maxlength'=>60);
 	$fld_desc              = new RpbcField('event_desc', __('Description', 'rpbcalendar'), 'textarea');
 	$fld_desc->allow_empty = true;
 	$fld_begin = new RpbcDateField('event_begin', __('Begin', 'rpbcalendar'));

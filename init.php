@@ -7,7 +7,7 @@ function rpbcalendar_create_tables()
 	$sql_event_table = "
 		CREATE TABLE " . RPBCALENDAR_EVENT_TABLE . " (
 			event_id       INT(11)     NOT NULL AUTO_INCREMENT,
-			event_title    VARCHAR(30) NOT NULL,
+			event_title    VARCHAR(60) NOT NULL,
 			event_begin    DATE        NOT NULL,
 			event_end      DATE        NOT NULL,
 			event_time     TIME,
@@ -42,7 +42,7 @@ function rpbcalendar_create_tables()
 	$sql_holiday_table =
 		"CREATE TABLE " . RPBCALENDAR_HOLIDAY_TABLE . " (
 			holiday_id    INT(11)     NOT NULL AUTO_INCREMENT,
-			holiday_name  VARCHAR(30) NOT NULL,
+			holiday_name  VARCHAR(60) NOT NULL,
 			holiday_begin DATE        NOT NULL,
 			holiday_end   DATE        NOT NULL,
 			PRIMARY KEY (holiday_id)
