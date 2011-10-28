@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 15:03+0200\n"
+"POT-Creation-Date: 2011-10-28 21:02+0200\n"
 "PO-Revision-Date: 2011-08-29 00:37+0200\n"
 "Last-Translator: Yoann <yoann.le-montagner@m4x.org>\n"
 "Language-Team: French\n"
@@ -353,11 +353,11 @@ msgstr "La date de fin doit être plus grande que la date de début"
 msgid "Calendar"
 msgstr "Agenda"
 
-#: print.php:40 templates/printer.php:21
+#: print.php:40 templates/printer.php:24
 msgid "From"
 msgstr "De"
 
-#: print.php:40 templates/printer.php:30
+#: print.php:40 templates/printer.php:33
 msgid "to"
 msgstr "à"
 
@@ -411,7 +411,7 @@ msgstr "Afficher la liste des événements du jour"
 msgid "Today's events"
 msgstr "Événements du jour"
 
-#: todaysevents.class.php:37 upcomingevents.class.php:44
+#: todaysevents.class.php:37 upcomingevents.class.php:52
 msgid "Title:"
 msgstr "Titre :"
 
@@ -419,13 +419,17 @@ msgstr "Titre :"
 msgid "Display a list of upcoming events"
 msgstr "Afficher une liste d'événements à venir"
 
-#: upcomingevents.class.php:12 upcomingevents.class.php:35
+#: upcomingevents.class.php:12 upcomingevents.class.php:38
 msgid "Upcoming events"
 msgstr "Événements à venir"
 
-#: upcomingevents.class.php:49
+#: upcomingevents.class.php:57
 msgid "Length of the upcoming period (in days):"
 msgstr "Durée de la période à venir (en jours) :"
+
+#: upcomingevents.class.php:61
+msgid "Show today events:"
+msgstr "Afficher les événements du jour :"
 
 #: admin/colorfield.class.php:12
 msgid "Use HTML hexa format (ex: #0000ff for blue or #ffff00 for yellow)"
@@ -577,10 +581,10 @@ msgstr "Chercher un événement :"
 msgid "Search"
 msgstr "Rechercher"
 
-#: templates/printer.php:39
+#: templates/printer.php:42
 msgid "Print"
 msgstr "Imprimer"
 
-#: templates/printer.php:40
+#: templates/printer.php:43
 msgid "Generate the PDF for printing"
 msgstr "Générer le PDF à imprimer"

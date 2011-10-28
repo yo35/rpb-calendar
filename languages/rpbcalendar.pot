@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-02 15:03+0200\n"
+"POT-Creation-Date: 2011-10-28 21:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -350,11 +350,11 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
-#: print.php:40 templates/printer.php:21
+#: print.php:40 templates/printer.php:24
 msgid "From"
 msgstr ""
 
-#: print.php:40 templates/printer.php:30
+#: print.php:40 templates/printer.php:33
 msgid "to"
 msgstr ""
 
@@ -408,7 +408,7 @@ msgstr ""
 msgid "Today's events"
 msgstr ""
 
-#: todaysevents.class.php:37 upcomingevents.class.php:44
+#: todaysevents.class.php:37 upcomingevents.class.php:52
 msgid "Title:"
 msgstr ""
 
@@ -416,12 +416,16 @@ msgstr ""
 msgid "Display a list of upcoming events"
 msgstr ""
 
-#: upcomingevents.class.php:12 upcomingevents.class.php:35
+#: upcomingevents.class.php:12 upcomingevents.class.php:38
 msgid "Upcoming events"
 msgstr ""
 
-#: upcomingevents.class.php:49
+#: upcomingevents.class.php:57
 msgid "Length of the upcoming period (in days):"
+msgstr ""
+
+#: upcomingevents.class.php:61
+msgid "Show today events:"
 msgstr ""
 
 #: admin/colorfield.class.php:12
@@ -570,10 +574,10 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: templates/printer.php:39
+#: templates/printer.php:42
 msgid "Print"
 msgstr ""
 
-#: templates/printer.php:40
+#: templates/printer.php:43
 msgid "Generate the PDF for printing"
 msgstr ""
