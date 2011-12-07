@@ -133,9 +133,9 @@ class RpbCalendarPDF extends TCPDF
 		// Actual printing
 		$this->PrintTableHeaders();
 		if($this->first_weekday>=$this->start_of_week) {
-			$first_day_in_row = 1 - ($this->first_weekday - $this->start_of_week);
+			$first_day_in_row =  1 - ($this->first_weekday - $this->start_of_week);
 		} else {
-			$first_day_in_row = 6 + ($this->first_weekday - $this->start_of_week);
+			$first_day_in_row = -6 - ($this->first_weekday - $this->start_of_week);
 		}
 		while($first_day_in_row <= $this->days_in_month) {
 			$this->PushTableRow($first_day_in_row);
