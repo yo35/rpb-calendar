@@ -133,9 +133,7 @@
 #rpbcalendar-calendar {
 	clear: both;
 	overflow: auto !important;
-	-moz-box-shadow   : 1px 1px 1px #555;
-	-webkit-box-shadow: 1px 1px 1px #555;
-	box-shadow        : 1px 1px 1px #555;
+	box-shadow: 0 0 2px #000;
 }
 
 #rpbcalendar-calendar table {
@@ -270,9 +268,7 @@ a.rpbcalendar-event:hover .rpbcalendar-event-tooltip {
 	padding: 3px 5px 4px;
 	min-width: 100px;
 	border: 1px solid;
-	-moz-box-shadow   : 1px 1px 1px #555;
-	-webkit-box-shadow: 1px 1px 1px #555;
-	box-shadow        : 1px 1px 1px #555;
+	box-shadow: 0 0 2px #000;
 	-moz-border-radius   : 5px;
 	-khtml-border-radius : 5px;
 	-webkit-border-radius: 5px;
