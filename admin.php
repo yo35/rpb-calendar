@@ -224,6 +224,7 @@ function rpbcalendar_manage_highdays()
 function rpbcalendar_manage_events()
 {
 	// Includes
+	require_once(RPBCALENDAR_ABSPATH.'admin/itemseparator.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/column.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/categorycolumn.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/linkcolumn.class.php');
@@ -232,7 +233,7 @@ function rpbcalendar_manage_events()
 	require_once(RPBCALENDAR_ABSPATH.'admin/enddatefield.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/timefield.class.php');
 	require_once(RPBCALENDAR_ABSPATH.'admin/form.class.php');
-
+	
 	// Specialized version of RpbcColumn to display the description field
 	class RpbcEventDescColumn extends RpbcColumn
 	{
@@ -265,6 +266,20 @@ function rpbcalendar_manage_events()
 			$order_asc_code = $order_asc ? 'ASC' : 'DESC';
 			return 'ORDER BY event_begin '.$order_asc_code.', event_end '.$order_asc_code.
 				', event_time '.$order_asc_code;
+		}
+	}
+	
+	// Item separator for events
+	class RpbcEventSeparator extends RpbcItemSepator
+	{
+		protected function compute_hash($obj)
+		{
+			return date('Y-m', strtotime($obj->event_begin));
+		}
+		
+		protected function compute_label($obj)
+		{
+			return ucwords(date_i18n('F Y', strtotime($obj->event_begin)));
 		}
 	}
 
@@ -332,7 +347,8 @@ function rpbcalendar_manage_events()
 		__('Events'         , 'rpbcalendar'),
 		__('Add a new event', 'rpbcalendar'),
 		__('Edit the event' , 'rpbcalendar'),
-		__('Delete an event', 'rpbcalendar')
+		__('Delete an event', 'rpbcalendar'),
+		new RpbcEventSeparator()
 	);
 }
 

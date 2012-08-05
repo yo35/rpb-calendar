@@ -1,4 +1,12 @@
 
+.rpbcalendar-itemlist-subtitle {
+	background-color: white;
+}
+
+.rpbcalendar-itemlist-subtitle h3 {
+	margin-left: 50px;
+}
+
 .rpbcalendar-color-caption {
 	height: 36px;
 	width : 36px;
