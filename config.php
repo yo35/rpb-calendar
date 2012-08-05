@@ -2,7 +2,7 @@
 
 // Plugin version
 // Don't forget to update the version field at the top of rpbcalendar.php
-define('RPBCALENDAR_VERSION', '0.12');
+define('RPBCALENDAR_VERSION', '1.0');
 
 // Directories
 define('RPBCALENDAR_PLUGIN_DIR', basename(dirname(__FILE__)));
