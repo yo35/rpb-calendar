@@ -1185,7 +1185,7 @@ function CP_select(inputobj, linkname, format) {
 	this.currentDate=null;
 	var time=0;
 	if (selectedDate!=null) {
-		time = getDateFromFormat(selectedDate,format)
+		time = getDateFromFormat(selectedDate,format);
 		}
 	else if (inputobj.value!="") {
 		time = getDateFromFormat(inputobj.value,format);
