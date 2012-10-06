@@ -3,7 +3,7 @@
 Plugin Name: RpbCalendar
 Description: This plugin allows you to display a calendar of all your events and appointments as a page on your website.
 Author: Yoann Le Montagner
-Version: 1.0
+Version: 1.1
 */
 
 // Don't forget to update the version field at the top of config.php
@@ -63,17 +63,20 @@ function rpbcalendar_navigate_form($form_name, $params, $submit_label, $submit_t
 }
 
 // SELECT ... FROM ... part of the query to use to retrieve events from the database
-function rpbcalendar_select_events_base_sql()
+function rpbcalendar_select_events_base_sql($need_begin_end_fields=false)
 {
 	global $wpdb;
-	$select_part = 'SELECT event_title, event_desc, event_time, event_link ';
-	$from_part   = 'FROM '.RPBCALENDAR_EVENT_TABLE.' ';
+	$select_part = 'SELECT event_title, event_desc, event_time, event_link';
+	if($need_begin_end_fields) {
+		$select_part .= ', event_begin, event_end';
+	}
+	$from_part = ' FROM '.RPBCALENDAR_EVENT_TABLE.' ';
 	if(rpbcalendar_display_author()) {
-		$select_part .= ', wpu.display_name AS author_name ';
+		$select_part .= ', wpu.display_name AS author_name';
 		$from_part   .= 'LEFT OUTER JOIN '.$wpdb->users.' wpu ON event_author=wpu.ID ';
 	}
 	if(rpbcalendar_display_category()) {
-		$select_part .= ', rpbc.category_id AS category_id ';
+		$select_part .= ', rpbc.category_id AS category_id';
 		$from_part   .= 'LEFT OUTER JOIN '.RPBCALENDAR_CATEGORY_TABLE.' rpbc ON event_category=rpbc.category_id ';
 	}
 	return $select_part.$from_part;

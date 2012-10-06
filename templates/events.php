@@ -7,11 +7,35 @@
 		);
 		return;
 	}
+	if(!isset($group_by_date_range)) {
+		$group_by_date_range = false;
+	}
 
 	// Displaying events
-	foreach($events as $event) {
-
-
+	if($group_by_date_range) {
+		$current_begin = null;
+		$current_end   = null;
+	}
+	foreach($events as $event)
+	{
+		////////////////////////////////////////////////////////////////////////////
+		// Display the header of the date range
+		
+		if($group_by_date_range) {
+			if($event->event_begin!=$current_begin || $event->event_end!=$current_end) {
+				if(!is_null($current_begin)) {
+					echo '</div></div>';
+				}
+				$current_begin    = $event->event_begin;
+				$current_end      = $event->event_end  ;
+				$date_range_label = rpbcalendar_format_date_range($current_begin, $current_end);
+				echo '<div class="rpbcalendar-upcoming-period">';
+				echo '<div class="rpbcalendar-upcoming-period-title">'.$date_range_label.'</div>';
+				echo '<div class="rpbcalendar-upcoming-period-content">';
+			}
+		}
+		
+		
 		////////////////////////////////////////////////////////////////////////////
 		// Extrating and formatting event data
 
@@ -87,6 +111,11 @@
 
 		// End of event
 		echo '</a>';
+	}
+	
+	// Close the last group of events
+	if($group_by_date_range && !is_null($current_begin)) {
+		echo '</div></div>';
 	}
 
 ?>

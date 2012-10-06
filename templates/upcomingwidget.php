@@ -9,22 +9,20 @@
 	$sql_first_day  = "'".mysql_escape_string($first_day)."'";
 	$sql_last_day   = "'".mysql_escape_string($last_day )."'";
 
-	// All type of event date range encountered within the given interval
+	// Retrieve the events in the database
 	global $wpdb;
+	$select_from_part = rpbcalendar_select_events_base_sql(true);
 	if($show_today_events) {
-		$where_sql = 'WHERE event_begin<='.$sql_last_day.' AND event_end>='.$sql_first_day.' ';
+		$where_part = 'WHERE event_begin<='.$sql_last_day.' AND event_end>='.$sql_first_day.' ';
 	}
 	else {
-		$where_sql = 'WHERE event_begin<='.$sql_last_day.' AND event_begin>='.$sql_first_day.' ';
+		$where_part = 'WHERE event_begin<='.$sql_last_day.' AND event_begin>='.$sql_first_day.' ';
 	}
-	$date_ranges = $wpdb->get_results(
-		'SELECT DISTINCT event_begin, event_end FROM '.RPBCALENDAR_EVENT_TABLE.' '.
-		$where_sql.
-		'ORDER BY event_begin, event_end;'
-	);
-
+	$order_part = 'ORDER BY event_begin, event_end;';
+	$events = $wpdb->get_results($select_from_part . $where_part . $order_part);
+	
 	// Special case if no events within the given period of time
-	if(empty($date_ranges)) {
+	if(empty($events)) {
 		return;
 	}
 
@@ -35,27 +33,8 @@
 	}
 
 	// Display events grouped by period ranges
-	$select_from_part = rpbcalendar_select_events_base_sql();
-	foreach($date_ranges as $date_range) {
-
-		// Retrieve the corresponding events
-		$sql_current_begin = "'".$date_range->event_begin."'";
-		$sql_current_end   = "'".$date_range->event_end  ."'";
-		$events = $wpdb->get_results($select_from_part.
-			'WHERE event_begin='.$sql_current_begin.' AND event_end='.$sql_current_end.' '.
-			'ORDER BY event_title;'
-		);
-
-		// Date range label
-		$date_range_label = rpbcalendar_format_date_range($date_range->event_begin, $date_range->event_end);
-
-		// Display events
-		echo '<div class="rpbcalendar-upcoming-period">';
-		echo '<div class="rpbcalendar-upcoming-period-title">'.$date_range_label.'</div>';
-		echo '<div class="rpbcalendar-upcoming-period-content">';
-		include(RPBCALENDAR_ABSPATH.'templates/events.php');
-		echo '</div></div>';
-	}
+	$group_by_date_range = true;
+	include(RPBCALENDAR_ABSPATH.'templates/events.php');
 
 	// End of the widget
 	echo $args['after_widget'];
