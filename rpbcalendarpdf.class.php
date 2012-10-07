@@ -51,7 +51,6 @@ class RpbCalendarPDF extends TCPDF
 	// Data retrieved from the database
 	private $highday_map;
 	private $holiday_map;
-	private $event_map  ;
 	private $event_list ;
 
 	// Temporary flags
@@ -234,21 +233,6 @@ class RpbCalendarPDF extends TCPDF
 	private function RetrieveEvents()
 	{
 		global $wpdb;
-		$this->event_map = array_fill(1, $this->days_in_month, NULL);
-		for($k=1; $k<=$this->days_in_month; $k++) {
-			$current_day         = date('Y-m-d', mktime(0, 0, 0, $this->month, $k, $this->year));
-			$sql_current_day     = "'".mysql_escape_string($current_day)."'";
-			$this->event_map[$k] = $wpdb->get_results('SELECT '.
-				'event_title, event_desc, event_time, event_begin, event_end, '.
-				'c.category_id AS category_id, '.
-				'c.category_text_color AS category_text_color, '.
-				'c.category_background_color AS category_background_color '.
-				'FROM '.RPBCALENDAR_EVENT_TABLE.' '.
-				'LEFT OUTER JOIN '.RPBCALENDAR_CATEGORY_TABLE.' c ON event_category=c.category_id '.
-				'WHERE event_begin<='.$sql_current_day.' AND event_end>='.$sql_current_day.' '.
-				'ORDER BY event_title;'
-			);
-		}
 		$this->event_list = $wpdb->get_results(
 			'SELECT event_title, event_desc, event_time, '.
 				'DAY(CASE event_begin<'.$this->sql_first_day.' WHEN TRUE THEN '.$this->sql_first_day.' ELSE event_begin END) AS actual_begin, '.
