@@ -241,10 +241,10 @@ add_shortcode('rpbexplorer', 'rpbcalendar_shortcode_rpbexplorer');
 function rpbcalendar_shortcode_rpbexplorer($atts)
 {
 	ob_start();
-	if(array_key_exists('from', $atts)) {
+	if(!empty($atts) && array_key_exists('from', $atts)) {
 		$rpbcalendar_search_from = $atts['from'];
 	}
-	if(array_key_exists('to', $atts)) {
+	if(!empty($atts) && array_key_exists('to', $atts)) {
 		$rpbcalendar_search_to = $atts['to'];
 	}
 	include(RPBCALENDAR_ABSPATH.'templates/explorer.php');
