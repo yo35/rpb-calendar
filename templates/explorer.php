@@ -5,7 +5,7 @@
 	{
 		// Retrieve events
 		global $wpdb;
-		$event_filter = "'%".mysql_escape_string(stripslashes($_GET['rpbfilter']))."%'";
+		$event_filter = "'".mysql_escape_string(stripslashes($_GET['rpbfilter']))."'";
 		$where_part   = 'WHERE event_title LIKE ' . $event_filter . ' ';
 		if(isset($rpbcalendar_search_from)) {
 			$where_part .= 'AND event_end>=' . "'" . mysql_escape_string($rpbcalendar_search_from) . "' ";
