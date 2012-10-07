@@ -52,14 +52,19 @@ class RpbCalendarPDF extends TCPDF
 	private $highday_map;
 	private $holiday_map;
 	private $event_map  ;
+	private $event_list ;
 
 	// Temporary flags
 	private $cell_width        ;
+	private $x_at_begin        ;
+	private $w_at_end          ;
 	private $weekend_cell      ;
 	private $first_pass_row    ;
 	private $current_row_height;
 	private $lookup_fill_color ;
 	private $lookup_text_color ;
+	private $cell_plan_y       ;
+	private $label_height      ;
 
 	// Constructor
 	function __construct()
@@ -163,6 +168,14 @@ class RpbCalendarPDF extends TCPDF
 			$this->Error(__('The month must be valued between 1 and 12', 'rpbcalendar'));
 			return;
 		}
+		
+		// Heigth of the label
+		$this->startTransaction();
+		$this->label_height = $this->GetY();
+		$this->SetFont('', 'B', $this->small_font_size);
+		$this->Cell($this->day_label_width, 0, 99, 'BR', 1, 'C', true);
+		$this->label_height = $this->GetY() - $this->label_height;
+		$this->rollbackTransaction(true);
 
 		// Set up values
 		$this->days_in_month = (int)(date("t", mktime(0, 0, 0, $this->month, 1, $this->year)));
@@ -226,7 +239,7 @@ class RpbCalendarPDF extends TCPDF
 			$current_day         = date('Y-m-d', mktime(0, 0, 0, $this->month, $k, $this->year));
 			$sql_current_day     = "'".mysql_escape_string($current_day)."'";
 			$this->event_map[$k] = $wpdb->get_results('SELECT '.
-				'event_title, event_desc, event_time, '.
+				'event_title, event_desc, event_time, event_begin, event_end, '.
 				'c.category_id AS category_id, '.
 				'c.category_text_color AS category_text_color, '.
 				'c.category_background_color AS category_background_color '.
@@ -236,6 +249,18 @@ class RpbCalendarPDF extends TCPDF
 				'ORDER BY event_title;'
 			);
 		}
+		$this->event_list = $wpdb->get_results(
+			'SELECT event_title, event_desc, event_time, '.
+				'DAY(CASE event_begin<'.$this->sql_first_day.' WHEN TRUE THEN '.$this->sql_first_day.' ELSE event_begin END) AS actual_begin, '.
+				'DAY(CASE event_end  >'.$this->sql_last_day .' WHEN TRUE THEN '.$this->sql_last_day .' ELSE event_end   END) AS actual_end  , '.
+				'c.category_id AS category_id, '.
+				'c.category_text_color AS category_text_color, '.
+				'c.category_background_color AS category_background_color '.
+			'FROM '.RPBCALENDAR_EVENT_TABLE.' '.
+			'LEFT OUTER JOIN '.RPBCALENDAR_CATEGORY_TABLE.' c ON event_category=c.category_id '.
+			'WHERE event_begin<='.$this->sql_last_day.' AND event_end>='.$this->sql_first_day.' '.
+			'ORDER BY event_begin ASC, event_end DESC, event_title ASC;'
+		);
 	}
 
 	// Print table headers
@@ -254,6 +279,8 @@ class RpbCalendarPDF extends TCPDF
 		// Formating commands and width computations
 		$this->SetFont('', '');
 		$this->cell_width   = array_fill(0, 7, 0    );
+		$this->x_at_begin   = array_fill(0, 7, 0    );
+		$this->w_at_end     = array_fill(0, 7, 0    );
 		$this->weekend_cell = array_fill(0, 7, false);
 		$normal_day_width  = $this->text_width * 3 / 25;
 		$weekend_day_width = $this->text_width * 5 / 25;
@@ -266,7 +293,9 @@ class RpbCalendarPDF extends TCPDF
 			$current_width = $is_weekend ? $weekend_day_width : $normal_day_width;
 			$this->Cell($current_width, 0, ucwords($weekday_name), 1, 0, 'C', true);
 			$this->cell_width  [$k] = $current_width;
-			$this->weekend_cell[$k] = $is_weekend   ;
+			$this->x_at_begin  [$k] = $k==0 ? $this->margin_left : $this->x_at_begin[$k-1] + $this->cell_width[$k-1];
+			$this->w_at_end    [$k] = $this->x_at_begin[$k] + $current_width;
+			$this->weekend_cell[$k] = $is_weekend;
 		}
 		$this->Ln();
 	}
@@ -274,14 +303,75 @@ class RpbCalendarPDF extends TCPDF
 	// Push one row in the table
 	private function PushTableRow($first_day_in_row)
 	{
-		$this->current_row_height = $this->minimum_cell_height;
-		$this->first_pass_row     = true;
+		$x = $this->GetX();
+		$y = $this->GetY();
+		$this->first_pass_row = true;
 		$this->startTransaction();
-		$this->PrintTableRow($first_day_in_row);
+		$this->PrepareEvents($first_day_in_row);
 		$this->rollbackTransaction(true);
 		$this->first_pass_row = false;
 		$this->PrintTableRow($first_day_in_row);
-		$this->Ln();
+		$this->SetXY($x, $y+$this->current_row_height);
+	}
+	
+	// Select the events that should be displayed in the current row and place them
+	private function PrepareEvents($first_day_in_row)
+	{
+		$this->current_row_height = $this->minimum_cell_height;
+		$last_day_in_row          = $first_day_in_row + 6;
+		$actual_first_day_in_row  = max($first_day_in_row, 1);
+		$actual_last_day_in_row   = min($last_day_in_row, $this->days_in_month);
+		for($k=0; $k<7; ++$k) {
+			$this->cell_plan_y[$k] = array();
+		}
+		foreach($this->event_list as $event)
+		{	
+			// Select only the events that happens during the current period of 7 days 
+			if($event->actual_end<$actual_first_day_in_row || $event->actual_begin>$actual_last_day_in_row) {
+				$event->in_current_row = false;
+				continue;
+			}
+			$event->in_current_row = true;
+			
+			// Determine the x coordinate and width of the event
+			$begin_day_in_row = max($event->actual_begin, $actual_first_day_in_row) - $first_day_in_row;
+			$end_day_in_row   = min($event->actual_end  , $actual_last_day_in_row ) - $first_day_in_row;
+			$event->current_x = $this->x_at_begin[$begin_day_in_row];
+			$event->current_w = $this->w_at_end[$end_day_in_row] - $event->current_x;
+			
+			// Determine the y coordinate of the event
+			$h = $this->PushEvent($event, $event->current_w, $event->current_x);
+			$y = 0;
+			$k = $begin_day_in_row;
+			while($k<=$end_day_in_row) {
+				$newY = $this->CheckYAllocation($y, $h, $k); 
+				if($newY<0) {
+					++$k;
+				}
+				else {
+					$y = $newY;
+					$k = $begin_day_in_row;
+				}
+			}
+			
+			// Set the y coordinate
+			$event->current_y = $y;
+			for($k=$begin_day_in_row; $k<=$end_day_in_row; ++$k) {
+				array_push($this->cell_plan_y[$k], array('top' => $y, 'bottom' => $y+$h)); 
+			}
+			$this->current_row_height = max($this->current_row_height, $y+$h+$this->event_margin_tb+$this->label_height);
+		}
+	}
+	
+	// Check if the current y coordinate allocation is valid in the given cell
+	private function CheckYAllocation($y, $h, $cell)
+	{
+		foreach($this->cell_plan_y[$cell] as $slot) {
+			if($y<$slot['bottom'] && $y+$h>$slot['top']) {
+				return $slot['bottom'];
+			}
+		}
+		return -1;
 	}
 
 	// Print one row in the table
@@ -290,29 +380,31 @@ class RpbCalendarPDF extends TCPDF
 		for($k=0; $k<7; $k++) {
 			$current_day = $first_day_in_row + $k;
 			if($current_day<=0 || $current_day>$this->days_in_month) {
-				$current_height = $this->PushPhantomCell($k);
-			} else {
-				$current_height = $this->PushRegularCell($k, $current_day);
+				$this->PushPhantomCell($k);
 			}
-			if($this->first_pass_row) {
-				$this->current_row_height = max($this->current_row_height, $current_height);
+			else {
+				$this->PushRegularCell($k, $current_day);
 			}
+		}
+		$offset_y = $this->GetY() + $this->label_height;
+		foreach($this->event_list as $event) {
+			if(!$event->in_current_row) {
+				continue;
+			}
+			$this->PushEvent($event, $event->current_w, $event->current_x, $event->current_y + $offset_y);
 		}
 	}
 
 	// Append a phantom cell to the current table
 	private function PushPhantomCell($current_column)
 	{
-		$current_height = $this->first_pass_row ? 0 : $this->current_row_height;
 		$this->SetDrawColor(0);
 		$this->SetFillColor(128);
-		$this->Cell($this->cell_width[$current_column], $current_height, '', 1, 0, 'L', true);
+		$this->Cell($this->cell_width[$current_column], $this->current_row_height, '', 1, 0, 'L', true);
 		$x = $this->GetX();
 		$y = $this->GetY();
 		$this->Ln();
-		$retval = $this->GetY() - $y;
 		$this->SetXY($x, $y);
-		return $retval;
 	}
 
 	// Append a regular day cell to the current table
@@ -350,26 +442,17 @@ class RpbCalendarPDF extends TCPDF
 		$this->SetXY($x, $y);
 		$this->Cell($this->day_label_width, 0, $current_day, 'BR', 1, 'C', true);
 
-		// Events
-		$this->SetFont('', '', $this->small_font_size);
-		foreach($this->event_map[$current_day] as $event) {
-			$this->PushEvent($event, $w, $x);
-		}
-
-		// Height of the cell
-		$retval = $this->GetY() + $this->event_margin_tb - $y;
-
 		// Border
 		$this->SetXY($x, $y);
 		$this->SetDrawColor(0);
 		$this->Cell($w, $this->current_row_height, '', 1, 0, '', false);
-		return $retval;
 	}
 
 	// Append an event to the current cell
-	private function PushEvent($event, $w, $x)
+	private function PushEvent($event, $w, $x, $y=null)
 	{
 		// Content
+		$this->SetFont('', '', $this->small_font_size);
 		$this->SetEventColors($event);
 		$text = '<b>' . $event->event_title . '</b>';
 		if(isset($event->event_time) && !empty($event->event_time)) {
@@ -380,7 +463,9 @@ class RpbCalendarPDF extends TCPDF
 		}
 
 		// Rendering
-		$y = $this->GetY();
+		if(is_null($y)) {
+			$y = 0;
+		}
 		$this->SetXY($x+$this->event_margin_lr, $y+$this->event_margin_tb);
 		if(!$this->first_pass_row) {
 			$this->startTransaction();
@@ -391,6 +476,9 @@ class RpbCalendarPDF extends TCPDF
 		}
 		$this->MultiCell($w-2*$this->event_margin_lr, 0, $text, 0, 'L', false, 1, null, null, true, 0, true);
 		$this->SetX($x);
+		
+		// Return the total height of the event (including the top margin)
+		return $this->GetY()-$y;
 	}
 
 	// Setup event colors
