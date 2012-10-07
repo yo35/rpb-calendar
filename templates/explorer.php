@@ -1,15 +1,22 @@
 <?php
 
 	// Do not print the table if no search was emitted
-	if(isset($_GET['rpbfilter']) && strlen($_GET['rpbfilter'])!=0) {
-
+	if(isset($_GET['rpbfilter']) && strlen($_GET['rpbfilter'])!=0)
+	{
 		// Retrieve events
 		global $wpdb;
 		$event_filter = "'%".mysql_escape_string(stripslashes($_GET['rpbfilter']))."%'";
+		$where_part   = 'WHERE event_title LIKE ' . $event_filter . ' ';
+		if(isset($rpbcalendar_search_from)) {
+			$where_part .= 'AND event_end>=' . "'" . mysql_escape_string($rpbcalendar_search_from) . "' ";
+		}
+		if(isset($rpbcalendar_search_to)) {
+			$where_part .= 'AND event_begin<=' . "'" . mysql_escape_string($rpbcalendar_search_to) . "' ";
+		}
 		$events       = $wpdb->get_results(
 			'SELECT event_title, event_desc, event_begin, event_end, event_time, event_link '.
 			'FROM '.RPBCALENDAR_EVENT_TABLE.' '.
-			'WHERE event_title LIKE '.$event_filter.' '.
+			$where_part.
 			'ORDER BY event_begin ASC, event_end ASC, event_time ASC;'
 		);
 ?>
