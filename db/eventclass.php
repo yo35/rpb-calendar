@@ -50,7 +50,7 @@ class RPBCalendarEventClass
 	private function __construct()
 	{
 		register_post_type('rpbcalendar_event', array(
-			labels => array(
+			'labels' => array(
 				'name'               => __('Events'                 , 'rpbcalendar'),
 				'singular_name'      => __('Event'                  , 'rpbcalendar'),
 				'add_new_item'       => __('Add new event'          , 'rpbcalendar'),
