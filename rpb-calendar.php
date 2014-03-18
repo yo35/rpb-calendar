@@ -39,4 +39,14 @@ define('RPBCALENDAR_URL'       , site_url().'/wp-content/plugins/'.RPBCALENDAR_P
 // Enable internationalization
 load_plugin_textdomain('rpbcalendar', false, RPBCALENDAR_PLUGIN_DIR.'/languages/');
 
+
+// Initialize the database objects
+add_action('init', 'rpbcalendar_init');
+function rpbcalendar_init()
+{
+	require_once(RPBCALENDAR_ABSPATH . 'db/eventclass.php');
+	RPBCalendarEventClass::register();
+}
+
+
 //TODO
