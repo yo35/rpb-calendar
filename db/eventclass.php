@@ -67,7 +67,7 @@ class RPBCalendarEventClass
 			'supports'     => array('title', 'editor', 'author', 'comments'),
 			'rewrite'      => array('slug' => 'event'),
 			'query_var'    => 'event',
-			'register_meta_box_cb' => array($this, 'registerMetaBoxes'),
+			'register_meta_box_cb' => array($this, 'registerEditionBoxes'),
 		));
 	}
 
@@ -76,13 +76,13 @@ class RPBCalendarEventClass
 	 * Register the "boxes" that show the meta-information related to an event
 	 * (the date, time,link, etc...) in the backend interface.
 	 */
-	public function registerMetaBoxes()
+	public function registerEditionBoxes()
 	{
 		// Link
 		add_meta_box(
 			'rpbcalendar-admin-eventLink',
 			__('Link', 'rpbcalendar'),
-			array($this, 'printMetaLink'),
+			array($this, 'printLinkEditionBox'),
 			'rpbcalendar_event',
 			'normal',
 			'high'
@@ -92,7 +92,7 @@ class RPBCalendarEventClass
 		add_meta_box(
 			'rpbcalendar-admin-eventDateTime',
 			__('Date/time', 'rpbcalendar'),
-			array($this, 'printMetaDateTime'),
+			array($this, 'printDateTimeEditionBox'),
 			'rpbcalendar_event',
 			'side',
 			'high'
@@ -103,7 +103,7 @@ class RPBCalendarEventClass
 	/**
 	 * TODO: printMetaLink
 	 */
-	public function printMetaLink($event)
+	public function printLinkEditionBox($event)
 	{
 		echo 'Bonjour le monde';
 	}
@@ -112,7 +112,7 @@ class RPBCalendarEventClass
 	/**
 	 * TODO: printMetaDateTime
 	 */
-	public function printMetaDateTime($event)
+	public function printDateTimeEditionBox($event)
 	{
 		echo 'Bonjour le monde';
 	}

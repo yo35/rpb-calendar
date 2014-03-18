@@ -26,7 +26,7 @@ require_once(RPBCALENDAR_ABSPATH.'models/abstract/abstractmodel.php');
 /**
  * Model for the box showing the link associated to an event in the backend edition interface.
  */
-class RPBCalendarModelLinkBox extends RPBCalendarAbstractModel
+class RPBCalendarModelLinkEditionBox extends RPBCalendarAbstractModel
 {
 	public function __construct($event)
 	{
