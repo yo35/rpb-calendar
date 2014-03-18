@@ -47,6 +47,3 @@ function rpbcalendar_init()
 	require_once(RPBCALENDAR_ABSPATH . 'db/eventclass.php');
 	RPBCalendarEventClass::register();
 }
-
-
-//TODO

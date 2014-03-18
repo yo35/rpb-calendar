@@ -101,7 +101,9 @@ class RPBCalendarEventClass
 
 
 	/**
-	 * TODO: printMetaLink
+	 * Print the edition box showing the link assocated to an event.
+	 *
+	 * @param object $event
 	 */
 	public function printLinkEditionBox($event)
 	{
@@ -110,11 +112,13 @@ class RPBCalendarEventClass
 
 
 	/**
-	 * TODO: printMetaDateTime
+	 * Print the edition box showing the date and time assocated to an event.
+	 *
+	 * @param object $event
 	 */
 	public function printDateTimeEditionBox($event)
 	{
-		echo 'Bonjour le monde';
+		echo 'TODO'; //TODO: implement printDateTimeEditionBox($event)
 	}
 
 
