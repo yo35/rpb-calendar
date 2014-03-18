@@ -105,7 +105,7 @@ class RPBCalendarEventClass
 	 */
 	public function printLinkEditionBox($event)
 	{
-		echo 'Bonjour le monde';
+		$this->printEditionBox('LinkEditionBox', $event);
 	}
 
 
@@ -115,5 +115,20 @@ class RPBCalendarEventClass
 	public function printDateTimeEditionBox($event)
 	{
 		echo 'Bonjour le monde';
+	}
+
+
+	/**
+	 * Print the edition box specified by the model with the given name.
+	 *
+	 * @param string $modelName
+	 * @param object $event
+	 */
+	private function printEditionBox($modelName, $event)
+	{
+		require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+		$model = RPBCalendarHelperLoader::loadModel($modelName, $event);
+		$view  = RPBCalendarHelperLoader::loadView($model);
+		$view->display();
 	}
 }
