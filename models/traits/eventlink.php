@@ -50,7 +50,7 @@ class RPBCalendarTraitEventLink extends RPBCalendarAbstractTrait
 	 *
 	 * @return string Null is returned if no link is defined.
 	 */
-	private function getEventLink()
+	public function getEventLink()
 	{
 		if(!$this->linkLoaded) {
 			$this->link = RPBCalendarHelperValidation::validateURL(get_post_meta($event->ID, 'link', true));
