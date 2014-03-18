@@ -20,17 +20,13 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH.'models/abstract/abstracteditionboxmodel.php');
+require_once(RPBCALENDAR_ABSPATH.'models/abstract/abstractmodel.php');
 
 
-/**
- * Model for the box showing the link associated to an event in the backend edition interface.
- */
-class RPBCalendarModelLinkEditionBox extends RPBCalendarAbstractEditionBoxModel
+class RPBCalendarAbstractEditionBoxModel extends RPBCalendarAbstractModel
 {
-	public function __construct($event)
+	public function getViewName()
 	{
-		parent::__construct();
-		$this->loadTrait('EventLink', $event);
+		return 'EditionBox';
 	}
 }
