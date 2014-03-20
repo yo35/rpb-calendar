@@ -20,21 +20,28 @@
  ******************************************************************************/
 ?>
 
-<input type="text" name="event_link" id="rpbcalendar-admin-eventLinkField" value="<?php
-	echo htmlspecialchars($model->getEventLink());
-?>" />
+<div class="rpbcalendar-admin-hBox">
+	<input type="text" name="event_link" id="rpbcalendar-admin-eventLinkField" value="<?php
+		echo htmlspecialchars($model->getEventLink());
+	?>" />
+	<a class="button" id="rpbcalendar-admin-eventLinkPreview" href="#" title="<?php
+		_e('Preview the target link in a new window', 'rpbcalendar');
+	?>"><?php _e('Preview', 'rpbcalendar'); ?></a>
+</div>
 
 
 <script type="text/javascript">
 
 	// Mark the field as valid
-	function rpbCalendarUpdateEventLinkState($, isValid)
+	function rpbcalendarUpdateEventLinkState($, isValid)
 	{
 		if(isValid) {
 			$('#rpbcalendar-admin-eventLinkField').removeClass('rpbcalendar-admin-invalidField');
+			$('#rpbcalendar-admin-eventLinkPreview').removeClass('rpbcalendar-admin-disabled');
 		}
 		else {
 			$('#rpbcalendar-admin-eventLinkField').addClass('rpbcalendar-admin-invalidField');
+			$('#rpbcalendar-admin-eventLinkPreview').addClass('rpbcalendar-admin-disabled');
 		}
 	}
 
@@ -47,10 +54,31 @@
 			{
 				data: { method: 'validateURL', arg1: true, value: jQuery('#rpbcalendar-admin-eventLinkField').val() },
 				dataType: 'json',
-				success: function(answer) { rpbCalendarUpdateEventLinkState(jQuery, answer.result); },
-				error: function() { rpbCalendarUpdateEventLinkState(jQuery, false); }
+				success: function(answer) { rpbcalendarUpdateEventLinkState(jQuery, answer.result); },
+				error: function() { rpbcalendarUpdateEventLinkState(jQuery, false); }
 			}
 		);
 	}).change();
+
+
+	// Preview window for the event link.
+	var rpbcalendarEventLinkPreviewWindow = null;
+
+
+	// Open the event link target in a dedicated window when the 'Preview' button is clicked.
+	jQuery('#rpbcalendar-admin-eventLinkPreview').click(function(e)
+	{
+		e.preventDefault();
+		if(jQuery('#rpbcalendar-admin-eventLinkPreview').hasClass('rpbcalendar-admin-disabled')) {
+			return;
+		}
+		var url = jQuery('#rpbcalendar-admin-eventLinkField').val();
+		if(rpbcalendarEventLinkPreviewWindow==null || rpbcalendarEventLinkPreviewWindow.closed) {
+			rpbcalendarEventLinkPreviewWindow = window.open(url);
+		}
+		else {
+			rpbcalendarEventLinkPreviewWindow.location.replace(url);
+		}
+	});
 
 </script>
