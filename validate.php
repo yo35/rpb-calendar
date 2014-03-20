@@ -18,39 +18,60 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
-?>
-
-<input type="text" name="event_link" id="rpbcalendar-admin-eventLinkField" value="<?php
-	echo htmlspecialchars($model->getEventLink());
-?>" />
 
 
-<script type="text/javascript">
+// Load the validation functions
+require_once(dirname(__FILE__).'/helpers/validation.php');
 
-	// Mark the field as valid
-	function rpbCalendarUpdateEventLinkState($, isValid)
-	{
-		if(isValid) {
-			$('#rpbcalendar-admin-eventLinkField').removeClass('rpbcalendar-admin-invalidField');
-		}
-		else {
-			$('#rpbcalendar-admin-eventLinkField').addClass('rpbcalendar-admin-invalidField');
+
+// Build the answer
+function do_validation()
+{
+	// Default answer
+	$answer = array('result' => false);
+
+	// Retrieve the method to use
+	if(!isset($_GET['method'])) {
+		$answer['error'] = 'No validation method defined.';
+		return $answer;
+	}
+	$method = $_GET['method'];
+	$answer['method'] = $method;
+	if(!method_exists('RPBCalendarHelperValidation', $method)) {
+		$answer['error'] = 'Bad validation method.';
+		return $answer;
+	}
+
+	// Retrieve the value to validate
+	if(!isset($_GET['value'])) {
+		$answer['error'] = 'No value defined.';
+		return $answer;
+	}
+	$value = $_GET['value'];
+	$answer['value'] = $value;
+
+	// Parse the additional arguments
+	$callback = array('RPBCalendarHelperValidation', $method);
+	$args     = array($value);
+	if(isset($_GET['arg1'])) {
+		$answer['arg1'] = $_GET['arg1'];
+		array_push($args, $_GET['arg1']);
+		if(isset($_GET['arg2'])) {
+			$answer['arg2'] = $_GET['arg2'];
+			array_push($args, $_GET['arg2']);
+			if(isset($_GET['arg3'])) {
+				$answer['arg3'] = $_GET['arg3'];
+				array_push($args, $_GET['arg3']);
+			}
 		}
 	}
 
+	// Validate the result
+	$answer['result'] = !is_null(call_user_func_array($callback, $args));
+	return $answer;
+}
 
-	// Call the AJAX validation request when the value of the field changes.
-	jQuery('#rpbcalendar-admin-eventLinkField').change(function()
-	{
-		jQuery.ajax(
-			'<?php echo RPBCALENDAR_URL . '/validate.php'; ?>',
-			{
-				data: { method: 'validateURL', arg1: true, value: jQuery('#rpbcalendar-admin-eventLinkField').val() },
-				dataType: 'json',
-				success: function(answer) { rpbCalendarUpdateEventLinkState(jQuery, answer.result); },
-				error: function() { rpbCalendarUpdateEventLinkState(jQuery, false); }
-			}
-		);
-	}).change();
 
-</script>
+// Return a JSON-encoded string.
+header('Content-Type: application/json');
+echo json_encode(do_validation());

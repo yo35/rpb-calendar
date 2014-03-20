@@ -22,3 +22,8 @@
 #rpbcalendar-admin-eventLink input[type="text"] {
 	width: 100%;
 }
+
+input[type="text"].rpbcalendar-admin-invalidField {
+	border-color: red;
+	background-color: #ffd0d0;
+}
