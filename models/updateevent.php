@@ -29,14 +29,14 @@ require_once(RPBCALENDAR_ABSPATH.'models/abstract/abstractmodel.php');
  */
 class RPBCalendarModelUpdateEvent extends RPBCalendarAbstractModel
 {
-	private $actionTraitsLoaded = false;
-	private $postID;
+	private $traitsLoaded = false;
+	private $eventID;
 
 
-	public function __construct($postID)
+	public function __construct($eventID)
 	{
 		parent::__construct();
-		$this->postID = $postID;
+		$this->eventID = $eventID;
 	}
 
 
@@ -51,12 +51,12 @@ class RPBCalendarModelUpdateEvent extends RPBCalendarAbstractModel
 		}
 
 		// Load the required traits.
-		if(!$this->actionTraitsLoaded) {
+		if(!$this->traitsLoaded) {
 			$this->loadTrait('UpdateEventLink');
-			$this->actionTraitsLoaded = true;
+			$this->traitsLoaded = true;
 		}
 
 		// Call the update methods defined in the traits.
-		$this->updateEventLink($this->postID);
+		$this->updateEventLink($this->eventID);
 	}
 }

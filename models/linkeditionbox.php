@@ -28,9 +28,9 @@ require_once(RPBCALENDAR_ABSPATH.'models/abstract/abstracteditionboxmodel.php');
  */
 class RPBCalendarModelLinkEditionBox extends RPBCalendarAbstractEditionBoxModel
 {
-	public function __construct($event)
+	public function __construct($eventID)
 	{
 		parent::__construct();
-		$this->loadTrait('EventLink', $event);
+		$this->loadTrait('EventLink', $eventID);
 	}
 }

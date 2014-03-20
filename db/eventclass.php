@@ -137,7 +137,7 @@ class RPBCalendarEventClass
 	 */
 	private function printEditionBox($modelName, $event)
 	{
-		$model = RPBCalendarHelperLoader::loadModel($modelName, $event);
+		$model = RPBCalendarHelperLoader::loadModel($modelName, $event->ID);
 		$view  = RPBCalendarHelperLoader::loadView($model);
 		$view->display();
 	}

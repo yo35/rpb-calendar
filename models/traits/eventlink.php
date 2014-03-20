@@ -29,7 +29,7 @@ require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
  */
 class RPBCalendarTraitEventLink extends RPBCalendarAbstractTrait
 {
-	private $event;
+	private $eventID;
 	private $link;
 
 
@@ -38,9 +38,9 @@ class RPBCalendarTraitEventLink extends RPBCalendarAbstractTrait
 	 *
 	 * @param object $event
 	 */
-	public function __construct($event)
+	public function __construct($eventID)
 	{
-		$this->event = $event;
+		$this->eventID = $eventID;
 	}
 
 
@@ -52,7 +52,7 @@ class RPBCalendarTraitEventLink extends RPBCalendarAbstractTrait
 	public function getEventLink()
 	{
 		if(is_null($this->link)) {
-			$value = RPBCalendarHelperValidation::validateURL(get_post_meta($this->event->ID, 'event_link', true), true);
+			$value = RPBCalendarHelperValidation::validateURL(get_post_meta($this->eventID, 'event_link', true), true);
 			$this->link = is_null($value) ? '' : $value;
 		}
 		return $this->link;

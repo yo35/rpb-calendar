@@ -32,11 +32,11 @@ class RPBCalendarTraitUpdateEventLink extends RPBCalendarAbstractTrait
 	/**
 	 * Update the link meta-information of the post identified by the given ID.
 	 */
-	public function updateEventLink($postID)
+	public function updateEventLink($eventID)
 	{
 		$eventLink = $this->getPostEventLink();
 		if(!is_null($eventLink)) {
-			update_post_meta($postID, 'event_link', $eventLink);
+			update_post_meta($eventID, 'event_link', $eventLink);
 		}
 	}
 
