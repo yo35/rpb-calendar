@@ -20,6 +20,9 @@
  ******************************************************************************/
 
 
+require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+
+
 /**
  * Register the 'event' type of post in the Wordpress database.
  *
@@ -49,6 +52,7 @@ class RPBCalendarEventClass
 	 */
 	private function __construct()
 	{
+		// Register the new type of post
 		register_post_type('rpbcalendar_event', array(
 			'labels' => array(
 				'name'               => __('Events'                 , 'rpbcalendar'),
@@ -69,6 +73,9 @@ class RPBCalendarEventClass
 			'query_var'    => 'event',
 			'register_meta_box_cb' => array($this, 'registerEditionBoxes'),
 		));
+
+		// Callback for post saving
+		add_action('save_post', array($this, 'save'));
 	}
 
 
@@ -130,9 +137,18 @@ class RPBCalendarEventClass
 	 */
 	private function printEditionBox($modelName, $event)
 	{
-		require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
 		$model = RPBCalendarHelperLoader::loadModel($modelName, $event);
 		$view  = RPBCalendarHelperLoader::loadView($model);
 		$view->display();
+	}
+
+
+	/**
+	 * Save the meta-information associated to an event.
+	 */
+	public function save($postID)
+	{
+		$model = RPBCalendarHelperLoader::loadModel('UpdateEvent', $postID);
+		$model->processRequest();
 	}
 }

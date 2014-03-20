@@ -18,8 +18,39 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
-?>
 
-<input type="text" name="event_link" value="<?php
-	echo htmlspecialchars($model->getEventLink());
-?>" />
+
+require_once(RPBCALENDAR_ABSPATH.'models/traits/abstracttrait.php');
+require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
+
+
+/**
+ * Update the link meta-information associated to an event based on an HTTP POST request.
+ */
+class RPBCalendarTraitUpdateEventLink extends RPBCalendarAbstractTrait
+{
+	/**
+	 * Update the link meta-information of the post identified by the given ID.
+	 */
+	public function updateEventLink($postID)
+	{
+		$eventLink = $this->getPostEventLink();
+		if(!is_null($eventLink)) {
+			update_post_meta($postID, 'event_link', $eventLink);
+		}
+	}
+
+
+	/**
+	 * New event link value.
+	 */
+	public function getPostEventLink()
+	{
+		if(array_key_exists('event_link', $_POST)) {
+			return RPBCalendarHelperValidation::validateURL($_POST['event_link']);
+		}
+		else {
+			return null;
+		}
+	}
+}
