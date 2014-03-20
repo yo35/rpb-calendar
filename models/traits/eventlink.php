@@ -53,7 +53,7 @@ class RPBCalendarTraitEventLink extends RPBCalendarAbstractTrait
 	public function getEventLink()
 	{
 		if(!$this->linkLoaded) {
-			$this->link = RPBCalendarHelperValidation::validateURL(get_post_meta($event->ID, 'link', true));
+			$this->link = RPBCalendarHelperValidation::validateURL(get_post_meta($this->event->ID, 'event_link', true));
 			$this->linkLoaded = true;
 		}
 		return $this->link;
