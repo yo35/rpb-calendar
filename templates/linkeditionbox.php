@@ -20,4 +20,6 @@
  ******************************************************************************/
 ?>
 
-TODO
+<input type="text" value="<?php
+	echo htmlspecialchars($model->getEventLink());
+?>" />
