@@ -31,7 +31,6 @@ class RPBCalendarTraitEventLink extends RPBCalendarAbstractTrait
 {
 	private $event;
 	private $link;
-	private $linkLoaded = false;
 
 
 	/**
@@ -52,9 +51,9 @@ class RPBCalendarTraitEventLink extends RPBCalendarAbstractTrait
 	 */
 	public function getEventLink()
 	{
-		if(!$this->linkLoaded) {
-			$this->link = RPBCalendarHelperValidation::validateURL(get_post_meta($this->event->ID, 'event_link', true));
-			$this->linkLoaded = true;
+		if(is_null($this->link)) {
+			$value = RPBCalendarHelperValidation::validateURL(get_post_meta($this->event->ID, 'event_link', true), true);
+			$this->link = is_null($value) ? '' : $value;
 		}
 		return $this->link;
 	}

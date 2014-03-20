@@ -47,7 +47,7 @@ class RPBCalendarTraitUpdateEventLink extends RPBCalendarAbstractTrait
 	public function getPostEventLink()
 	{
 		if(array_key_exists('event_link', $_POST)) {
-			return RPBCalendarHelperValidation::validateURL($_POST['event_link']);
+			return RPBCalendarHelperValidation::validateURL($_POST['event_link'], true);
 		}
 		else {
 			return null;
