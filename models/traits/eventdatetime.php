@@ -30,8 +30,12 @@ require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
 class RPBCalendarTraitEventDateTime extends RPBCalendarAbstractTrait
 {
 	private $eventID;
-	private $dateBegin;
-	private $dateEnd;
+	private $dateBegin    ;
+	private $dateBeginInfo;
+	private $dateBeginStr ;
+	private $dateEnd    ;
+	private $dateEndInfo;
+	private $dateEndStr ;
 
 
 	/**
@@ -73,5 +77,57 @@ class RPBCalendarTraitEventDateTime extends RPBCalendarAbstractTrait
 			$this->dateEnd = (is_null($value) || $value < $dateBegin) ? $dateBegin : $value;
 		}
 		return $this->dateEnd;
+	}
+
+
+	/**
+	 * Return the detailed information about the begin date of the given event.
+	 *
+	 * @return array See the PHP function `getdate`.
+	 */
+	public function getEventDateBeginInfo()
+	{
+		if(is_null($this->dateBeginInfo)) {
+			$this->dateBeginInfo = getdate($this->getEventDateBegin());
+		}
+		return $this->dateBeginInfo;
+	}
+
+
+	/**
+	 * Return the detailed information about the end date of the given event.
+	 *
+	 * @return array See the PHP function `getdate`.
+	 */
+	public function getEventDateEndInfo()
+	{
+		if(is_null($this->dateEndInfo)) {
+			$this->dateEndInfo = getdate($this->getEventDateEnd());
+		}
+		return $this->dateEndInfo;
+	}
+
+
+	/**
+	 * Return the begin date of the given event formatted as a string.
+	 */
+	public function getEventDateBeginAsString()
+	{
+		if(is_null($this->dateBeginStr)) {
+			$this->dateBeginStr = date('Y-m-d', $this->getEventDateBegin());
+		}
+		return $this->dateBeginStr;
+	}
+
+
+	/**
+	 * Return the end date of the given event formatted as a string.
+	 */
+	public function getEventDateEndAsString()
+	{
+		if(is_null($this->dateEndStr)) {
+			$this->dateEndStr = date('Y-m-d', $this->getEventDateEnd());
+		}
+		return $this->dateEndStr;
 	}
 }
