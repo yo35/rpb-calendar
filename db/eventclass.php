@@ -125,7 +125,7 @@ class RPBCalendarEventClass
 	 */
 	public function printDateTimeEditionBox($event)
 	{
-		echo 'TODO'; //TODO: implement printDateTimeEditionBox($event)
+		$this->printEditionBox('DateTimeEditionBox', $event);
 	}
 
 
