@@ -53,10 +53,12 @@ class RPBCalendarModelUpdateEvent extends RPBCalendarAbstractModel
 		// Load the required traits.
 		if(!$this->traitsLoaded) {
 			$this->loadTrait('UpdateEventLink');
+			$this->loadTrait('UpdateEventDateTime');
 			$this->traitsLoaded = true;
 		}
 
 		// Call the update methods defined in the traits.
-		$this->updateEventLink($this->eventID);
+		$this->updateEventLink    ($this->eventID);
+		$this->updateEventDateTime($this->eventID);
 	}
 }
