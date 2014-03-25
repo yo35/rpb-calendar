@@ -41,6 +41,11 @@ a.button.rpbcalendar-admin-disabled:active {
 	background-color: initial;
 }
 
+
+
+/******************************************************************************/
+/*** Horizontal box layout ***/
+
 .rpbcalendar-admin-hBox {
 	display: -webkit-box;
 	display: -moz-box;
@@ -62,4 +67,37 @@ a.button.rpbcalendar-admin-disabled:active {
 .rpbcalendar-admin-hBox > :first-child,
 .wp-core-ui .rpbcalendar-admin-hBox > :first-child {
 	margin-left: 0px;
+}
+
+
+
+/******************************************************************************/
+/*** Grid layout ***/
+
+.rpbcalendar-admin-gridLayout {
+	display: table;
+}
+
+.rpbcalendar-admin-gridLayout > div {
+	display: table-row;
+	}
+
+.rpbcalendar-admin-gridLayout > div > div {
+	display: table-cell;
+	vertical-align: middle;
+	padding-top : 4px;
+	padding-left: 4px;
+}
+
+.rpbcalendar-admin-gridLayout > div:first-child > div {
+	padding-top: 0px;
+}
+
+.rpbcalendar-admin-gridLayout > div > div:first-child {
+	padding-left: 0px;
+}
+
+.rpbcalendar-admin-gridLayout > div > div > *,
+.wp-core-ui .rpbcalendar-admin-gridLayout > div > div > * {
+	margin: 0px;
 }
