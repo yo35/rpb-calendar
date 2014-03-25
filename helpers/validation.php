@@ -29,8 +29,7 @@ abstract class RPBCalendarHelperValidation
 	 * Validate a date.
 	 *
 	 * @param mixed $value
-	 * @return array May be null if the value does not represent a valid date.
-	 *         Otherwise, an array with the keys `'year'`, `'month'` and `'day'` is returned.
+	 * @return int Unix timestamp, with hour, minutes and seconds set to 0.
 	 */
 	public static function validateDate($value)
 	{
@@ -42,28 +41,26 @@ abstract class RPBCalendarHelperValidation
 			$y = intval($matches[1]);
 			$m = intval($matches[2]);
 			$d = intval($matches[3]);
-		}
 
-		// If the input is an array, ensure that the required keys are defined.
-		else if(is_array($value)) {
-			if(!(array_key_exists('year', $value) && array_key_exists('month', $value) && array_key_exists('day', $value))) {
+			// The day/month/year numbers must correspond to a valid Gregorian date.
+			if(!checkdate($m, $d, $y)) {
 				return null;
 			}
-			$y = (int)$value['year' ];
-			$m = (int)$value['month'];
-			$d = (int)$value['day'  ];
+
+			// Generate and return the appropriate timestamp.
+			return mktime(0, 0, 0, $m, $d, $y);
+		}
+
+		// If the input is an integer, it is assumed that it correspond to a timestamp.
+		// In this case, the hour/minute/second information is hidden.
+		else if(is_int($value)) {
+			return floor($value / 86400) * 86400; // 86400 = 24*60*60 = number of seconds in a day.
 		}
 
 		// Other types of input are rejected.
 		else {
 			return null;
 		}
-
-		// Check the date, and return the result if it is valid.
-		if(!checkdate($m, $d, $y)) {
-			return null;
-		}
-		return array('year' => $y, 'month' => $m, 'day' => $d);
 	}
 
 
