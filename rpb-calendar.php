@@ -49,12 +49,25 @@ function rpbcalendar_init()
 }
 
 
+// Enqueue scripts
+add_action(is_admin() ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts', 'rpbcalendar_enqueue_scripts');
+function rpbcalendar_enqueue_scripts()
+{
+	if(is_admin()) {
+		wp_enqueue_script('jquery-ui-datepicker');
+	}
+}
+
+
 // Enqueue CSS
 add_action(is_admin() ? 'admin_print_styles' : 'wp_print_styles', 'rpbcalendar_enqueue_css');
 function rpbcalendar_enqueue_css()
 {
+	// Additional CSS for the backend.
 	if(is_admin()) {
-		wp_register_style('rpbcalendar-backend', RPBCALENDAR_URL.'/css/backend.css');
-		wp_enqueue_style ('rpbcalendar-backend');
+		wp_register_style('rpbcalendar-jquery-ui', RPBCALENDAR_URL.'/css/jquery-ui-1.10.4.custom.min.css');
+		wp_register_style('rpbcalendar-backend'  , RPBCALENDAR_URL.'/css/backend.css');
+		wp_enqueue_style ('rpbcalendar-jquery-ui');
+		wp_enqueue_style ('rpbcalendar-backend'  );
 	}
 }
