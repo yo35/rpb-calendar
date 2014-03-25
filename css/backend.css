@@ -85,8 +85,8 @@ a.button.rpbcalendar-admin-disabled:active {
 .rpbcalendar-admin-gridLayout > div > div {
 	display: table-cell;
 	vertical-align: middle;
-	padding-top : 4px;
-	padding-left: 4px;
+	padding-top : 5px;
+	padding-left: 5px;
 }
 
 .rpbcalendar-admin-gridLayout > div:first-child > div {
