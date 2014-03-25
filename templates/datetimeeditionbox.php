@@ -49,15 +49,14 @@
 	jQuery(document).ready(function($)
 	{
 		$('#rpbcalendar-admin-eventDateBeginField').prop('readonly', true).datepicker({
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'yy-mm-dd',
+			onSelect: function(dateBegin) {
+				$('#rpbcalendar-admin-eventDateEndField').datepicker('option', 'minDate', dateBegin);
+			}
 		});
 		$('#rpbcalendar-admin-eventDateEndField').prop('readonly', true).datepicker({
 			dateFormat: 'yy-mm-dd',
 			minDate: $('#rpbcalendar-admin-eventDateBeginField').val()
-		});
-		$('#rpbcalendar-admin-eventDateBeginField').datepicker('option', 'onSelect', function(dateBegin)
-		{
-			$('#rpbcalendar-admin-eventDateEndField').datepicker('option', 'minDate', dateBegin);
 		});
 	});
 
