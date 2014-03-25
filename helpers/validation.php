@@ -26,6 +26,48 @@
 abstract class RPBCalendarHelperValidation
 {
 	/**
+	 * Validate a date.
+	 *
+	 * @param mixed $value
+	 * @return array May be null if the value does not represent a valid date.
+	 *         Otherwise, an array with the keys `'year'`, `'month'` and `'day'` is returned.
+	 */
+	public static function validateDate($value)
+	{
+		// If the input is a string, parse it.
+		if(is_string($value)) {
+			if(!preg_match('/^\s*([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])\s*$/', $value, $matches)) {
+				return null;
+			}
+			$y = intval($matches[1]);
+			$m = intval($matches[2]);
+			$d = intval($matches[3]);
+		}
+
+		// If the input is an array, ensure that the required keys are defined.
+		else if(is_array($value)) {
+			if(!(array_key_exists('year', $value) && array_key_exists('month', $value) && array_key_exists('day', $value))) {
+				return null;
+			}
+			$y = (int)$value['year' ];
+			$m = (int)$value['month'];
+			$d = (int)$value['day'  ];
+		}
+
+		// Other types of input are rejected.
+		else {
+			return null;
+		}
+
+		// Check the date, and return the result if it is valid.
+		if(!checkdate($m, $d, $y)) {
+			return null;
+		}
+		return array('year' => $y, 'month' => $m, 'day' => $d);
+	}
+
+
+	/**
 	 * Validate an URL.
 	 *
 	 * @param mixed $value
