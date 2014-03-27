@@ -80,9 +80,8 @@ class RPBCalendarEventClass
 		// Callback for post saving
 		add_action('save_post', array($this, 'save'));
 
-		// Filters for the definition of the columns in the backend interface.
+		// Filter for the definition of the columns in the backend interface.
 		add_filter('manage_rpbcalendar_event_posts_columns', array($this, 'registerEditionColumns'));
-		add_action('manage_rpbcalendar_event_posts_custom_column', array($this, 'printEditionColumn'), 10, 2);
 	}
 
 
@@ -98,31 +97,16 @@ class RPBCalendarEventClass
 
 
 	/**
-	 * Customize the columns in the "list of events" page in the backend interface.
+	 * Callback for the edition columns.
 	 *
 	 * @param array $columns Default columns.
 	 * @return array
 	 */
 	public function registerEditionColumns($columns)
 	{
-		// New set of columns.
-		return array(
-			'cb'         => $columns['cb'      ],
-			'title'      => $columns['title'   ],
-			'event_date' => __('Date', 'rpbcalendar'),
-			'author'     => $columns['author'  ],
-			'comments'   => $columns['comments'],
-			'date'       => __('State', 'rpbcalendar')
-		);
-	}
-
-
-	/**
-	 * TODO
-	 */
-	public function printEditionColumn($column, $eventID)
-	{
-		echo 'TODO col=' . $column . ' ev='.$eventID;
+		require_once(RPBCALENDAR_ABSPATH . 'controllers/editioncolumn.php');
+		$controller = new RPBCalendarControllerEditionColumn($columns);
+		return $controller->run();
 	}
 
 
