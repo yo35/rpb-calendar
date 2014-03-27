@@ -41,11 +41,11 @@ a.button.rpbcalendar-admin-disabled:active {
 	background-color: initial;
 }
 
-th.column-rpbcalendar_eventDateTime {
+th.column-rpbevent_date_time {
 	width: 18%;
 }
 
-tr.type-rpbcalendar_event span.rpbcalendar-admin-label {
+tr.type-rpbevent span.rpbcalendar-admin-label {
 	color: #888;
 	margin-right: 5px;
 }

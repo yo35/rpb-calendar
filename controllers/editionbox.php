@@ -42,7 +42,7 @@ class RPBCalendarControllerEditionBox extends RPBCalendarAbstractController
 			'rpbcalendar-admin-eventLink',
 			__('Link', 'rpbcalendar'),
 			array($this, 'printLinkEditionBox'),
-			'rpbcalendar_event',
+			'rpbevent',
 			'normal',
 			'high'
 		);
@@ -52,7 +52,7 @@ class RPBCalendarControllerEditionBox extends RPBCalendarAbstractController
 			'rpbcalendar-admin-eventDateTime',
 			__('Date/time', 'rpbcalendar'),
 			array($this, 'printDateTimeEditionBox'),
-			'rpbcalendar_event',
+			'rpbevent',
 			'side',
 			'high'
 		);

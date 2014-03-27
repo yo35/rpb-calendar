@@ -41,19 +41,19 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 	public function run()
 	{
 		// Register the callback to use to print the content of the custom columns.
-		add_action('manage_rpbcalendar_event_posts_custom_column', array($this, 'printEditionColumn'), 10, 2);
+		add_action('manage_rpbevent_posts_custom_column', array($this, 'printEditionColumn'), 10, 2);
 
 		// Register the filter that defines the sortable columns.
-		add_filter('manage_edit-rpbcalendar_event_sortable_columns', array($this, 'registerSortableColumns'));
+		add_filter('manage_edit-rpbevent_sortable_columns', array($this, 'registerSortableColumns'));
 
 		// New set of columns.
 		return array(
-			'cb'                        => $this->defaultColumns['cb'      ],
-			'title'                     => $this->defaultColumns['title'   ],
-			'rpbcalendar_eventDateTime' => __('Date/time', 'rpbcalendar'),
-			'author'                    => $this->defaultColumns['author'  ],
-			'comments'                  => $this->defaultColumns['comments'],
-			'date'                      => __('State', 'rpbcalendar')
+			'cb'                 => $this->defaultColumns['cb'      ],
+			'title'              => $this->defaultColumns['title'   ],
+			'rpbevent_date_time' => __('Date/time', 'rpbcalendar'),
+			'author'             => $this->defaultColumns['author'  ],
+			'comments'           => $this->defaultColumns['comments'],
+			'date'               => __('State', 'rpbcalendar')
 		);
 	}
 
@@ -65,7 +65,7 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 	 */
 	public function registerSortableColumns($columns)
 	{
-		$columns['rpbcalendar_eventDateTime'] = 'rpbevent_date_begin';
+		$columns['rpbevent_date_time'] = 'rpbevent_date_begin';
 		return $columns;
 	}
 
@@ -94,7 +94,7 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 	private static function getTemplateName($column)
 	{
 		switch($column) {
-			case 'rpbcalendar_eventDateTime': return 'DateTimeEditionColumn';
+			case 'rpbevent_date_time': return 'DateTimeEditionColumn';
 			default: return null;
 		}
 	}

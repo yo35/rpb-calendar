@@ -46,7 +46,7 @@ class RPBCalendarModelUpdateEvent extends RPBCalendarAbstractModel
 	public function processRequest()
 	{
 		// If the post is not an event, nothing to do.
-		if($_POST['post_type']!='rpbcalendar_event') {
+		if($_POST['post_type']!='rpbevent') {
 			return;
 		}
 

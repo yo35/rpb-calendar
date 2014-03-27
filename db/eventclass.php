@@ -56,7 +56,7 @@ class RPBCalendarEventClass
 	private function __construct()
 	{
 		// Register the new type of post
-		register_post_type('rpbcalendar_event', array(
+		register_post_type('rpbevent', array(
 			'labels' => array(
 				'name'               => __('Events'                 , 'rpbcalendar'),
 				'singular_name'      => __('Event'                  , 'rpbcalendar'),
@@ -84,7 +84,7 @@ class RPBCalendarEventClass
 		add_action('save_post', array($this, 'save'));
 
 		// Filter for the definition of the columns in the backend interface.
-		add_filter('manage_rpbcalendar_event_posts_columns', array($this, 'registerEditionColumns'));
+		add_filter('manage_rpbevent_posts_columns', array($this, 'registerEditionColumns'));
 	}
 
 
@@ -98,7 +98,7 @@ class RPBCalendarEventClass
 	public function alterQuery($args)
 	{
 		// Only events are affected
-		if($args['post_type']=='rpbcalendar_event')
+		if($args['post_type']=='rpbevent')
 		{
 			// Allow ordering by date
 			if(isset($args['orderby']) && $args['orderby']=='rpbevent_date_begin') {
