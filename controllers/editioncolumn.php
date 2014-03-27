@@ -45,12 +45,12 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 
 		// New set of columns.
 		return array(
-			'cb'         => $this->defaultColumns['cb'      ],
-			'title'      => $this->defaultColumns['title'   ],
-			'event_date' => __('Date', 'rpbcalendar'),
-			'author'     => $this->defaultColumns['author'  ],
-			'comments'   => $this->defaultColumns['comments'],
-			'date'       => __('State', 'rpbcalendar')
+			'cb'                        => $this->defaultColumns['cb'      ],
+			'title'                     => $this->defaultColumns['title'   ],
+			'rpbcalendar_eventDateTime' => __('Date/time', 'rpbcalendar'),
+			'author'                    => $this->defaultColumns['author'  ],
+			'comments'                  => $this->defaultColumns['comments'],
+			'date'                      => __('State', 'rpbcalendar')
 		);
 	}
 
@@ -63,6 +63,24 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 	 */
 	public function printEditionColumn($column, $eventID)
 	{
-		echo 'TODO col=' . $column . ' ev='.$eventID;
+		$model = $this->getModel();
+		$model->setEventID($eventID);
+		$model->useTemplate(self::getTemplateName($column));
+		$this->getView()->display();
+	}
+
+
+	/**
+	 * Return the name of the template to use based on the given column ID.
+	 *
+	 * @param string $column
+	 * @return string
+	 */
+	private static function getTemplateName($column)
+	{
+		switch($column) {
+			case 'rpbcalendar_eventDateTime': return 'DateTimeEditionColumn';
+			default: return null;
+		}
 	}
 }
