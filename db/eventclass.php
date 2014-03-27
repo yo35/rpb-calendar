@@ -78,6 +78,27 @@ class RPBCalendarEventClass
 
 		// Callback for post saving
 		add_action('save_post', array($this, 'save'));
+
+		// Filter for the definition of the columns in the backend interface.
+		add_filter('manage_rpbcalendar_event_posts_columns', array($this, 'registerColumns'));
+	}
+
+
+	/**
+	 * Customize the columns in the "list of events" page in the backend interface.
+	 *
+	 * @param array $columns Default columns.
+	 * @return array
+	 */
+	public function registerColumns($columns)
+	{
+		return array(
+			'cb'       => $columns['cb'      ],
+			'title'    => $columns['title'   ],
+			'author'   => $columns['author'  ],
+			'comments' => $columns['comments'],
+			'date'     => __('State', 'rpbcalendar')
+		);
 	}
 
 
