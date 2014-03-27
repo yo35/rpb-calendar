@@ -30,6 +30,7 @@ abstract class RPBCalendarAbstractController
 {
 	private $modelName;
 	private $model = null;
+	private $view  = null;
 
 
 	/**
@@ -52,6 +53,18 @@ abstract class RPBCalendarAbstractController
 			$this->model = RPBCalendarHelperLoader::loadModel($this->modelName);
 		}
 		return $this->model;
+	}
+
+
+	/**
+	 * Load (if necessary) and return the view.
+	 */
+	public function getView()
+	{
+		if(is_null($this->view)) {
+			$this->view = RPBCalendarHelperLoader::loadView($this->getModel());
+		}
+		return $this->view;
 	}
 
 
