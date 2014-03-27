@@ -20,17 +20,18 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH.'models/abstract/abstracteditionboxmodel.php');
+require_once(RPBCALENDAR_ABSPATH.'models/abstract/abstractmodel.php');
 
 
 /**
- * Model for the box showing the link associated to an event in the backend edition interface.
+ * Model for the edition boxes showing the meta information associated to an event
+ * in the backend edition interface.
  */
-class RPBCalendarModelLinkEditionBox extends RPBCalendarAbstractEditionBoxModel
+class RPBCalendarModelEditionBox extends RPBCalendarAbstractModel
 {
-	public function __construct($eventID)
+	public function __construct()
 	{
 		parent::__construct();
-		$this->loadTrait('EventLink', $eventID);
+		$this->loadTrait('Event');
 	}
 }

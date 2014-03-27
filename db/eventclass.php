@@ -33,6 +33,8 @@ class RPBCalendarEventClass
 {
 	private static $registered = false;
 
+	private $editionBoxView;
+
 
 	/**
 	 * Function to call externally to register the class. Must be called only once.
@@ -104,6 +106,10 @@ class RPBCalendarEventClass
 			'side',
 			'high'
 		);
+
+		// Load the model and the view for the edition boxes
+		$model = RPBCalendarHelperLoader::loadModel('EditionBox');
+		$this->editionBoxView = RPBCalendarHelperLoader::loadView($model);
 	}
 
 
@@ -132,14 +138,15 @@ class RPBCalendarEventClass
 	/**
 	 * Print the edition box specified by the model with the given name.
 	 *
-	 * @param string $modelName
+	 * @param string $templateName
 	 * @param object $event
 	 */
-	private function printEditionBox($modelName, $event)
+	private function printEditionBox($templateName, $event)
 	{
-		$model = RPBCalendarHelperLoader::loadModel($modelName, $event->ID);
-		$view  = RPBCalendarHelperLoader::loadView($model);
-		$view->display();
+		$model = $this->editionBoxView->getModel();
+		$model->useTemplate($templateName);
+		$model->setEventID($event->ID);
+		$this->editionBoxView->display();
 	}
 
 

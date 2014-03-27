@@ -25,32 +25,65 @@ require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
 
 
 /**
- * Load the date/time meta information associated to an event.
+ * Meta information associated to an event.
  */
-class RPBCalendarTraitEventDateTime extends RPBCalendarAbstractTrait
+class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 {
-	private $eventID;
-	private $dateBegin    ;
-	private $dateBeginInfo;
-	private $dateBeginStr ;
-	private $dateEnd    ;
-	private $dateEndInfo;
-	private $dateEndStr ;
+	private $eventID = -1;
+	private $link        ;
+	private $dateBegin   ;
+	private $dateBeginStr;
+	private $dateEnd     ;
+	private $dateEndStr  ;
 
 
 	/**
-	 * Constructor.
+	 * ID of the currently selected event.
 	 *
-	 * @param object $event
+	 * @return int
 	 */
-	public function __construct($eventID)
+	public function getEventID()
 	{
-		$this->eventID = $eventID;
+		return $this->eventID;
 	}
 
 
 	/**
-	 * Return the begin date of the given event.
+	 * Change the currently selected event.
+	 *
+	 * @param int $eventID ID of the newly selected event.
+	 */
+	public function setEventID($eventID)
+	{
+		if($this->eventID==$eventID) {
+			return;
+		}
+		$this->eventID = $eventID;
+		$this->link         = null;
+		$this->dateBegin    = null;
+		$this->dateBeginStr = null;
+		$this->dateEnd      = null;
+		$this->dateEndStr   = null;
+	}
+
+
+	/**
+	 * Return the web link associated to the currently selected event.
+	 *
+	 * @return string Either a valid URL or an empty string.
+	 */
+	public function getEventLink()
+	{
+		if(is_null($this->link)) {
+			$value = RPBCalendarHelperValidation::validateURL(get_post_meta($this->eventID, 'event_link', true), true);
+			$this->link = is_null($value) ? '' : $value;
+		}
+		return $this->link;
+	}
+
+
+	/**
+	 * Return the begin date of the currently selected event.
 	 *
 	 * @return int Timestamp
 	 */
@@ -65,7 +98,7 @@ class RPBCalendarTraitEventDateTime extends RPBCalendarAbstractTrait
 
 
 	/**
-	 * Return the end date of the given event.
+	 * Return the end date of the currently selected event.
 	 *
 	 * @return int Timestamp
 	 */
@@ -81,35 +114,9 @@ class RPBCalendarTraitEventDateTime extends RPBCalendarAbstractTrait
 
 
 	/**
-	 * Return the detailed information about the begin date of the given event.
+	 * Return the begin date of the currently selected event formatted as a string.
 	 *
-	 * @return array See the PHP function `getdate`.
-	 */
-	public function getEventDateBeginInfo()
-	{
-		if(is_null($this->dateBeginInfo)) {
-			$this->dateBeginInfo = getdate($this->getEventDateBegin());
-		}
-		return $this->dateBeginInfo;
-	}
-
-
-	/**
-	 * Return the detailed information about the end date of the given event.
-	 *
-	 * @return array See the PHP function `getdate`.
-	 */
-	public function getEventDateEndInfo()
-	{
-		if(is_null($this->dateEndInfo)) {
-			$this->dateEndInfo = getdate($this->getEventDateEnd());
-		}
-		return $this->dateEndInfo;
-	}
-
-
-	/**
-	 * Return the begin date of the given event formatted as a string.
+	 * @return string
 	 */
 	public function getEventDateBeginAsString()
 	{
@@ -121,7 +128,9 @@ class RPBCalendarTraitEventDateTime extends RPBCalendarAbstractTrait
 
 
 	/**
-	 * Return the end date of the given event formatted as a string.
+	 * Return the end date of the currently selected event formatted as a string.
+	 *
+	 * @return string
 	 */
 	public function getEventDateEndAsString()
 	{
