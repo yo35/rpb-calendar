@@ -30,11 +30,9 @@ require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
 class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 {
 	private $eventID = -1;
-	private $link        ;
-	private $dateBegin   ;
-	private $dateBeginStr;
-	private $dateEnd     ;
-	private $dateEndStr  ;
+	private $link     ;
+	private $dateBegin;
+	private $dateEnd  ;
 
 
 	/**
@@ -116,27 +114,23 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	/**
 	 * Return the begin date of the currently selected event formatted as a string.
 	 *
+	 * @param string $format Date format pattern, as specified by the WP `date_i18n()` function.
 	 * @return string
 	 */
-	public function getEventDateBeginAsString()
+	public function getEventDateBeginAsString($format = 'Y-m-d')
 	{
-		if(is_null($this->dateBeginStr)) {
-			$this->dateBeginStr = date('Y-m-d', $this->getEventDateBegin());
-		}
-		return $this->dateBeginStr;
+		return date_i18n($format, $this->getEventDateBegin());
 	}
 
 
 	/**
 	 * Return the end date of the currently selected event formatted as a string.
 	 *
+	 * @param string $format Date format pattern, as specified by the WP `date_i18n()` function.
 	 * @return string
 	 */
-	public function getEventDateEndAsString()
+	public function getEventDateEndAsString($format = 'Y-m-d')
 	{
-		if(is_null($this->dateEndStr)) {
-			$this->dateEndStr = date('Y-m-d', $this->getEventDateEnd());
-		}
-		return $this->dateEndStr;
+		return date_i18n($format, $this->getEventDateEnd());
 	}
 }
