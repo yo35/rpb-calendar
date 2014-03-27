@@ -31,7 +31,7 @@ abstract class RPBCalendarAbstractView
 	/**
 	 * Constructor.
 	 */
-	protected function __construct($model)
+	public function __construct($model)
 	{
 		$this->model = $model;
 	}
