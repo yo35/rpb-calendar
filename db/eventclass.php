@@ -33,6 +33,7 @@ class RPBCalendarEventClass
 {
 	private static $registered = false;
 
+	private $columnView;
 	private $editionBoxView;
 
 
@@ -73,14 +74,26 @@ class RPBCalendarEventClass
 			'supports'     => array('title', 'editor', 'author', 'comments'),
 			'rewrite'      => array('slug' => 'event'),
 			'query_var'    => 'event',
-			'register_meta_box_cb' => array($this, 'registerEditionBoxes'),
+			'register_meta_box_cb' => array($this, 'registerMetaBoxCallback'),
 		));
 
 		// Callback for post saving
 		add_action('save_post', array($this, 'save'));
 
-		// Filter for the definition of the columns in the backend interface.
-		add_filter('manage_rpbcalendar_event_posts_columns', array($this, 'registerColumns'));
+		// Filters for the definition of the columns in the backend interface.
+		add_filter('manage_rpbcalendar_event_posts_columns', array($this, 'registerEditionColumns'));
+		add_action('manage_rpbcalendar_event_posts_custom_column', array($this, 'printEditionColumn'), 10, 2);
+	}
+
+
+	/**
+	 * Callback for the edition boxes.
+	 */
+	public function registerMetaBoxCallback()
+	{
+		require_once(RPBCALENDAR_ABSPATH . 'controllers/editionbox.php');
+		$controller = new RPBCalendarControllerEditionBox();
+		$controller->run();
 	}
 
 
@@ -90,84 +103,26 @@ class RPBCalendarEventClass
 	 * @param array $columns Default columns.
 	 * @return array
 	 */
-	public function registerColumns($columns)
+	public function registerEditionColumns($columns)
 	{
+		// New set of columns.
 		return array(
-			'cb'       => $columns['cb'      ],
-			'title'    => $columns['title'   ],
-			'author'   => $columns['author'  ],
-			'comments' => $columns['comments'],
-			'date'     => __('State', 'rpbcalendar')
+			'cb'         => $columns['cb'      ],
+			'title'      => $columns['title'   ],
+			'event_date' => __('Date', 'rpbcalendar'),
+			'author'     => $columns['author'  ],
+			'comments'   => $columns['comments'],
+			'date'       => __('State', 'rpbcalendar')
 		);
 	}
 
 
 	/**
-	 * Register the "boxes" that show the meta-information related to an event
-	 * (the date, time,link, etc...) in the backend interface.
+	 * TODO
 	 */
-	public function registerEditionBoxes()
+	public function printEditionColumn($column, $eventID)
 	{
-		// Link
-		add_meta_box(
-			'rpbcalendar-admin-eventLink',
-			__('Link', 'rpbcalendar'),
-			array($this, 'printLinkEditionBox'),
-			'rpbcalendar_event',
-			'normal',
-			'high'
-		);
-
-		// Date/time/notes
-		add_meta_box(
-			'rpbcalendar-admin-eventDateTime',
-			__('Date/time', 'rpbcalendar'),
-			array($this, 'printDateTimeEditionBox'),
-			'rpbcalendar_event',
-			'side',
-			'high'
-		);
-
-		// Load the model and the view for the edition boxes
-		$model = RPBCalendarHelperLoader::loadModel('EditionBox');
-		$this->editionBoxView = RPBCalendarHelperLoader::loadView($model);
-	}
-
-
-	/**
-	 * Print the edition box showing the link assocated to an event.
-	 *
-	 * @param object $event
-	 */
-	public function printLinkEditionBox($event)
-	{
-		$this->printEditionBox('LinkEditionBox', $event);
-	}
-
-
-	/**
-	 * Print the edition box showing the date and time assocated to an event.
-	 *
-	 * @param object $event
-	 */
-	public function printDateTimeEditionBox($event)
-	{
-		$this->printEditionBox('DateTimeEditionBox', $event);
-	}
-
-
-	/**
-	 * Print the edition box specified by the model with the given name.
-	 *
-	 * @param string $templateName
-	 * @param object $event
-	 */
-	private function printEditionBox($templateName, $event)
-	{
-		$model = $this->editionBoxView->getModel();
-		$model->useTemplate($templateName);
-		$model->setEventID($event->ID);
-		$this->editionBoxView->display();
+		echo 'TODO col=' . $column . ' ev='.$eventID;
 	}
 
 
