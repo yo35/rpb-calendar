@@ -43,6 +43,9 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 		// Register the callback to use to print the content of the custom columns.
 		add_action('manage_rpbcalendar_event_posts_custom_column', array($this, 'printEditionColumn'), 10, 2);
 
+		// Register the filter that defines the sortable columns.
+		add_filter('manage_edit-rpbcalendar_event_sortable_columns', array($this, 'registerSortableColumns'));
+
 		// New set of columns.
 		return array(
 			'cb'                        => $this->defaultColumns['cb'      ],
@@ -52,6 +55,18 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 			'comments'                  => $this->defaultColumns['comments'],
 			'date'                      => __('State', 'rpbcalendar')
 		);
+	}
+
+
+	/**
+	 * Mark the column containing the event date/time as sortable.
+	 *
+	 * @param array $columns
+	 */
+	public function registerSortableColumns($columns)
+	{
+		$columns['rpbcalendar_eventDateTime'] = 'event_date_begin';
+		return $columns;
 	}
 
 

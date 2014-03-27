@@ -77,11 +77,35 @@ class RPBCalendarEventClass
 			'register_meta_box_cb' => array($this, 'registerMetaBoxCallback'),
 		));
 
+		// Callback for post querying
+		add_filter('request', array($this, 'alterQuery'));
+
 		// Callback for post saving
 		add_action('save_post', array($this, 'save'));
 
 		// Filter for the definition of the columns in the backend interface.
 		add_filter('manage_rpbcalendar_event_posts_columns', array($this, 'registerEditionColumns'));
+	}
+
+
+	/**
+	 * Callback that alters the parameters of post queries to handle some meta-information
+	 * associated to the events.
+	 *
+	 * @param array $args Query parameters
+	 * @return array Modified query parameters
+	 */
+	public function alterQuery($args)
+	{
+		// Only events are affected
+		if($args['post_type']=='rpbcalendar_event')
+		{
+			// Allow ordering by date
+			if(isset($args['orderby']) && $args['orderby']=='event_date_begin') {
+				$args = array_merge($args, array('meta_key' => 'event_date_begin', 'orderby' => 'meta_value'));
+			}
+		}
+		return $args;
 	}
 
 
