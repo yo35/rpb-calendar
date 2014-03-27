@@ -20,7 +20,7 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH.'views/abstractview.php');
+require_once(RPBCALENDAR_ABSPATH . 'views/abstractview.php');
 
 
 /**
