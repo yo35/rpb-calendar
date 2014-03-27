@@ -35,6 +35,7 @@
 abstract class RPBCalendarAbstractModel
 {
 	private $name = null;
+	private $templateName = null;
 	private $methodIndex = array();
 
 
@@ -116,6 +117,18 @@ abstract class RPBCalendarAbstractModel
 	 */
 	public function getTemplateName()
 	{
-		return $this->getName();
+		return is_null($this->templateName) ? $this->getName() : $this->templateName;
+	}
+
+
+	/**
+	 * Change the name of the template to use.
+	 *
+	 * @param string $templateName Null to use the default template, which is the one
+	 *        that has the same name as the model.
+	 */
+	public function useTemplate($templateName)
+	{
+		$this->templateName = $templateName;
 	}
 }
