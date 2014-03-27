@@ -65,7 +65,7 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 	 */
 	public function registerSortableColumns($columns)
 	{
-		$columns['rpbcalendar_eventDateTime'] = 'event_date_begin';
+		$columns['rpbcalendar_eventDateTime'] = 'rpbevent_date_begin';
 		return $columns;
 	}
 

@@ -36,7 +36,7 @@ class RPBCalendarTraitUpdateEventLink extends RPBCalendarAbstractTrait
 	{
 		$eventLink = $this->getPostEventLink();
 		if(!is_null($eventLink)) {
-			update_post_meta($eventID, 'event_link', $eventLink);
+			update_post_meta($eventID, 'rpbevent_link', $eventLink);
 		}
 	}
 
@@ -46,8 +46,8 @@ class RPBCalendarTraitUpdateEventLink extends RPBCalendarAbstractTrait
 	 */
 	public function getPostEventLink()
 	{
-		if(array_key_exists('event_link', $_POST)) {
-			return RPBCalendarHelperValidation::validateURL($_POST['event_link'], true);
+		if(array_key_exists('rpbevent_link', $_POST)) {
+			return RPBCalendarHelperValidation::validateURL($_POST['rpbevent_link'], true);
 		}
 		else {
 			return null;

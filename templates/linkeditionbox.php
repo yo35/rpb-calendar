@@ -21,7 +21,7 @@
 ?>
 
 <div class="rpbcalendar-admin-hBox">
-	<input type="text" name="event_link" id="rpbcalendar-admin-eventLinkField" value="<?php
+	<input type="text" name="rpbevent_link" id="rpbcalendar-admin-eventLinkField" value="<?php
 		echo htmlspecialchars($model->getEventLink());
 	?>" />
 	<a class="button" id="rpbcalendar-admin-eventLinkPreview" href="#" title="<?php

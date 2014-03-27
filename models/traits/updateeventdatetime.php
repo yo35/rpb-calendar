@@ -42,10 +42,10 @@ class RPBCalendarTraitUpdateEventDateTime extends RPBCalendarAbstractTrait
 		$dateBegin = $this->getPostEventDateBeginAsString();
 		$dateEnd   = $this->getPostEventDateEndAsString  ();
 		if(!is_null($dateBegin)) {
-			update_post_meta($eventID, 'event_date_begin', $dateBegin);
+			update_post_meta($eventID, 'rpbevent_date_begin', $dateBegin);
 		}
 		if(!is_null($dateEnd)) {
-			update_post_meta($eventID, 'event_date_end', $dateEnd);
+			update_post_meta($eventID, 'rpbevent_date_end', $dateEnd);
 		}
 	}
 
@@ -106,9 +106,9 @@ class RPBCalendarTraitUpdateEventDateTime extends RPBCalendarAbstractTrait
 		if($this->dateLoaded) {
 			return;
 		}
-		if(array_key_exists('event_date_begin', $_POST) && array_key_exists('event_date_end', $_POST)) {
-			$dateBegin = RPBCalendarHelperValidation::validateDate($_POST['event_date_begin']);
-			$dateEnd   = RPBCalendarHelperValidation::validateDate($_POST['event_date_end'  ]);
+		if(array_key_exists('rpbevent_date_begin', $_POST) && array_key_exists('rpbevent_date_end', $_POST)) {
+			$dateBegin = RPBCalendarHelperValidation::validateDate($_POST['rpbevent_date_begin']);
+			$dateEnd   = RPBCalendarHelperValidation::validateDate($_POST['rpbevent_date_end'  ]);
 			if(!is_null($dateBegin) && !is_null($dateEnd)) {
 				$this->dateBegin = min($dateBegin, $dateEnd);
 				$this->dateEnd   = max($dateBegin, $dateEnd);

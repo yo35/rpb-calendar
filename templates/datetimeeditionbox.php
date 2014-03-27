@@ -26,7 +26,7 @@
 			<label for="rpbcalendar-admin-eventDateBeginField"><?php _e('From:', 'rpbcalendar'); ?></label>
 		</div>
 		<div>
-			<input type="text" name="event_date_begin" id="rpbcalendar-admin-eventDateBeginField" value="<?php
+			<input type="text" name="rpbevent_date_begin" id="rpbcalendar-admin-eventDateBeginField" value="<?php
 				echo htmlspecialchars($model->getEventDateBeginAsString());
 			?>" size="10" />
 		</div>
@@ -36,7 +36,7 @@
 			<label for="rpbcalendar-admin-eventDateBeginField"><?php _e('To:', 'rpbcalendar'); ?></label>
 		</div>
 		<div>
-			<input type="text" name="event_date_end" id="rpbcalendar-admin-eventDateEndField" value="<?php
+			<input type="text" name="rpbevent_date_end" id="rpbcalendar-admin-eventDateEndField" value="<?php
 				echo htmlspecialchars($model->getEventDateEndAsString());
 			?>" size="10" />
 		</div>

@@ -73,7 +73,7 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	public function getEventLink()
 	{
 		if(is_null($this->link)) {
-			$value = RPBCalendarHelperValidation::validateURL(get_post_meta($this->eventID, 'event_link', true), true);
+			$value = RPBCalendarHelperValidation::validateURL(get_post_meta($this->eventID, 'rpbevent_link', true), true);
 			$this->link = is_null($value) ? '' : $value;
 		}
 		return $this->link;
@@ -88,7 +88,7 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	public function getEventDateBegin()
 	{
 		if(is_null($this->dateBegin)) {
-			$value = RPBCalendarHelperValidation::validateDate(get_post_meta($this->eventID, 'event_date_begin', true));
+			$value = RPBCalendarHelperValidation::validateDate(get_post_meta($this->eventID, 'rpbevent_date_begin', true));
 			$this->dateBegin = is_null($value) ? RPBCalendarHelperValidation::validateDate(time()) : $value;
 		}
 		return $this->dateBegin;
@@ -103,7 +103,7 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	public function getEventDateEnd()
 	{
 		if(is_null($this->dateEnd)) {
-			$value     = RPBCalendarHelperValidation::validateDate(get_post_meta($this->eventID, 'event_date_end', true));
+			$value     = RPBCalendarHelperValidation::validateDate(get_post_meta($this->eventID, 'rpbevent_date_end', true));
 			$dateBegin = $this->getEventDateBegin();
 			$this->dateEnd = (is_null($value) || $value < $dateBegin) ? $dateBegin : $value;
 		}

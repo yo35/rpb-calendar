@@ -101,8 +101,8 @@ class RPBCalendarEventClass
 		if($args['post_type']=='rpbcalendar_event')
 		{
 			// Allow ordering by date
-			if(isset($args['orderby']) && $args['orderby']=='event_date_begin') {
-				$args = array_merge($args, array('meta_key' => 'event_date_begin', 'orderby' => 'meta_value'));
+			if(isset($args['orderby']) && $args['orderby']=='rpbevent_date_begin') {
+				$args = array_merge($args, array('meta_key' => 'rpbevent_date_begin', 'orderby' => 'meta_value'));
 			}
 		}
 		return $args;
