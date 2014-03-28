@@ -43,6 +43,9 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 		// Register the callback to use to print the content of the custom columns.
 		add_action('manage_rpbevent_posts_custom_column', array($this, 'printEditionColumn'), 10, 2);
 
+		// Register the callback to filter the events based on their categories.
+		add_action('restrict_manage_posts', array($this, 'registerCategoryFilter'));
+
 		// Register the filter that defines the sortable columns.
 		add_filter('manage_edit-rpbevent_sortable_columns', array($this, 'registerSortableColumns'));
 
@@ -56,6 +59,22 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 			'comments'            => $this->defaultColumns['comments'],
 			'date'                => __('State', 'rpbcalendar')
 		);
+	}
+
+
+	/**
+	 * Print a combo-box allowing the user to show only the events belonging to a particular event category.
+	 */
+	public function registerCategoryFilter()
+	{
+		wp_dropdown_categories(array(
+			'taxonomy'        => 'rpbevent_category',
+			'name'            => 'rpbevent_category',
+			'selected'        => isset($_GET['rpbevent_category']) ? $_GET['rpbevent_category'] : '',
+			'hierarchical'    => true,
+			'hide_empty'      => false,
+			'show_option_all' => __('View all categories', 'rpbcalendar')
+		));
 	}
 
 

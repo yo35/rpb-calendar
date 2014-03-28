@@ -73,7 +73,7 @@ class RPBCalendarEventClass
 			'hierarchical' => false,
 			'supports'     => array('title', 'editor', 'author', 'comments'),
 			'rewrite'      => array('slug' => 'event'),
-			'query_var'    => 'event',
+			'query_var'    => 'event', // TODO: relevant?
 			'register_meta_box_cb' => array($this, 'registerMetaBoxCallback'),
 		));
 
@@ -90,12 +90,11 @@ class RPBCalendarEventClass
 			),
 			'public'       => true,
 			'hierarchical' => true,
-			'rewrite'      => array('slug' => 'event-category'),
-			'query_var'    => 'event-category'
+			'rewrite'      => array('slug' => 'event-category')
 		));
 
 		// Callback for post querying
-		add_filter('request', array($this, 'alterQuery'));
+		add_action('parse_query', array($this, 'alterQuery'));
 
 		// Callback for post saving
 		add_action('save_post', array($this, 'save'));
@@ -109,20 +108,27 @@ class RPBCalendarEventClass
 	 * Callback that alters the parameters of post queries to handle some meta-information
 	 * associated to the events.
 	 *
-	 * @param array $args Query parameters
-	 * @return array Modified query parameters
+	 * @param WP_Query $query
 	 */
-	public function alterQuery($args)
+	public function alterQuery($query)
 	{
-		// Only events are affected
-		if($args['post_type']=='rpbevent')
-		{
-			// Allow ordering by date
-			if(isset($args['orderby']) && $args['orderby']=='rpbevent_date_begin') {
-				$args = array_merge($args, array('meta_key' => 'rpbevent_date_begin', 'orderby' => 'meta_value'));
-			}
+		// Only events are affected.
+		$vars = &$query->query_vars;
+		if(!(isset($vars['post_type']) && $vars['post_type']=='rpbevent')) {
+			return;
 		}
-		return $args;
+
+		// Enable ordering by date
+		if(isset($vars['orderby']) && $vars['orderby']=='rpbevent_date_begin') {
+			$vars['meta_key'] = 'rpbevent_date_begin';
+			$vars['orderby' ] = 'meta_value';
+		}
+
+		// Enable category-based filtering
+		if(isset($vars['rpbevent_category']) && is_numeric($vars['rpbevent_category']) && $vars['rpbevent_category']!=0) {
+			$term = get_term_by('id', $vars['rpbevent_category'], 'rpbevent_category');
+			$vars['rpbevent_category'] = $term->slug;
+		}
 	}
 
 
