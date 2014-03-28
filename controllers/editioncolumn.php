@@ -54,6 +54,7 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 			'cb'                  => $this->defaultColumns['cb'      ],
 			'title'               => $this->defaultColumns['title'   ],
 			'rpbevent_date_time'  => __('Date/time', 'rpbcalendar'),
+			'rpbevent_link'       => __('Link', 'rpbcalendar'),
 			'author'              => $this->defaultColumns['author'  ],
 			'rpbevent_categories' => __('Categories', 'rpbcalendar'),
 			'comments'            => $this->defaultColumns['comments'],
@@ -114,7 +115,8 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 	private static function getTemplateName($column)
 	{
 		switch($column) {
-			case 'rpbevent_date_time' : return 'DateTimeEditionColumn';
+			case 'rpbevent_date_time' : return 'DateTimeEditionColumn'  ;
+			case 'rpbevent_link'      : return 'LinkEditionColumn'      ;
 			case 'rpbevent_categories': return 'CategoriesEditionColumn';
 			default: return null;
 		}

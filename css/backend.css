@@ -45,6 +45,10 @@ th#rpbevent_date_time {
 	width: 18%;
 }
 
+th#rpbevent_link {
+	width: 10%;
+}
+
 th#rpbevent_categories {
 	width: 10%;
 }
