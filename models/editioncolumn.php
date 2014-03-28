@@ -28,9 +28,27 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
  */
 class RPBCalendarModelEditionColumn extends RPBCalendarAbstractModel
 {
+	private $filterByCategoryURLTemplate;
+
+
 	public function __construct()
 	{
 		parent::__construct();
 		$this->loadTrait('Event');
+	}
+
+
+	/**
+	 * Return the URL to use to display the list of all events of the given category.
+	 *
+	 * @param object $category
+	 * @return string
+	 */
+	public function getFilterByCategoryURL($category)
+	{
+		if(is_null($this->filterByCategoryURLTemplate)) {
+			$this->filterByCategoryURLTemplate = admin_url('edit.php?post_type=rpbevent&rpbevent_category=%1$s');
+		}
+		return sprintf($this->filterByCategoryURLTemplate, $category->term_id);
 	}
 }
