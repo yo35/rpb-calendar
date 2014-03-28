@@ -30,9 +30,10 @@ require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
 class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 {
 	private $eventID = -1;
-	private $link     ;
-	private $dateBegin;
-	private $dateEnd  ;
+	private $categories;
+	private $link      ;
+	private $dateBegin ;
+	private $dateEnd   ;
 
 
 	/**
@@ -57,11 +58,26 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 			return;
 		}
 		$this->eventID = $eventID;
-		$this->link         = null;
-		$this->dateBegin    = null;
-		$this->dateBeginStr = null;
-		$this->dateEnd      = null;
-		$this->dateEndStr   = null;
+		$this->categories = null;
+		$this->link       = null;
+		$this->dateBegin  = null;
+		$this->dateEnd    = null;
+	}
+
+
+	/**
+	 * Return the categories associated to the currently selected event.
+	 *
+	 * @return array Array of objects, as returned by the WP function `get_the_terms()`,
+	 *         or an empty array if no category is associated to the currently selected event.
+	 */
+	public function getEventCategories()
+	{
+		if(is_null($this->categories)) {
+			$value = get_the_terms($this->eventID, 'rpbevent_category');
+			$this->categories = is_array($value) ? $value : array();
+		}
+		return $this->categories;
 	}
 
 
