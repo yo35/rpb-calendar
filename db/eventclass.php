@@ -55,7 +55,7 @@ class RPBCalendarEventClass
 	 */
 	private function __construct()
 	{
-		// Register the new type of post
+		// Register the new type of post.
 		register_post_type('rpbevent', array(
 			'labels' => array(
 				'name'               => __('Events'                 , 'rpbcalendar'),
@@ -75,6 +75,23 @@ class RPBCalendarEventClass
 			'rewrite'      => array('slug' => 'event'),
 			'query_var'    => 'event',
 			'register_meta_box_cb' => array($this, 'registerMetaBoxCallback'),
+		));
+
+		// Register the associated taxonomy.
+		register_taxonomy('rpbevent_category', 'rpbevent', array(
+			'labels' => array(
+				'name'          => __('Event categories'       , 'rpbcalendar'),
+				'singular_name' => __('Event category'         , 'rpbcalendar'),
+				'add_new_item'  => __('Add new event category' , 'rpbcalendar'),
+				'edit_item'     => __('Edit event category'    , 'rpbcalendar'),
+				'view_item'     => __('View event category'    , 'rpbcalendar'),
+				'search items'  => __('Search event categories', 'rpbcalendar'),
+				'not_found'     => __('No event category found', 'rpbcalendar')
+			),
+			'public'       => true,
+			'hierarchical' => true,
+			'rewrite'      => array('slug' => 'event-category'),
+			'query_var'    => 'event-category'
 		));
 
 		// Callback for post querying
