@@ -127,7 +127,9 @@ class RPBCalendarEventClass
 		// Enable category-based filtering
 		if(isset($vars['rpbevent_category']) && is_numeric($vars['rpbevent_category']) && $vars['rpbevent_category']!=0) {
 			$term = get_term_by('id', $vars['rpbevent_category'], 'rpbevent_category');
-			$vars['rpbevent_category'] = $term->slug;
+			if($term) {
+				$vars['rpbevent_category'] = $term->slug;
+			}
 		}
 	}
 
