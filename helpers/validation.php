@@ -65,6 +65,26 @@ abstract class RPBCalendarHelperValidation
 
 
 	/**
+	 * Validate a string representing a color.
+	 *
+	 * @param mixed $value
+	 * @return string May be null is the value is not valid.
+	 */
+	public static function validateColor($value)
+	{
+		if(!is_string($value)) {
+			return null;
+		}
+		if(preg_match('/^\s*(#[0-9a-fA-F]{6})\s*$/', $value, $matches)) {
+			return $matches[1];
+		}
+		else {
+			return null;
+		}
+	}
+
+
+	/**
 	 * Validate an URL.
 	 *
 	 * @param mixed $value
