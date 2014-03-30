@@ -68,18 +68,20 @@ abstract class RPBCalendarHelperValidation
 	 * Validate a string representing a color.
 	 *
 	 * @param mixed $value
+	 * @param boolean $allowEmptyString Whether `''` is considered as a valid color or not (default: false).
 	 * @return string May be null is the value is not valid.
 	 */
-	public static function validateColor($value)
+	public static function validateColor($value, $allowEmptyString=false)
 	{
 		if(!is_string($value)) {
 			return null;
 		}
-		if(preg_match('/^\s*(#[0-9a-fA-F]{6})\s*$/', $value, $matches)) {
-			return $matches[1];
+		$value = trim($value);
+		if($allowEmptyString && $value=='') {
+			return '';
 		}
 		else {
-			return null;
+			return preg_match('/^#[0-9a-fA-F]{6}$/', $value) ? $value : null;
 		}
 	}
 
