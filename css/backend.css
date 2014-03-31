@@ -74,6 +74,11 @@ tr.type-rpbevent span.rpbcalendar-admin-label {
 	height: 100px;
 }
 
+.rpbcalendar-admin-colorPatchTransparent {
+	background-image: url(../images/transparent-pattern.png);
+	background-repeat: repeat;
+}
+
 
 
 /******************************************************************************/

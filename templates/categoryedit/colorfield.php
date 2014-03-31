@@ -60,6 +60,7 @@
 			target: $('#rpbcalendar-admin-colorPicker'),
 			change: function(event, ui) {
 				$('#rpbcalendar-admin-colorSample').css('background-color', ui.color.toString());
+				$('#rpbcalendar-admin-colorSample').removeClass('rpbcalendar-admin-colorPatchTransparent');
 			}
 		});
 
@@ -77,12 +78,16 @@
 			e.preventDefault();
 			$('#rpbcalendar-admin-categoryColorField').val('');
 			$('#rpbcalendar-admin-colorSample').css('background-color', 'transparent');
+			$('#rpbcalendar-admin-colorSample').addClass('rpbcalendar-admin-colorPatchTransparent');
 		});
 
 
 		// Initial aspect of the color sample.
 		var initialColor = $('#rpbcalendar-admin-categoryColorField').val();
 		$('#rpbcalendar-admin-colorSample').css('background-color', initialColor=='' ? 'transparent' : initialColor);
+		if(initialColor=='') {
+			$('#rpbcalendar-admin-colorSample').addClass('rpbcalendar-admin-colorPatchTransparent');
+		}
 	});
 
 </script>
