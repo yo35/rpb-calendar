@@ -45,11 +45,9 @@ th#rpbevent_date_time {
 	width: 18%;
 }
 
-th#rpbevent_link {
-	width: 10%;
-}
-
-th#rpbevent_categories {
+th#rpbevent_link,
+th#rpbevent_categories,
+th#rpbevent_category_color {
 	width: 10%;
 }
 
@@ -66,7 +64,6 @@ tr.type-rpbevent span.rpbcalendar-admin-label {
 .rpbcalendar-admin-eventDateEnd {
 	margin-top: 3px;
 }
-
 
 #rpbcalendar-admin-categoryColorPreview {
 	width : 100px;

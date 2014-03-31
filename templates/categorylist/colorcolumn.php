@@ -20,4 +20,14 @@
  ******************************************************************************/
 ?>
 
-TODO Color: <?php echo htmlspecialchars($model->getCategoryColor()); ?>
+<?php if($model->getCategoryColor()==''): ?>
+
+	&mdash;
+
+<?php else: ?>
+
+	<div class="rpbcalendar-admin-colorPatch" style="background-color: <?php
+		 echo htmlspecialchars($model->getCategoryColor());
+	?>"></div>
+
+<?php endif; ?>
