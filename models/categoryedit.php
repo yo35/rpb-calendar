@@ -33,4 +33,13 @@ class RPBCalendarModelCategoryEdit extends RPBCalendarAbstractModel
 		parent::__construct();
 		$this->loadTrait('Category');
 	}
+
+
+	/**
+	 * Whether the form is intended to add a new event category or to edit an existing one.
+	 */
+	public function isNewCategoryMode()
+	{
+		return $this->getCategoryID()<0;
+	}
 }

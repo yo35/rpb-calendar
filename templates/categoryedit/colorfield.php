@@ -20,33 +20,47 @@
  ******************************************************************************/
 ?>
 
-<tr class="form-field">
+<?php if($model->isNewCategoryMode()): ?>
+	<div class="form-field">
+<?php else: ?>
+	<tr class="form-field">
+		<th valign="top" scope="row">
+<?php endif; ?>
 
-	<th valign="top" scope="row">
-		<label for="rpbcalendar-admin-categoryColorField"><?php _e('Color', 'rpbcalendar'); ?></label>
-	</th>
 
-	<td>
-		<input type="hidden" name="rpbevent_category_color" id="rpbcalendar-admin-categoryColorField" value="<?php
-			echo htmlspecialchars($model->getCategoryColor());
-		?>" />
-		<div class="rpbcalendar-admin-hBox">
-			<div class="rpbcalendar-admin-vBox">
-				<div id="rpbcalendar-admin-categoryColorPreview" class="rpbcalendar-admin-colorPatch"></div>
-				<a class="button" id="rpbcalendar-admin-randomColorButton" href="#" title="<?php
-					_e('Select a color at random', 'rpbcalendar');
-				?>"><?php _e('Random', 'rpbcalendar'); ?></a>
-				<a class="button" id="rpbcalendar-admin-clearColorButton" href="#" title="<?php
-					_e('Do not associate a color to the current category', 'rpbcalendar');
-				?>"><?php _e('Clear', 'rpbcalendar'); ?></a>
-			</div>
-			<div>
-				<div id="rpbcalendar-admin-colorPicker"></div>
-			</div>
-		</div>
-	</td>
+<label for="rpbcalendar-admin-categoryColorField"><?php _e('Color', 'rpbcalendar'); ?></label>
 
-</tr>
+<?php if(!$model->isNewCategoryMode()): ?>
+		</th>
+		<td>
+<?php endif; ?>
+
+<input type="hidden" name="rpbevent_category_color" id="rpbcalendar-admin-categoryColorField" value="<?php
+	echo htmlspecialchars($model->getCategoryColor());
+?>" />
+
+<div class="rpbcalendar-admin-hBox">
+	<div class="rpbcalendar-admin-vBox">
+		<div id="rpbcalendar-admin-categoryColorPreview" class="rpbcalendar-admin-colorPatch"></div>
+		<a class="button" id="rpbcalendar-admin-randomColorButton" href="#" title="<?php
+			_e('Select a color at random', 'rpbcalendar');
+		?>"><?php _e('Random', 'rpbcalendar'); ?></a>
+		<a class="button" id="rpbcalendar-admin-clearColorButton" href="#" title="<?php
+			_e('Do not associate a color to the current category', 'rpbcalendar');
+		?>"><?php _e('Clear', 'rpbcalendar'); ?></a>
+	</div>
+	<div>
+		<div id="rpbcalendar-admin-colorPicker"></div>
+	</div>
+</div>
+
+<?php if($model->isNewCategoryMode()): ?>
+	</div>
+<?php else: ?>
+		</td>
+	</tr>
+<?php endif; ?>
+
 
 
 <script type="text/javascript">
@@ -83,11 +97,20 @@
 
 
 		// Initial aspect of the color sample.
-		var initialColor = $('#rpbcalendar-admin-categoryColorField').val();
-		$('#rpbcalendar-admin-categoryColorPreview').css('background-color', initialColor=='' ? 'transparent' : initialColor);
-		if(initialColor=='') {
-			$('#rpbcalendar-admin-categoryColorPreview').addClass('rpbcalendar-admin-colorPatchTransparent');
-		}
+		<?php if($model->isNewCategoryMode()): ?>
+
+			$('#rpbcalendar-admin-randomColorButton').click();
+
+		<?php else: ?>
+
+			var initialColor = $('#rpbcalendar-admin-categoryColorField').val();
+			$('#rpbcalendar-admin-categoryColorPreview').css('background-color', initialColor=='' ? 'transparent' : initialColor);
+			if(initialColor=='') {
+				$('#rpbcalendar-admin-categoryColorPreview').addClass('rpbcalendar-admin-colorPatchTransparent');
+			}
+
+		<?php endif; ?>
+
 	});
 
 </script>
