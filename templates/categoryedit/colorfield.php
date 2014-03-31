@@ -32,7 +32,7 @@
 		?>" />
 		<div class="rpbcalendar-admin-hBox">
 			<div class="rpbcalendar-admin-vBox">
-				<div id="rpbcalendar-admin-colorSample" class="rpbcalendar-admin-colorPatch"></div>
+				<div id="rpbcalendar-admin-categoryColorPreview" class="rpbcalendar-admin-colorPatch"></div>
 				<a class="button" id="rpbcalendar-admin-randomColorButton" href="#" title="<?php
 					_e('Select a color at random', 'rpbcalendar');
 				?>"><?php _e('Random', 'rpbcalendar'); ?></a>
@@ -59,8 +59,8 @@
 			palettes: true,
 			target: $('#rpbcalendar-admin-colorPicker'),
 			change: function(event, ui) {
-				$('#rpbcalendar-admin-colorSample').css('background-color', ui.color.toString());
-				$('#rpbcalendar-admin-colorSample').removeClass('rpbcalendar-admin-colorPatchTransparent');
+				$('#rpbcalendar-admin-categoryColorPreview').css('background-color', ui.color.toString());
+				$('#rpbcalendar-admin-categoryColorPreview').removeClass('rpbcalendar-admin-colorPatchTransparent');
 			}
 		});
 
@@ -77,16 +77,16 @@
 		$('#rpbcalendar-admin-clearColorButton').click(function(e) {
 			e.preventDefault();
 			$('#rpbcalendar-admin-categoryColorField').val('');
-			$('#rpbcalendar-admin-colorSample').css('background-color', 'transparent');
-			$('#rpbcalendar-admin-colorSample').addClass('rpbcalendar-admin-colorPatchTransparent');
+			$('#rpbcalendar-admin-categoryColorPreview').css('background-color', 'transparent');
+			$('#rpbcalendar-admin-categoryColorPreview').addClass('rpbcalendar-admin-colorPatchTransparent');
 		});
 
 
 		// Initial aspect of the color sample.
 		var initialColor = $('#rpbcalendar-admin-categoryColorField').val();
-		$('#rpbcalendar-admin-colorSample').css('background-color', initialColor=='' ? 'transparent' : initialColor);
+		$('#rpbcalendar-admin-categoryColorPreview').css('background-color', initialColor=='' ? 'transparent' : initialColor);
 		if(initialColor=='') {
-			$('#rpbcalendar-admin-colorSample').addClass('rpbcalendar-admin-colorPatchTransparent');
+			$('#rpbcalendar-admin-categoryColorPreview').addClass('rpbcalendar-admin-colorPatchTransparent');
 		}
 	});
 
