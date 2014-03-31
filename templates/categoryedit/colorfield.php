@@ -32,7 +32,7 @@
 		?>" />
 		<div class="rpbcalendar-admin-hBox">
 			<div class="rpbcalendar-admin-vBox">
-				<div id="rpbcalendar-admin-colorSample"></div>
+				<div id="rpbcalendar-admin-colorSample" class="rpbcalendar-admin-colorPatch"></div>
 				<a class="button" id="rpbcalendar-admin-randomColorButton" href="#" title="<?php
 					_e('Select a color at random', 'rpbcalendar');
 				?>"><?php _e('Random', 'rpbcalendar'); ?></a>
