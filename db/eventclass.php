@@ -99,8 +99,62 @@ class RPBCalendarEventClass
 		// Callback for post saving
 		add_action('save_post', array($this, 'save'));
 
+		// Event category hooks
+		add_action('rpbevent_category_add_form_fields'    , array($this, 'callbackCategoryAdd' ));
+		add_action('rpbevent_category_edit_form_fields'   , array($this, 'callbackCategoryEdit'));
+		add_filter('manage_edit-rpbevent_category_columns', array($this, 'callbackCategoryList'));
+		add_action('edited_rpbevent_category' , array($this, 'updateCategory'));
+		add_action('created_rpbevent_category', array($this, 'updateCategory'));
+
 		// Filter for the definition of the columns in the backend interface.
 		add_filter('manage_rpbevent_posts_columns', array($this, 'registerEditionColumns'));
+	}
+
+
+	/**
+	 * Callback for the event category add form.
+	 */
+	public function callbackCategoryAdd()
+	{
+		$this->callbackCategoryEdit(null);
+	}
+
+
+	/**
+	 * Callback for the event category edition form.
+	 *
+	 * @param object $category
+	 */
+	public function callbackCategoryEdit($category)
+	{
+		require_once(RPBCALENDAR_ABSPATH . 'controllers/categoryedit.php');
+		$controller = new RPBCalendarControllerCategoryEdit($category);
+		$controller->run();
+	}
+
+
+	/**
+	 * Callbackf for the list of event categories table.
+	 *
+	 * @param array $defaultColumns
+	 */
+	public function callbackCategoryList($defaultColumns)
+	{
+		require_once(RPBCALENDAR_ABSPATH . 'controllers/categorylist.php');
+		$controller = new RPBCalendarControllerCategoryList($defaultColumns);
+		return $controller->run();
+	}
+
+
+	/**
+	 * Save the meta-data associated to an event category.
+	 *
+	 * @param int $categoryID
+	 */
+	public function updateCategory($categoryID)
+	{
+		$model = RPBCalendarHelperLoader::loadModel('CategoryUpdate', $categoryID);
+		$model->processRequest();
 	}
 
 
