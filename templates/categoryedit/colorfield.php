@@ -27,9 +27,62 @@
 	</th>
 
 	<td>
-		<input type="text" name="rpbevent_category_color" id="rpbcalendar-admin-categoryColorField" value="<?php
+		<input type="hidden" name="rpbevent_category_color" id="rpbcalendar-admin-categoryColorField" value="<?php
 			echo htmlspecialchars($model->getCategoryColor());
-		?>" size="7" />
+		?>" />
+		<div class="rpbcalendar-admin-hBox">
+			<div class="rpbcalendar-admin-vBox">
+				<div id="rpbcalendar-admin-colorSample"></div>
+				<a class="button" id="rpbcalendar-admin-randomColorButton" href="#" title="<?php
+					_e('Select a color at random', 'rpbcalendar');
+				?>"><?php _e('Random', 'rpbcalendar'); ?></a>
+				<a class="button" id="rpbcalendar-admin-clearColorButton" href="#" title="<?php
+					_e('Do not associate a color to the current category', 'rpbcalendar');
+				?>"><?php _e('Clear', 'rpbcalendar'); ?></a>
+			</div>
+			<div>
+				<div id="rpbcalendar-admin-colorPicker"></div>
+			</div>
+		</div>
 	</td>
 
 </tr>
+
+
+<script type="text/javascript">
+
+	jQuery(document).ready(function($)
+	{
+		// Initialize the color picker widget.
+		$('#rpbcalendar-admin-categoryColorField').prop('readonly', true).iris({
+			hide: false,
+			palettes: true,
+			target: $('#rpbcalendar-admin-colorPicker'),
+			change: function(event, ui) {
+				$('#rpbcalendar-admin-colorSample').css('background-color', ui.color.toString());
+			}
+		});
+
+
+		// Callback to set a color at random.
+		$('#rpbcalendar-admin-randomColorButton').click(function(e) {
+			e.preventDefault();
+			var color = Math.floor(Math.random()*256*256*256);
+			$('#rpbcalendar-admin-categoryColorField').iris('color', '#' + color.toString(16));
+		});
+
+
+		// Callback to unset the color.
+		$('#rpbcalendar-admin-clearColorButton').click(function(e) {
+			e.preventDefault();
+			$('#rpbcalendar-admin-categoryColorField').val('');
+			$('#rpbcalendar-admin-colorSample').css('background-color', 'transparent');
+		});
+
+
+		// Initial aspect of the color sample.
+		var initialColor = $('#rpbcalendar-admin-categoryColorField').val();
+		$('#rpbcalendar-admin-colorSample').css('background-color', initialColor=='' ? 'transparent' : initialColor);
+	});
+
+</script>

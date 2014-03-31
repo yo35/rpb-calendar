@@ -67,6 +67,13 @@ tr.type-rpbevent span.rpbcalendar-admin-label {
 	margin-top: 3px;
 }
 
+#rpbcalendar-admin-colorSample {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	width : 100px;
+	height: 100px;
+}
+
 
 
 /******************************************************************************/
@@ -93,6 +100,30 @@ tr.type-rpbevent span.rpbcalendar-admin-label {
 .rpbcalendar-admin-hBox > :first-child,
 .wp-core-ui .rpbcalendar-admin-hBox > :first-child {
 	margin-left: 0px;
+}
+
+
+
+/******************************************************************************/
+/*** Vertical box layout ***/
+
+.rpbcalendar-admin-vBox {
+	display: flex;
+	flex-direction: column;
+}
+
+.rpbcalendar-admin-vBox > input {
+	margin: 0px;
+}
+
+.rpbcalendar-admin-vBox > *,
+.wp-core-ui .rpbcalendar-admin-vBox > * {
+	margin-top: 5px;
+}
+
+.rpbcalendar-admin-vBox > :first-child,
+.wp-core-ui .rpbcalendar-admin-vBox > :first-child {
+	margin-top: 0px;
 }
 
 

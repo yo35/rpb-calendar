@@ -55,6 +55,7 @@ function rpbcalendar_enqueue_scripts()
 {
 	if(is_admin()) {
 		wp_enqueue_script('jquery-ui-datepicker');
+		wp_enqueue_script('iris'); // color picker
 	}
 }
 
