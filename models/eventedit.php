@@ -20,78 +20,17 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'controllers/abstractcontroller.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
 
 
 /**
- * Controls the display of the edition boxes showing the meta information
- * associated to an event in the backend edition interface.
+ * Model for the edition form for events.
  */
-class RPBCalendarControllerEditionBox extends RPBCalendarAbstractController
+class RPBCalendarModelEventEdit extends RPBCalendarAbstractModel
 {
 	public function __construct()
 	{
-		parent::__construct('EditionBox');
-	}
-
-
-	public function run()
-	{
-		// Register the link edition box
-		add_meta_box(
-			'rpbcalendar-admin-eventLink',
-			__('Link', 'rpbcalendar'),
-			array($this, 'printLinkEditionBox'),
-			'rpbevent',
-			'normal',
-			'high'
-		);
-
-		// Register the date/time edition box
-		add_meta_box(
-			'rpbcalendar-admin-eventDateTime',
-			__('Date/time', 'rpbcalendar'),
-			array($this, 'printDateTimeEditionBox'),
-			'rpbevent',
-			'side',
-			'high'
-		);
-	}
-
-
-	/**
-	 * Print the edition box showing the link assocated to an event.
-	 *
-	 * @param object $event
-	 */
-	public function printLinkEditionBox($event)
-	{
-		$this->printEditionBox($event, 'LinkEditionBox');
-	}
-
-
-	/**
-	 * Print the edition box showing the date and time assocated to an event.
-	 *
-	 * @param object $event
-	 */
-	public function printDateTimeEditionBox($event)
-	{
-		$this->printEditionBox($event, 'DateTimeEditionBox');
-	}
-
-
-	/**
-	 * Generic callback for printing an edition box.
-	 *
-	 * @param object $event
-	 * @param string $templateName
-	 */
-	private function printEditionBox($event, $templateName)
-	{
-		$model = $this->getModel();
-		$model->setEventID($event->ID);
-		$model->useTemplate($templateName);
-		$this->getView()->display();
+		parent::__construct();
+		$this->loadTrait('Event');
 	}
 }

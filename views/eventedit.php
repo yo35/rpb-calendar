@@ -24,13 +24,13 @@ require_once(RPBCALENDAR_ABSPATH . 'views/abstractview.php');
 
 
 /**
- * View for the edition boxes in the backend interface.
+ * View for the edition form for events.
  */
-class RPBCalendarViewEditionBox extends RPBCalendarAbstractView
+class RPBCalendarViewEventEdit extends RPBCalendarAbstractView
 {
 	public function display()
 	{
 		$model = $this->getModel();
-		include(RPBCALENDAR_ABSPATH.'templates/'.strtolower($model->getTemplateName()).'.php');
+		include(RPBCALENDAR_ABSPATH.'templates/eventedit/'.strtolower($model->getTemplateName()).'.php');
 	}
 }

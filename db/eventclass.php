@@ -193,8 +193,8 @@ class RPBCalendarEventClass
 	 */
 	public function registerMetaBoxCallback()
 	{
-		require_once(RPBCALENDAR_ABSPATH . 'controllers/editionbox.php');
-		$controller = new RPBCalendarControllerEditionBox();
+		require_once(RPBCALENDAR_ABSPATH . 'controllers/eventedit.php');
+		$controller = new RPBCalendarControllerEventEdit();
 		$controller->run();
 	}
 
