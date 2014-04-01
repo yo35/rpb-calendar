@@ -70,7 +70,6 @@ class RPBCalendarEventClass
 			'hierarchical' => false,
 			'supports'     => array('title', 'editor', 'author', 'comments'),
 			'rewrite'      => array('slug' => 'event'),
-			'query_var'    => 'event', // TODO: relevant?
 			'register_meta_box_cb' => array($this, 'callbackEventEdit'),
 		));
 
