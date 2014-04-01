@@ -20,35 +20,17 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
+require_once(RPBCALENDAR_ABSPATH . 'views/abstractview.php');
 
 
 /**
- * Model for the edition columns in the "list of events" of the backend edition interface.
+ * View for the table showing the list of events.
  */
-class RPBCalendarModelEditionColumn extends RPBCalendarAbstractModel
+class RPBCalendarViewEventList extends RPBCalendarAbstractView
 {
-	private $filterByCategoryURLTemplate;
-
-
-	public function __construct()
+	public function display()
 	{
-		parent::__construct();
-		$this->loadTrait('Event');
-	}
-
-
-	/**
-	 * Return the URL to use to display the list of all events of the given category.
-	 *
-	 * @param object $category
-	 * @return string
-	 */
-	public function getFilterByCategoryURL($category)
-	{
-		if(is_null($this->filterByCategoryURLTemplate)) {
-			$this->filterByCategoryURLTemplate = admin_url('edit.php?post_type=rpbevent&rpbevent_category=%1$s');
-		}
-		return sprintf($this->filterByCategoryURLTemplate, $category->term_id);
+		$model = $this->getModel();
+		include(RPBCALENDAR_ABSPATH.'templates/eventlist/'.strtolower($model->getTemplateName()).'.php');
 	}
 }

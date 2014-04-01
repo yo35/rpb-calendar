@@ -24,16 +24,16 @@ require_once(RPBCALENDAR_ABSPATH . 'controllers/abstractcontroller.php');
 
 
 /**
- * Controls the display of the columns in the "list of events" page of the backend interface.
+ * Customize the table showing the list of events.
  */
-class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
+class RPBCalendarControllerEventList extends RPBCalendarAbstractController
 {
 	private $defaultColumns; // Default set of columns as defined by the WP engine.
 
 
 	public function __construct($defaultColumns)
 	{
-		parent::__construct('EditionColumn');
+		parent::__construct('EventList');
 		$this->defaultColumns = $defaultColumns;
 	}
 
@@ -41,7 +41,7 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 	public function run()
 	{
 		// Register the callback to use to print the content of the custom columns.
-		add_action('manage_rpbevent_posts_custom_column', array($this, 'printEditionColumn'), 10, 2);
+		add_action('manage_rpbevent_posts_custom_column', array($this, 'printCell'), 10, 2);
 
 		// Register the callback to filter the events based on their categories.
 		add_action('restrict_manage_posts', array($this, 'registerCategoryFilter'));
@@ -97,7 +97,7 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 	 * @param string $column ID of the current columns in the event list table.
 	 * @param int $eventID ID of the event corresponding to the current row in the event list table.
 	 */
-	public function printEditionColumn($column, $eventID)
+	public function printCell($column, $eventID)
 	{
 		$model = $this->getModel();
 		$model->setEventID($eventID);
@@ -115,9 +115,9 @@ class RPBCalendarControllerEditionColumn extends RPBCalendarAbstractController
 	private static function getTemplateName($column)
 	{
 		switch($column) {
-			case 'rpbevent_date_time' : return 'DateTimeEditionColumn'  ;
-			case 'rpbevent_link'      : return 'LinkEditionColumn'      ;
-			case 'rpbevent_categories': return 'CategoriesEditionColumn';
+			case 'rpbevent_date_time' : return 'DateTimeColumn'  ;
+			case 'rpbevent_link'      : return 'LinkColumn'      ;
+			case 'rpbevent_categories': return 'CategoriesColumn';
 			default: return null;
 		}
 	}

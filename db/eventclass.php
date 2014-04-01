@@ -207,8 +207,8 @@ class RPBCalendarEventClass
 	 */
 	public function registerEditionColumns($columns)
 	{
-		require_once(RPBCALENDAR_ABSPATH . 'controllers/editioncolumn.php');
-		$controller = new RPBCalendarControllerEditionColumn($columns);
+		require_once(RPBCALENDAR_ABSPATH . 'controllers/eventlist.php');
+		$controller = new RPBCalendarControllerEventList($columns);
 		return $controller->run();
 	}
 
