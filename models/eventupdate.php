@@ -20,37 +20,42 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH.'models/traits/abstracttrait.php');
-require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
+require_once(RPBCALENDAR_ABSPATH.'models/abstract/abstractmodel.php');
 
 
 /**
- * Update the link meta-information associated to an event based on an HTTP POST request.
+ * Process an update event request.
  */
-class RPBCalendarTraitUpdateEventLink extends RPBCalendarAbstractTrait
+class RPBCalendarModelEventUpdate extends RPBCalendarAbstractModel
 {
-	/**
-	 * Update the link meta-information of the post identified by the given ID.
-	 */
-	public function updateEventLink($eventID)
+	private $traitLoaded = false;
+	private $eventID;
+
+
+	public function __construct($eventID)
 	{
-		$eventLink = $this->getPostEventLink();
-		if(!is_null($eventLink)) {
-			update_post_meta($eventID, 'rpbevent_link', $eventLink);
-		}
+		parent::__construct();
+		$this->eventID = $eventID;
 	}
 
 
 	/**
-	 * New event link value.
+	 * Process the request.
 	 */
-	public function getPostEventLink()
+	public function processRequest()
 	{
-		if(array_key_exists('rpbevent_link', $_POST)) {
-			return RPBCalendarHelperValidation::validateURL($_POST['rpbevent_link'], true);
+		// Nothing to do if it is not the expected taxonomy type.
+		if($_POST['post_type']!='rpbevent') {
+			return;
 		}
-		else {
-			return null;
+
+		// Load the required trait.
+		if(!$this->traitLoaded) {
+			$this->loadTrait('PostEvent');
+			$this->traitLoaded = true;
 		}
+
+		// Call the update method.
+		$this->updateEvent($this->eventID);
 	}
 }

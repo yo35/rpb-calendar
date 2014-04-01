@@ -25,19 +25,20 @@ require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
 
 
 /**
- * Update the link meta-information associated to an event based on an HTTP POST request.
+ * Update the meta information associated to an event.
  */
-class RPBCalendarTraitUpdateEventDateTime extends RPBCalendarAbstractTrait
+class RPBCalendarTraitPostEvent extends RPBCalendarAbstractTrait
 {
 	private $dateLoaded = false;
 	private $dateBegin;
 	private $dateEnd  ;
+	private $link;
 
 
 	/**
 	 * Update the date/time meta-information of the post identified by the given ID.
 	 */
-	public function updateEventDateTime($eventID)
+	public function updateEvent($eventID)
 	{
 		$dateBegin = $this->getPostEventDateBeginAsString();
 		$dateEnd   = $this->getPostEventDateEndAsString  ();
@@ -46,6 +47,11 @@ class RPBCalendarTraitUpdateEventDateTime extends RPBCalendarAbstractTrait
 		}
 		if(!is_null($dateEnd)) {
 			update_post_meta($eventID, 'rpbevent_date_end', $dateEnd);
+		}
+
+		$link = $this->getPostEventLink();
+		if(!is_null($link)) {
+			update_post_meta($eventID, 'rpbevent_link', $eventLink);
 		}
 	}
 
@@ -115,5 +121,19 @@ class RPBCalendarTraitUpdateEventDateTime extends RPBCalendarAbstractTrait
 			}
 		}
 		$this->dateLoaded = true;
+	}
+
+
+	/**
+	 * New link for the event, or null if no update is required.
+	 *
+	 * @return string
+	 */
+	public function getPostEventLink()
+	{
+		if(!isset($this->link)) {
+			$this->link = RPBCalendarHelperValidation::validateURL($_POST['rpbevent_link'], true);
+		}
+		return $this->link;
 	}
 }

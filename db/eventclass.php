@@ -33,9 +33,6 @@ class RPBCalendarEventClass
 {
 	private static $registered = false;
 
-	private $columnView;
-	private $editionBoxView;
-
 
 	/**
 	 * Function to call externally to register the class. Must be called only once.
@@ -74,7 +71,7 @@ class RPBCalendarEventClass
 			'supports'     => array('title', 'editor', 'author', 'comments'),
 			'rewrite'      => array('slug' => 'event'),
 			'query_var'    => 'event', // TODO: relevant?
-			'register_meta_box_cb' => array($this, 'registerMetaBoxCallback'),
+			'register_meta_box_cb' => array($this, 'callbackEventEdit'),
 		));
 
 		// Register the associated taxonomy.
@@ -96,9 +93,6 @@ class RPBCalendarEventClass
 		// Callback for post querying
 		add_action('parse_query', array($this, 'alterQuery'));
 
-		// Callback for post saving
-		add_action('save_post', array($this, 'save'));
-
 		// Event category hooks
 		add_action('rpbevent_category_add_form_fields'    , array($this, 'callbackCategoryAdd' ));
 		add_action('rpbevent_category_edit_form_fields'   , array($this, 'callbackCategoryEdit'));
@@ -106,8 +100,9 @@ class RPBCalendarEventClass
 		add_action('edited_rpbevent_category' , array($this, 'updateCategory'));
 		add_action('created_rpbevent_category', array($this, 'updateCategory'));
 
-		// Filter for the definition of the columns in the backend interface.
-		add_filter('manage_rpbevent_posts_columns', array($this, 'registerEditionColumns'));
+		// Event hooks
+		add_filter('manage_rpbevent_posts_columns', array($this, 'callbackEventList'));
+		add_action('save_post', array($this, 'updateEvent'));
 	}
 
 
@@ -134,9 +129,10 @@ class RPBCalendarEventClass
 
 
 	/**
-	 * Callbackf for the list of event categories table.
+	 * Callback for the list of event categories table.
 	 *
 	 * @param array $defaultColumns
+	 * @return array
 	 */
 	public function callbackCategoryList($defaultColumns)
 	{
@@ -154,6 +150,43 @@ class RPBCalendarEventClass
 	public function updateCategory($categoryID)
 	{
 		$model = RPBCalendarHelperLoader::loadModel('CategoryUpdate', $categoryID);
+		$model->processRequest();
+	}
+
+
+	/**
+	 * Callback for the event edition form.
+	 */
+	public function callbackEventEdit()
+	{
+		require_once(RPBCALENDAR_ABSPATH . 'controllers/eventedit.php');
+		$controller = new RPBCalendarControllerEventEdit();
+		$controller->run();
+	}
+
+
+	/**
+	 * Callback for the list of events table.
+	 *
+	 * @param array $columns Default columns.
+	 * @return array
+	 */
+	public function callbackEventList($columns)
+	{
+		require_once(RPBCALENDAR_ABSPATH . 'controllers/eventlist.php');
+		$controller = new RPBCalendarControllerEventList($columns);
+		return $controller->run();
+	}
+
+
+	/**
+	 * Save the meta-data associated to an event.
+	 *
+	 * @param int $eventID
+	 */
+	public function updateEvent($eventID)
+	{
+		$model = RPBCalendarHelperLoader::loadModel('EventUpdate', $eventID);
 		$model->processRequest();
 	}
 
@@ -185,40 +218,5 @@ class RPBCalendarEventClass
 				$vars['rpbevent_category'] = $term->slug;
 			}
 		}
-	}
-
-
-	/**
-	 * Callback for the edition boxes.
-	 */
-	public function registerMetaBoxCallback()
-	{
-		require_once(RPBCALENDAR_ABSPATH . 'controllers/eventedit.php');
-		$controller = new RPBCalendarControllerEventEdit();
-		$controller->run();
-	}
-
-
-	/**
-	 * Callback for the edition columns.
-	 *
-	 * @param array $columns Default columns.
-	 * @return array
-	 */
-	public function registerEditionColumns($columns)
-	{
-		require_once(RPBCALENDAR_ABSPATH . 'controllers/eventlist.php');
-		$controller = new RPBCalendarControllerEventList($columns);
-		return $controller->run();
-	}
-
-
-	/**
-	 * Save the meta-information associated to an event.
-	 */
-	public function save($postID)
-	{
-		$model = RPBCalendarHelperLoader::loadModel('UpdateEvent', $postID);
-		$model->processRequest();
 	}
 }
