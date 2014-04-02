@@ -20,4 +20,48 @@
  ******************************************************************************/
 ?>
 
-TODO
+<div id="cal" class="rpbcalendar-calendar"></div>
+
+<script type="text/javascript">
+
+	jQuery(document).ready(function($) {
+
+		$('#cal').fullCalendar({
+			header: { left: 'title', center: '', right: 'today prevYear,prev,next,nextYear' },
+			firstDay: 1
+		});
+
+		$('#cal').fullCalendar('renderEvent', {
+			title: "Ev1",
+			start: "2014-04-01",
+			end  : "2014-04-03",
+			color: "#ffdd00"
+		}, true);
+
+		$('#cal').fullCalendar('renderEvent', {
+			title: "An event with a very long title that may be wider than a cell...",
+			start: "2014-04-25",
+			end  : "2014-04-25",
+			color: "#88ff88",
+			textColor: "black",
+			editable: true
+		}, true);
+
+		$('#cal').fullCalendar('renderEvent', {
+			title: "Ev2",
+			start: "2014-04-03",
+			end  : "2014-04-10",
+			color: "#880000",
+			editable: true
+		}, true);
+
+		$('#cal').fullCalendar('renderEvent', {
+			title: "Ev2",
+			start: "2014-04-05",
+			end  : "2014-04-05",
+			color: "#0088ff"
+		}, true);
+
+	});
+
+</script>
