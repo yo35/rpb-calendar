@@ -18,20 +18,43 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
-?>
 
-<div id="cal" class="rpbcalendar-calendar"></div>
 
-<script type="text/javascript">
+header('Content-Type: application/json');
 
-	jQuery(document).ready(function($) {
+$res = array(
 
-		$('#cal').fullCalendar({
-			header: { left: 'title', center: '', right: 'today prevYear,prev,next,nextYear' },
-			firstDay: 1,
-			events: '<?php echo RPBCALENDAR_URL.'/ajax/fetchevents.php'; ?>'
-		});
+	array(
+		'title' => 'Ev1',
+		'start' => '2014-04-01',
+		'end'   => '2014-04-03',
+		'color' => '#ffdd00'
+	),
 
-	});
+	array(
+		'title'     => 'An event with a very long title that may be wider than a cell...',
+		'start'     => '2014-04-25',
+		'end'       => '2014-04-25',
+		'color'     => '#88ff88',
+		'textColor' => 'black',
+		'editable'  => true
+	),
 
-</script>
+	array(
+		'title'    => 'Ev2',
+		'start'    => '2014-04-03',
+		'end'      => '2014-04-10',
+		'color'    => '#880000',
+		'editable' => true
+	),
+
+	array(
+		'title' => 'Ev3',
+		'start' => '2014-04-05',
+		'end'   => '2014-04-05',
+		'color' => '#0088ff'
+	)
+
+);
+
+echo json_encode($res);
