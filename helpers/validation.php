@@ -110,6 +110,21 @@ abstract class RPBCalendarHelperValidation
 
 
 	/**
+	 * Validate an integer.
+	 *
+	 * @param mixed $value
+	 * @param int $min Minimum value (optional).
+	 * @param int $max Maximum value (optional).
+	 * @return int May be null is the value is not valid.
+	 */
+	public static function validateInteger($value, $min=null, $max=null)
+	{
+		$value = filter_var($value, FILTER_VALIDATE_INT);
+		return $value===false ? null : max(is_null($max) ? $value : min($value, $max), $min);
+	}
+
+
+	/**
 	 * Validate a boolean.
 	 *
 	 * @param mixed $value
