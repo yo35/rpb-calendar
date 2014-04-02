@@ -32,6 +32,7 @@ abstract class RPBCalendarAbstractShortcodeModel extends RPBCalendarAbstractMode
 	private $content;
 	private $contentFiltered = false;
 	private $shortcodeName;
+	private $itemID;
 
 
 	/**
@@ -113,4 +114,37 @@ abstract class RPBCalendarAbstractShortcodeModel extends RPBCalendarAbstractMode
 	{
 		return $content;
 	}
+
+
+	/**
+	 * Return a string that may be used as an HTML ID (as-is or as a prefix) to tag
+	 * the HTML nodes that needs to.
+	 *
+	 * @return string
+	 */
+	public function getItemID()
+	{
+		if(!isset($this->itemID)) {
+			$this->itemID = self::allocateID();
+		}
+		return $this->itemID;
+	}
+
+
+	/**
+	 * Allocate a new ID for a HTML node.
+	 *
+	 * @return string
+	 */
+	private static function allocateID()
+	{
+		++self::$idCounter;
+		return 'rpbcalendar-item' . self::$idCounter;
+	}
+
+
+	/**
+	 * ID counter.
+	 */
+	private static $idCounter = 0;
 }

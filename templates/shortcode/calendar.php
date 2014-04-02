@@ -20,13 +20,13 @@
  ******************************************************************************/
 ?>
 
-<div id="cal" class="rpbcalendar-calendar"></div>
+<div id="<?php echo htmlspecialchars($model->getItemID()); ?>" class="rpbcalendar-calendar"></div>
 
 <script type="text/javascript">
 
 	jQuery(document).ready(function($) {
 
-		$('#cal').fullCalendar({
+		$('#' + <?php echo json_encode($model->getItemID()); ?>).fullCalendar({
 			header: { left: 'title', center: '', right: 'today prevYear,prev,next,nextYear' },
 			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
 			events: '<?php echo RPBCALENDAR_URL.'/ajax/fetchevents.php'; ?>'
