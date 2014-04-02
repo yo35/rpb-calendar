@@ -34,7 +34,7 @@
  */
 abstract class RPBCalendarAbstractModel
 {
-	private $name = null;
+	private $name;
 	private $templateName = null;
 	private $methodIndex = array();
 
@@ -87,13 +87,8 @@ abstract class RPBCalendarAbstractModel
 	 */
 	public function getName()
 	{
-		if(is_null($this->name)) {
-			if(preg_match('/^RPBCalendarModel(.*)$/', get_class($this), $matches)) {
-				$this->name = $matches[1];
-			}
-			else {
-				$this->name = '';
-			}
+		if(!isset($this->name)) {
+			$this->name = preg_match('/^RPBCalendarModel(.*)$/', get_class($this), $matches) ? $matches[1] : '';
 		}
 		return $this->name;
 	}

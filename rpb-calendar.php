@@ -72,3 +72,15 @@ function rpbcalendar_enqueue_css()
 		wp_enqueue_style ('rpbcalendar-backend'  );
 	}
 }
+
+
+// Short-code registration
+if(!is_admin()) {
+	add_action('init', 'rpbcalendar_init_shortcodes');
+	function rpbcalendar_init_shortcodes()
+	{
+		require_once(RPBCALENDAR_ABSPATH . 'controllers/shortcodes.php');
+		$controller = new RPBCalendarControllerShortcodes();
+		return $controller->run();
+	}
+}
