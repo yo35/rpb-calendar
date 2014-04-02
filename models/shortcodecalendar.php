@@ -21,6 +21,7 @@
 
 
 require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractshortcodemodel.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
@@ -28,5 +29,20 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractshortcodemodel.php')
  */
 class RPBCalendarModelShortcodeCalendar extends RPBCalendarAbstractShortcodeModel
 {
-	// RAS
+	private $startOfWeek;
+
+
+	/**
+	 * Day on which the week is assumed to starts.
+	 *
+	 * @return int 0 for Sunday, 1 for Monday, ..., 6 for Saturday.
+	 */
+	public function getStartOfWeek()
+	{
+		if(!isset($this->startOfWeek)) {
+			$value = RPBCalendarHelperValidation::validateInteger(get_option('start_of_week'), 0, 6);
+			$this->startOfWeek = is_null($value) ? 0 : $value;
+		}
+		return $this->startOfWeek;
+	}
 }

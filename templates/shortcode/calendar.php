@@ -28,7 +28,7 @@
 
 		$('#cal').fullCalendar({
 			header: { left: 'title', center: '', right: 'today prevYear,prev,next,nextYear' },
-			firstDay: 1,
+			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
 			events: '<?php echo RPBCALENDAR_URL.'/ajax/fetchevents.php'; ?>'
 		});
 
