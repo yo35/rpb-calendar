@@ -45,7 +45,7 @@ class RPBCalendarModelCategoryUpdate extends RPBCalendarAbstractModel
 	public function processRequest()
 	{
 		// Nothing to do if it is not the expected taxonomy type.
-		if($_POST['taxonomy']!='rpbevent_category') {
+		if(!(isset($_POST['taxonomy']) && $_POST['taxonomy']=='rpbevent_category')) {
 			return;
 		}
 
