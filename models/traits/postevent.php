@@ -51,7 +51,7 @@ class RPBCalendarTraitPostEvent extends RPBCalendarAbstractTrait
 
 		$link = $this->getPostEventLink();
 		if(!is_null($link)) {
-			update_post_meta($eventID, 'rpbevent_link', $eventLink);
+			update_post_meta($eventID, 'rpbevent_link', $link);
 		}
 	}
 
