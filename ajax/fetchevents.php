@@ -20,41 +20,45 @@
  ******************************************************************************/
 
 
-header('Content-Type: application/json');
+// Load the WP engine.
+define('WP_USE_THEMES', false);
+require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 
-$res = array(
 
-	array(
-		'title' => 'Ev1',
-		'start' => '2014-04-01',
-		'end'   => '2014-04-03',
-		'color' => '#ffdd00'
-	),
+// Function to call to print the answer
+function printJSON($value)
+{
+	header('Content-Type: application/json');
+	echo json_encode($value);
+	die;
+}
 
-	array(
-		'title'     => 'An event with a very long title that may be wider than a cell...',
-		'start'     => '2014-04-25',
-		'end'       => '2014-04-25',
-		'color'     => '#88ff88',
-		'textColor' => 'black',
-		'editable'  => true
-	),
 
-	array(
-		'title'    => 'Ev2',
-		'start'    => '2014-04-03',
-		'end'      => '2014-04-10',
-		'color'    => '#880000',
-		'editable' => true
-	),
+// Load the model.
+require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+$model = RPBCalendarHelperLoader::loadModel('FetchEvents');
 
-	array(
-		'title' => 'Ev3',
-		'start' => '2014-04-05',
-		'end'   => '2014-04-05',
-		'color' => '#0088ff'
-	)
 
-);
+// Begin/end dates.
+if(is_null($model->getFetchIntervalBegin()) || is_null($model->getFetchIntervalEnd())) {
+	printJSON(array(
+		'error'   => true,
+		'message' => 'Missing or invalid start date and/or end date.'
+	));
+}
 
-echo json_encode($res);
+
+// Retrieve the events.
+$events = array();
+while($model->fetchNextEvent())
+{
+	$events[] = array(
+		'title' => $model->getEventTitle(),
+		'start' => $model->getEventDateBegin(),
+		'end'   => $model->getEventDateEnd()
+	);
+}
+
+
+// Return the fetched events.
+printJSON($events);
