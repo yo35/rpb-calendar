@@ -33,9 +33,15 @@ abstract class RPBCalendarHelperValidation
 	 */
 	public static function validateDate($value)
 	{
-		// If the input is a string, parse it.
-		if(is_string($value)) {
-			if(!preg_match('/^\s*([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])\s*$/', $value, $matches)) {
+		// If the input represents a numerical value, it is assumed that it correspond
+		// to a timestamp. In this case, the hour/minute/second information is hidden.
+		if(is_numeric($value)) {
+			return floor($value / 86400) * 86400; // 86400 = 24*60*60 = number of seconds in a day.
+		}
+
+		// Otherwise, if the input is a string, parse it.
+		else if(is_string($value)) {
+			if(!preg_match('/^\s*([0-9]{4})-([0-9]{2})-([0-9]{2})\s*$/', $value, $matches)) {
 				return null;
 			}
 			$y = intval($matches[1]);
@@ -49,12 +55,6 @@ abstract class RPBCalendarHelperValidation
 
 			// Generate and return the appropriate timestamp.
 			return mktime(0, 0, 0, $m, $d, $y);
-		}
-
-		// If the input is an integer, it is assumed that it correspond to a timestamp.
-		// In this case, the hour/minute/second information is hidden.
-		else if(is_int($value)) {
-			return floor($value / 86400) * 86400; // 86400 = 24*60*60 = number of seconds in a day.
 		}
 
 		// Other types of input are rejected.
