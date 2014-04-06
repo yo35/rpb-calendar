@@ -20,9 +20,21 @@
  ******************************************************************************/
 
 
+// Find the root directory of the WP engine.
+define('RPBCALENDAR_AJAX_DIRECTORY', dirname(__FILE__));
+if(file_exists(RPBCALENDAR_AJAX_DIRECTORY . '/config.php'))
+{
+	// The file config.php may provide an alternative definition of the constant RPBCALENDAR_WP_DIRECTORY.
+	require_once(RPBCALENDAR_AJAX_DIRECTORY . '/config.php');
+}
+if(!defined('RPBCALENDAR_WP_DIRECTORY')) {
+	define('RPBCALENDAR_WP_DIRECTORY', dirname(dirname(dirname(dirname(RPBCALENDAR_AJAX_DIRECTORY)))));
+}
+
+
 // Load the WP engine.
 define('WP_USE_THEMES', false);
-require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
+require_once(RPBCALENDAR_WP_DIRECTORY . '/wp-load.php');
 
 
 // Function to call to print the answer
