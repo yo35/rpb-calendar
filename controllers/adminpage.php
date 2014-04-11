@@ -20,38 +20,23 @@
  ******************************************************************************/
 
 
+require_once(RPBCALENDAR_ABSPATH . 'controllers/abstractcontroller.php');
+
+
 /**
- * Register the plugin administration pages in the Wordpress backend.
- *
- * This class is not constructible. Call the static method `register()`
- * to trigger the registration operations.
+ * Show the requested plugin administration page.
  */
-abstract class RPBCalendarAdminPages
+class RPBCalendarControllerAdminPage extends RPBCalendarAbstractController
 {
-	/**
-	 * Register the plugin administration pages. Must be called only once.
-	 */
-	public static function register()
+	public function __construct($modelName)
 	{
-		// Page "options"
-		add_submenu_page('edit.php?post_type=rpbevent',
-			__('Events and calendar settings', 'rpbcalendar'),
-			__('Settings', 'rpbcalendar'),
-			'manage_options', 'rpbcalendar-options', array(__CLASS__, 'callbackPageOptions')
-		);
+		parent::__construct($modelName);
 	}
 
 
-	public static function callbackPageOptions()
+	public function run()
 	{
-		self::printAdminPage('AdminPageOptions');
-	}
-
-
-	private static function printAdminPage($modelName)
-	{
-		require_once(RPBCALENDAR_ABSPATH . 'controllers/adminpage.php');
-		$controller = new RPBCalendarControllerAdminPage($modelName);
-		$controller->run();
+		// Create and display the view.
+		$this->getView()->display();
 	}
 }

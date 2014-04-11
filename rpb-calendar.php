@@ -74,6 +74,10 @@ function rpbcalendar_enqueue_css()
 	wp_register_style('rpbcalendar-fullcalendar', RPBCALENDAR_URL.'/fullcalendar/fullcalendar.css');
 	wp_enqueue_style('rpbcalendar-fullcalendar');
 
+	// Main CSS.
+	wp_register_style('rpbcalendar-main', RPBCALENDAR_URL.'/css/main.css');
+	wp_enqueue_style('rpbcalendar-main');
+
 	// Additional CSS for the backend.
 	if(is_admin()) {
 		wp_register_style('rpbcalendar-jquery-ui', RPBCALENDAR_URL.'/css/jquery-ui-1.10.4.custom.min.css');

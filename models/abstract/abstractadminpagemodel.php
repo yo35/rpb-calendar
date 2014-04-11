@@ -20,38 +20,56 @@
  ******************************************************************************/
 
 
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
+
+
 /**
- * Register the plugin administration pages in the Wordpress backend.
- *
- * This class is not constructible. Call the static method `register()`
- * to trigger the registration operations.
+ * Base class for the models used to render the plugin administration pages.
  */
-abstract class RPBCalendarAdminPages
+abstract class RPBCalendarAbstractAdminPageModel extends RPBCalendarAbstractModel
 {
+	private $adminPageName;
+
+
 	/**
-	 * Register the plugin administration pages. Must be called only once.
+	 * Constructor.
 	 */
-	public static function register()
+	public function __construct()
 	{
-		// Page "options"
-		add_submenu_page('edit.php?post_type=rpbevent',
-			__('Events and calendar settings', 'rpbcalendar'),
-			__('Settings', 'rpbcalendar'),
-			'manage_options', 'rpbcalendar-options', array(__CLASS__, 'callbackPageOptions')
-		);
+		parent::__construct();
+		$this->useTemplate($this->getAdminPageName());
 	}
 
 
-	public static function callbackPageOptions()
+	/**
+	 * Use the "AdminPage" view by default.
+	 *
+	 * @return string
+	 */
+	public function getViewName()
 	{
-		self::printAdminPage('AdminPageOptions');
+		return 'AdminPage';
 	}
 
 
-	private static function printAdminPage($modelName)
+	/**
+	 * Name of the administration page.
+	 *
+	 * @return string
+	 */
+	public function getAdminPageName()
 	{
-		require_once(RPBCALENDAR_ABSPATH . 'controllers/adminpage.php');
-		$controller = new RPBCalendarControllerAdminPage($modelName);
-		$controller->run();
+		if(!isset($this->adminPageName)) {
+			$this->adminPageName = preg_match('/^AdminPage(.*)$/', $this->getName(), $matches) ? $matches[1] : '';
+		}
+		return $this->adminPageName;
 	}
+
+
+	/**
+	 * Human-readable title of the page.
+	 *
+	 * @return string
+	 */
+	public abstract function getTitle();
 }

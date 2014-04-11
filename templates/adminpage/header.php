@@ -18,40 +18,19 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
+?>
 
+<h2><?php echo htmlspecialchars($model->getTitle()); ?></h2>
 
-/**
- * Register the plugin administration pages in the Wordpress backend.
- *
- * This class is not constructible. Call the static method `register()`
- * to trigger the registration operations.
- */
-abstract class RPBCalendarAdminPages
-{
-	/**
-	 * Register the plugin administration pages. Must be called only once.
-	 */
-	public static function register()
-	{
-		// Page "options"
-		add_submenu_page('edit.php?post_type=rpbevent',
-			__('Events and calendar settings', 'rpbcalendar'),
-			__('Settings', 'rpbcalendar'),
-			'manage_options', 'rpbcalendar-options', array(__CLASS__, 'callbackPageOptions')
-		);
-	}
+<div id="rpbcalendar-admin-javascriptWarning" class="error">
+	<p><?php
+		_e('To work properly, the RPB Calendar plugin needs javascript to be activated in your browser.',
+			'rpbcalendar');
+	?></p>
+</div>
 
+<script type="text/javascript">
 
-	public static function callbackPageOptions()
-	{
-		self::printAdminPage('AdminPageOptions');
-	}
+	jQuery('#rpbcalendar-admin-javascriptWarning').addClass('rpbcalendar-invisible');
 
-
-	private static function printAdminPage($modelName)
-	{
-		require_once(RPBCALENDAR_ABSPATH . 'controllers/adminpage.php');
-		$controller = new RPBCalendarControllerAdminPage($modelName);
-		$controller->run();
-	}
-}
+</script>
