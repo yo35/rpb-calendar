@@ -22,6 +22,8 @@
 
 <form action="<?php echo htmlspecialchars($model->getFormActionURL()); ?>" method="post">
 
+	<input type="hidden" name="rpbcalendar_action" value="update-options" />
+
 	<input type="hidden" name="rpbcalendar_defaultColor" id="rpbcalendar-admin-defaultColorField" value="<?php
 		echo htmlspecialchars($model->getDefaultCategoryColor());
 	?>" />
@@ -55,6 +57,11 @@
 
 		</tbody>
 	</table>
+
+
+	<p class="submit">
+		<input class="button button-primary" type="submit" value="<?php _e('Save changes', 'rpbcalendar'); ?>" />
+	</p>
 
 </form>
 

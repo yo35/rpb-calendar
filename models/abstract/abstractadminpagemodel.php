@@ -29,6 +29,7 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
 abstract class RPBCalendarAbstractAdminPageModel extends RPBCalendarAbstractModel
 {
 	private $adminPageName;
+	private $formAction;
 
 
 	/**
@@ -63,6 +64,24 @@ abstract class RPBCalendarAbstractAdminPageModel extends RPBCalendarAbstractMode
 			$this->adminPageName = preg_match('/^AdminPage(.*)$/', $this->getName(), $matches) ? $matches[1] : '';
 		}
 		return $this->adminPageName;
+	}
+
+
+	/**
+	 * Return the name of the action that should be performed by the server.
+	 * The action is initiated by the user when clicking on a "submit" button in
+	 * an HTML form with its method attribute set to POST.
+	 *
+	 * This function may return an empty string if no action is required.
+	 *
+	 * @return string
+	 */
+	public function getFormAction()
+	{
+		if(!isset($this->formAction)) {
+			$this->formAction = isset($_POST['rpbcalendar_action']) ? $_POST['rpbcalendar_action'] : '';
+		}
+		return $this->formAction;
 	}
 
 

@@ -20,43 +20,40 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'controllers/abstractcontroller.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
- * Show the requested plugin administration page.
+ * Update the options of the plugin.
  */
-class RPBCalendarControllerAdminPage extends RPBCalendarAbstractController
+class RPBCalendarTraitPostOptions extends RPBCalendarAbstractTrait
 {
-	public function __construct($modelName)
-	{
-		parent::__construct($modelName);
-	}
+	private $defaultCategoryColor;
 
 
-	public function run()
+	/**
+	 * Update the plugin options.
+	 */
+	public function updateOptions()
 	{
-		// Execute the form action if any.
-		switch($this->getModel()->getFormAction()) {
-			case 'update-options': $this->executeAction('PostOptions', 'updateOptions'); break;
-			default: break;
+		$defaultCategoryColor = $this->getPostDefaultCategoryColor();
+		if(!is_null($defaultCategoryColor)) {
+			update_option('rpbcalendar_defaultColor', $defaultCategoryColor);
 		}
-
-		// Create and display the view.
-		$this->getView()->display();
 	}
 
 
 	/**
-	 * Load the trait `$traitName`, and execute the method `$methodName` supposedly defined by the trait.
+	 * New value for the default category color.
 	 *
-	 * @param string $traitName
-	 * @param string $methodName
+	 * @return string
 	 */
-	private function executeAction($traitName, $methodName)
+	public function getPostDefaultCategoryColor()
 	{
-		$model = $this->getModel();
-		$model->loadTrait($traitName);
-		$model->$methodName();
+		if(!isset($this->defaultCategoryColor)) {
+			$this->defaultCategoryColor = RPBCalendarHelperValidation::validateColor($_POST['rpbcalendar_defaultColor']);
+		}
+		return $this->defaultCategoryColor;
 	}
 }
