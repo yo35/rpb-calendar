@@ -44,7 +44,7 @@ load_plugin_textdomain('rpbcalendar', false, RPBCALENDAR_PLUGIN_DIR.'/languages/
 add_action('init', 'rpbcalendar_init');
 function rpbcalendar_init()
 {
-	require_once(RPBCALENDAR_ABSPATH . 'db/eventclass.php');
+	require_once(RPBCALENDAR_ABSPATH . 'wp/eventclass.php');
 	RPBCalendarEventClass::register();
 }
 
@@ -98,5 +98,16 @@ if(!is_admin()) {
 		require_once(RPBCALENDAR_ABSPATH . 'controllers/shortcodes.php');
 		$controller = new RPBCalendarControllerShortcodes();
 		return $controller->run();
+	}
+}
+
+
+// Plugin administration pages
+if(is_admin()) {
+	add_action('admin_menu', 'rpbcalendar_init_admin_pages');
+	function rpbcalendar_init_admin_pages()
+	{
+		require_once(RPBCALENDAR_ABSPATH . 'wp/adminpages.php');
+		RPBCalendarAdminPages::register();
 	}
 }
