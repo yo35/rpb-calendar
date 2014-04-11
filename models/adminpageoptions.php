@@ -21,15 +21,45 @@
 
 
 require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractadminpagemodel.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
- * TODO
+ * Model for the plugin options page.
  */
 class RPBCalendarModelAdminPageOptions extends RPBCalendarAbstractAdminPageModel
 {
+	private $defaultCategoryColor;
+
+
 	public function getTitle()
 	{
 		return __('Events and calendar settings', 'rpbcalendar');
+	}
+
+
+	/**
+	 * URL to which the the request for modifying the options of the plugin will be dispatched.
+	 *
+	 * @return string
+	 */
+	public function getFormActionURL()
+	{
+		return site_url() . '/wp-admin/edit.php?post_type=rpbevent&page=rpbcalendar-options';
+	}
+
+
+	/**
+	 * Default color for the event categories.
+	 *
+	 * @return string
+	 */
+	public function getDefaultCategoryColor()
+	{
+		if(!isset($this->defaultCategoryColor)) {
+			$value = RPBCalendarHelperValidation::validateColor(get_option('rpbcalendar_defaultColor'));
+			$this->defaultCategoryColor = is_null($value) ? '#ffffcc' : $value;
+		}
+		return $this->defaultCategoryColor;
 	}
 }

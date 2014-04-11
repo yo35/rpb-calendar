@@ -65,6 +65,7 @@ tr.type-rpbevent span.rpbcalendar-admin-label {
 	margin-top: 3px;
 }
 
+#rpbcalendar-admin-defaultColorPreview,
 #rpbcalendar-admin-categoryColorPreview {
 	width : 100px;
 	height: 100px;
