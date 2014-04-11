@@ -20,57 +20,43 @@
  ******************************************************************************/
 
 
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractadminpagemodel.php');
+
+
 /**
- * Register the plugin administration pages in the Wordpress backend.
- *
- * This class is not constructible. Call the static method `register()`
- * to trigger the registration operations.
+ * Model for the plugin credit page.
  */
-abstract class RPBCalendarAdminPages
+class RPBCalendarModelAdminPageAbout extends RPBCalendarAbstractAdminPageModel
 {
-	/**
-	 * Register the plugin administration pages. Must be called only once.
-	 */
-	public static function register()
+	private $pluginInfo;
+
+
+	public function getTitle()
 	{
-		// Page "options"
-		add_submenu_page('edit.php?post_type=rpbevent',
-			__('Events and calendar settings', 'rpbcalendar'),
-			__('Settings', 'rpbcalendar'),
-			'manage_options', 'rpbcalendar-options', array(__CLASS__, 'callbackPageOptions')
-		);
-
-
-		// Page "about"
-		add_submenu_page('edit.php?post_type=rpbevent',
-			sprintf(__('About %1$s', 'rpbcalendar'), 'RPB Calendar'),
-			__('About', 'rpbcalendar'),
-			'manage_options', 'rpbcalendar-about', array(__CLASS__, 'callbackPageAbout')
-		);
-	}
-
-
-	public static function callbackPageOptions()
-	{
-		self::printAdminPage('AdminPageOptions');
-	}
-
-
-	public static function callbackPageAbout()
-	{
-		self::printAdminPage('AdminPageAbout');
+		return sprintf(__('About %1$s', 'rpbcalendar'), 'RPB Calendar');
 	}
 
 
 	/**
-	 * Load and print the plugin administration page defined by the model `$modelName`.
+	 * Current version of the plugin
 	 *
-	 * @param string $modelName
+	 * @return string
 	 */
-	private static function printAdminPage($modelName)
+	public function getPluginVersion()
 	{
-		require_once(RPBCALENDAR_ABSPATH . 'controllers/adminpage.php');
-		$controller = new RPBCalendarControllerAdminPage($modelName);
-		$controller->run();
+		$this->loadPluginInfo();
+		return $this->pluginInfo['Version'];
+	}
+
+
+	/**
+	 * Load the information concerning the plugin.
+	 */
+	private function loadPluginInfo()
+	{
+		if(isset($this->pluginInfo)) {
+			return;
+		}
+		$this->pluginInfo = get_plugin_data(RPBCALENDAR_ABSPATH . 'rpb-calendar.php');
 	}
 }

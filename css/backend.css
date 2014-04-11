@@ -171,3 +171,29 @@ tr.type-rpbevent span.rpbcalendar-admin-label {
 .wp-core-ui .rpbcalendar-admin-gridLayout > div > div > * {
 	margin: 0px;
 }
+
+
+
+/******************************************************************************/
+/*** About page ***/
+
+#rpbcalendar-admin-translator-list {
+	display: table;
+}
+
+#rpbcalendar-admin-translator-list div {
+	display: table-row;
+}
+
+#rpbcalendar-admin-translator-list dt,
+#rpbcalendar-admin-translator-list dd {
+	display: table-cell;
+}
+
+#rpbcalendar-admin-translator-list dd {
+	padding-left: 15px;
+}
+
+#rpbcalendar-admin-translator-list img {
+	vertical-align: middle;
+}
