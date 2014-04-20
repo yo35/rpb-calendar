@@ -72,9 +72,7 @@ abstract class RPBCalendarAbstractWidgetModel extends RPBCalendarAbstractModel
 	public function getTitle()
 	{
 		if(!isset($this->title)) {
-			$this->title = isset($this->instance['title']) ?
-				RPBCalendarHelperValidation::trim($this->instance['title']) :
-				$this->getDefaultTitle();
+			$this->title = isset($this->instance['title']) ? RPBCalendarHelperValidation::trim($this->instance['title']) : $this->getDefaultTitle();
 		}
 		return $this->title;
 	}

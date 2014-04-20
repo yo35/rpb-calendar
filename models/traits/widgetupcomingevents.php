@@ -64,7 +64,7 @@ class RPBCalendarTraitWidgetUpcomingEvents extends RPBCalendarAbstractTrait
 	public function getTimeFrame()
 	{
 		if(!isset($this->timeFrame)) {
-			$value = isset($instance['time-frame']) ? RPBCalendarHelperValidation::validateInteger($instance['time-frame'], 1) : null;
+			$value = isset($this->instance['time-frame']) ? RPBCalendarHelperValidation::validateInteger($this->instance['time-frame'], 1) : null;
 			$this->timeFrame = isset($value) ? $value : 7;
 		}
 		return $this->timeFrame;
@@ -79,7 +79,7 @@ class RPBCalendarTraitWidgetUpcomingEvents extends RPBCalendarAbstractTrait
 	public function getWithToday()
 	{
 		if(!isset($this->withToday)) {
-			$value = isset($instance['with-today']) ? RPBCalendarHelperValidation::validateBooleanFromInt($instance['with-today']) : null;
+			$value = isset($this->instance['with-today']) ? RPBCalendarHelperValidation::validateBooleanFromInt($this->instance['with-today']) : null;
 			$this->withToday = isset($value) ? $value : false;
 		}
 		return $this->withToday;
