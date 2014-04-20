@@ -20,61 +20,57 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractwidgetupdatemodel.php');
 
 
 /**
- * Widget presenting the upcoming events.
+ * Model to update the settings of the upcoming events widget.
  */
-class RPBCalendarWidgetUpcomingEvents extends WP_Widget
+class RPBCalendarModelWidgetUpdateUpcomingEvents extends RPBCalendarAbstractWidgetUpdateModel
 {
-	/**
-	 * Register the widget class (should be called only once).
-	 */
-	public static function register()
+	private $validatedInstance;
+	private $newTimeFrame;
+	private $newWithToday;
+
+
+	public function __construct($instance, $newInstance)
 	{
-		register_widget('RPBCalendarWidgetUpcomingEvents');
+		parent::__construct($instance, $newInstance);
+		$this->loadTrait('WidgetUpcomingEvents', $this->getInstance());
+
+		// Initialize the new widget parameters.
+		$this->newTimeFrame = isset($newInstance['time-frame']) ? RPBCalendarHelperValidation::validateInteger($newInstance['time-frame'], 1) : null;
+		$this->newWithToday = isset($newInstance['with-today']) ? RPBCalendarHelperValidation::validateBooleanFromInt($newInstance['with-today']) : null;
+	}
+
+
+	protected function makeValidatedInstance()
+	{
+		$retVal = parent::makeValidatedInstance();
+		$retVal['time-frame'] = isset($this->newTimeFrame) ? $this->newTimeFrame : $this->getTimeFrame();
+		$retVal['with-today'] = (isset($this->newWithToday) ? $this->newWithToday : $this->getWithToday()) ? 1 : 0;
+		return $retVal;
 	}
 
 
 	/**
-	 * Constructor.
+	 * New value of the "time-frame" parameter.
+	 *
+	 * @return int May be null if the new title is invalid.
 	 */
-	public function __construct()
+	public function getNewTimeFrame()
 	{
-		parent::__construct(
-			'rpbcalendar-upcoming-events',
-			__('Upcoming events', 'rpbcalendar'),
-			array(
-				'description' => __('A list of the upcoming events within a certain date range.', 'rpbcalendar')
-			)
-		);
-	}
-
-	// Display
-	function widget($args, $instance)
-	{
-		//include(RPBCALENDAR_ABSPATH.'templates/upcomingwidget.php');
-		echo 'TODO: RPBCalendarWidgetUpcomingEvents::widget()';
-	}
-
-	/**
-	 * Update the parameters of a widget instance.
-	 */
-	public function update($newInstance, $oldInstance)
-	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetUpdateUpcomingEvents', $oldInstance, $newInstance);
-		return $model->getValidatedInstance();
+		return $this->newTimeFrame;
 	}
 
 
 	/**
-	 * Generate the configuration form in the backend interface.
+	 * New value of the "with-today" parameter.
+	 *
+	 * @return boolean May be null if the new title is invalid.
 	 */
-	public function form($instance)
+	public function getNewWithToday()
 	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetFormUpcomingEvents', $instance, $this);
-		$view = RPBCalendarHelperLoader::loadView($model);
-		$view->display();
+		return $this->newWithToday;
 	}
 }
