@@ -24,13 +24,13 @@ require_once(RPBCALENDAR_ABSPATH . 'views/abstractview.php');
 
 
 /**
- * Generic view for the widget setting forms.
+ * Generic view for the widget edition forms.
  */
-class RPBCalendarViewWidgetForm extends RPBCalendarAbstractView
+class RPBCalendarViewWidgetEdit extends RPBCalendarAbstractView
 {
 	public function display()
 	{
 		$model = $this->getModel();
-		include(RPBCALENDAR_ABSPATH.'templates/widgetform/'.strtolower($model->getTemplateName()).'.php');
+		include(RPBCALENDAR_ABSPATH.'templates/widgetedit/'.strtolower($model->getTemplateName()).'.php');
 	}
 }

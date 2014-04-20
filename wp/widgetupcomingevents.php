@@ -73,7 +73,7 @@ class RPBCalendarWidgetUpcomingEvents extends WP_Widget
 	 */
 	public function form($instance)
 	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetFormUpcomingEvents', $instance, $this);
+		$model = RPBCalendarHelperLoader::loadModel('WidgetEditUpcomingEvents', $instance, $this);
 		$view = RPBCalendarHelperLoader::loadView($model);
 		$view->display();
 	}

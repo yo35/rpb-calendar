@@ -20,13 +20,13 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractwidgetformmodel.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractwidgeteditmodel.php');
 
 
 /**
  * Model for the setting form of the upcoming events widget.
  */
-class RPBCalendarModelWidgetFormUpcomingEvents extends RPBCalendarAbstractWidgetFormModel
+class RPBCalendarModelWidgetEditUpcomingEvents extends RPBCalendarAbstractWidgetEditModel
 {
 	private $timeFrameFieldID  ;
 	private $timeFrameFieldName;

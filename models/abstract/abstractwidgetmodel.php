@@ -55,7 +55,7 @@ abstract class RPBCalendarAbstractWidgetModel extends RPBCalendarAbstractModel
 	public function getWidgetName()
 	{
 		if(!isset($this->widgetName)) {
-			$this->widgetName = preg_match('/^Widget(?:Form|Update|Print)(.*)$/', $this->getName(), $matches) ? $matches[1] : '';
+			$this->widgetName = preg_match('/^Widget(?:Edit|Update|Print)(.*)$/', $this->getName(), $matches) ? $matches[1] : '';
 		}
 		return $this->widgetName;
 	}

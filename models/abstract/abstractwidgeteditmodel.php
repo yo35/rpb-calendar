@@ -26,7 +26,7 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractwidgetmodel.php');
 /**
  * Base class for the models used to render widget setting forms.
  */
-abstract class RPBCalendarAbstractWidgetFormModel extends RPBCalendarAbstractWidgetModel
+abstract class RPBCalendarAbstractWidgetEditModel extends RPBCalendarAbstractWidgetModel
 {
 	private $wpWidget;
 	private $titleFieldID;
@@ -47,13 +47,13 @@ abstract class RPBCalendarAbstractWidgetFormModel extends RPBCalendarAbstractWid
 
 
 	/**
-	 * Use the "WidgetForm" view by default.
+	 * Use the "WidgetEdit" view by default.
 	 *
 	 * @return string
 	 */
 	public function getViewName()
 	{
-		return 'WidgetForm';
+		return 'WidgetEdit';
 	}
 
 
