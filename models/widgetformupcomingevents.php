@@ -34,9 +34,9 @@ class RPBCalendarModelWidgetFormUpcomingEvents extends RPBCalendarAbstractWidget
 	private $withTodayFieldName;
 
 
-	public function __construct($wpWidget, $instance)
+	public function __construct($instance, $wpWidget)
 	{
-		parent::__construct($wpWidget, $instance);
+		parent::__construct($instance, $wpWidget);
 		$this->loadTrait('WidgetUpcomingEvents', $instance);
 	}
 
