@@ -20,66 +20,79 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractwidgetformmodel.php');
 
 
 /**
- * Widget presenting the upcoming events.
+ * Model for the setting form of the upcoming events widget.
  */
-class RPBCalendarWidgetUpcomingEvents extends WP_Widget
+class RPBCalendarModelWidgetFormUpcomingEvents extends RPBCalendarAbstractWidgetFormModel
 {
-	/**
-	 * Register the widget class (should be called only once).
-	 */
-	public static function register()
+	private $timeFrameFieldID  ;
+	private $timeFrameFieldName;
+	private $withTodayFieldID  ;
+	private $withTodayFieldName;
+
+
+	public function __construct($wpWidget, $instance)
 	{
-		register_widget('RPBCalendarWidgetUpcomingEvents');
+		parent::__construct($wpWidget, $instance);
+		$this->loadTrait('WidgetUpcomingEvents', $instance);
 	}
 
 
 	/**
-	 * Constructor.
+	 * ID for the "time frame" field.
+	 *
+	 * @return string
 	 */
-	public function __construct()
+	public function getTimeFrameFieldID()
 	{
-		parent::__construct(
-			'rpbcalendar-upcoming-events',
-			__('Upcoming events', 'rpbcalendar'),
-			array(
-				'description' => __('A list of the upcoming events within a certain date range.', 'rpbcalendar')
-			)
-		);
-	}
-
-	// Display
-	function widget($args, $instance)
-	{
-		//include(RPBCALENDAR_ABSPATH.'templates/upcomingwidget.php');
-		echo 'TODO: RPBCalendarWidgetUpcomingEvents::widget()';
-	}
-
-	// Update
-	/*function update($new_instance, $old_instance)
-	{
-		$instance          = $old_instance;
-		$instance['title'] = $new_instance['title'];
-		if(is_numeric($new_instance['upcoming_range'])) {
-			$instance['upcoming_range'] = $new_instance['upcoming_range'];
+		if(!isset($this->timeFrameFieldID)) {
+			$this->timeFrameFieldID = $this->getFieldID('time-frame');
 		}
-		if(is_numeric($new_instance['show_today_events'])) {
-			$instance['show_today_events'] = $new_instance['show_today_events'];
-		}
-		return $instance;
-	}*/
+		return $this->timeFrameFieldID;
+	}
 
 
 	/**
-	 * Generate the configuration form in the backend interface.
+	 * Name for the "time frame" field.
+	 *
+	 * @return string
 	 */
-	function form($instance)
+	public function getTimeFrameFieldName()
 	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetFormUpcomingEvents', $this, $instance);
-		$view = RPBCalendarHelperLoader::loadView($model);
-		$view->display();
+		if(!isset($this->timeFrameFieldName)) {
+			$this->timeFrameFieldName = $this->getFieldName('time-frame');
+		}
+		return $this->timeFrameFieldName;
+	}
+
+
+	/**
+	 * ID for the "with today" field.
+	 *
+	 * @return string
+	 */
+	public function getWithTodayFieldID()
+	{
+		if(!isset($this->withTodayFieldID)) {
+			$this->withTodayFieldID = $this->getFieldID('with-today');
+		}
+		return $this->withTodayFieldID;
+	}
+
+
+	/**
+	 * Name for the "with today" field.
+	 *
+	 * @return string
+	 */
+	public function getWithTodayFieldName()
+	{
+		if(!isset($this->withTodayFieldName)) {
+			$this->withTodayFieldName = $this->getFieldName('with-today');
+		}
+		return $this->withTodayFieldName;
 	}
 }

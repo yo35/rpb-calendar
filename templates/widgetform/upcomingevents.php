@@ -18,68 +18,36 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
+?>
 
+<p>
+	<label for="<?php echo htmlspecialchars($model->getTitleFieldID()); ?>"><?php _e('Title:', 'rpbcalendar'); ?></label>
+	<input type="text" class="widefat"
+		id="<?php echo htmlspecialchars($model->getTitleFieldID()); ?>"
+		name="<?php echo htmlspecialchars($model->getTitleFieldName()); ?>"
+		value="<?php echo htmlspecialchars($model->getTitle()); ?>"
+	/>
+</p>
 
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+<p>
+	<label for="<?php echo htmlspecialchars($model->getTimeFrameFieldID()); ?>"><?php
+		_e('Length of the time frame (in days):', 'rpbcalendar');
+	?></label>
+	<input type="text" class="widefat"
+		id="<?php echo htmlspecialchars($model->getTimeFrameFieldID()); ?>"
+		name="<?php echo htmlspecialchars($model->getTimeFrameFieldName()); ?>"
+		value="<?php echo htmlspecialchars($model->getTimeFrame()); ?>"
+	/>
+</p>
 
-
-/**
- * Widget presenting the upcoming events.
- */
-class RPBCalendarWidgetUpcomingEvents extends WP_Widget
-{
-	/**
-	 * Register the widget class (should be called only once).
-	 */
-	public static function register()
-	{
-		register_widget('RPBCalendarWidgetUpcomingEvents');
-	}
-
-
-	/**
-	 * Constructor.
-	 */
-	public function __construct()
-	{
-		parent::__construct(
-			'rpbcalendar-upcoming-events',
-			__('Upcoming events', 'rpbcalendar'),
-			array(
-				'description' => __('A list of the upcoming events within a certain date range.', 'rpbcalendar')
-			)
-		);
-	}
-
-	// Display
-	function widget($args, $instance)
-	{
-		//include(RPBCALENDAR_ABSPATH.'templates/upcomingwidget.php');
-		echo 'TODO: RPBCalendarWidgetUpcomingEvents::widget()';
-	}
-
-	// Update
-	/*function update($new_instance, $old_instance)
-	{
-		$instance          = $old_instance;
-		$instance['title'] = $new_instance['title'];
-		if(is_numeric($new_instance['upcoming_range'])) {
-			$instance['upcoming_range'] = $new_instance['upcoming_range'];
-		}
-		if(is_numeric($new_instance['show_today_events'])) {
-			$instance['show_today_events'] = $new_instance['show_today_events'];
-		}
-		return $instance;
-	}*/
-
-
-	/**
-	 * Generate the configuration form in the backend interface.
-	 */
-	function form($instance)
-	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetFormUpcomingEvents', $this, $instance);
-		$view = RPBCalendarHelperLoader::loadView($model);
-		$view->display();
-	}
-}
+<p>
+	<input type="hidden" value="0" name="<?php echo htmlspecialchars($model->getWithTodayFieldName()); ?>" />
+	<input type="checkbox" value="1" class="widefat"
+		id="<?php echo htmlspecialchars($model->getWithTodayFieldID()); ?>"
+		name="<?php echo htmlspecialchars($model->getWithTodayFieldName()); ?>"
+		<?php if($model->getWithToday()) echo 'checked="1"'; ?>
+	/>
+	<label for="<?php echo htmlspecialchars($model->getWithTodayFieldID()); ?>"><?php
+		_e('Show events of the current day', 'rpbcalendar');
+	?></label>
+</p>

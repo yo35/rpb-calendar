@@ -20,66 +20,68 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
- * Widget presenting the upcoming events.
+ * Global parameters relative to an instance of an upcoming events widget.
  */
-class RPBCalendarWidgetUpcomingEvents extends WP_Widget
+class RPBCalendarTraitWidgetUpcomingEvents extends RPBCalendarAbstractTrait
 {
-	/**
-	 * Register the widget class (should be called only once).
-	 */
-	public static function register()
-	{
-		register_widget('RPBCalendarWidgetUpcomingEvents');
-	}
+	private $instance;
+	private $timeFrame;
+	private $withToday;
 
 
 	/**
 	 * Constructor.
+	 *
+	 * @param array $instance Array containing the information relative to the current widget instance.
 	 */
-	public function __construct()
+	public function __construct($instance)
 	{
-		parent::__construct(
-			'rpbcalendar-upcoming-events',
-			__('Upcoming events', 'rpbcalendar'),
-			array(
-				'description' => __('A list of the upcoming events within a certain date range.', 'rpbcalendar')
-			)
-		);
+		$this->instance = $instance;
 	}
-
-	// Display
-	function widget($args, $instance)
-	{
-		//include(RPBCALENDAR_ABSPATH.'templates/upcomingwidget.php');
-		echo 'TODO: RPBCalendarWidgetUpcomingEvents::widget()';
-	}
-
-	// Update
-	/*function update($new_instance, $old_instance)
-	{
-		$instance          = $old_instance;
-		$instance['title'] = $new_instance['title'];
-		if(is_numeric($new_instance['upcoming_range'])) {
-			$instance['upcoming_range'] = $new_instance['upcoming_range'];
-		}
-		if(is_numeric($new_instance['show_today_events'])) {
-			$instance['show_today_events'] = $new_instance['show_today_events'];
-		}
-		return $instance;
-	}*/
 
 
 	/**
-	 * Generate the configuration form in the backend interface.
+	 * Default title of the widget.
+	 *
+	 * @return string
 	 */
-	function form($instance)
+	public function getDefaultTitle()
 	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetFormUpcomingEvents', $this, $instance);
-		$view = RPBCalendarHelperLoader::loadView($model);
-		$view->display();
+		return __('Upcoming events', 'rpbcalendar');
+	}
+
+
+	/**
+	 * Size of the time frame in which events will be displayed (in days).
+	 *
+	 * @return int
+	 */
+	public function getTimeFrame()
+	{
+		if(!isset($this->timeFrame)) {
+			$value = isset($instance['time-frame']) ? RPBCalendarHelperValidation::validateInteger($instance['time-frame'], 1) : null;
+			$this->timeFrame = isset($value) ? $value : 7;
+		}
+		return $this->timeFrame;
+	}
+
+
+	/**
+	 * Whether the events of the current day should be included or not.
+	 *
+	 * @return boolean
+	 */
+	public function getWithToday()
+	{
+		if(!isset($this->withToday)) {
+			$value = isset($instance['with-today']) ? RPBCalendarHelperValidation::validateBooleanFromInt($instance['with-today']) : null;
+			$this->withToday = isset($value) ? $value : false;
+		}
+		return $this->withToday;
 	}
 }

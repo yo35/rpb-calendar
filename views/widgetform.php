@@ -20,66 +20,17 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+require_once(RPBCALENDAR_ABSPATH . 'views/abstractview.php');
 
 
 /**
- * Widget presenting the upcoming events.
+ * Generic view for the widget setting forms.
  */
-class RPBCalendarWidgetUpcomingEvents extends WP_Widget
+class RPBCalendarViewWidgetForm extends RPBCalendarAbstractView
 {
-	/**
-	 * Register the widget class (should be called only once).
-	 */
-	public static function register()
+	public function display()
 	{
-		register_widget('RPBCalendarWidgetUpcomingEvents');
-	}
-
-
-	/**
-	 * Constructor.
-	 */
-	public function __construct()
-	{
-		parent::__construct(
-			'rpbcalendar-upcoming-events',
-			__('Upcoming events', 'rpbcalendar'),
-			array(
-				'description' => __('A list of the upcoming events within a certain date range.', 'rpbcalendar')
-			)
-		);
-	}
-
-	// Display
-	function widget($args, $instance)
-	{
-		//include(RPBCALENDAR_ABSPATH.'templates/upcomingwidget.php');
-		echo 'TODO: RPBCalendarWidgetUpcomingEvents::widget()';
-	}
-
-	// Update
-	/*function update($new_instance, $old_instance)
-	{
-		$instance          = $old_instance;
-		$instance['title'] = $new_instance['title'];
-		if(is_numeric($new_instance['upcoming_range'])) {
-			$instance['upcoming_range'] = $new_instance['upcoming_range'];
-		}
-		if(is_numeric($new_instance['show_today_events'])) {
-			$instance['show_today_events'] = $new_instance['show_today_events'];
-		}
-		return $instance;
-	}*/
-
-
-	/**
-	 * Generate the configuration form in the backend interface.
-	 */
-	function form($instance)
-	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetFormUpcomingEvents', $this, $instance);
-		$view = RPBCalendarHelperLoader::loadView($model);
-		$view->display();
+		$model = $this->getModel();
+		include(RPBCALENDAR_ABSPATH.'templates/widgetform/'.strtolower($model->getTemplateName()).'.php');
 	}
 }
