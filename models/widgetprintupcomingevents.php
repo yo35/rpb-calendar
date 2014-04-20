@@ -20,66 +20,17 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractwidgetprintmodel.php');
 
 
 /**
- * Widget presenting the upcoming events.
+ * Model used to render the upcoming events widget in the frontend.
  */
-class RPBCalendarWidgetUpcomingEvents extends WP_Widget
+class RPBCalendarModelWidgetPrintUpcomingEvents extends RPBCalendarAbstractWidgetPrintModel
 {
-	/**
-	 * Register the widget class (should be called only once).
-	 */
-	public static function register()
+	public function __construct($instance, $theme)
 	{
-		register_widget('RPBCalendarWidgetUpcomingEvents');
-	}
-
-
-	/**
-	 * Constructor.
-	 */
-	public function __construct()
-	{
-		parent::__construct(
-			'rpbcalendar-upcoming-events',
-			__('Upcoming events', 'rpbcalendar'),
-			array(
-				'description' => __('A list of the upcoming events within a certain date range.', 'rpbcalendar')
-			)
-		);
-	}
-
-
-	/**
-	 * Render the widget in the frontend.
-	 */
-	public function widget($theme, $instance)
-	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetPrintUpcomingEvents', $instance, $theme);
-		$view = RPBCalendarHelperLoader::loadView($model);
-		$view->display();
-	}
-
-
-	/**
-	 * Update the parameters of a widget instance.
-	 */
-	public function update($newInstance, $oldInstance)
-	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetUpdateUpcomingEvents', $oldInstance, $newInstance);
-		return $model->getValidatedInstance();
-	}
-
-
-	/**
-	 * Generate the configuration form in the backend interface.
-	 */
-	public function form($instance)
-	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetEditUpcomingEvents', $instance, $this);
-		$view = RPBCalendarHelperLoader::loadView($model);
-		$view->display();
+		parent::__construct($instance, $theme);
+		$this->loadTrait('WidgetUpcomingEvents', $instance);
 	}
 }

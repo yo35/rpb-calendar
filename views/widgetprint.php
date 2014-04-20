@@ -20,66 +20,32 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+require_once(RPBCALENDAR_ABSPATH . 'views/abstractview.php');
 
 
 /**
- * Widget presenting the upcoming events.
+ * Generic view for the widgets in the frontend.
  */
-class RPBCalendarWidgetUpcomingEvents extends WP_Widget
+class RPBCalendarViewWidgetPrint extends RPBCalendarAbstractView
 {
-	/**
-	 * Register the widget class (should be called only once).
-	 */
-	public static function register()
+	public function display()
 	{
-		register_widget('RPBCalendarWidgetUpcomingEvents');
-	}
+		// Retrieve the model and the theme data.
+		$model = $this->getModel();
+		$theme = $model->getTheme();
 
+		// Create the widget box if any.
+		echo $theme['before_widget'];
 
-	/**
-	 * Constructor.
-	 */
-	public function __construct()
-	{
-		parent::__construct(
-			'rpbcalendar-upcoming-events',
-			__('Upcoming events', 'rpbcalendar'),
-			array(
-				'description' => __('A list of the upcoming events within a certain date range.', 'rpbcalendar')
-			)
-		);
-	}
+		// Display the title.
+		if($model->getTitle()!='') {
+			echo $theme['before_title'] . htmlspecialchars($model->getTitle()) . $theme['after_title'];
+		}
 
+		// Print the widget content.
+		include(RPBCALENDAR_ABSPATH.'templates/widgetprint/'.strtolower($model->getTemplateName()).'.php');
 
-	/**
-	 * Render the widget in the frontend.
-	 */
-	public function widget($theme, $instance)
-	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetPrintUpcomingEvents', $instance, $theme);
-		$view = RPBCalendarHelperLoader::loadView($model);
-		$view->display();
-	}
-
-
-	/**
-	 * Update the parameters of a widget instance.
-	 */
-	public function update($newInstance, $oldInstance)
-	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetUpdateUpcomingEvents', $oldInstance, $newInstance);
-		return $model->getValidatedInstance();
-	}
-
-
-	/**
-	 * Generate the configuration form in the backend interface.
-	 */
-	public function form($instance)
-	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetEditUpcomingEvents', $instance, $this);
-		$view = RPBCalendarHelperLoader::loadView($model);
-		$view->display();
+		// Close the widget box if any.
+		echo $theme['after_widget'];
 	}
 }
