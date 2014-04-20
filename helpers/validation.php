@@ -120,7 +120,7 @@ abstract class RPBCalendarHelperValidation
 	public static function validateInteger($value, $min=null, $max=null)
 	{
 		$value = filter_var($value, FILTER_VALIDATE_INT);
-		return $value===false ? null : max(is_null($max) ? $value : min($value, $max), $min);
+		return $value===false ? null : max($max===null ? $value : min($value, $max), $min);
 	}
 
 
@@ -132,7 +132,7 @@ abstract class RPBCalendarHelperValidation
 	 */
 	public static function validateBoolean($value)
 	{
-		return (is_null($value) || $value==='') ? null : filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+		return ($value===null || $value==='') ? null : filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
 	}
 
 
