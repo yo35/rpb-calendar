@@ -20,48 +20,77 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractwidgetmodel.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widget.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
- * Base class for the models used to print the widgets in the front-end.
+ * Base class for the models used to update the widget settings.
  */
-abstract class RPBCalendarAbstractWidgetPrintModel extends RPBCalendarAbstractWidgetModel
+abstract class RPBCalendarAbstractWidgetUpdateModel extends RPBCalendarAbstractWidgetModel
 {
-	private $theme;
+	private $validatedInstance;
+	private $newInstance;
+	private $newTitle;
 
 
 	/**
 	 * Constructor.
 	 *
-	 * @param array $instance Array containing the information relative to the current widget instance.
-	 * @param array $theme Array containing some data provided by the theme.
+	 * @param array $instance Array containing the information relative to the old widget instance.
+	 * @param array $newInstance New widget parameters.
 	 */
-	public function __construct($instance, $theme)
+	public function __construct($instance, $newInstance)
 	{
 		parent::__construct($instance);
-		$this->theme = $theme;
+		$this->newInstance = $newInstance;
+
+		// Initialize the new widget parameters.
+		$this->newTitle = isset($newInstance['title']) ? RPBCalendarHelperValidation::trim($newInstance['title']) : null;
 	}
 
 
 	/**
-	 * Use the "WidgetPrint" view by default.
-	 *
-	 * @return string
-	 */
-	public function getViewName()
-	{
-		return 'WidgetPrint';
-	}
-
-
-	/**
-	 * Theme-related data.
+	 * Build and return an array containing the validated parameters of the new instance.
 	 *
 	 * @return array
 	 */
-	public function getTheme()
+	public function getValidatedInstance()
 	{
-		return $this->theme;
+		if(!isset($this->validatedInstance)) {
+			$this->validatedInstance = $this->makeValidatedInstance();
+		}
+		return $this->validatedInstance;
+	}
+
+
+	/**
+	 * Initialize the set of validated parameters. This method may be overloaded in derived classes.
+	 */
+	protected function makeValidatedInstance()
+	{
+		return array('title' => isset($this->newTitle) ? $this->newTitle : $this->getTitle());
+	}
+
+
+	/**
+	 * Return the new value of the title parameter.
+	 *
+	 * @return string May be null if the new title is invalid.
+	 */
+	public function getNewTitle()
+	{
+		return $this->newTitle;
+	}
+
+
+	/**
+	 * Return the new set of widget parameters.
+	 *
+	 * @return array
+	 */
+	protected function getNewInstance()
+	{
+		return $this->newInstance;
 	}
 }

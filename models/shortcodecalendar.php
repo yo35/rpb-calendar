@@ -20,7 +20,7 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractshortcodemodel.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/shortcode.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 

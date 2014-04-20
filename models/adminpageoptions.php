@@ -20,7 +20,7 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractadminpagemodel.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/adminpage.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 

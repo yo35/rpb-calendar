@@ -20,7 +20,7 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractwidgetupdatemodel.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetupdate.php');
 
 
 /**
