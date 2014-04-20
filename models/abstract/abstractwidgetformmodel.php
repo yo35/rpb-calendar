@@ -21,6 +21,7 @@
 
 
 require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
@@ -79,12 +80,17 @@ abstract class RPBCalendarAbstractWidgetFormModel extends RPBCalendarAbstractMod
 	/**
 	 * Title of the widget.
 	 *
+	 * The default value of this attribute is obtained by calling the method `getDefaultTitle()`,
+	 * that must be defined either in a sub-class or in a dynamically loaded trait.
+	 *
 	 * @return string
 	 */
 	public function getTitle()
 	{
 		if(!isset($this->title)) {
-			$this->title = isset($this->instance['title']) ? $this->instance['title'] : $this->getDefaultTitle();
+			$this->title = isset($this->instance['title']) ?
+				RPBCalendarHelperValidation::trim($this->instance['title']) :
+				$this->getDefaultTitle();
 		}
 		return $this->title;
 	}
