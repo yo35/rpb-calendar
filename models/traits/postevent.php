@@ -20,8 +20,8 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH.'models/traits/abstracttrait.php');
-require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
@@ -29,10 +29,31 @@ require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
  */
 class RPBCalendarTraitPostEvent extends RPBCalendarAbstractTrait
 {
-	private $dateLoaded = false;
 	private $dateBegin;
-	private $dateEnd  ;
+	private $dateEnd;
 	private $link;
+
+
+	/**
+	 * Constructor.
+	 */
+	public function __construct()
+	{
+		// Load the begin/end dates.
+		if(isset($_POST['rpbevent_date_begin']) && isset($_POST['rpbevent_date_end'])) {
+			$dateBegin = RPBCalendarHelperValidation::validateDate($_POST['rpbevent_date_begin']);
+			$dateEnd   = RPBCalendarHelperValidation::validateDate($_POST['rpbevent_date_end'  ]);
+			if(isset($dateBegin) && isset($dateEnd)) {
+				$this->dateBegin = min($dateBegin, $dateEnd);
+				$this->dateEnd   = max($dateBegin, $dateEnd);
+			}
+		}
+
+		// Load the link.
+		if(isset($_POST['rpbevent_link'])) {
+			$this->link = RPBCalendarHelperValidation::validateURL($_POST['rpbevent_link'], true);
+		}
+	}
 
 
 	/**
@@ -40,43 +61,18 @@ class RPBCalendarTraitPostEvent extends RPBCalendarAbstractTrait
 	 */
 	public function updateEvent($eventID)
 	{
+		// Update the dates.
 		$dateBegin = $this->getPostEventDateBeginAsString();
 		$dateEnd   = $this->getPostEventDateEndAsString  ();
-		if(!is_null($dateBegin)) {
+		if(isset($dateBegin) && isset($dateEnd)) {
 			update_post_meta($eventID, 'rpbevent_date_begin', $dateBegin);
-		}
-		if(!is_null($dateEnd)) {
-			update_post_meta($eventID, 'rpbevent_date_end', $dateEnd);
+			update_post_meta($eventID, 'rpbevent_date_end'  , $dateEnd  );
 		}
 
-		$link = $this->getPostEventLink();
-		if(!is_null($link)) {
-			update_post_meta($eventID, 'rpbevent_link', $link);
+		// Update the link.
+		if(isset($this->link)) {
+			update_post_meta($eventID, 'rpbevent_link', $this->link);
 		}
-	}
-
-
-	/**
-	 * New begin date for the event.
-	 *
-	 * @return int Timestamp, or null if no new begin date is defined.
-	 */
-	public function getPostEventDateBegin()
-	{
-		$this->ensureDateLoaded();
-		return $this->dateBegin;
-	}
-
-
-	/**
-	 * New end date for the event.
-	 *
-	 * @return int Timestamp, or null if no new end date is defined.
-	 */
-	public function getPostEventDateEnd()
-	{
-		$this->ensureDateLoaded();
-		return $this->dateEnd;
 	}
 
 
@@ -85,10 +81,9 @@ class RPBCalendarTraitPostEvent extends RPBCalendarAbstractTrait
 	 *
 	 * @return int Timestamp, or null if no new begin date is defined.
 	 */
-	public function getPostEventDateBeginAsString()
+	private function getPostEventDateBeginAsString()
 	{
-		$value = $this->getPostEventDateBegin();
-		return is_null($value) ? null : date('Y-m-d', $value);
+		return isset($this->dateBegin) ? date('Y-m-d', $this->dateBegin) : null;
 	}
 
 
@@ -97,43 +92,8 @@ class RPBCalendarTraitPostEvent extends RPBCalendarAbstractTrait
 	 *
 	 * @return int Timestamp, or null if no new end date is defined.
 	 */
-	public function getPostEventDateEndAsString()
+	private function getPostEventDateEndAsString()
 	{
-		$value = $this->getPostEventDateEnd();
-		return is_null($value) ? null : date('Y-m-d', $value);
-	}
-
-
-	/**
-	 * Read the begin/end dates from the HTTP POST data.
-	 */
-	private function ensureDateLoaded()
-	{
-		if($this->dateLoaded) {
-			return;
-		}
-		if(array_key_exists('rpbevent_date_begin', $_POST) && array_key_exists('rpbevent_date_end', $_POST)) {
-			$dateBegin = RPBCalendarHelperValidation::validateDate($_POST['rpbevent_date_begin']);
-			$dateEnd   = RPBCalendarHelperValidation::validateDate($_POST['rpbevent_date_end'  ]);
-			if(!is_null($dateBegin) && !is_null($dateEnd)) {
-				$this->dateBegin = min($dateBegin, $dateEnd);
-				$this->dateEnd   = max($dateBegin, $dateEnd);
-			}
-		}
-		$this->dateLoaded = true;
-	}
-
-
-	/**
-	 * New link for the event, or null if no update is required.
-	 *
-	 * @return string
-	 */
-	public function getPostEventLink()
-	{
-		if(!isset($this->link)) {
-			$this->link = RPBCalendarHelperValidation::validateURL($_POST['rpbevent_link'], true);
-		}
-		return $this->link;
+		return isset($this->dateEnd) ? date('Y-m-d', $this->dateEnd) : null;
 	}
 }

@@ -33,27 +33,25 @@ class RPBCalendarTraitPostOptions extends RPBCalendarAbstractTrait
 
 
 	/**
-	 * Update the plugin options.
+	 * Constructor.
 	 */
-	public function updateOptions()
+	public function __construct()
 	{
-		$defaultCategoryColor = $this->getPostDefaultCategoryColor();
-		if(!is_null($defaultCategoryColor)) {
-			update_option('rpbcalendar_defaultColor', $defaultCategoryColor);
+		// Load the default color.
+		if(isset($_POST['rpbcalendar_defaultColor'])) {
+			$this->defaultCategoryColor = RPBCalendarHelperValidation::validateColor($_POST['rpbcalendar_defaultColor']);
 		}
 	}
 
 
 	/**
-	 * New value for the default category color.
-	 *
-	 * @return string
+	 * Update the plugin options.
 	 */
-	public function getPostDefaultCategoryColor()
+	public function updateOptions()
 	{
-		if(!isset($this->defaultCategoryColor)) {
-			$this->defaultCategoryColor = RPBCalendarHelperValidation::validateColor($_POST['rpbcalendar_defaultColor']);
+		// Update the default color.
+		if(isset($this->defaultCategoryColor)) {
+			update_option('rpbcalendar_defaultColor', $this->defaultCategoryColor);
 		}
-		return $this->defaultCategoryColor;
 	}
 }

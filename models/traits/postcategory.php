@@ -20,8 +20,8 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH.'models/traits/abstracttrait.php');
-require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
@@ -33,27 +33,25 @@ class RPBCalendarTraitPostCategory extends RPBCalendarAbstractTrait
 
 
 	/**
-	 * Execute the update request.
+	 * Constructor.
 	 */
-	public function updateCategory($categoryID)
+	public function __construct()
 	{
-		$color = $this->getPostCategoryColor();
-		if(!is_null($color)) {
-			update_option('rpbevent_category_'.$categoryID.'_color', $color);
+		// Load the color.
+		if(isset($_POST['rpbevent_category_color'])) {
+			$this->color = RPBCalendarHelperValidation::validateColor($_POST['rpbevent_category_color'], true);
 		}
 	}
 
 
 	/**
-	 * New value for the event category color, or null if no update is required.
-	 *
-	 * @return string
+	 * Execute the update request.
 	 */
-	public function getPostCategoryColor()
+	public function updateCategory($categoryID)
 	{
-		if(!isset($this->color)) {
-			$this->color = RPBCalendarHelperValidation::validateColor($_POST['rpbevent_category_color'], true);
+		// Update the color.
+		if(isset($this->color)) {
+			update_option('rpbevent_category_'.$categoryID.'_color', $this->color);
 		}
-		return $this->color;
 	}
 }
