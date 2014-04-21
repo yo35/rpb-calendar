@@ -52,7 +52,7 @@ $model = RPBCalendarHelperLoader::loadModel('FetchEvents');
 
 
 // Begin/end dates.
-if(is_null($model->getFetchIntervalBegin()) || is_null($model->getFetchIntervalEnd())) {
+if($model->getFetchIntervalBegin()===null || $model->getFetchIntervalEnd()===null) {
 	printJSON(array(
 		'error'   => true,
 		'message' => 'Missing or invalid start date and/or end date.'

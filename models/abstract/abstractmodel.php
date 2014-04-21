@@ -35,7 +35,7 @@
 abstract class RPBCalendarAbstractModel
 {
 	private $name;
-	private $templateName = null;
+	private $templateName;
 	private $methodIndex = array();
 
 
@@ -53,7 +53,7 @@ abstract class RPBCalendarAbstractModel
 	public function __call($method, $args)
 	{
 		$trait = $this->methodIndex[$method];
-		if(is_null($trait)) {
+		if(!isset($trait)) {
 			$modelName = $this->getName();
 			throw new Exception("Invalid call to method `$method` in the model `$modelName`.");
 		}
@@ -112,7 +112,7 @@ abstract class RPBCalendarAbstractModel
 	 */
 	public function getTemplateName()
 	{
-		return is_null($this->templateName) ? $this->getName() : $this->templateName;
+		return isset($this->templateName) ? $this->templateName : $this->getName();
 	}
 
 
