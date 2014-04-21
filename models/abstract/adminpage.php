@@ -29,15 +29,17 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
 abstract class RPBCalendarAbstractAdminPageModel extends RPBCalendarAbstractModel
 {
 	private $adminPageName;
-	private $formAction;
+	private $postAction;
+	private $title;
 
 
 	/**
 	 * Constructor.
 	 */
-	public function __construct()
+	public function __construct($title)
 	{
 		parent::__construct();
+		$this->title = $title;
 		$this->useTemplate($this->getAdminPageName());
 	}
 
@@ -76,12 +78,12 @@ abstract class RPBCalendarAbstractAdminPageModel extends RPBCalendarAbstractMode
 	 *
 	 * @return string
 	 */
-	public function getFormAction()
+	public function getPostAction()
 	{
-		if(!isset($this->formAction)) {
-			$this->formAction = isset($_POST['rpbcalendar_action']) ? $_POST['rpbcalendar_action'] : '';
+		if(!isset($this->postAction)) {
+			$this->postAction = isset($_POST['rpbcalendar_action']) ? $_POST['rpbcalendar_action'] : '';
 		}
-		return $this->formAction;
+		return $this->postAction;
 	}
 
 
@@ -90,5 +92,8 @@ abstract class RPBCalendarAbstractAdminPageModel extends RPBCalendarAbstractMode
 	 *
 	 * @return string
 	 */
-	public abstract function getTitle();
+	public function getTitle()
+	{
+		return $this->title;
+	}
 }

@@ -36,8 +36,8 @@ class RPBCalendarControllerAdminPage extends RPBCalendarAbstractController
 
 	public function run()
 	{
-		// Execute the form action if any.
-		switch($this->getModel()->getFormAction()) {
+		// Execute the action requested by the POST data, if any.
+		switch($this->getModel()->getPostAction()) {
 			case 'update-options': $this->executeAction('PostOptions', 'updateOptions'); break;
 			default: break;
 		}

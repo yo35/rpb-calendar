@@ -31,9 +31,12 @@ class RPBCalendarModelAdminPageAbout extends RPBCalendarAbstractAdminPageModel
 	private $pluginInfo;
 
 
-	public function getTitle()
+	/**
+	 * Constructor.
+	 */
+	public function __construct()
 	{
-		return sprintf(__('About %1$s', 'rpbcalendar'), 'RPB Calendar');
+		parent::__construct(sprintf(__('About %1$s', 'rpbcalendar'), 'RPB Calendar'));
 	}
 
 

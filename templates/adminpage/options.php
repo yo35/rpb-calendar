@@ -20,7 +20,7 @@
  ******************************************************************************/
 ?>
 
-<form action="<?php echo htmlspecialchars($model->getFormActionURL()); ?>" method="post">
+<form action="<?php echo htmlspecialchars($model->getFormURL()); ?>" method="post">
 
 	<input type="hidden" name="rpbcalendar_action" value="update-options" />
 

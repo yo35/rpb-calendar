@@ -29,12 +29,16 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
  */
 class RPBCalendarModelAdminPageOptions extends RPBCalendarAbstractAdminPageModel
 {
+	private $formURL;
 	private $defaultCategoryColor;
 
 
-	public function getTitle()
+	/**
+	 * Constructor.
+	 */
+	public function __construct()
 	{
-		return __('Events and calendar settings', 'rpbcalendar');
+		parent::__construct(__('Events and calendar settings', 'rpbcalendar'));
 	}
 
 
@@ -43,9 +47,12 @@ class RPBCalendarModelAdminPageOptions extends RPBCalendarAbstractAdminPageModel
 	 *
 	 * @return string
 	 */
-	public function getFormActionURL()
+	public function getFormURL()
 	{
-		return site_url() . '/wp-admin/edit.php?post_type=rpbevent&page=rpbcalendar-options';
+		if(!isset($this->formURL)) {
+			$this->formURL = site_url() . '/wp-admin/edit.php?post_type=rpbevent&page=rpbcalendar-options';
+		}
+		return $this->formURL;
 	}
 
 
@@ -58,7 +65,7 @@ class RPBCalendarModelAdminPageOptions extends RPBCalendarAbstractAdminPageModel
 	{
 		if(!isset($this->defaultCategoryColor)) {
 			$value = RPBCalendarHelperValidation::validateColor(get_option('rpbcalendar_defaultColor'));
-			$this->defaultCategoryColor = is_null($value) ? '#ffffcc' : $value;
+			$this->defaultCategoryColor = isset($value) ? $value : '#ffffcc';
 		}
 		return $this->defaultCategoryColor;
 	}
