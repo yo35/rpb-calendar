@@ -20,8 +20,8 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH.'models/traits/abstracttrait.php');
-require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
@@ -30,7 +30,8 @@ require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
 class RPBCalendarTraitCategory extends RPBCalendarAbstractTrait
 {
 	private $categoryID = -1;
-	private $color;
+	private $data = array();
+	private $category;
 
 
 	/**
@@ -55,7 +56,22 @@ class RPBCalendarTraitCategory extends RPBCalendarAbstractTrait
 			return;
 		}
 		$this->categoryID = $categoryID;
-		$this->color = null;
+		$this->category = null;
+	}
+
+
+	/**
+	 * Ensure that the object `$this->category` is equal to `$this->data[$this->categoryID]`.
+	 */
+	private function ensureCategoryLoaded()
+	{
+		if(isset($this->category)) {
+			return;
+		}
+		if(!isset($this->data[$this->categoryID])) {
+			$this->data[$this->categoryID] = new stdClass;
+		}
+		$this->category = $this->data[$this->categoryID];
 	}
 
 
@@ -66,10 +82,11 @@ class RPBCalendarTraitCategory extends RPBCalendarAbstractTrait
 	 */
 	public function getCategoryColor()
 	{
-		if(is_null($this->color)) {
+		$this->ensureCategoryLoaded();
+		if(!isset($this->category->color)) {
 			$value = RPBCalendarHelperValidation::validateColor(get_option('rpbevent_category_'.$this->categoryID.'_color'), true);
-			$this->color = is_null($value) ? '' : $value;
+			$this->category->color = isset($value) ? $value : '';
 		}
-		return $this->color;
+		return $this->category->color;
 	}
 }

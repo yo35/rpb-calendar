@@ -20,8 +20,8 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH.'models/traits/abstracttrait.php');
-require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
@@ -30,10 +30,8 @@ require_once(RPBCALENDAR_ABSPATH.'helpers/validation.php');
 class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 {
 	private $eventID = -1;
-	private $categories;
-	private $link      ;
-	private $dateBegin ;
-	private $dateEnd   ;
+	private $data = array();
+	private $event;
 
 
 	/**
@@ -58,10 +56,22 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 			return;
 		}
 		$this->eventID = $eventID;
-		$this->categories = null;
-		$this->link       = null;
-		$this->dateBegin  = null;
-		$this->dateEnd    = null;
+		$this->event = null;
+	}
+
+
+	/**
+	 * Ensure that the object `$this->event` is equal to `$this->data[$this->eventID]`.
+	 */
+	private function ensureEventLoaded()
+	{
+		if(isset($this->event)) {
+			return;
+		}
+		if(!isset($this->data[$this->eventID])) {
+			$this->data[$this->eventID] = new stdClass;
+		}
+		$this->event = $this->data[$this->eventID];
 	}
 
 
@@ -73,11 +83,12 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	 */
 	public function getEventCategories()
 	{
-		if(is_null($this->categories)) {
+		$this->ensureEventLoaded();
+		if(!isset($this->event->categories)) {
 			$value = get_the_terms($this->eventID, 'rpbevent_category');
-			$this->categories = is_array($value) ? $value : array();
+			$this->event->categories = is_array($value) ? $value : array();
 		}
-		return $this->categories;
+		return $this->event->categories;
 	}
 
 
@@ -88,11 +99,12 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	 */
 	public function getEventLink()
 	{
-		if(is_null($this->link)) {
+		$this->ensureEventLoaded();
+		if(!isset($this->event->link)) {
 			$value = RPBCalendarHelperValidation::validateURL(get_post_meta($this->eventID, 'rpbevent_link', true), true);
-			$this->link = is_null($value) ? '' : $value;
+			$this->event->link = isset($value) ? $value : '';
 		}
-		return $this->link;
+		return $this->event->link;
 	}
 
 
@@ -103,11 +115,12 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	 */
 	public function getEventDateBegin()
 	{
-		if(is_null($this->dateBegin)) {
+		$this->ensureEventLoaded();
+		if(!isset($this->event->dateBegin)) {
 			$value = RPBCalendarHelperValidation::validateDate(get_post_meta($this->eventID, 'rpbevent_date_begin', true));
-			$this->dateBegin = is_null($value) ? RPBCalendarHelperValidation::validateDate(time()) : $value;
+			$this->event->dateBegin = isset($value) ? $value : RPBCalendarHelperValidation::validateDate(time());
 		}
-		return $this->dateBegin;
+		return $this->event->dateBegin;
 	}
 
 
@@ -118,12 +131,13 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	 */
 	public function getEventDateEnd()
 	{
-		if(is_null($this->dateEnd)) {
-			$value     = RPBCalendarHelperValidation::validateDate(get_post_meta($this->eventID, 'rpbevent_date_end', true));
+		$this->ensureEventLoaded();
+		if(!isset($this->event->dateEnd)) {
+			$value = RPBCalendarHelperValidation::validateDate(get_post_meta($this->eventID, 'rpbevent_date_end', true));
 			$dateBegin = $this->getEventDateBegin();
-			$this->dateEnd = (is_null($value) || $value < $dateBegin) ? $dateBegin : $value;
+			$this->event->dateEnd = (isset($value) && $value>=$dateBegin) ? $value : $dateBegin;
 		}
-		return $this->dateEnd;
+		return $this->event->dateEnd;
 	}
 
 
