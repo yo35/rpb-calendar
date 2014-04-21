@@ -29,8 +29,8 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
 abstract class RPBCalendarAbstractController
 {
 	private $modelName;
-	private $model = null;
-	private $view  = null;
+	private $model;
+	private $view;
 
 
 	/**
@@ -49,7 +49,7 @@ abstract class RPBCalendarAbstractController
 	 */
 	public function getModel()
 	{
-		if(is_null($this->model)) {
+		if(!isset($this->model)) {
 			$this->model = RPBCalendarHelperLoader::loadModel($this->modelName);
 		}
 		return $this->model;
@@ -61,7 +61,7 @@ abstract class RPBCalendarAbstractController
 	 */
 	public function getView()
 	{
-		if(is_null($this->view)) {
+		if(!isset($this->view)) {
 			$this->view = RPBCalendarHelperLoader::loadView($this->getModel());
 		}
 		return $this->view;
