@@ -20,47 +20,28 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetprint.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
- * Model used to render the upcoming events widget in the frontend.
+ * Information about the current day.
  */
-class RPBCalendarModelWidgetPrintUpcomingEvents extends RPBCalendarAbstractWidgetPrintModel
+class RPBCalendarTraitToday extends RPBCalendarAbstractTrait
 {
-	public function __construct($instance, $theme)
-	{
-		parent::__construct($instance, $theme);
-		$this->loadTrait('WidgetUpcomingEvents', $instance);
-		$this->loadTrait('Today');
-	}
+	private $today;
 
 
 	/**
-	 * Begin date of the time frame.
+	 * Timestamp corresponding to the current day.
 	 *
-	 * @return string
+	 * @return int
 	 */
-	private function getTimeFrameBegin()
+	public function getToday()
 	{
-		$t = $this->getToday();
-		if(!$this->getWithToday()) {
-			$t += 86400; // 86400 = 24*60*60 = number of seconds in a day.
+		if(!isset($this->today)) {
+			$this->today = RPBCalendarHelperValidation::validateDate(time());
 		}
-		return date('Y-m-d', $t);
-	}
-
-
-	/**
-	 * End date of the time frame.
-	 *
-	 * @return string
-	 */
-	private function getTimeFrameEnd()
-	{
-		$t = $this->getToday();
-		$t += $this->getTimeFrame() * 86400; // 86400 = 24*60*60 = number of seconds in a day.
-		return date('Y-m-d', $t);
+		return $this->today;
 	}
 }
