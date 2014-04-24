@@ -32,6 +32,9 @@ class RPBCalendarViewWidgetPrint extends RPBCalendarAbstractView
 	{
 		// Retrieve the model and the theme data.
 		$model = $this->getModel();
+		if($model->getWidgetHidden()) {
+			return;
+		}
 		$theme = $model->getTheme();
 
 		// Create the widget box if any.
