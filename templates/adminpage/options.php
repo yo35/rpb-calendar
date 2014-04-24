@@ -20,7 +20,7 @@
  ******************************************************************************/
 ?>
 
-<form action="<?php echo htmlspecialchars($model->getFormURL()); ?>" method="post">
+<form action="<?php echo htmlspecialchars($model->getPageOptionsURL()); ?>" method="post">
 
 	<input type="hidden" name="rpbcalendar_action" value="update-options" />
 
@@ -51,6 +51,13 @@
 							<div id="rpbcalendar-admin-colorPicker"></div>
 						</div>
 					</div>
+					<p class="description">
+						<?php
+							_e(
+								'The default category color is used to display the events that belong to categories with no color.',
+							'rpbcalendar');
+						?>
+					</p>
 				</td>
 
 			</tr>

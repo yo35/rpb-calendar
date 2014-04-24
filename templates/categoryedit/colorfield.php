@@ -54,6 +54,19 @@
 	</div>
 </div>
 
+<p class="description">
+	<?php echo sprintf(
+		__(
+			'The color is used to display the events that belong to the category. '.
+			'The events belonging to a category for which no color is defined are displayed '.
+			'either with the color associated to the category parent (if the latter exists), '.
+			'or with the default category color (see the %1$sglobal settings%2$s).',
+		'rpbcalendar'),
+		'<a href="'.htmlspecialchars($model->getPageOptionsURL()).'">',
+		'</a>');
+	?>
+</p>
+
 <?php if($model->isNewCategoryMode()): ?>
 	</div>
 <?php else: ?>
