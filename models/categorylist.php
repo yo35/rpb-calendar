@@ -32,5 +32,6 @@ class RPBCalendarModelCategoryList extends RPBCalendarAbstractModel
 	{
 		parent::__construct();
 		$this->loadTrait('Category');
+		$this->loadTrait('AdminPagesURL');
 	}
 }

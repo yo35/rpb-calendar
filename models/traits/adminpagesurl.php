@@ -20,27 +20,27 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
 
 
 /**
- * Model for the edition form for event categories.
+ * URL of the administration pages.
  */
-class RPBCalendarModelCategoryEdit extends RPBCalendarAbstractModel
+class RPBCalendarTraitAdminPagesURL extends RPBCalendarAbstractTrait
 {
-	public function __construct()
-	{
-		parent::__construct();
-		$this->loadTrait('Category');
-		$this->loadTrait('AdminPagesURL');
-	}
+	private static $pageOptionsURL;
 
 
 	/**
-	 * Whether the form is intended to add a new event category or to edit an existing one.
+	 * URL to the plugin options page.
+	 *
+	 * @return string
 	 */
-	public function isNewCategoryMode()
+	public function getPageOptionsURL()
 	{
-		return $this->getCategoryID()<0;
+		if(!isset(self::$pageOptionsURL)) {
+			self::$pageOptionsURL = site_url() . '/wp-admin/edit.php?post_type=rpbevent&page=rpbcalendar-options';
+		}
+		return self::$pageOptionsURL;
 	}
 }

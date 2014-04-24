@@ -29,29 +29,13 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
  */
 class RPBCalendarModelAdminPageOptions extends RPBCalendarAbstractAdminPageModel
 {
-	private $formURL;
-
-
 	/**
 	 * Constructor.
 	 */
 	public function __construct()
 	{
 		parent::__construct(__('Events and calendar settings', 'rpbcalendar'));
+		$this->loadTrait('AdminPagesURL');
 		$this->loadTrait('DefaultCategoryColor');
-	}
-
-
-	/**
-	 * URL to which the the request for modifying the options of the plugin will be dispatched.
-	 *
-	 * @return string
-	 */
-	public function getFormURL()
-	{
-		if(!isset($this->formURL)) {
-			$this->formURL = site_url() . '/wp-admin/edit.php?post_type=rpbevent&page=rpbcalendar-options';
-		}
-		return $this->formURL;
 	}
 }
