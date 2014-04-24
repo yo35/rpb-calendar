@@ -26,19 +26,15 @@
 
 <?php else: ?>
 
-	<?php
+	<ul>
+		<?php foreach($model->getEventCategories() as $category): ?>
 
-		$output = array();
+			<li>
+				<span class="rpbcalendar-categoryTag"></span>
+				<?php echo htmlspecialchars($category->name); ?>
+			</li>
 
-		foreach($model->getEventCategories() as $category) {
-			$output[] = sprintf('<a href="%1$s">%2$s</a>',
-				htmlspecialchars($model->getFilterByCategoryURL($category)),
-				htmlspecialchars($category->name)
-			);
-		}
-
-		echo implode(', ', $output);
-
-	?>
+		<?php endforeach; ?>
+	</ul>
 
 <?php endif; ?>

@@ -30,6 +30,20 @@
 
 
 /******************************************************************************/
+/*** Category tags ***/
+
+.rpbcalendar-categoryTag {
+	display: inline-block;
+	width: 1.2em;
+	height: 1.2em;
+	border-radius: 0.6em;
+	vertical-align: -0.25em;
+	background-color: red; /* TODO: use the category color */
+}
+
+
+
+/******************************************************************************/
 /*** Event blocks ***/
 
 .rpbcalendar-eventBlock {

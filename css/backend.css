@@ -56,6 +56,11 @@ tr.type-rpbevent span.rpbcalendar-admin-label {
 	margin-right: 5px;
 }
 
+td.rpbevent_categories ul {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
 .rpbcalendar-admin-eventDateBegin,
 .rpbcalendar-admin-eventDateEnd {
 	color: #444;
