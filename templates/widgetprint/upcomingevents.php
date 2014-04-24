@@ -20,4 +20,10 @@
  ******************************************************************************/
 ?>
 
-TODO: implement the upcoming-events widget
+<p>TODO: implement the upcoming-events widget</p>
+
+<ul>
+	<?php while($model->fetchEvent()): ?>
+		<li><?php echo htmlspecialchars($model->getEventTitle()); ?></li>
+	<?php endwhile; ?>
+</ul>

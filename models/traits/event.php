@@ -77,6 +77,21 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 
 
 	/**
+	 * Title of the currently selected event.
+	 *
+	 * @return string
+	 */
+	public function getEventTitle()
+	{
+		$this->ensureEventLoaded();
+		if(!isset($this->event->title)) {
+			$this->event->title = get_the_title($this->eventID);
+		}
+		return $this->event->title;
+	}
+
+
+	/**
 	 * Return the categories associated to the currently selected event.
 	 *
 	 * @return array Array of objects, as returned by the WP function `get_the_terms()`,
