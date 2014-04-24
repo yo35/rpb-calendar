@@ -20,38 +20,29 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/adminpage.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
- * Model for the plugin options page.
+ * Global setting: default event category color.
  */
-class RPBCalendarModelAdminPageOptions extends RPBCalendarAbstractAdminPageModel
+class RPBCalendarTraitDefaultCategoryColor extends RPBCalendarAbstractTrait
 {
-	private $formURL;
+	private static $defaultCategoryColor;
 
 
 	/**
-	 * Constructor.
-	 */
-	public function __construct()
-	{
-		parent::__construct(__('Events and calendar settings', 'rpbcalendar'));
-		$this->loadTrait('DefaultCategoryColor');
-	}
-
-
-	/**
-	 * URL to which the the request for modifying the options of the plugin will be dispatched.
+	 * Default color for the event categories.
 	 *
 	 * @return string
 	 */
-	public function getFormURL()
+	public function getDefaultCategoryColor()
 	{
-		if(!isset($this->formURL)) {
-			$this->formURL = site_url() . '/wp-admin/edit.php?post_type=rpbevent&page=rpbcalendar-options';
+		if(!isset(self::$defaultCategoryColor)) {
+			$value = RPBCalendarHelperValidation::validateColor(get_option('rpbcalendar_defaultColor'));
+			self::$defaultCategoryColor = isset($value) ? $value : '#ffffcc';
 		}
-		return $this->formURL;
+		return self::$defaultCategoryColor;
 	}
 }
