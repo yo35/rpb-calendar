@@ -30,7 +30,7 @@
 		<?php foreach($model->getEventCategories() as $category): ?>
 
 			<li>
-				<span class="rpbcalendar-categoryTag"></span>
+				<span class="rpbcalendar-categoryTag" style="background-color: <?php echo htmlspecialchars($category->color); ?>"></span>
 				<?php echo htmlspecialchars($category->name); ?>
 			</li>
 

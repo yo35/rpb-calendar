@@ -33,6 +33,8 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	private static $data = array();
 	private $eventID = -1;
 	private $event;
+	private $categoryTrait;
+	private $defaultColorTrait;
 
 
 	/**
@@ -94,8 +96,10 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	/**
 	 * Return the categories associated to the currently selected event.
 	 *
-	 * @return array Array of objects, as returned by the WP function `get_the_terms()`,
-	 *         or an empty array if no category is associated to the currently selected event.
+	 * @return array Array of objects. Each object `$c` corresponds to a category, and has the following fields:
+	 *  - `$c->ID` (int): ID of the category,
+	 *  - `$c->name` (string): name of the category,
+	 *  - `$c->color` (string): color associated to the category, determined hierarchically.
 	 */
 	public function getEventCategories()
 	{
@@ -106,13 +110,67 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 			if(is_array($categories)) {
 				foreach($categories as $category) {
 					$this->event->categories[] = (object) array(
-						'ID'   => $category->term_id,
-						'name' => $category->name
+						'ID'    => $category->term_id,
+						'name'  => $category->name,
+						'color' => $this->retrieveCategoryColor($category->term_id)
 					);
 				}
 			}
 		}
 		return $this->event->categories;
+	}
+
+
+	/**
+	 * Retrieve the color associated to the given category.
+	 *
+	 * @param int $categoryID
+	 */
+	private function retrieveCategoryColor($categoryID)
+	{
+		$this->ensureCategoryTraitLoaded();
+
+		// Try to return the color associated to the current category if it exist.
+		while($categoryID > 0) {
+			$this->categoryTrait->setCategoryID($categoryID);
+			$color = $this->categoryTrait->getCategoryColor();
+			if($color!='') {
+				return $color;
+			}
+
+			// Otherwise, try to return the color associated to the category parent.
+			$category = get_term($categoryID, 'rpbevent_category');
+			$categoryID = $category->parent;
+		}
+
+		// At this point, neither the initial category nor any of its parents have
+		// a color -> return the default category color.
+		$this->ensureDefaultColorTraitLoaded();
+		return $this->defaultColorTrait->getDefaultCategoryColor();
+	}
+
+
+	/**
+	 * Create a new instance of the category trait, if necessary.
+	 */
+	private function ensureCategoryTraitLoaded()
+	{
+		if(isset($this->categoryTrait)) {
+			return;
+		}
+		$this->categoryTrait = RPBCalendarHelperLoader::loadTrait('Category');
+	}
+
+
+	/**
+	 * Create a new instance of the default category color trait, if necessary.
+	 */
+	private function ensureDefaultColorTraitLoaded()
+	{
+		if(isset($this->defaultColorTrait)) {
+			return;
+		}
+		$this->defaultColorTrait = RPBCalendarHelperLoader::loadTrait('DefaultCategoryColor');
 	}
 
 
