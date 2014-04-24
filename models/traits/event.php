@@ -101,8 +101,16 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	{
 		$this->ensureEventLoaded();
 		if(!isset($this->event->categories)) {
-			$value = get_the_terms($this->eventID, 'rpbevent_category');
-			$this->event->categories = is_array($value) ? $value : array();
+			$this->event->categories = array();
+			$categories = get_the_terms($this->eventID, 'rpbevent_category');
+			if(is_array($categories)) {
+				foreach($categories as $category) {
+					$this->event->categories[] = (object) array(
+						'ID'   => $category->term_id,
+						'name' => $category->name
+					);
+				}
+			}
 		}
 		return $this->event->categories;
 	}

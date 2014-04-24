@@ -49,6 +49,6 @@ class RPBCalendarModelEventList extends RPBCalendarAbstractModel
 		if(!isset($this->filterByCategoryURLTemplate)) {
 			$this->filterByCategoryURLTemplate = admin_url('edit.php?post_type=rpbevent&rpbevent_category=%1$s');
 		}
-		return sprintf($this->filterByCategoryURLTemplate, $category->term_id);
+		return sprintf($this->filterByCategoryURLTemplate, $category->ID);
 	}
 }
