@@ -22,6 +22,7 @@
 
 require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetprint.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/today.php');
 
 
 /**
@@ -33,7 +34,6 @@ class RPBCalendarModelWidgetPrintUpcomingEvents extends RPBCalendarAbstractWidge
 	{
 		parent::__construct($instance, $theme);
 		$this->loadTrait('WidgetUpcomingEvents', $instance);
-		$this->loadTrait('Today');
 	}
 
 
@@ -44,7 +44,7 @@ class RPBCalendarModelWidgetPrintUpcomingEvents extends RPBCalendarAbstractWidge
 	 */
 	private function getTimeFrameBegin()
 	{
-		$t = $this->getToday();
+		$t = RPBCalendarHelperToday::timestamp();
 		if(!$this->getWithToday()) {
 			$t += 86400; // 86400 = 24*60*60 = number of seconds in a day.
 		}
@@ -59,7 +59,7 @@ class RPBCalendarModelWidgetPrintUpcomingEvents extends RPBCalendarAbstractWidge
 	 */
 	private function getTimeFrameEnd()
 	{
-		$t = $this->getToday();
+		$t = RPBCalendarHelperToday::timestamp();
 		$t += $this->getTimeFrame() * 86400; // 86400 = 24*60*60 = number of seconds in a day.
 		return date('Y-m-d', $t);
 	}

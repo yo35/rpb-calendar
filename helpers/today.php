@@ -20,16 +20,15 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
  * Information about the current day.
  */
-class RPBCalendarTraitToday extends RPBCalendarAbstractTrait
+abstract class RPBCalendarHelperToday
 {
-	private $today;
+	private static $today;
 
 
 	/**
@@ -37,11 +36,11 @@ class RPBCalendarTraitToday extends RPBCalendarAbstractTrait
 	 *
 	 * @return int
 	 */
-	public function getToday()
+	public static function timestamp()
 	{
-		if(!isset($this->today)) {
-			$this->today = RPBCalendarHelperValidation::validateDate(time());
+		if(!isset(self::$today)) {
+			self::$today = RPBCalendarHelperValidation::validateDate(time());
 		}
-		return $this->today;
+		return self::$today;
 	}
 }
