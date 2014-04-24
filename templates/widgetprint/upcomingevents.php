@@ -20,10 +20,12 @@
  ******************************************************************************/
 ?>
 
-<p>TODO: implement the upcoming-events widget</p>
-
-<ul>
+<div class="rpbcalendar-eventBlockList">
 	<?php while($model->fetchEvent()): ?>
-		<li><?php echo htmlspecialchars($model->getEventTitle()); ?></li>
+
+		<div class="rpbcalendar-eventBlock">
+			<?php echo htmlspecialchars($model->getEventTitle()); ?>
+		</div>
+
 	<?php endwhile; ?>
-</ul>
+</div>
