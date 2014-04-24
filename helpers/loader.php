@@ -38,6 +38,18 @@ abstract class RPBCalendarHelperLoader
 
 
 	/**
+	 * Load the model corresponding to the given trait name.
+	 */
+	public static function loadTrait($traitName, $arg1=null, $arg2=null, $arg3=null)
+	{
+		$fileName  = strtolower($traitName);
+		$className = 'RPBCalendarTrait' . $traitName;
+		require_once(RPBCALENDAR_ABSPATH . 'models/traits/' . $fileName . '.php');
+		return new $className($arg1, $arg2, $arg3);
+	}
+
+
+	/**
 	 * Load the view whose name is returned by `$model->getViewName()`.
 	 */
 	public static function loadView($model)

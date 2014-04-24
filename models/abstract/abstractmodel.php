@@ -20,6 +20,9 @@
  ******************************************************************************/
 
 
+require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+
+
 /**
  * Base class for the models used by the RPB Calendar plugin.
  *
@@ -67,10 +70,7 @@ abstract class RPBCalendarAbstractModel
 	public function loadTrait($traitName, $arg1=null, $arg2=null, $arg3=null)
 	{
 		// Load the definition of the trait, and instantiate it.
-		$fileName  = strtolower($traitName);
-		$className = 'RPBCalendarTrait' . $traitName;
-		require_once(RPBCALENDAR_ABSPATH . 'models/traits/' . $fileName . '.php');
-		$trait = new $className($arg1, $arg2, $arg3);
+		$trait = RPBCalendarHelperLoader::loadTrait($traitName, $arg1, $arg2, $arg3);
 
 		// List all the public methods of the trait, and register them
 		// to the method index of the current model.
