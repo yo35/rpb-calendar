@@ -29,8 +29,8 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
  */
 class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 {
+	private static $data = array();
 	private $eventID = -1;
-	private $data = array();
 	private $event;
 
 
@@ -61,17 +61,17 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 
 
 	/**
-	 * Ensure that the object `$this->event` is equal to `$this->data[$this->eventID]`.
+	 * Ensure that the object `$this->event` is equal to `self::$data[$this->eventID]`.
 	 */
 	private function ensureEventLoaded()
 	{
 		if(isset($this->event)) {
 			return;
 		}
-		if(!isset($this->data[$this->eventID])) {
-			$this->data[$this->eventID] = new stdClass;
+		if(!isset(self::$data[$this->eventID])) {
+			self::$data[$this->eventID] = new stdClass;
 		}
-		$this->event = $this->data[$this->eventID];
+		$this->event = self::$data[$this->eventID];
 	}
 
 
