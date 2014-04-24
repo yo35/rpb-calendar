@@ -33,7 +33,7 @@ class RPBCalendarModelWidgetPrintUpcomingEvents extends RPBCalendarAbstractWidge
 	public function __construct($instance, $theme)
 	{
 		parent::__construct($instance, $theme);
-		$this->loadTrait('WidgetUpcomingEvents', $instance);
+		$this->loadTrait('WidgetUpcomingEvents', $this->instance);
 
 		// Load the events.
 		$where = array(
@@ -41,6 +41,18 @@ class RPBCalendarModelWidgetPrintUpcomingEvents extends RPBCalendarAbstractWidge
 			'time_frame_end'   => $this->getTimeFrameEnd  ()
 		);
 		$this->loadTrait('EventQuery', $where);
+	}
+
+
+	protected function getDefaultTitle()
+	{
+		return __('Upcoming events', 'rpbcalendar');
+	}
+
+
+	protected function getDefaultWidgetHidden()
+	{
+		return !$this->haveEvent();
 	}
 
 

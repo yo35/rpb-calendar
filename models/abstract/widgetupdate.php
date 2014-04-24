@@ -29,8 +29,8 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
  */
 abstract class RPBCalendarAbstractWidgetUpdateModel extends RPBCalendarAbstractWidgetModel
 {
+	protected $newInstance;
 	private $validatedInstance;
-	private $newInstance;
 	private $newTitle;
 
 
@@ -46,7 +46,9 @@ abstract class RPBCalendarAbstractWidgetUpdateModel extends RPBCalendarAbstractW
 		$this->newInstance = $newInstance;
 
 		// Initialize the new widget parameters.
-		$this->newTitle = isset($newInstance['title']) ? RPBCalendarHelperValidation::trim($newInstance['title']) : null;
+		if(isset($this->newInstance['title'])) {
+			$this->newTitle = RPBCalendarHelperValidation::trim($this->newInstance['title']);
+		}
 	}
 
 
@@ -70,27 +72,5 @@ abstract class RPBCalendarAbstractWidgetUpdateModel extends RPBCalendarAbstractW
 	protected function makeValidatedInstance()
 	{
 		return array('title' => isset($this->newTitle) ? $this->newTitle : $this->getTitle());
-	}
-
-
-	/**
-	 * Return the new value of the title parameter.
-	 *
-	 * @return string May be null if the new title is invalid.
-	 */
-	public function getNewTitle()
-	{
-		return $this->newTitle;
-	}
-
-
-	/**
-	 * Return the new set of widget parameters.
-	 *
-	 * @return array
-	 */
-	protected function getNewInstance()
-	{
-		return $this->newInstance;
 	}
 }

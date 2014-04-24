@@ -46,17 +46,6 @@ class RPBCalendarTraitWidgetUpcomingEvents extends RPBCalendarAbstractTrait
 
 
 	/**
-	 * Default title of the widget.
-	 *
-	 * @return string
-	 */
-	public function getDefaultTitle()
-	{
-		return __('Upcoming events', 'rpbcalendar');
-	}
-
-
-	/**
 	 * Size of the time frame in which events will be displayed (in days).
 	 *
 	 * @return int

@@ -37,7 +37,13 @@ class RPBCalendarModelWidgetEditUpcomingEvents extends RPBCalendarAbstractWidget
 	public function __construct($instance, $wpWidget)
 	{
 		parent::__construct($instance, $wpWidget);
-		$this->loadTrait('WidgetUpcomingEvents', $instance);
+		$this->loadTrait('WidgetUpcomingEvents', $this->instance);
+	}
+
+
+	protected function getDefaultTitle()
+	{
+		return __('Upcoming events', 'rpbcalendar');
 	}
 
 

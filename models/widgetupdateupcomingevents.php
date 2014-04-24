@@ -36,11 +36,15 @@ class RPBCalendarModelWidgetUpdateUpcomingEvents extends RPBCalendarAbstractWidg
 	public function __construct($instance, $newInstance)
 	{
 		parent::__construct($instance, $newInstance);
-		$this->loadTrait('WidgetUpcomingEvents', $this->getInstance());
+		$this->loadTrait('WidgetUpcomingEvents', $this->instance);
 
 		// Initialize the new widget parameters.
-		$this->newTimeFrame = isset($newInstance['time-frame']) ? RPBCalendarHelperValidation::validateInteger($newInstance['time-frame'], 1) : null;
-		$this->newWithToday = isset($newInstance['with-today']) ? RPBCalendarHelperValidation::validateBooleanFromInt($newInstance['with-today']) : null;
+		if(isset($this->newInstance['time-frame'])) {
+			$this->newTimeFrame = RPBCalendarHelperValidation::validateInteger($this->newInstance['time-frame'], 1);
+		}
+		if(isset($this->newInstance['with-today'])) {
+			$this->newWithToday = RPBCalendarHelperValidation::validateBooleanFromInt($this->newInstance['with-today']);
+		}
 	}
 
 
@@ -50,6 +54,12 @@ class RPBCalendarModelWidgetUpdateUpcomingEvents extends RPBCalendarAbstractWidg
 		$retVal['time-frame'] = isset($this->newTimeFrame) ? $this->newTimeFrame : $this->getTimeFrame();
 		$retVal['with-today'] = (isset($this->newWithToday) ? $this->newWithToday : $this->getWithToday()) ? 1 : 0;
 		return $retVal;
+	}
+
+
+	protected function getDefaultTitle()
+	{
+		return __('Upcoming events', 'rpbcalendar');
 	}
 
 

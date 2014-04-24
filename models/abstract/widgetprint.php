@@ -29,6 +29,7 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widget.php');
 abstract class RPBCalendarAbstractWidgetPrintModel extends RPBCalendarAbstractWidgetModel
 {
 	private $theme;
+	private $widgetHidden;
 
 
 	/**
@@ -64,4 +65,26 @@ abstract class RPBCalendarAbstractWidgetPrintModel extends RPBCalendarAbstractWi
 	{
 		return $this->theme;
 	}
+
+
+	/**
+	 * Whether the widget should be hidden or not.
+	 *
+	 * @return boolean
+	 */
+	public function getWidgetHidden()
+	{
+		if(!isset($this->widgetHidden)) {
+			$this->widgetHidden = $this->getDefaultWidgetHidden();
+		}
+		return $this->widgetHidden;
+	}
+
+
+	/**
+	 * Default "widget-hidden" attribute.
+	 *
+	 * @return boolean
+	 */
+	protected abstract function getDefaultWidgetHidden();
 }
