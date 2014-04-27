@@ -36,6 +36,6 @@ class RPBCalendarModelAdminPageOptions extends RPBCalendarAbstractModelAdminPage
 	{
 		parent::__construct();
 		$this->loadTrait('AdminPagesURL');
-		$this->loadTrait('DefaultCategoryColor');
+		$this->loadTrait('DefaultColors');
 	}
 }

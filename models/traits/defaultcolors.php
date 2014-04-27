@@ -25,11 +25,12 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
- * Global setting: default event category color.
+ * Global settings: default colors for the events and the event categories.
  */
-class RPBCalendarTraitDefaultCategoryColor extends RPBCalendarAbstractTrait
+class RPBCalendarTraitDefaultColors extends RPBCalendarAbstractTrait
 {
 	private static $defaultCategoryColor;
+	private static $defaultEventColor;
 
 
 	/**
@@ -40,9 +41,24 @@ class RPBCalendarTraitDefaultCategoryColor extends RPBCalendarAbstractTrait
 	public function getDefaultCategoryColor()
 	{
 		if(!isset(self::$defaultCategoryColor)) {
-			$value = RPBCalendarHelperValidation::validateColor(get_option('rpbcalendar_defaultColor'));
-			self::$defaultCategoryColor = isset($value) ? $value : '#ffffcc';
+			$value = RPBCalendarHelperValidation::validateColor(get_option('rpbcalendar_defaultCategoryColor'));
+			self::$defaultCategoryColor = isset($value) ? $value : '#ffffaa';
 		}
 		return self::$defaultCategoryColor;
+	}
+
+
+	/**
+	 * Default color for the events that do not belong to any category.
+	 *
+	 * @return string
+	 */
+	public function getDefaultEventColor()
+	{
+		if(!isset(self::$defaultEventColor)) {
+			$value = RPBCalendarHelperValidation::validateColor(get_option('rpbcalendar_defaultEventColor'));
+			self::$defaultEventColor = isset($value) ? $value : '#3344ff';
+		}
+		return self::$defaultEventColor;
 	}
 }
