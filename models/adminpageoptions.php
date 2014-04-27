@@ -27,14 +27,14 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 /**
  * Model for the plugin options page.
  */
-class RPBCalendarModelAdminPageOptions extends RPBCalendarAbstractAdminPageModel
+class RPBCalendarModelAdminPageOptions extends RPBCalendarAbstractModelAdminPage
 {
 	/**
 	 * Constructor.
 	 */
 	public function __construct()
 	{
-		parent::__construct(__('Events and calendar settings', 'rpbcalendar'));
+		parent::__construct();
 		$this->loadTrait('AdminPagesURL');
 		$this->loadTrait('DefaultCategoryColor');
 	}

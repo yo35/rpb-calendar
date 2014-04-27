@@ -46,6 +46,8 @@ class RPBCalendarTraitPostOptions extends RPBCalendarAbstractTrait
 
 	/**
 	 * Update the plugin options.
+	 *
+	 * @return string
 	 */
 	public function updateOptions()
 	{
@@ -53,5 +55,8 @@ class RPBCalendarTraitPostOptions extends RPBCalendarAbstractTrait
 		if(isset($this->defaultCategoryColor)) {
 			update_option('rpbcalendar_defaultColor', $this->defaultCategoryColor);
 		}
+
+		// Notify the user.
+		return __('Settings saved.', 'rpbcalendar');
 	}
 }

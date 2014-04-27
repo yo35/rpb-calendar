@@ -28,12 +28,21 @@ require_once(RPBCALENDAR_ABSPATH . 'controllers/abstractcontroller.php');
  */
 class RPBCalendarControllerAdminPage extends RPBCalendarAbstractController
 {
+	/**
+	 * Constructor.
+	 *
+	 * @param string $modelName Name of the model to use. It is supposed to refer
+	 *        to a model that inherits from the class AbstractModelAdminPage.
+	 */
 	public function __construct($modelName)
 	{
 		parent::__construct($modelName);
 	}
 
 
+	/**
+	 * Entry-point of the controller.
+	 */
 	public function run()
 	{
 		// Execute the action requested by the POST data, if any.
@@ -53,10 +62,13 @@ class RPBCalendarControllerAdminPage extends RPBCalendarAbstractController
 	 * @param string $traitName
 	 * @param string $methodName
 	 */
-	private function executeAction($traitName, $methodName)
+	private function executeAction($traitName, $methodName, $capability='manage_options')
 	{
+		if(!current_user_can($capability)) {
+			return;
+		}
 		$model = $this->getModel();
 		$model->loadTrait($traitName);
-		$model->$methodName();
+		$model->setPostMessage($model->$methodName());
 	}
 }

@@ -26,18 +26,9 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/adminpage.php');
 /**
  * Model for the plugin credit page.
  */
-class RPBCalendarModelAdminPageAbout extends RPBCalendarAbstractAdminPageModel
+class RPBCalendarModelAdminPageAbout extends RPBCalendarAbstractModelAdminPage
 {
 	private $pluginInfo;
-
-
-	/**
-	 * Constructor.
-	 */
-	public function __construct()
-	{
-		parent::__construct(sprintf(__('About %1$s', 'rpbcalendar'), 'RPB Calendar'));
-	}
 
 
 	/**

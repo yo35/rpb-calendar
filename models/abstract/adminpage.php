@@ -26,20 +26,20 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
 /**
  * Base class for the models used to render the plugin administration pages.
  */
-abstract class RPBCalendarAbstractAdminPageModel extends RPBCalendarAbstractModel
+abstract class RPBCalendarAbstractModelAdminPage extends RPBCalendarAbstractModel
 {
 	private $adminPageName;
-	private $postAction;
 	private $title;
+	private $postAction;
+	private $postMessage;
 
 
 	/**
 	 * Constructor.
 	 */
-	public function __construct($title)
+	public function __construct()
 	{
 		parent::__construct();
-		$this->title = $title;
 		$this->setTemplateName($this->getAdminPageName());
 	}
 
@@ -70,6 +70,20 @@ abstract class RPBCalendarAbstractAdminPageModel extends RPBCalendarAbstractMode
 
 
 	/**
+	 * Human-readable title of the page.
+	 *
+	 * @return string
+	 */
+	public function getTitle()
+	{
+		if(!isset($this->title)) {
+			$this->title = htmlspecialchars_decode(get_admin_page_title(), ENT_QUOTES);
+		}
+		return $this->title;
+	}
+
+
+	/**
 	 * Return the name of the action that should be performed by the server.
 	 * The action is initiated by the user when clicking on a "submit" button in
 	 * an HTML form with its method attribute set to POST.
@@ -88,12 +102,24 @@ abstract class RPBCalendarAbstractAdminPageModel extends RPBCalendarAbstractMode
 
 
 	/**
-	 * Human-readable title of the page.
+	 * Human-readable message informing the user about the result of the POST action.
+	 * or an empty string if no action were performed.
 	 *
 	 * @return string
 	 */
-	public function getTitle()
+	public function getPostMessage()
 	{
-		return $this->title;
+		return isset($this->postMessage) ? $this->postMessage : '';
+	}
+
+
+	/**
+	 * Set the POST action message.
+	 *
+	 * @param string $message
+	 */
+	public function setPostMessage($message)
+	{
+		$this->postMessage = $message;
 	}
 }
