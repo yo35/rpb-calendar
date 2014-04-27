@@ -22,7 +22,13 @@
 
 <?php if($model->getCategoryColor()==''): ?>
 
-	&mdash;
+	<div>&mdash;</div>
+	<div>
+		<span class="rpbcalendar-admin-label"><?php _e('Displayed as:', 'rpbcalendar'); ?></span>
+		<span class="rpbcalendar-categoryTag" style="background-color: <?php
+			echo htmlspecialchars($model->getCategoryInheritedColor());
+		?>"></span>
+	</div>
 
 <?php else: ?>
 
