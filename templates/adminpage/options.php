@@ -24,42 +24,49 @@
 
 	<input type="hidden" name="rpbcalendar_action" value="update-options" />
 
-	<input type="hidden" name="rpbcalendar_defaultColor" id="rpbcalendar-admin-defaultColorField" value="<?php
+	<input type="hidden" name="defaultCategoryColor" id="rpbcalendar-defaultCategoryColorField" value="<?php
 		echo htmlspecialchars($model->getDefaultCategoryColor());
+	?>" />
+
+	<input type="hidden" name="defaultEventColor" id="rpbcalendar-defaultEventColorField" value="<?php
+		echo htmlspecialchars($model->getDefaultEventColor());
 	?>" />
 
 	<table class="form-table">
 		<tbody>
 
 			<tr valign="top">
-
 				<th scope="row">
-					<label for="rpbcalendar-admin-defaultColorField"><?php
+					<label for="rpbcalendar-defaultCategoryColorField"><?php
 						_e('Default category color', 'rpbcalendar');
 					?></label>
 				</th>
-
 				<td>
-					<div class="rpbcalendar-admin-hBox">
-						<div class="rpbcalendar-admin-vBox">
-							<div id="rpbcalendar-admin-defaultColorPreview" class="rpbcalendar-admin-colorPatch"></div>
-							<a class="button" id="rpbcalendar-admin-randomColorButton" href="#" title="<?php
-								_e('Select a color at random', 'rpbcalendar');
-							?>"><?php _e('Random', 'rpbcalendar'); ?></a>
-						</div>
-						<div>
-							<div id="rpbcalendar-admin-colorPicker"></div>
-						</div>
-					</div>
+					<div id="rpbcalendar-defaultCategoryColorIris"></div>
 					<p class="description">
 						<?php
-							_e(
-								'The default category color is used to display the events that belong to categories with no color.',
-							'rpbcalendar');
+							_e('The default category color is used to display the events that belong to categories with no color.',
+								'rpbcalendar');
 						?>
 					</p>
 				</td>
+			</tr>
 
+			<tr valign="top">
+				<th scope="row">
+					<label for="rpbcalendar-defaultEventColorField"><?php
+						_e('Default event color', 'rpbcalendar');
+					?></label>
+				</th>
+				<td>
+					<div id="rpbcalendar-defaultEventColorIris"></div>
+					<p class="description">
+						<?php
+							_e('The default event color is used to display the events that do not belong to any category.',
+								'rpbcalendar');
+						?>
+					</p>
+				</td>
 			</tr>
 
 		</tbody>
@@ -78,25 +85,26 @@
 
 	jQuery(document).ready(function($)
 	{
-		// Initialize the color picker widget.
-		$('#rpbcalendar-admin-defaultColorField').prop('readonly', true).iris({
-			hide: false,
-			palettes: true,
-			target: $('#rpbcalendar-admin-colorPicker'),
+		// Initialize the color picker widget (default category color).
+		$('#rpbcalendar-defaultCategoryColorIris').iris2({
+			buttonClass: 'button',
+			clearButton: false,
+			color: $('#rpbcalendar-defaultCategoryColorField').val(),
 			change: function(event, ui) {
-				$('#rpbcalendar-admin-defaultColorPreview').css('background-color', ui.color.toString());
+				$('#rpbcalendar-defaultCategoryColorField').val(ui.color);
 			}
 		});
 
-		// Callback to set a color at random.
-		$('#rpbcalendar-admin-randomColorButton').click(function(e) {
-			e.preventDefault();
-			var color = Math.floor(Math.random()*256*256*256);
-			$('#rpbcalendar-admin-defaultColorField').iris('color', '#' + color.toString(16));
+		// Initialize the color picker widget (default event color).
+		$('#rpbcalendar-defaultEventColorIris').iris2({
+			buttonClass: 'button',
+			clearButton: false,
+			color: $('#rpbcalendar-defaultEventColorField').val(),
+			change: function(event, ui) {
+				$('#rpbcalendar-defaultEventColorField').val(ui.color);
+			}
 		});
 
-		// Initial aspect of the color sample.
-		$('#rpbcalendar-admin-defaultColorPreview').css('background-color', $('#rpbcalendar-admin-defaultColorField').val());
 	});
 
 </script>

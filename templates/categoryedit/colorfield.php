@@ -28,31 +28,18 @@
 <?php endif; ?>
 
 
-<label for="rpbcalendar-admin-categoryColorField"><?php _e('Color', 'rpbcalendar'); ?></label>
+<label for="rpbcalendar-categoryColorField"><?php _e('Color', 'rpbcalendar'); ?></label>
 
 <?php if(!$model->isNewCategoryMode()): ?>
 		</th>
 		<td>
 <?php endif; ?>
 
-<input type="hidden" name="rpbevent_category_color" id="rpbcalendar-admin-categoryColorField" value="<?php
+<input type="hidden" name="rpbevent_category_color" id="rpbcalendar-categoryColorField" value="<?php
 	echo htmlspecialchars($model->getCategoryColor());
 ?>" />
 
-<div class="rpbcalendar-admin-hBox">
-	<div class="rpbcalendar-admin-vBox">
-		<div id="rpbcalendar-admin-categoryColorPreview" class="rpbcalendar-admin-colorPatch"></div>
-		<a class="button" id="rpbcalendar-admin-randomColorButton" href="#" title="<?php
-			_e('Select a color at random', 'rpbcalendar');
-		?>"><?php _e('Random', 'rpbcalendar'); ?></a>
-		<a class="button" id="rpbcalendar-admin-clearColorButton" href="#" title="<?php
-			_e('Do not associate a color to the current category', 'rpbcalendar');
-		?>"><?php _e('Clear', 'rpbcalendar'); ?></a>
-	</div>
-	<div>
-		<div id="rpbcalendar-admin-colorPicker"></div>
-	</div>
-</div>
+<div id="rpbcalendar-categoryColorIris"></div>
 
 <p class="description">
 	<?php echo sprintf(
@@ -81,47 +68,17 @@
 	jQuery(document).ready(function($)
 	{
 		// Initialize the color picker widget.
-		$('#rpbcalendar-admin-categoryColorField').prop('readonly', true).iris({
-			hide: false,
-			palettes: true,
-			target: $('#rpbcalendar-admin-colorPicker'),
+		$('#rpbcalendar-categoryColorIris').iris2({
+			buttonClass: 'button',
+			color: $('#rpbcalendar-categoryColorField').val(),
 			change: function(event, ui) {
-				$('#rpbcalendar-admin-categoryColorPreview').css('background-color', ui.color.toString());
-				$('#rpbcalendar-admin-categoryColorPreview').removeClass('rpbcalendar-admin-colorPatchTransparent');
+				$('#rpbcalendar-categoryColorField').val(ui.color);
 			}
 		});
-
-
-		// Callback to set a color at random.
-		$('#rpbcalendar-admin-randomColorButton').click(function(e) {
-			e.preventDefault();
-			var color = Math.floor(Math.random()*256*256*256);
-			$('#rpbcalendar-admin-categoryColorField').iris('color', '#' + color.toString(16));
-		});
-
-
-		// Callback to unset the color.
-		$('#rpbcalendar-admin-clearColorButton').click(function(e) {
-			e.preventDefault();
-			$('#rpbcalendar-admin-categoryColorField').val('');
-			$('#rpbcalendar-admin-categoryColorPreview').css('background-color', 'transparent');
-			$('#rpbcalendar-admin-categoryColorPreview').addClass('rpbcalendar-admin-colorPatchTransparent');
-		});
-
 
 		// Initial aspect of the color sample.
 		<?php if($model->isNewCategoryMode()): ?>
-
-			$('#rpbcalendar-admin-randomColorButton').click();
-
-		<?php else: ?>
-
-			var initialColor = $('#rpbcalendar-admin-categoryColorField').val();
-			$('#rpbcalendar-admin-categoryColorPreview').css('background-color', initialColor=='' ? 'transparent' : initialColor);
-			if(initialColor=='') {
-				$('#rpbcalendar-admin-categoryColorPreview').addClass('rpbcalendar-admin-colorPatchTransparent');
-			}
-
+			$('#rpbcalendar-categoryColorIris').iris2('selectRandom');
 		<?php endif; ?>
 
 	});
