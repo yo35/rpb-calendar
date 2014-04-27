@@ -26,7 +26,7 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
 /**
  * Base class for the models used to render the Wordpress shortcodes defined by the plugin.
  */
-abstract class RPBCalendarAbstractShortcodeModel extends RPBCalendarAbstractModel
+abstract class RPBCalendarAbstractModelShortcode extends RPBCalendarAbstractModel
 {
 	private $atts   ;
 	private $content;

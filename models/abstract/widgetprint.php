@@ -26,7 +26,7 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widget.php');
 /**
  * Base class for the models used to print the widgets in the front-end.
  */
-abstract class RPBCalendarAbstractWidgetPrintModel extends RPBCalendarAbstractWidgetModel
+abstract class RPBCalendarAbstractModelWidgetPrint extends RPBCalendarAbstractModelWidget
 {
 	private $theme;
 	private $widgetHidden;

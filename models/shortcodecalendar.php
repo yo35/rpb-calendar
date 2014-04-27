@@ -27,7 +27,7 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 /**
  * Model for the shortcode [rpbcalendar].
  */
-class RPBCalendarModelShortcodeCalendar extends RPBCalendarAbstractShortcodeModel
+class RPBCalendarModelShortcodeCalendar extends RPBCalendarAbstractModelShortcode
 {
 	private $startOfWeek;
 

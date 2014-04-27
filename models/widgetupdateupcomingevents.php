@@ -26,7 +26,7 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetupdate.php');
 /**
  * Model to update the settings of the upcoming events widget.
  */
-class RPBCalendarModelWidgetUpdateUpcomingEvents extends RPBCalendarAbstractWidgetUpdateModel
+class RPBCalendarModelWidgetUpdateUpcomingEvents extends RPBCalendarAbstractModelWidgetUpdate
 {
 	private $validatedInstance;
 	private $newTimeFrame;

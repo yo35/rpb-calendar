@@ -27,7 +27,7 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 /**
  * Base class for the widget-associated models.
  */
-abstract class RPBCalendarAbstractWidgetModel extends RPBCalendarAbstractModel
+abstract class RPBCalendarAbstractModelWidget extends RPBCalendarAbstractModel
 {
 	protected $instance;
 	private $widgetName;

@@ -28,7 +28,7 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/today.php');
 /**
  * Model used to render the upcoming events widget in the frontend.
  */
-class RPBCalendarModelWidgetPrintUpcomingEvents extends RPBCalendarAbstractWidgetPrintModel
+class RPBCalendarModelWidgetPrintUpcomingEvents extends RPBCalendarAbstractModelWidgetPrint
 {
 	public function __construct($instance, $theme)
 	{
