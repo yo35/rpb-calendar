@@ -34,7 +34,7 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	private $eventID = -1;
 	private $event;
 	private $categoryTrait;
-	private $defaultColorTrait;
+	private $defaultColorsTrait;
 
 
 	/**
@@ -125,28 +125,59 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	 * Retrieve the color associated to the given category.
 	 *
 	 * @param int $categoryID
+	 * @return string
 	 */
 	private function retrieveCategoryColor($categoryID)
 	{
 		$this->ensureCategoryTraitLoaded();
+		$this->categoryTrait->setCategoryID($categoryID);
+		return $this->categoryTrait->getCategoryInheritedColor();
+	}
 
-		// Try to return the color associated to the current category if it exist.
-		while($categoryID > 0) {
-			$this->categoryTrait->setCategoryID($categoryID);
-			$color = $this->categoryTrait->getCategoryColor();
-			if($color!='') {
-				return $color;
-			}
 
-			// Otherwise, try to return the color associated to the category parent.
-			$category = get_term($categoryID, 'rpbevent_category');
-			$categoryID = $category->parent;
+	/**
+	 * Style attribute that must be apply to the event when rendering.
+	 *
+	 * @return string
+	 */
+	public function getEventBackgroundStyle()
+	{
+		$this->ensureEventLoaded();
+		if(!isset($this->event->backgroundStyle)) {
+			$this->event->backgroundStyle = $this->buildEventBackgroundStyle();
 		}
+		return $this->event->backgroundStyle;
+	}
 
-		// At this point, neither the initial category nor any of its parents have
-		// a color -> return the default category color.
-		$this->ensureDefaultColorTraitLoaded();
-		return $this->defaultColorTrait->getDefaultCategoryColor();
+
+	/**
+	 * Determine the style attribute that must be applied to the event when rendering.
+	 *
+	 * @return string
+	 */
+	private function buildEventBackgroundStyle()
+	{
+		$colors = array();
+		foreach($this->getEventCategories() as $category) {
+			$colors[] = $category->color;
+		}
+		$colors = array_unique($colors);
+		sort($colors);
+		switch(count($colors)) {
+
+			// 0-color => the event does not belong to any category.
+			case 0:
+				$this->ensureDefaultColorsTraitLoaded();
+				return 'background-color: ' . $this->defaultColorsTrait->getDefaultEventColor();
+
+			// 1-color
+			case 1:
+				return 'background-color: ' . $colors[0];
+
+			// Too many colors!
+			default:
+				return 'background-image: url(' . RPBCALENDAR_URL . '/images/transparent-pattern.png)'; //TODO: special pattern
+		}
 	}
 
 
@@ -163,14 +194,14 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 
 
 	/**
-	 * Create a new instance of the default category color trait, if necessary.
+	 * Create a new instance of the default colors trait, if necessary.
 	 */
-	private function ensureDefaultColorTraitLoaded()
+	private function ensureDefaultColorsTraitLoaded()
 	{
-		if(isset($this->defaultColorTrait)) {
+		if(isset($this->defaultColorsTrait)) {
 			return;
 		}
-		$this->defaultColorTrait = RPBCalendarHelperLoader::loadTrait('DefaultCategoryColor');
+		$this->defaultColorsTrait = RPBCalendarHelperLoader::loadTrait('DefaultColors');
 	}
 
 

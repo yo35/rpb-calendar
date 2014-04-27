@@ -23,7 +23,7 @@
 <div class="rpbcalendar-eventBlockList">
 	<?php while($model->fetchEvent()): ?>
 
-		<div class="rpbcalendar-eventBlock">
+		<div class="rpbcalendar-eventBlock" style="<?php echo htmlspecialchars($model->getEventBackgroundStyle()); ?>">
 			<?php echo htmlspecialchars($model->getEventTitle()); ?>
 		</div>
 
