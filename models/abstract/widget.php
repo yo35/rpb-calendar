@@ -43,7 +43,7 @@ abstract class RPBCalendarAbstractWidgetModel extends RPBCalendarAbstractModel
 	{
 		parent::__construct();
 		$this->instance = $instance;
-		$this->useTemplate($this->getWidgetName());
+		$this->setTemplateName($this->getWidgetName());
 	}
 
 

@@ -90,7 +90,7 @@ class RPBCalendarControllerEventEdit extends RPBCalendarAbstractController
 	{
 		$model = $this->getModel();
 		$model->setEventID($event->ID);
-		$model->useTemplate($templateName);
+		$model->setTemplateName($templateName);
 		$this->getView()->display();
 	}
 }

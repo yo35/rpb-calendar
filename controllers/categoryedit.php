@@ -42,7 +42,7 @@ class RPBCalendarControllerCategoryEdit extends RPBCalendarAbstractController
 	{
 		$model = $this->getModel();
 		$model->setCategoryID(isset($this->category) ? $this->category->term_id : -1);
-		$model->useTemplate('ColorField');
+		$model->setTemplateName('ColorField');
 		$this->getView()->display();
 	}
 }

@@ -46,7 +46,7 @@ abstract class RPBCalendarAbstractShortcodeModel extends RPBCalendarAbstractMode
 		parent::__construct();
 		$this->atts    = is_array($atts) ? $atts : array();
 		$this->content = $content;
-		$this->useTemplate($this->getShortcodeName());
+		$this->setTemplateName($this->getShortcodeName());
 	}
 
 

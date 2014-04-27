@@ -101,7 +101,7 @@ class RPBCalendarControllerEventList extends RPBCalendarAbstractController
 	{
 		$model = $this->getModel();
 		$model->setEventID($eventID);
-		$model->useTemplate(self::getTemplateName($column));
+		$model->setTemplateName(self::getTemplateName($column));
 		$this->getView()->display();
 	}
 

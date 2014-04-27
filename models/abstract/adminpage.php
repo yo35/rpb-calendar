@@ -40,7 +40,7 @@ abstract class RPBCalendarAbstractAdminPageModel extends RPBCalendarAbstractMode
 	{
 		parent::__construct();
 		$this->title = $title;
-		$this->useTemplate($this->getAdminPageName());
+		$this->setTemplateName($this->getAdminPageName());
 	}
 
 

@@ -65,7 +65,7 @@ class RPBCalendarControllerCategoryList extends RPBCalendarAbstractController
 	{
 		$model = $this->getModel();
 		$model->setCategoryID($categoryID);
-		$model->useTemplate('ColorColumn');
+		$model->setTemplateName('ColorColumn');
 		$this->getView()->display();
 	}
 }

@@ -122,7 +122,7 @@ abstract class RPBCalendarAbstractModel
 	 * @param string $templateName Null to use the default template, which is the one
 	 *        that has the same name as the model.
 	 */
-	public function useTemplate($templateName)
+	public function setTemplateName($templateName)
 	{
 		$this->templateName = $templateName;
 	}
