@@ -30,6 +30,7 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 class RPBCalendarTraitPostOptions extends RPBCalendarAbstractTrait
 {
 	private $defaultCategoryColor;
+	private $defaultEventColor;
 
 
 	/**
@@ -37,9 +38,12 @@ class RPBCalendarTraitPostOptions extends RPBCalendarAbstractTrait
 	 */
 	public function __construct()
 	{
-		// Load the default color.
-		if(isset($_POST['rpbcalendar_defaultColor'])) {
-			$this->defaultCategoryColor = RPBCalendarHelperValidation::validateColor($_POST['rpbcalendar_defaultColor']);
+		// Load the default colors.
+		if(isset($_POST['defaultCategoryColor'])) {
+			$this->defaultCategoryColor = RPBCalendarHelperValidation::validateColor($_POST['defaultCategoryColor']);
+		}
+		if(isset($_POST['defaultEventColor'])) {
+			$this->defaultEventColor = RPBCalendarHelperValidation::validateColor($_POST['defaultEventColor']);
 		}
 	}
 
@@ -51,9 +55,12 @@ class RPBCalendarTraitPostOptions extends RPBCalendarAbstractTrait
 	 */
 	public function updateOptions()
 	{
-		// Update the default color.
+		// Update the default colors.
 		if(isset($this->defaultCategoryColor)) {
-			update_option('rpbcalendar_defaultColor', $this->defaultCategoryColor);
+			update_option('rpbcalendar_defaultCategoryColor', $this->defaultCategoryColor);
+		}
+		if(isset($this->defaultEventColor)) {
+			update_option('rpbcalendar_defaultEventColor', $this->defaultEventColor);
 		}
 
 		// Notify the user.
