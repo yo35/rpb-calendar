@@ -42,7 +42,7 @@ class RPBCalendarTraitDefaultColors extends RPBCalendarAbstractTrait
 	{
 		if(!isset(self::$defaultCategoryColor)) {
 			$value = RPBCalendarHelperValidation::validateColor(get_option('rpbcalendar_defaultCategoryColor'));
-			self::$defaultCategoryColor = isset($value) ? $value : '#ffffaa';
+			self::$defaultCategoryColor = isset($value) ? $value : '#cc33aa';
 		}
 		return self::$defaultCategoryColor;
 	}
