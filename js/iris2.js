@@ -148,8 +148,7 @@
 			if(key=='color') {
 				var newColor = filterColor(value);
 				if(newColor=='') {
-					preview.addClass('uicalendar-iris2-transparent').css('background-color', 'transparent');
-					myself._updateColor('');
+					this.selectNone();
 				}
 				else {
 					$('.uicalendar-iris2-colorPicker', this.element).iris('color', newColor);
@@ -164,6 +163,28 @@
 
 
 		/**
+		 * Select a color at random.
+		 */
+		selectRandom: function()
+		{
+			var newColor = Math.floor(Math.random()*256*256*256);
+			$('.uicalendar-iris2-colorPicker', this.element).iris('color', '#' + newColor.toString(16));
+		},
+
+
+		/**
+		 * Unselect the current color.
+		 *
+		 * This is equivalent to set the `color` property to `''`.
+		 */
+		selectNone: function()
+		{
+			$('.uicalendar-iris2-preview', this.element).addClass('uicalendar-iris2-transparent').css('background-color', 'transparent');
+			this._updateColor('');
+		},
+
+
+		/**
 		 * Update the color property.
 		 */
 		_updateColor: function(newColor)
@@ -172,7 +193,7 @@
 				return;
 			}
 			this.options.color = newColor;
-			this._trigger('change', null, this.options.color);
+			this._trigger('change', null, { color: this.options.color });
 		},
 
 
@@ -201,14 +222,11 @@
 			$(content).appendTo(this.element.empty());
 
 			// The DOM nodes inside the widget.
-			var preview     = $('.uicalendar-iris2-preview'    , this.element);
-			var colorPicker = $('.uicalendar-iris2-colorPicker', this.element);
-
-			// The current object.
 			var myself = this;
+			var preview = $('.uicalendar-iris2-preview', this.element);
 
 			// Set-up the color-picker sub-widget.
-			colorPicker.iris({
+			$('.uicalendar-iris2-colorPicker', this.element).iris({
 				color: this.options.color=='' ? DEFAULT_COLOR : this.options.color,
 				hide: false,
 				palettes: true,
@@ -220,20 +238,12 @@
 
 			// Set-up the random-button sub-widget.
 			if(this.options.randomButton) {
-				$('.uicalendar-iris2-randomButton', this.element).click(function(e) {
-					e.preventDefault();
-					var color = Math.floor(Math.random()*256*256*256);
-					colorPicker.iris('color', '#' + color.toString(16));
-				});
+				$('.uicalendar-iris2-randomButton', this.element).click(function(e) { e.preventDefault(); myself.selectRandom(); });
 			}
 
 			// Set-up the clear-button sub-widget.
 			if(this.options.clearButton) {
-				$('.uicalendar-iris2-clearButton', this.element).click(function(e) {
-					e.preventDefault();
-					preview.addClass('uicalendar-iris2-transparent').css('background-color', 'transparent');
-					myself._updateColor('');
-				});
+				$('.uicalendar-iris2-clearButton', this.element).click(function(e) { e.preventDefault(); myself.selectNone(); });
 			}
 
 			// Initialize the state of the preview node.
