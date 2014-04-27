@@ -32,6 +32,7 @@ class RPBCalendarTraitCategory extends RPBCalendarAbstractTrait
 	private static $data = array();
 	private $categoryID = -1;
 	private $category;
+	private $defaultColorsTrait;
 
 
 	/**
@@ -76,6 +77,21 @@ class RPBCalendarTraitCategory extends RPBCalendarAbstractTrait
 
 
 	/**
+	 * Return the ID of the parent of the currently selected event category.
+	 *
+	 * @return int O if the currently selected event category has no parent.
+	 */
+	public function getCategoryParentID()
+	{
+		$this->ensureCategoryLoaded();
+		if(!isset($this->category->parentID)) {
+			$this->category->parentID = get_term($this->categoryID, 'rpbevent_category')->parent;
+		}
+		return $this->category->parentID;
+	}
+
+
+	/**
 	 * Return the color associated to the currently selected event category.
 	 *
 	 * @return string
@@ -88,5 +104,66 @@ class RPBCalendarTraitCategory extends RPBCalendarAbstractTrait
 			$this->category->color = isset($value) ? $value : '';
 		}
 		return $this->category->color;
+	}
+
+
+	/**
+	 * Return the color that is used to display the currently selected event category.
+	 *
+	 * This color is the one associated to the current category if it has one.
+	 * Otherwise the category inherits the color from its parent if the latter exists,
+	 * or from the default category color otherwise.
+	 *
+	 * @return string
+	 */
+	public function getCategoryInheritedColor()
+	{
+		$this->ensureCategoryLoaded();
+		if(!isset($this->category->inheritedColor)) {
+			$this->category->inheritedColor = $this->buildInheritedColor();
+		}
+		return $this->category->inheritedColor;
+	}
+
+
+	/**
+	 * Determine the inherited color of the currently selected event category.
+	 *
+	 * @return string
+	 */
+	private function buildInheritedColor()
+	{
+		// Is there a color associated to the current category? If yes, return it.
+		$color = $this->getCategoryColor();
+		if($color!='') {
+			return $color;
+		}
+
+		// Otherwise, if the category has a parent, return its inherited color.
+		$parentID = $this->getCategoryParentID();
+		if($parentID > 0) {
+			$myID = $this->categoryID;
+			$this->setCategoryID($parentID);
+			$color = $this->getCategoryInheritedColor();
+			$this->setCategoryID($myID);
+			$this->ensureCategoryLoaded();
+			return $color;
+		}
+
+		// Otherwise, return the default category color.
+		$this->ensureDefaultColorsTraitLoaded();
+		return $this->defaultColorsTrait->getDefaultCategoryColor();
+	}
+
+
+	/**
+	 * Create a new instance of the default colors trait, if necessary.
+	 */
+	private function ensureDefaultColorsTraitLoaded()
+	{
+		if(isset($this->defaultColorsTrait)) {
+			return;
+		}
+		$this->defaultColorsTrait = RPBCalendarHelperLoader::loadTrait('DefaultColors');
 	}
 }
