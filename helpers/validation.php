@@ -81,7 +81,7 @@ abstract class RPBCalendarHelperValidation
 			return '';
 		}
 		else {
-			return preg_match('/^#[0-9a-fA-F]{6}$/', $value) ? $value : null;
+			return preg_match('/^#[0-9a-fA-F]{6}$/', $value) ? strtolower($value) : null;
 		}
 	}
 

@@ -23,6 +23,7 @@
 require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/today.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/color.php');
 
 
 /**
@@ -168,16 +169,27 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 			// 0-color => the event does not belong to any category.
 			case 0:
 				$this->ensureDefaultColorsTraitLoaded();
-				return 'background-color: ' . $this->defaultColorsTrait->getDefaultEventColor();
+				return self::uniformBackgroundStyle($this->defaultColorsTrait->getDefaultEventColor());
 
 			// 1-color
 			case 1:
-				return 'background-color: ' . $colors[0];
+				return self::uniformBackgroundStyle($colors[0]);
 
 			// Too many colors!
 			default:
 				return 'background-image: url(' . RPBCALENDAR_URL . '/images/transparent-pattern.png)'; //TODO: special pattern
 		}
+	}
+
+
+	/**
+	 * Style attribute for an event block with a uniform color.
+	 */
+	private static function uniformBackgroundStyle($color)
+	{
+		$lightness = RPBCalendarHelperColor::lightness($color);
+		$textColor = $lightness>0.5 ? 'black' : 'white';
+		return "background-color:$color; color:$textColor;";
 	}
 
 
