@@ -26,22 +26,51 @@
 abstract class RPBCalendarHelperColor
 {
 	/**
-	 * Compute the lightness of the given color.
+	 * Try to parse an input string and to interpret it as a color specification.
 	 *
-	 * @param string $color Accepted format: `#rrggbb` (hexa-decimal digits).
-	 * @return float Value in the range 0 (black) - 1 (white).
+	 * Accepted format: `#rrggbb` (hexa-decimal digits).
+	 *
+	 * @param string $color
+	 * @return array Contains the RGB compounds as [0-255]-valued integers. Null is returned if the parsing fails.
 	 */
-	public static function lightness($color)
+	public static function parse($color)
 	{
+		// The input must be a string.
+		if(!is_string($color)) {
+			return null;
+		}
+
 		// Parse the input.
 		if(!preg_match('/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i', $color, $matches)) {
 			return null;
 		}
-		$r = intval($matches[1], 16) / 255;
-		$g = intval($matches[2], 16) / 255;
-		$b = intval($matches[3], 16) / 255;
+		$r = intval($matches[1], 16);
+		$g = intval($matches[2], 16);
+		$b = intval($matches[3], 16);
+		return array('r' => $r, 'g' => $g, 'b' => $b);
+	}
+
+
+	/**
+	 * Compute the lightness of the given color.
+	 *
+	 * @param mixed $color
+	 * @return float Value in the range 0 (black) - 1 (white).
+	 */
+	public static function lightness($color)
+	{
+		// Parse the input if necessary.
+		if(is_string($color)) {
+			$color = self::parse($color);
+		}
+		if($color==null) {
+			return;
+		}
 
 		// The lightness is obtained as a convex combination of the RGB compounds.
+		$r = $color['r'] / 255;
+		$g = $color['g'] / 255;
+		$b = $color['b'] / 255;
 		return 0.30*$r + 0.59*$g + 0.11*$b;
 	}
 }
