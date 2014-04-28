@@ -181,7 +181,7 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 
 			// Too many colors!
 			default:
-				return 'background-image: url(' . RPBCALENDAR_URL . '/images/transparent-pattern.png)'; //TODO: special pattern
+				return self::fallbackBackgroundStyle();
 		}
 	}
 
@@ -213,7 +213,19 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 		$lightness2 = RPBCalendarHelperColor::lightness($color2);
 		$textColor = ($lightness1 + $lightness2)/2 > 0.5 ? 'black' : 'white';
 		$url = RPBCALENDAR_URL . '/ajax/color2.php?c1=' . urlencode($color1) . '&c2=' . urlencode($color2);
-		return "background-image: url($url); background-repeat: repeat; color:$textColor;";
+		return "background-image:url($url); background-repeat:repeat; color:$textColor;";
+	}
+
+
+	/**
+	 * Style attribute for an event block with too many colors.
+	 *
+	 * @return string
+	 */
+	private static function fallbackBackgroundStyle()
+	{
+		$url = RPBCALENDAR_URL . '/images/fallback-pattern.png';
+		return "background-image:url($url); background-repeat:repeat; color:black;";
 	}
 
 
