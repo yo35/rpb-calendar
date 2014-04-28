@@ -175,6 +175,10 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 			case 1:
 				return self::uniformBackgroundStyle($colors[0]);
 
+			// 2-colors
+			case 2:
+				return self::bicolorBackgroundStyle($colors[0], $colors[1]);
+
 			// Too many colors!
 			default:
 				return 'background-image: url(' . RPBCALENDAR_URL . '/images/transparent-pattern.png)'; //TODO: special pattern
@@ -184,12 +188,32 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 
 	/**
 	 * Style attribute for an event block with a uniform color.
+	 *
+	 * @param string $color
+	 * @return string
 	 */
 	private static function uniformBackgroundStyle($color)
 	{
 		$lightness = RPBCalendarHelperColor::lightness($color);
 		$textColor = $lightness>0.5 ? 'black' : 'white';
 		return "background-color:$color; color:$textColor;";
+	}
+
+
+	/**
+	 * Style attribute for an event block with 2 colors.
+	 *
+	 * @param string $color1
+	 * @param string $color2
+	 * @return string
+	 */
+	private static function bicolorBackgroundStyle($color1, $color2)
+	{
+		$lightness1 = RPBCalendarHelperColor::lightness($color1);
+		$lightness2 = RPBCalendarHelperColor::lightness($color2);
+		$textColor = ($lightness1 + $lightness2)/2 > 0.5 ? 'black' : 'white';
+		$url = RPBCALENDAR_URL . '/ajax/color2.php?c1=' . urlencode($color1) . '&c2=' . urlencode($color2);
+		return "background-image: url($url); background-repeat: repeat; color:$textColor;";
 	}
 
 
