@@ -20,34 +20,25 @@
  ******************************************************************************/
 
 
-// Load the WP engine.
-require_once(dirname(__FILE__) . '/bootstrap.php');
+/**
+ * Special settings for the AJAX API of the RPB Calendar plugin.
+ *
+ * The AJAX API of the RPB Calendar plugin is designed to work "out-of-the-box"
+ * in standard configurations. Therefore, in most situations, the file
+ * `rpb-calendar/ajax/config.php` MUST NOT exist. Do not create it unless you
+ * are sure of you do.
+ */
 
 
-// Load the model.
-$model = RPBCalendarHelperLoader::loadModel('FetchEvents');
-
-
-// Begin/end dates.
-if($model->getFetchIntervalBegin()===null || $model->getFetchIntervalEnd()===null) {
-	returnJSON(array(
-		'error'   => true,
-		'message' => 'Missing or invalid start date and/or end date.'
-	));
-}
-
-
-// Retrieve the events.
-$events = array();
-while($model->fetchNextEvent())
-{
-	$events[] = array(
-		'title' => $model->getEventTitle(),
-		'start' => $model->getEventDateBegin(),
-		'end'   => $model->getEventDateEnd()
-	);
-}
-
-
-// Return the fetched events.
-returnJSON($events);
+/**
+ * Path to the root directory of the Wordpress engine.
+ *
+ * The constant `RPBCALENDAR_WP_DIRECTORY` must be set such that
+ * `RPBCALENDAR_WP_DIRECTORY . '/wp-load.php'` is a valid path to the PHP file
+ * in charge of loading the WP engine (i.e. `wp-load.php` in the root directory
+ * of your Wordpress blog).
+ *
+ * By default, this constant is defined in the file `rpb-calendar/ajax/bootstrap.php`
+ * as `dirname(dirname(dirname(dirname(dirname(__FILE__)))))`.
+ */
+define('RPBCALENDAR_WP_DIRECTORY', '/path/to/the/wpEngine');

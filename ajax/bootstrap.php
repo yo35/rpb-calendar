@@ -20,34 +20,43 @@
  ******************************************************************************/
 
 
-// Load the WP engine.
-require_once(dirname(__FILE__) . '/bootstrap.php');
+/**
+ * Bootstrap the WP engine and provide the `returnJSON()` function that must be used
+ * to return the answer to an AJAX request.
+ */
 
 
-// Load the model.
-$model = RPBCalendarHelperLoader::loadModel('FetchEvents');
-
-
-// Begin/end dates.
-if($model->getFetchIntervalBegin()===null || $model->getFetchIntervalEnd()===null) {
-	returnJSON(array(
-		'error'   => true,
-		'message' => 'Missing or invalid start date and/or end date.'
-	));
-}
-
-
-// Retrieve the events.
-$events = array();
-while($model->fetchNextEvent())
+// Find the root directory of the WP engine.
+define('RPBCALENDAR_AJAX_DIRECTORY', dirname(__FILE__));
+if(file_exists(RPBCALENDAR_AJAX_DIRECTORY . '/config.php'))
 {
-	$events[] = array(
-		'title' => $model->getEventTitle(),
-		'start' => $model->getEventDateBegin(),
-		'end'   => $model->getEventDateEnd()
-	);
+	// The file config.php may provide an alternative definition of the constant RPBCALENDAR_WP_DIRECTORY.
+	require_once(RPBCALENDAR_AJAX_DIRECTORY . '/config.php');
+}
+if(!defined('RPBCALENDAR_WP_DIRECTORY')) {
+	define('RPBCALENDAR_WP_DIRECTORY', dirname(dirname(dirname(dirname(RPBCALENDAR_AJAX_DIRECTORY)))));
 }
 
 
-// Return the fetched events.
-returnJSON($events);
+// Load the WP engine.
+define('WP_USE_THEMES', false);
+require_once(RPBCALENDAR_WP_DIRECTORY . '/wp-load.php');
+
+
+// Loader helper.
+require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+
+
+/**
+ * Echo the answer to the AJAX request in a JSON format and terminate the PHP script.
+ *
+ * This function does not return.
+ *
+ * @param array $data Answer to the AJAX request.
+ */
+function returnJSON($data)
+{
+	header('Content-Type: application/json');
+	echo json_encode($data);
+	die;
+}
