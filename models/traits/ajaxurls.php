@@ -18,68 +18,29 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
-?>
-
-<div class="rpbcalendar-eventBlockList">
-	<?php while($model->fetchEvent()): ?>
-
-		<div class="rpbcalendar-eventBlock"
-			style="<?php echo htmlspecialchars($model->getEventBackgroundStyle()); ?>"
-			data-event-id="<?php echo htmlspecialchars($model->getEventID()); ?>"
-		>
-			<?php echo htmlspecialchars($model->getEventTitle()); ?>
-		</div>
-
-	<?php endwhile; ?>
-</div>
 
 
-<script type="text/javascript">
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
 
-	jQuery(document).ready(function($)
+
+/**
+ * URLs of the AJAX callbacks.
+ */
+class RPBCalendarTraitAjaxURLs extends RPBCalendarAbstractTrait
+{
+	private static $fetchEventDataURL;
+
+
+	/**
+	 * URL to the fetch-event-data page.
+	 *
+	 * @return string
+	 */
+	public function getFetchEventDataURL()
 	{
-
-		// Render the content of the tooltip.
-		function renderContent(json, api)
-		{
-			api.set('content.text', json.content); // TODO
+		if(!isset(self::$fetchEventDataURL)) {
+			self::$fetchEventDataURL = RPBCALENDAR_URL . '/ajax/fetcheventdata.php';
 		}
-
-
-		// Set-up the tooltips.
-		$('#' + <?php echo json_encode($model->getWidgetID()); ?> + ' .rpbcalendar-eventBlock').each(function(i,e) {
-			$(e).qtip({
-				content: {
-					title: $(e).text(),
-					button: true,
-					text: function(event, api) {
-
-						// AJAX request to fetch the event data.
-						$.ajax({
-							url     : <?php echo json_encode($model->getFetchEventDataURL()); ?>,
-							data    : { id: $(e).data('eventId') },
-							dataType: 'json',
-						})
-
-						// Render the event data if the AJAX request succeeds.
-						.done(function(json) {
-							if(!json.error) {
-								renderContent(json, api);
-							}
-						})
-
-						.fail(function() {
-							alert('Failure'); // TODO: remove
-						});
-					}
-				},
-				position: { my: 'top left', at: 'bottom left' },
-				style: { classes: 'qtip-tipped rpbcalendar-qtip qtip-shadow' },
-				show: { delay: 100, solo: true },
-				hide: { delay: 100, fixed: true }
-			});
-		});
-
-	});
-
-</script>
+		return self::$fetchEventDataURL;
+	}
+}

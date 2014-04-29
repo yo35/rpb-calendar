@@ -34,6 +34,7 @@ class RPBCalendarModelWidgetPrintUpcomingEvents extends RPBCalendarAbstractModel
 	{
 		parent::__construct($instance, $theme);
 		$this->loadTrait('WidgetUpcomingEvents', $this->instance);
+		$this->loadTrait('AjaxURLs');
 
 		// Load the events.
 		$where = array(
