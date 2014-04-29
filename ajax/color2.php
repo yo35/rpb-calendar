@@ -36,7 +36,7 @@ $color2 = isset($_GET['c2']) ? RPBCalendarHelperColor::parse($_GET['c2']) : null
 
 
 // Ensure the both color parameters are valid.
-if($color1==null || $color2==null) {
+if($color1===null || $color2===null) {
 	header('Content-Type: application/json');
 	echo json_encode(array(
 		'error'   => true,

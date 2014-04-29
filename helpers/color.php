@@ -63,7 +63,7 @@ abstract class RPBCalendarHelperColor
 		if(is_string($color)) {
 			$color = self::parse($color);
 		}
-		if($color==null) {
+		if($color===null) {
 			return;
 		}
 
