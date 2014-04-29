@@ -68,6 +68,15 @@ abstract class RPBCalendarAbstractModelWidgetPrint extends RPBCalendarAbstractMo
 
 
 	/**
+	 * DOM ID of the widget.
+	 */
+	public function getWidgetID()
+	{
+		return $this->theme['widget_id'];
+	}
+
+
+	/**
 	 * Whether the widget should be hidden or not.
 	 *
 	 * @return boolean
