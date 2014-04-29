@@ -53,6 +53,11 @@ function rpbcalendar_init()
 add_action(is_admin() ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts', 'rpbcalendar_enqueue_scripts');
 function rpbcalendar_enqueue_scripts()
 {
+	// qTip2
+	$dependencies = array('jquery');
+	wp_register_script('rpbcalendar-qtip2', RPBCALENDAR_URL.'/third-party-libs/qtip2/jquery.qtip.min.js', $dependencies);
+	wp_enqueue_script('rpbcalendar-qtip2');
+
 	// FullCalendar
 	$dependencies = array('jquery-ui-widget');
 	wp_register_script('rpbcalendar-fullcalendar', RPBCALENDAR_URL.'/fullcalendar/fullcalendar.min.js', $dependencies);
@@ -74,6 +79,10 @@ function rpbcalendar_enqueue_scripts()
 add_action(is_admin() ? 'admin_print_styles' : 'wp_print_styles', 'rpbcalendar_enqueue_css');
 function rpbcalendar_enqueue_css()
 {
+	// qTip2
+	wp_register_style('rpbcalendar-qtip2', RPBCALENDAR_URL.'/third-party-libs/qtip2/jquery.qtip.min.css');
+	wp_enqueue_style('rpbcalendar-qtip2');
+
 	// FullCalendar
 	wp_register_style('rpbcalendar-fullcalendar', RPBCALENDAR_URL.'/fullcalendar/fullcalendar.css');
 	wp_enqueue_style('rpbcalendar-fullcalendar');
