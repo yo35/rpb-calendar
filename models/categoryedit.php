@@ -32,7 +32,7 @@ class RPBCalendarModelCategoryEdit extends RPBCalendarAbstractModel
 	{
 		parent::__construct();
 		$this->loadTrait('Category');
-		$this->loadTrait('AdminPagesURL');
+		$this->loadTrait('AdminPageURLs');
 	}
 
 
