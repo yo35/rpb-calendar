@@ -24,7 +24,7 @@ require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
 
 
 /**
- * URL of the administration pages.
+ * URLs of the administration pages.
  */
 class RPBCalendarTraitAdminPageURLs extends RPBCalendarAbstractTrait
 {
