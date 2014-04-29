@@ -44,8 +44,9 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	{
 		// Query default arguments.
 		$args = array(
-			'post_type' => 'rpbevent',
-			'nopaging'  => true
+			'post_type'   => 'rpbevent',
+			'post_status' => 'publish',
+			'nopaging'    => true
 		);
 		$metaQuery = array();
 
@@ -120,5 +121,44 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	public function getEventTitle()
 	{
 		return get_the_title();
+	}
+
+
+	/**
+	 * Public name of the author of the currently selected event.
+	 *
+	 * @return string
+	 */
+	public function getEventAuthor()
+	{
+		return get_the_author();
+	}
+
+
+	/**
+	 * Date at which the event was published, formatted according the date format template
+	 * defined by the general WP settings.
+	 *
+	 * @return string
+	 */
+	public function getEventReleaseDate()
+	{
+		return get_the_date();
+	}
+
+
+	/**
+	 * Return the description of the event.
+	 *
+	 * @return string
+	 */
+	public function getEventContent()
+	{
+		global $more;
+		$m = $more;
+		$more = true;
+		$rawContent = get_the_content();
+		$more = $m;
+		return apply_filters('the_content', $rawContent);
 	}
 }
