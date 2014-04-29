@@ -49,6 +49,11 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 		);
 		$metaQuery = array();
 
+		// Filter: only the event corresponding to the given ID.
+		if(isset($where['id'])) {
+			$args['p'] = $where['id'];
+		}
+
 		// Filter: only the events within a given time frame.
 		if(isset($where['time_frame_begin'])) {
 			$metaQuery[] = array(
@@ -96,12 +101,24 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	{
 		// Return false if there is no more events.
 		if(!$this->query->have_posts()) {
+			$this->setEventID(-1);
 			return false;
 		}
 
 		// Otherwise, fetch the next event, set its ID, and return true.
-		$this->query->next_post();
+		$this->query->the_post();
 		$this->setEventID($this->query->post->ID);
 		return true;
+	}
+
+
+	/**
+	 * Title of the currently selected event.
+	 *
+	 * @return string
+	 */
+	public function getEventTitle()
+	{
+		return get_the_title();
 	}
 }
