@@ -23,9 +23,34 @@
 <div class="rpbcalendar-eventBlockList">
 	<?php while($model->fetchEvent()): ?>
 
-		<div class="rpbcalendar-eventBlock" style="<?php echo htmlspecialchars($model->getEventBackgroundStyle()); ?>">
+		<div class="rpbcalendar-eventBlock"
+			style="<?php echo htmlspecialchars($model->getEventBackgroundStyle()); ?>"
+			data-event-id="<?php echo htmlspecialchars($model->getEventID()); ?>"
+		>
 			<?php echo htmlspecialchars($model->getEventTitle()); ?>
 		</div>
 
 	<?php endwhile; ?>
 </div>
+
+
+<script type="text/javascript">
+
+	jQuery(document).ready(function($)
+	{
+		$('#' + <?php echo json_encode($model->getWidgetID()); ?> + ' .rpbcalendar-eventBlock').each(function(i,e) {
+			$(e).qtip({
+				content: {
+					title: $(e).text(),
+					button: true,
+					text: 'TODO<br/>ID=' + $(e).data('eventId')
+				},
+				position: { my: 'top left', at: 'bottom left' },
+				style: { classes: 'qtip-tipped rpbcalendar-qtip qtip-shadow' },
+				show: { delay: 100, solo: true },
+				hide: { delay: 100, fixed: true }
+			});
+		});
+	});
+
+</script>
