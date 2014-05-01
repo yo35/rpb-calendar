@@ -53,6 +53,11 @@ function rpbcalendar_init()
 add_action(is_admin() ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts', 'rpbcalendar_enqueue_scripts');
 function rpbcalendar_enqueue_scripts()
 {
+	// Loading indicator
+	$dependencies = array('jquery-ui-widget');
+	wp_register_script('rpbcalendar-spinamin', RPBCALENDAR_URL.'/js/spinanim.js', $dependencies);
+	wp_enqueue_script('rpbcalendar-spinamin');
+
 	// qTip2
 	$dependencies = array('jquery');
 	wp_register_script('rpbcalendar-qtip2', RPBCALENDAR_URL.'/third-party-libs/qtip2/jquery.qtip.min.js', $dependencies);

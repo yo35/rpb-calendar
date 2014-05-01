@@ -71,6 +71,9 @@
 						.fail(function() {
 							alert('Failure'); // TODO: remove
 						});
+
+						// Return a loading indicator.
+						return $('<div></div>').spinanim();
 					}
 				},
 				position: { my: 'top left', at: 'bottom left' },
