@@ -131,14 +131,20 @@
 		 */
 		_destroy: function()
 		{
+			this._destroyTimer();
 			this.element.empty().removeClass('uicalendar-spinanim');
 		},
 
 
 		/**
-		 * Container size.
+		 * Return the size of the container (in pixels).
+		 *
+		 * @return number
 		 */
-		_containerSize: 0,
+		containerSize: function()
+		{
+			return DEFAULT_DIAMETER + DEFAULT_STICK_WIDTH*2 + 3;
+		},
 
 
 		/**
@@ -148,8 +154,8 @@
 		 */
 		_containerStyle: function()
 		{
-			this._containerSize = DEFAULT_DIAMETER + DEFAULT_STICK_WIDTH*2 + 3;
-			return 'margin:auto; position:relative; ' + cssSize(this._containerSize,this._containerSize);
+			var sz = this.containerSize();
+			return 'margin:auto; position:relative; ' + cssSize(sz,sz);
 		},
 
 
@@ -164,8 +170,9 @@
 			var w  = DEFAULT_STICK_WIDTH;
 			var h  = DEFAULT_STICK_HEIGHT;
 			var r  = (DEFAULT_DIAMETER + DEFAULT_STICK_WIDTH)/2;
-			var tx = r*Math.cos(angle) - w/2 + this._containerSize/2;
-			var ty = r*Math.sin(angle) - h/2 + this._containerSize/2;
+			var sz = this.containerSize();
+			var tx = r*Math.cos(angle) - w/2 + sz/2;
+			var ty = r*Math.sin(angle) - h/2 + sz/2;
 			return 'position:absolute; background-color:black; ' + cssSize(w,h) + ' ' + cssTranslateRotate(tx,ty,angle)
 				+ ' ' + cssBorderRadius(h/2);
 		},
@@ -191,14 +198,34 @@
 
 			// Animate the content.
 			var indexOffset = 0;
-			window.setInterval(function() {
-				$('.uicalendar-spinanim-stick', this.element).each(function(i,e) {
+			var sticks = $('.uicalendar-spinanim-stick', this.element);
+			this._destroyTimer();
+			this._timerID = window.setInterval(function() {
+				sticks.each(function(i,e) {
 					var val = (indexOffset - i) / DEFAULT_NUMBER_OF_STICKS;
 					$(e).css('opacity', 1 - (val - Math.floor(val)));
 				});
 				++indexOffset;
 			}, 1000 / DEFAULT_NUMBER_OF_STICKS);
-		}
+		},
+
+
+		/**
+		 * Stop the timer used to animate the widget if not done yet.
+		 */
+		_destroyTimer: function()
+		{
+			if(this._timerID > 0) {
+				clearInterval(this._timerID);
+				this._timerID = -1;
+			}
+		},
+
+
+		/**
+		 * ID of the timer used to animate the widget.
+		 */
+		_timerID: -1
 
 	});
 
