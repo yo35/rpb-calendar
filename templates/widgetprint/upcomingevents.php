@@ -42,7 +42,10 @@
 		// Render the content of the tooltip.
 		function renderContent(json, api)
 		{
-			api.set('content.text', json.content); // TODO
+			api.set('content.text',
+				'<div class="rpbcalendar-eventTip-content">' + json.content + '</div>'
+				// TODO: render the event meta-data
+			);
 		}
 
 
@@ -66,10 +69,6 @@
 							if(!json.error) {
 								renderContent(json, api);
 							}
-						})
-
-						.fail(function() {
-							alert('Failure'); // TODO: remove
 						});
 
 						// Return a loading indicator.
