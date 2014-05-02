@@ -120,7 +120,7 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	 */
 	public function getEventTitle()
 	{
-		return get_the_title();
+		return html_entity_decode(get_the_title(), ENT_QUOTES);
 	}
 
 
