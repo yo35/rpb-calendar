@@ -70,7 +70,7 @@
 				'<div class="rpbcalendar-eventTip-link"><a href="' + json.link + '" target=_blank>' + json.link + '</a></div>';
 
 			// Replace the content of the tooltip.
-			api.set('content.text', categories + releaseInfo + text + link + '<div>' + json.title + '</div>');
+			api.set('content.text', categories + releaseInfo + text + link);
 		}
 
 
