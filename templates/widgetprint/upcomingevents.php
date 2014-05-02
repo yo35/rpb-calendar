@@ -42,10 +42,35 @@
 		// Render the content of the tooltip.
 		function renderContent(json, api)
 		{
-			api.set('content.text',
-				'<div class="rpbcalendar-eventTip-content">' + json.content + '</div>'
-				// TODO: render the event meta-data
-			);
+			// Event categories
+			var categories = '';
+			if(json.categories.length>0) {
+				categories += '<div class="rpbcalendar-eventTip-categories">';
+				for(var k=0; k<json.categories.length; ++k) {
+					if(k>0) {
+						categories += ', ';
+					}
+					categories += '<span class="rpbcalendar-categoryTag" style="background-color:' + json.categories[k].color + '"></span> ' +
+						json.categories[k].name;
+				}
+				categories += '</div>';
+			}
+
+			// Event author and release date
+			var releaseInfo = '<div class="rpbcalendar-eventTip-releaseInfo"><p>' +
+				<?php echo json_encode(__('Posted on %2$s by %1$s', 'rpbcalendar')); ?> + '</p></div>';
+			releaseInfo = releaseInfo.replace(/%1\$s/g, json.author);
+			releaseInfo = releaseInfo.replace(/%2\$s/g, json.releaseDate);
+
+			// Event description
+			var text = '<div class="rpbcalendar-eventTip-content">' + json.content + '</div>';
+
+			// Event link
+			var link = json.link=='' ? '' : '<hr class="rpbcalendar-eventTip-separator" />' +
+				'<div class="rpbcalendar-eventTip-link"><a href="' + json.link + '" target=_blank>' + json.link + '</a></div>';
+
+			// Replace the content of the tooltip.
+			api.set('content.text', categories + releaseInfo + text + link + '<div>' + json.title + '</div>');
 		}
 
 

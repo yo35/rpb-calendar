@@ -41,19 +41,20 @@ if(!$model->isEventIDValid()) {
 $categories = array();
 foreach($model->getEventCategories() as $category) {
 	$categories[] = array(
-		'ID'    => $category->ID,
-		'name'  => $category->name,
-		'color' => $category->color
+		'ID'    => htmlspecialchars($category->ID),
+		'name'  => htmlspecialchars($category->name),
+		'color' => htmlspecialchars($category->color)
 	);
 }
 
 // Data associated to the currently selected event.
 $eventData = array(
-	'ID'          => $model->getEventID(),
-	'title'       => $model->getEventTitle(),
-	'author'      => $model->getEventAuthor(),
-	'releaseDate' => $model->getEventReleaseDate(),
+	'ID'          => htmlspecialchars($model->getEventID()),
+	'title'       => htmlspecialchars($model->getEventTitle()),
+	'author'      => htmlspecialchars($model->getEventAuthor()),
+	'releaseDate' => htmlspecialchars($model->getEventReleaseDate()),
 	'categories'  => $categories,
+	'link'        => htmlspecialchars($model->getEventLink()),
 	'content'     => $model->getEventContent()
 );
 
