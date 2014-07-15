@@ -24,13 +24,13 @@ require_once(RPBCALENDAR_ABSPATH . 'views/abstractview.php');
 
 
 /**
- * Generic view for the frontend shortcodes.
+ * Generic view for the plugin shortcodes.
  */
 class RPBCalendarViewShortcode extends RPBCalendarAbstractView
 {
 	public function display()
 	{
 		$model = $this->getModel();
-		include(RPBCALENDAR_ABSPATH.'templates/shortcode/'.strtolower($model->getTemplateName()).'.php');
+		include(RPBCALENDAR_ABSPATH . 'templates/shortcode/' . strtolower($model->getTemplateName()) . '.php');
 	}
 }

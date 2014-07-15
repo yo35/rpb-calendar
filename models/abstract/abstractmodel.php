@@ -38,7 +38,6 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
 abstract class RPBCalendarAbstractModel
 {
 	private $name;
-	private $templateName;
 	private $methodIndex = array();
 
 
@@ -66,11 +65,15 @@ abstract class RPBCalendarAbstractModel
 
 	/**
 	 * Import a trait to the current class.
+	 *
+	 * @param string $traitName Name of the trait.
+	 * @param mixed ... Arguments to pass to the trait (optional).
 	 */
-	public function loadTrait($traitName, $arg1=null, $arg2=null, $arg3=null)
+	public function loadTrait($traitName)
 	{
 		// Load the definition of the trait, and instantiate it.
-		$trait = RPBCalendarHelperLoader::loadTrait($traitName, $arg1, $arg2, $arg3);
+		$args  = func_get_args();
+		$trait = call_user_func_array(array('RPBCalendarHelperLoader', 'loadTrait'), $args);
 
 		// List all the public methods of the trait, and register them
 		// to the method index of the current model.
@@ -88,7 +91,7 @@ abstract class RPBCalendarAbstractModel
 	public function getName()
 	{
 		if(!isset($this->name)) {
-			$this->name = preg_match('/^RPBCalendarModel(.*)$/', get_class($this), $matches) ? $matches[1] : '';
+			$this->name = preg_match('/^RPBCalendarModel(.*)$/', get_class($this), $m) ? $m[1] : '';
 		}
 		return $this->name;
 	}
@@ -112,18 +115,6 @@ abstract class RPBCalendarAbstractModel
 	 */
 	public function getTemplateName()
 	{
-		return isset($this->templateName) ? $this->templateName : $this->getName();
-	}
-
-
-	/**
-	 * Change the name of the template to use.
-	 *
-	 * @param string $templateName Null to use the default template, which is the one
-	 *        that has the same name as the model.
-	 */
-	public function setTemplateName($templateName)
-	{
-		$this->templateName = $templateName;
+		return $this->getName();
 	}
 }

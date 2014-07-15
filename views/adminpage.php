@@ -32,8 +32,8 @@ class RPBCalendarViewAdminPage extends RPBCalendarAbstractView
 	{
 		$model = $this->getModel();
 		echo '<div class="wrap rpbcalendar-admin">';
-		include(RPBCALENDAR_ABSPATH.'templates/adminpage/header.php');
-		include(RPBCALENDAR_ABSPATH.'templates/adminpage/'.strtolower($model->getTemplateName()).'.php');
+		include(RPBCALENDAR_ABSPATH . 'templates/adminpage/header.php');
+		include(RPBCALENDAR_ABSPATH . 'templates/adminpage/' . strtolower($model->getTemplateName()) . '.php');
 		echo '</div>';
 	}
 }

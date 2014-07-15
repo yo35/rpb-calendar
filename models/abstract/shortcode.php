@@ -24,15 +24,15 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
 
 
 /**
- * Base class for the models used to render the Wordpress shortcodes defined by the plugin.
+ * Base class for the models used to render the plugin shortcodes.
  */
 abstract class RPBCalendarAbstractModelShortcode extends RPBCalendarAbstractModel
 {
-	private $atts   ;
+	private $shortcodeName;
+	private $atts;
 	private $content;
 	private $contentFiltered = false;
-	private $shortcodeName;
-	private $itemID;
+	private $uniqueID;
 
 
 	/**
@@ -44,9 +44,8 @@ abstract class RPBCalendarAbstractModelShortcode extends RPBCalendarAbstractMode
 	public function __construct($atts, $content)
 	{
 		parent::__construct();
-		$this->atts    = is_array($atts) ? $atts : array();
-		$this->content = $content;
-		$this->setTemplateName($this->getShortcodeName());
+		$this->atts    = (isset($atts   ) && is_array ($atts   )) ? $atts    : array();
+		$this->content = (isset($content) && is_string($content)) ? $content : '';
 	}
 
 
@@ -62,6 +61,15 @@ abstract class RPBCalendarAbstractModelShortcode extends RPBCalendarAbstractMode
 
 
 	/**
+	 * The name of the template to use is the name of the shortcode.
+	 */
+	public function getTemplateName()
+	{
+		return $this->getShortcodeName();
+	}
+
+
+	/**
 	 * Name of the shortcode.
 	 *
 	 * @return string
@@ -69,7 +77,7 @@ abstract class RPBCalendarAbstractModelShortcode extends RPBCalendarAbstractMode
 	public function getShortcodeName()
 	{
 		if(!isset($this->shortcodeName)) {
-			$this->shortcodeName = preg_match('/^Shortcode(.*)$/', $this->getName(), $matches) ? $matches[1] : '';
+			$this->shortcodeName = preg_match('/^Shortcode(.*)$/', $this->getName(), $m) ? $m[1] : '';
 		}
 		return $this->shortcodeName;
 	}
@@ -103,7 +111,7 @@ abstract class RPBCalendarAbstractModelShortcode extends RPBCalendarAbstractMode
 
 	/**
 	 * Pre-process the shortcode enclosed content, for instance to get rid of the
-	 * auto-format HTML tags introduced by the Wordpress engine. By default, this
+	 * auto-format HTML tags introduced by the WordPress engine. By default, this
 	 * function returns the raw content "as-is". The function should be re-implemented
 	 * in the derived models.
 	 *
@@ -117,34 +125,42 @@ abstract class RPBCalendarAbstractModelShortcode extends RPBCalendarAbstractMode
 
 
 	/**
-	 * Return a string that may be used as an HTML ID (as-is or as a prefix) to tag
-	 * the HTML nodes that needs to.
+	 * Return a string that may be used as a unique DOM node ID.
 	 *
 	 * @return string
 	 */
-	public function getItemID()
+	public function getUniqueID()
 	{
-		if(!isset($this->itemID)) {
-			$this->itemID = self::allocateID();
+		if(!isset($this->uniqueID)) {
+			$this->uniqueID = self::makeUniqueID();
 		}
-		return $this->itemID;
+		return $this->uniqueID;
 	}
 
 
 	/**
-	 * Allocate a new ID for a HTML node.
+	 * Allocate a new HTML node ID.
 	 *
 	 * @return string
 	 */
-	private static function allocateID()
+	private static function makeUniqueID()
 	{
+		if(!isset(self::$idPrefix)) {
+			self::$idPrefix = 'rpbcalendar-' . uniqid() . '-';
+		}
 		++self::$idCounter;
-		return 'rpbcalendar-item' . self::$idCounter;
+		return self::$idPrefix . self::$idCounter;
 	}
 
 
 	/**
-	 * ID counter.
+	 * Global ID counter.
 	 */
 	private static $idCounter = 0;
+
+
+	/**
+	 * Prefix for the dynamically allocated DOM IDs.
+	 */
+	private static $idPrefix;
 }

@@ -28,7 +28,6 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
  */
 abstract class RPBCalendarAbstractController
 {
-	private $modelName;
 	private $model;
 	private $view;
 
@@ -37,10 +36,12 @@ abstract class RPBCalendarAbstractController
 	 * Constructor
 	 *
 	 * @param string $modelName Name of the model to use.
+	 * @param mixed ... Arguments to pass to the model (optional).
 	 */
 	protected function __construct($modelName)
 	{
-		$this->modelName = $modelName;
+		$args = func_get_args();
+		$this->model = call_user_func_array(array('RPBCalendarHelperLoader', 'loadModel'), $args);
 	}
 
 
@@ -49,9 +50,6 @@ abstract class RPBCalendarAbstractController
 	 */
 	public function getModel()
 	{
-		if(!isset($this->model)) {
-			$this->model = RPBCalendarHelperLoader::loadModel($this->modelName);
-		}
 		return $this->model;
 	}
 
