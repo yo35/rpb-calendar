@@ -31,6 +31,6 @@ class RPBCalendarViewWidgetEdit extends RPBCalendarAbstractView
 	public function display()
 	{
 		$model = $this->getModel();
-		include(RPBCALENDAR_ABSPATH.'templates/widgetedit/'.strtolower($model->getTemplateName()).'.php');
+		include(RPBCALENDAR_ABSPATH . 'templates/widgetedit/' . strtolower($model->getTemplateName()) . '.php');
 	}
 }

@@ -32,7 +32,7 @@ class RPBCalendarViewWidgetPrint extends RPBCalendarAbstractView
 	{
 		// Retrieve the model and the theme data.
 		$model = $this->getModel();
-		if($model->getWidgetHidden()) {
+		if($model->isWidgetHidden()) {
 			return;
 		}
 		$theme = $model->getTheme();
@@ -41,12 +41,12 @@ class RPBCalendarViewWidgetPrint extends RPBCalendarAbstractView
 		echo $theme['before_widget'];
 
 		// Display the title.
-		if($model->getTitle()!='') {
+		if($model->hasTitle()) {
 			echo $theme['before_title'] . htmlspecialchars($model->getTitle()) . $theme['after_title'];
 		}
 
 		// Print the widget content.
-		include(RPBCALENDAR_ABSPATH.'templates/widgetprint/'.strtolower($model->getTemplateName()).'.php');
+		include(RPBCALENDAR_ABSPATH . 'templates/widgetprint/' . strtolower($model->getTemplateName()) . '.php');
 
 		// Close the widget box if any.
 		echo $theme['after_widget'];
