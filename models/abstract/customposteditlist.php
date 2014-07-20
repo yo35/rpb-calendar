@@ -20,17 +20,35 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/customposteditlist.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
 
 
 /**
- * Model for the edition form for events.
+ * Base class for the models used to customize the edit/list forms of custom posts and categories.
  */
-class RPBCalendarModelEventEdit extends RPBCalendarAbstractModelCustomPostEditList
+abstract class RPBCalendarAbstractModelCustomPostEditList extends RPBCalendarAbstractModel
 {
-	public function __construct()
+	private $templateName = '';
+
+
+	/**
+	 * Current template name.
+	 *
+	 * @return string
+	 */
+	public function getTemplateName()
 	{
-		parent::__construct();
-		$this->loadTrait('Event');
+		return $this->templateName;
+	}
+
+
+	/**
+	 * Set the current template name.
+	 *
+	 * @param string $templateName
+	 */
+	public function setTemplateName($templateName)
+	{
+		$this->templateName = $templateName;
 	}
 }

@@ -20,13 +20,13 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/customposteditlist.php');
 
 
 /**
  * Model for the edition form for event categories.
  */
-class RPBCalendarModelCategoryEdit extends RPBCalendarAbstractModel
+class RPBCalendarModelCategoryEdit extends RPBCalendarAbstractModelCustomPostEditList
 {
 	public function __construct()
 	{
