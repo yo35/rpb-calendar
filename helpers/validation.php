@@ -110,14 +110,19 @@ abstract class RPBCalendarHelperValidation
 
 
 	/**
-	 * Convert a value in a string, and trim it.
+	 * Validate a string.
 	 *
 	 * @param mixed $value
+	 * @param boolean $trim Whether the value should be trimmed (true by default).
 	 * @return string Never null.
 	 */
-	public static function trim($value)
+	public static function validateString($value, $trim=true)
 	{
-		return trim((string)$value);
+		$value = (string) $value;
+		if($trim) {
+			$value = trim($value);
+		}
+		return $value;
 	}
 
 
