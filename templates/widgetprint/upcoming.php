@@ -63,14 +63,16 @@
 			releaseInfo = releaseInfo.replace(/%2\$s/g, json.releaseDate);
 
 			// Event description
-			var text = '<div class="rpbcalendar-eventTip-content">' + json.content + '</div>';
+			var text = json.content==='' ? '' : '<div class="rpbcalendar-eventTip-content">' + json.content + '</div>';
 
 			// Event link
-			var link = json.link==='' ? '' : '<hr class="rpbcalendar-eventTip-separator" />' +
-				'<div class="rpbcalendar-eventTip-link"><a href="' + json.link + '" target=_blank>' + json.link + '</a></div>';
+			var link = json.link==='' ? '' : '<div class="rpbcalendar-eventTip-link"><a href="' + json.link + '" target=_blank>' + json.link + '</a></div>';
+
+			// Separator above the event link
+			var separator = (categories==='' && releaseInfo==='' && text==='') || link==='' ? '' : '<hr class="rpbcalendar-eventTip-separator" />';
 
 			// Replace the content of the tooltip.
-			api.set('content.text', categories + releaseInfo + text + link);
+			api.set('content.text', categories + releaseInfo + text + separator + link);
 		}
 
 

@@ -72,8 +72,21 @@
 	line-height: 15px;
 }
 
-.rpbcalendar-qtip .rpbcalendar-eventTip-categories {
-	margin-top: 0.4em;
+.rpbcalendar-qtip .qtip-content {
+	padding: 0.7em;
+}
+
+.rpbcalendar-qtip .qtip-content > * {
+	margin-top: 0.7em;
+	margin-bottom: 0.7em;
+}
+
+.rpbcalendar-qtip .qtip-content > *:first-child {
+	margin-top: 0em;
+}
+
+.rpbcalendar-qtip .qtip-content > *:last-child {
+	margin-bottom: 0em;
 }
 
 .rpbcalendar-qtip .rpbcalendar-eventTip-releaseInfo {
@@ -82,11 +95,6 @@
 	font-size: 80%;
 }
 
-.rpbcalendar-qtip .rpbcalendar-eventTip-separator {
-	margin-top: 0.8em;
-	margin-bottom: 0.6em;
-}
-
-.rpbcalendar-qtip .rpbcalendar-eventTip-link {
-	margin-bottom: 0.4em;
+.rpbcalendar-qtip .qtip-content > .rpbcalendar-eventTip-categories + .rpbcalendar-eventTip-releaseInfo {
+	margin-top: -0.4em;
 }
