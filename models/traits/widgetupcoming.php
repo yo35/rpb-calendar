@@ -65,7 +65,7 @@ class RPBCalendarTraitWidgetUpcoming extends RPBCalendarAbstractTrait
 	public function getTitle()
 	{
 		if(!isset($this->title)) {
-			$value = isset($this->instance['Title']) ? RPBCalendarHelperValidation::validateString($this->instance['Title']) : null;
+			$value = isset($this->instance['title']) ? RPBCalendarHelperValidation::validateString($this->instance['title']) : null;
 			$this->title = isset($value) ? $value : __('Upcoming events', 'rpbcalendar');
 		}
 		return $this->title;
@@ -80,7 +80,7 @@ class RPBCalendarTraitWidgetUpcoming extends RPBCalendarAbstractTrait
 	public function getTimeFrame()
 	{
 		if(!isset($this->timeFrame)) {
-			$value = isset($this->instance['TimeFrame']) ? RPBCalendarHelperValidation::validateInteger($this->instance['TimeFrame'], 1) : null;
+			$value = isset($this->instance['time-frame']) ? RPBCalendarHelperValidation::validateInteger($this->instance['time-frame'], 1) : null;
 			$this->timeFrame = isset($value) ? $value : 7;
 		}
 		return $this->timeFrame;
@@ -95,7 +95,7 @@ class RPBCalendarTraitWidgetUpcoming extends RPBCalendarAbstractTrait
 	public function getWithToday()
 	{
 		if(!isset($this->withToday)) {
-			$value = isset($this->instance['WithToday']) ? RPBCalendarHelperValidation::validateBoolean($this->instance['WithToday']) : null;
+			$value = isset($this->instance['with-today']) ? RPBCalendarHelperValidation::validateBoolean($this->instance['with-today']) : null;
 			$this->withToday = isset($value) ? $value : false;
 		}
 		return $this->withToday;

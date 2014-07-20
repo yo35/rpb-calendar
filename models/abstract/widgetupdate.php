@@ -56,10 +56,11 @@ abstract class RPBCalendarAbstractModelWidgetUpdate extends RPBCalendarAbstractM
 			$this->validatedInstance = array();
 			foreach($this->getAllFields() as $field) {
 				$value = null;
-				if(isset($this->newInstance[$field])) {
-					$value = $this->validateField($field, $this->newInstance[$field]);
+				$slug = self::toLowerCase($field);
+				if(isset($this->newInstance[$slug])) {
+					$value = $this->validateField($field, $this->newInstance[$slug]);
 				}
-				$this->validatedInstance[$field] = isset($value) ? $value : $this->getOldFieldValue($field);
+				$this->validatedInstance[$slug] = isset($value) ? $value : $this->getOldFieldValue($field);
 			}
 		}
 		return $this->validatedInstance;

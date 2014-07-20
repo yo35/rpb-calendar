@@ -82,7 +82,7 @@ abstract class RPBCalendarAbstractModelWidgetEdit extends RPBCalendarAbstractMod
 	private function getFieldID($field)
 	{
 		if(!isset($this->fieldIDs[$field])) {
-			$this->fieldIDs[$field] = $this->wpWidget->get_field_id($field);
+			$this->fieldIDs[$field] = $this->wpWidget->get_field_id(self::toLowerCase($field));
 		}
 		return $this->fieldIDs[$field];
 	}
@@ -97,7 +97,7 @@ abstract class RPBCalendarAbstractModelWidgetEdit extends RPBCalendarAbstractMod
 	private function getFieldName($field)
 	{
 		if(!isset($this->fieldNames[$field])) {
-			$this->fieldNames[$field] = $this->wpWidget->get_field_name($field);
+			$this->fieldNames[$field] = $this->wpWidget->get_field_name(self::toLowerCase($field));
 		}
 		return $this->fieldNames[$field];
 	}

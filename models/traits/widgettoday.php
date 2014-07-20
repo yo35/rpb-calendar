@@ -63,7 +63,7 @@ class RPBCalendarTraitWidgetToday extends RPBCalendarAbstractTrait
 	public function getTitle()
 	{
 		if(!isset($this->title)) {
-			$value = isset($this->instance['Title']) ? RPBCalendarHelperValidation::validateString($this->instance['Title']) : null;
+			$value = isset($this->instance['title']) ? RPBCalendarHelperValidation::validateString($this->instance['title']) : null;
 			$this->title = isset($value) ? $value : __('Today\'s events', 'rpbcalendar');
 		}
 		return $this->title;

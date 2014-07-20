@@ -140,4 +140,16 @@ abstract class RPBCalendarAbstractModelWidget extends RPBCalendarAbstractModel
 	{
 		return $this->fields;
 	}
+
+
+	/**
+	 * Convert a camel-case field name into lower case style, with hyphens as word separators.
+	 *
+	 * @param string $field
+	 * @return string
+	 */
+	protected static function toLowerCase($field)
+	{
+		return strtolower(preg_replace('/([^A-Z])([A-Z])/', '$1-$2', $field));
+	}
 }
