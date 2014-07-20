@@ -28,10 +28,8 @@
 
 // Find the root directory of the WP engine.
 define('RPBCALENDAR_AJAX_DIRECTORY', dirname(__FILE__));
-if(file_exists(RPBCALENDAR_AJAX_DIRECTORY . '/config.php'))
-{
-	// The file config.php may provide an alternative definition of the constant RPBCALENDAR_WP_DIRECTORY.
-	require_once(RPBCALENDAR_AJAX_DIRECTORY . '/config.php');
+if(file_exists(RPBCALENDAR_AJAX_DIRECTORY . '/config.php')) {
+	require_once(RPBCALENDAR_AJAX_DIRECTORY . '/config.php'); // May provide an alternative definition of the constant RPBCALENDAR_WP_DIRECTORY.
 }
 if(!defined('RPBCALENDAR_WP_DIRECTORY')) {
 	define('RPBCALENDAR_WP_DIRECTORY', dirname(dirname(dirname(dirname(RPBCALENDAR_AJAX_DIRECTORY)))));

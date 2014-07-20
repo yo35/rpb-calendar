@@ -31,12 +31,12 @@
 
 
 /**
- * Path to the root directory of the Wordpress engine.
+ * Path to the root directory of the WordPress engine.
  *
  * The constant `RPBCALENDAR_WP_DIRECTORY` must be set such that
  * `RPBCALENDAR_WP_DIRECTORY . '/wp-load.php'` is a valid path to the PHP file
  * in charge of loading the WP engine (i.e. `wp-load.php` in the root directory
- * of your Wordpress blog).
+ * of your WordPress blog).
  *
  * By default, this constant is defined in the file `rpb-calendar/ajax/bootstrap.php`
  * as `dirname(dirname(dirname(dirname(dirname(__FILE__)))))`.
