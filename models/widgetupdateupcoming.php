@@ -20,57 +20,30 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetupdate.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
- * Global parameters relative to an instance of an upcoming events widget.
+ * Model to update the settings of the upcoming events widget.
  */
-class RPBCalendarTraitWidgetUpcomingEvents extends RPBCalendarAbstractTrait
+class RPBCalendarModelWidgetUpdateUpcoming extends RPBCalendarAbstractModelWidgetUpdate
 {
-	private $instance;
-	private $timeFrame;
-	private $withToday;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param array $instance Array containing the information relative to the current widget instance.
-	 */
-	public function __construct($instance)
+	public function __construct($newInstance, $oldInstance)
 	{
-		$this->instance = $instance;
+		parent::__construct($newInstance, $oldInstance);
+		$this->loadTrait('WidgetUpcoming', $this->instance);
+		$this->registerFields($this->getUpcomingWidgetFields());
 	}
 
 
-	/**
-	 * Size of the time frame in which events will be displayed (in days).
-	 *
-	 * @return int
-	 */
-	public function getTimeFrame()
+	protected function validateField($field, $value)
 	{
-		if(!isset($this->timeFrame)) {
-			$value = isset($this->instance['time-frame']) ? RPBCalendarHelperValidation::validateInteger($this->instance['time-frame'], 1) : null;
-			$this->timeFrame = isset($value) ? $value : 7;
+		switch($field) {
+			case 'Title'    : return RPBCalendarHelperValidation::validateString($value);
+			case 'TimeFrame': return RPBCalendarHelperValidation::validateInteger($value, 1);
+			case 'WithToday': return RPBCalendarHelperValidation::validateBoolean($value);
+			default: return parent::validateField($field, $value);
 		}
-		return $this->timeFrame;
-	}
-
-
-	/**
-	 * Whether the events of the current day should be included or not.
-	 *
-	 * @return boolean
-	 */
-	public function getWithToday()
-	{
-		if(!isset($this->withToday)) {
-			$value = isset($this->instance['with-today']) ? RPBCalendarHelperValidation::validateBooleanFromInt($this->instance['with-today']) : null;
-			$this->withToday = isset($value) ? $value : false;
-		}
-		return $this->withToday;
 	}
 }

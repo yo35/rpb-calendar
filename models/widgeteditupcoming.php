@@ -26,79 +26,12 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetedit.php');
 /**
  * Model for the setting form of the upcoming events widget.
  */
-class RPBCalendarModelWidgetEditUpcomingEvents extends RPBCalendarAbstractModelWidgetEdit
+class RPBCalendarModelWidgetEditUpcoming extends RPBCalendarAbstractModelWidgetEdit
 {
-	private $timeFrameFieldID  ;
-	private $timeFrameFieldName;
-	private $withTodayFieldID  ;
-	private $withTodayFieldName;
-
-
 	public function __construct($instance, $wpWidget)
 	{
 		parent::__construct($instance, $wpWidget);
-		$this->loadTrait('WidgetUpcomingEvents', $this->instance);
-	}
-
-
-	protected function getDefaultTitle()
-	{
-		return __('Upcoming events', 'rpbcalendar');
-	}
-
-
-	/**
-	 * ID for the "time frame" field.
-	 *
-	 * @return string
-	 */
-	public function getTimeFrameFieldID()
-	{
-		if(!isset($this->timeFrameFieldID)) {
-			$this->timeFrameFieldID = $this->getFieldID('time-frame');
-		}
-		return $this->timeFrameFieldID;
-	}
-
-
-	/**
-	 * Name for the "time frame" field.
-	 *
-	 * @return string
-	 */
-	public function getTimeFrameFieldName()
-	{
-		if(!isset($this->timeFrameFieldName)) {
-			$this->timeFrameFieldName = $this->getFieldName('time-frame');
-		}
-		return $this->timeFrameFieldName;
-	}
-
-
-	/**
-	 * ID for the "with today" field.
-	 *
-	 * @return string
-	 */
-	public function getWithTodayFieldID()
-	{
-		if(!isset($this->withTodayFieldID)) {
-			$this->withTodayFieldID = $this->getFieldID('with-today');
-		}
-		return $this->withTodayFieldID;
-	}
-
-
-	/**
-	 * Name for the "with today" field.
-	 *
-	 * @return string
-	 */
-	public function getWithTodayFieldName()
-	{
-		if(!isset($this->withTodayFieldName)) {
-			$this->withTodayFieldName = $this->getFieldName('with-today');
-		}
-		return $this->withTodayFieldName;
+		$this->loadTrait('WidgetUpcoming', $this->instance);
+		$this->registerFields($this->getUpcomingWidgetFields());
 	}
 }

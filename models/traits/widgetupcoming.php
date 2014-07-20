@@ -20,67 +20,84 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetprint.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
-require_once(RPBCALENDAR_ABSPATH . 'helpers/today.php');
 
 
 /**
- * Model used to render the upcoming events widget in the frontend.
+ * Global parameters relative to an instance of an upcoming widget.
  */
-class RPBCalendarModelWidgetPrintUpcomingEvents extends RPBCalendarAbstractModelWidgetPrint
+class RPBCalendarTraitWidgetUpcoming extends RPBCalendarAbstractTrait
 {
-	public function __construct($instance, $theme)
+	private $instance;
+	private $title;
+	private $timeFrame;
+	private $withToday;
+
+
+	/**
+	 * Constructor.
+	 *
+	 * @param array $instance
+	 */
+	public function __construct($instance)
 	{
-		parent::__construct($instance, $theme);
-		$this->loadTrait('WidgetUpcomingEvents', $this->instance);
-		$this->loadTrait('AjaxURLs');
-
-		// Load the events.
-		$where = array(
-			'time_frame_begin' => $this->getTimeFrameBegin(),
-			'time_frame_end'   => $this->getTimeFrameEnd  ()
-		);
-		$this->loadTrait('EventQuery', $where);
-	}
-
-
-	protected function getDefaultTitle()
-	{
-		return __('Upcoming events', 'rpbcalendar');
-	}
-
-
-	protected function getDefaultWidgetHidden()
-	{
-		return !$this->haveEvent();
+		$this->instance = $instance;
 	}
 
 
 	/**
-	 * Begin date of the time frame.
+	 * Fields of the widget.
+	 *
+	 * @return array
+	 */
+	public function getUpcomingWidgetFields()
+	{
+		return array('Title', 'TimeFrame', 'WithToday');
+	}
+
+
+	/**
+	 * Title of the widget.
 	 *
 	 * @return string
 	 */
-	private function getTimeFrameBegin()
+	public function getTitle()
 	{
-		$t = RPBCalendarHelperToday::timestamp();
-		if(!$this->getWithToday()) {
-			$t += 86400; // 86400 = 24*60*60 = number of seconds in a day.
+		if(!isset($this->title)) {
+			$value = isset($this->instance['Title']) ? RPBCalendarHelperValidation::validateString($this->instance['Title']) : null;
+			$this->timeFrame = isset($value) ? $value : __('Upcoming events', 'rpbcalendar');
 		}
-		return date('Y-m-d', $t);
+		return $this->title;
 	}
 
 
 	/**
-	 * End date of the time frame.
+	 * Size of the time frame in which events will be displayed (in days).
 	 *
-	 * @return string
+	 * @return int
 	 */
-	private function getTimeFrameEnd()
+	public function getTimeFrame()
 	{
-		$t = RPBCalendarHelperToday::timestamp();
-		$t += $this->getTimeFrame() * 86400; // 86400 = 24*60*60 = number of seconds in a day.
-		return date('Y-m-d', $t);
+		if(!isset($this->timeFrame)) {
+			$value = isset($this->instance['TimeFrame']) ? RPBCalendarHelperValidation::validateInteger($this->instance['TimeFrame'], 1) : null;
+			$this->timeFrame = isset($value) ? $value : 7;
+		}
+		return $this->timeFrame;
+	}
+
+
+	/**
+	 * Whether the events of the current day should be included or not.
+	 *
+	 * @return boolean
+	 */
+	public function getWithToday()
+	{
+		if(!isset($this->withToday)) {
+			$value = isset($this->instance['WithToday']) ? RPBCalendarHelperValidation::validateBoolean($this->instance['WithToday']) : null;
+			$this->withToday = isset($value) ? $value : false;
+		}
+		return $this->withToday;
 	}
 }

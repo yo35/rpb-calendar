@@ -20,67 +20,64 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetupdate.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetprint.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/today.php');
 
 
 /**
- * Model to update the settings of the upcoming events widget.
+ * Model used to render the upcoming events widget in the frontend.
  */
-class RPBCalendarModelWidgetUpdateUpcomingEvents extends RPBCalendarAbstractModelWidgetUpdate
+class RPBCalendarModelWidgetPrintUpcoming extends RPBCalendarAbstractModelWidgetPrint
 {
-	private $validatedInstance;
-	private $newTimeFrame;
-	private $newWithToday;
-
-
-	public function __construct($instance, $newInstance)
+	public function __construct($instance, $theme)
 	{
-		parent::__construct($instance, $newInstance);
-		$this->loadTrait('WidgetUpcomingEvents', $this->instance);
+		parent::__construct($instance, $theme);
+		$this->loadTrait('WidgetUpcoming', $this->instance);
+		$this->registerFields($this->getUpcomingWidgetFields());
 
-		// Initialize the new widget parameters.
-		if(isset($this->newInstance['time-frame'])) {
-			$this->newTimeFrame = RPBCalendarHelperValidation::validateInteger($this->newInstance['time-frame'], 1);
-		}
-		if(isset($this->newInstance['with-today'])) {
-			$this->newWithToday = RPBCalendarHelperValidation::validateBooleanFromInt($this->newInstance['with-today']);
-		}
+		// Additional traits
+		$this->loadTrait('AjaxURLs');
+
+		// Load the events.
+		$where = array(
+			'time_frame_begin' => $this->getTimeFrameBegin(),
+			'time_frame_end'   => $this->getTimeFrameEnd  ()
+		);
+		$this->loadTrait('EventQuery', $where);
 	}
 
 
-	protected function makeValidatedInstance()
+	protected function computeIsWidgetHidden()
 	{
-		$retVal = parent::makeValidatedInstance();
-		$retVal['time-frame'] = isset($this->newTimeFrame) ? $this->newTimeFrame : $this->getTimeFrame();
-		$retVal['with-today'] = (isset($this->newWithToday) ? $this->newWithToday : $this->getWithToday()) ? 1 : 0;
-		return $retVal;
-	}
-
-
-	protected function getDefaultTitle()
-	{
-		return __('Upcoming events', 'rpbcalendar');
+		return !$this->haveEvent();
 	}
 
 
 	/**
-	 * New value of the "time-frame" parameter.
+	 * Begin date of the time frame.
 	 *
-	 * @return int May be null if the new title is invalid.
+	 * @return string
 	 */
-	public function getNewTimeFrame()
+	private function getTimeFrameBegin()
 	{
-		return $this->newTimeFrame;
+		$t = RPBCalendarHelperToday::timestamp();
+		if(!$this->getWithToday()) {
+			$t += 86400; // 86400 = 24*60*60 = number of seconds in a day.
+		}
+		return date('Y-m-d', $t);
 	}
 
 
 	/**
-	 * New value of the "with-today" parameter.
+	 * End date of the time frame.
 	 *
-	 * @return boolean May be null if the new title is invalid.
+	 * @return string
 	 */
-	public function getNewWithToday()
+	private function getTimeFrameEnd()
 	{
-		return $this->newWithToday;
+		$t = RPBCalendarHelperToday::timestamp();
+		$t += $this->getTimeFrame() * 86400; // 86400 = 24*60*60 = number of seconds in a day.
+		return date('Y-m-d', $t);
 	}
 }
