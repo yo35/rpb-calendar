@@ -24,33 +24,17 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
 
 
 /**
- * Register the 'event' type of post in the Wordpress database.
+ * Register the `rpbevent` post type in the WordPress database.
  *
  * This class is not publically constructible. Call the static method `register()`
  * to trigger the registration operations.
  */
 class RPBCalendarEventClass
 {
-	private static $registered = false;
-
-
 	/**
-	 * Function to call externally to register the class. Must be called only once.
+	 * Register the `rpbevent` post type. Must be called only once.
 	 */
 	public static function register()
-	{
-		if(self::$registered) {
-			return;
-		}
-		new RPBCalendarEventClass();
-		self::$registered = true;
-	}
-
-
-	/**
-	 * Constructor.
-	 */
-	private function __construct()
 	{
 		// Register the new type of post.
 		register_post_type('rpbevent', array(
@@ -70,7 +54,7 @@ class RPBCalendarEventClass
 			'hierarchical' => false,
 			'supports'     => array('title', 'editor', 'author', 'comments'),
 			'rewrite'      => array('slug' => 'event'),
-			'register_meta_box_cb' => array($this, 'callbackEventEdit'),
+			'register_meta_box_cb' => array(__CLASS__, 'callbackEventEdit'),
 		));
 
 		// Register the associated taxonomy.
@@ -90,27 +74,27 @@ class RPBCalendarEventClass
 		));
 
 		// Callback for post querying
-		add_action('parse_query', array($this, 'alterQuery'));
+		add_action('parse_query', array(__CLASS__, 'alterQuery'));
 
 		// Event category hooks
-		add_action('rpbevent_category_add_form_fields'    , array($this, 'callbackCategoryAdd' ));
-		add_action('rpbevent_category_edit_form_fields'   , array($this, 'callbackCategoryEdit'));
-		add_filter('manage_edit-rpbevent_category_columns', array($this, 'callbackCategoryList'));
-		add_action('edited_rpbevent_category' , array($this, 'updateCategory'));
-		add_action('created_rpbevent_category', array($this, 'updateCategory'));
+		add_action('rpbevent_category_add_form_fields'    , array(__CLASS__, 'callbackCategoryAdd' ));
+		add_action('rpbevent_category_edit_form_fields'   , array(__CLASS__, 'callbackCategoryEdit'));
+		add_filter('manage_edit-rpbevent_category_columns', array(__CLASS__, 'callbackCategoryList'));
+		add_action('edited_rpbevent_category' , array(__CLASS__, 'updateCategory'));
+		add_action('created_rpbevent_category', array(__CLASS__, 'updateCategory'));
 
 		// Event hooks
-		add_filter('manage_rpbevent_posts_columns', array($this, 'callbackEventList'));
-		add_action('save_post', array($this, 'updateEvent'));
+		add_filter('manage_rpbevent_posts_columns', array(__CLASS__, 'callbackEventList'));
+		add_action('save_post', array(__CLASS__, 'updateEvent'));
 	}
 
 
 	/**
 	 * Callback for the event category add form.
 	 */
-	public function callbackCategoryAdd()
+	public static function callbackCategoryAdd()
 	{
-		$this->callbackCategoryEdit(null);
+		self::callbackCategoryEdit(null);
 	}
 
 
@@ -119,7 +103,7 @@ class RPBCalendarEventClass
 	 *
 	 * @param object $category
 	 */
-	public function callbackCategoryEdit($category)
+	public static function callbackCategoryEdit($category)
 	{
 		require_once(RPBCALENDAR_ABSPATH . 'controllers/categoryedit.php');
 		$controller = new RPBCalendarControllerCategoryEdit($category);
@@ -133,7 +117,7 @@ class RPBCalendarEventClass
 	 * @param array $defaultColumns
 	 * @return array
 	 */
-	public function callbackCategoryList($defaultColumns)
+	public static function callbackCategoryList($defaultColumns)
 	{
 		require_once(RPBCALENDAR_ABSPATH . 'controllers/categorylist.php');
 		$controller = new RPBCalendarControllerCategoryList($defaultColumns);
@@ -146,7 +130,7 @@ class RPBCalendarEventClass
 	 *
 	 * @param int $categoryID
 	 */
-	public function updateCategory($categoryID)
+	public static function updateCategory($categoryID)
 	{
 		$model = RPBCalendarHelperLoader::loadModel('CategoryUpdate', $categoryID);
 		$model->processRequest();
@@ -156,7 +140,7 @@ class RPBCalendarEventClass
 	/**
 	 * Callback for the event edition form.
 	 */
-	public function callbackEventEdit()
+	public static function callbackEventEdit()
 	{
 		require_once(RPBCALENDAR_ABSPATH . 'controllers/eventedit.php');
 		$controller = new RPBCalendarControllerEventEdit();
@@ -170,7 +154,7 @@ class RPBCalendarEventClass
 	 * @param array $columns Default columns.
 	 * @return array
 	 */
-	public function callbackEventList($columns)
+	public static function callbackEventList($columns)
 	{
 		require_once(RPBCALENDAR_ABSPATH . 'controllers/eventlist.php');
 		$controller = new RPBCalendarControllerEventList($columns);
@@ -183,7 +167,7 @@ class RPBCalendarEventClass
 	 *
 	 * @param int $eventID
 	 */
-	public function updateEvent($eventID)
+	public static function updateEvent($eventID)
 	{
 		$model = RPBCalendarHelperLoader::loadModel('EventUpdate', $eventID);
 		$model->processRequest();
@@ -196,16 +180,16 @@ class RPBCalendarEventClass
 	 *
 	 * @param WP_Query $query
 	 */
-	public function alterQuery($query)
+	public static function alterQuery($query)
 	{
 		// Only events are affected.
 		$vars = &$query->query_vars;
-		if(!(isset($vars['post_type']) && $vars['post_type']=='rpbevent')) {
+		if(!(isset($vars['post_type']) && $vars['post_type'] === 'rpbevent')) {
 			return;
 		}
 
 		// Enable ordering by date
-		if(isset($vars['orderby']) && $vars['orderby']=='rpbevent_date_begin') {
+		if(isset($vars['orderby']) && $vars['orderby'] === 'rpbevent_date_begin') {
 			$vars['meta_key'] = 'rpbevent_date_begin';
 			$vars['orderby' ] = 'meta_value';
 		}
