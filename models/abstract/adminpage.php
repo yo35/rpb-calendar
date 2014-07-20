@@ -38,15 +38,6 @@ abstract class RPBCalendarAbstractModelAdminPage extends RPBCalendarAbstractMode
 
 
 	/**
-	 * Constructor.
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-
-	/**
 	 * Use the "AdminPage" view by default.
 	 *
 	 * @return string
