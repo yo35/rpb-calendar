@@ -66,7 +66,7 @@ class RPBCalendarTraitWidgetUpcoming extends RPBCalendarAbstractTrait
 	{
 		if(!isset($this->title)) {
 			$value = isset($this->instance['Title']) ? RPBCalendarHelperValidation::validateString($this->instance['Title']) : null;
-			$this->timeFrame = isset($value) ? $value : __('Upcoming events', 'rpbcalendar');
+			$this->title = isset($value) ? $value : __('Upcoming events', 'rpbcalendar');
 		}
 		return $this->title;
 	}

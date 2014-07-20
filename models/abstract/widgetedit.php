@@ -63,7 +63,7 @@ abstract class RPBCalendarAbstractModelWidgetEdit extends RPBCalendarAbstractMod
 	 */
 	public function __call($method, $args)
 	{
-		$pattern = '/^get(' . implode('|', $this->getAllFields()) . '(Name|ID)$/';
+		$pattern = '/^get(' . implode('|', $this->getAllFields()) . ')Field(Name|ID)$/';
 		if(preg_match($pattern, $method, $m)) {
 			return $m[2] === 'Name' ? $this->getFieldName($m[1]) : $this->getFieldID($m[1]);
 		}
