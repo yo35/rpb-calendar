@@ -50,16 +50,8 @@ abstract class RPBCalendarAdminPages
 	}
 
 
-	public static function callbackPageOptions()
-	{
-		self::printAdminPage('AdminPageOptions');
-	}
-
-
-	public static function callbackPageAbout()
-	{
-		self::printAdminPage('AdminPageAbout');
-	}
+	public static function callbackPageOptions() { self::printAdminPage('AdminPageOptions'); }
+	public static function callbackPageAbout  () { self::printAdminPage('AdminPageAbout'  ); }
 
 
 	/**

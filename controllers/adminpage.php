@@ -61,6 +61,7 @@ class RPBCalendarControllerAdminPage extends RPBCalendarAbstractController
 	 *
 	 * @param string $traitName
 	 * @param string $methodName
+	 * @param string $capability Required capability to execute the action. Default is `'manage_options'`.
 	 */
 	private function executeAction($traitName, $methodName, $capability='manage_options')
 	{

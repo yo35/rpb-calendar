@@ -100,7 +100,7 @@ class RPBCalendarTraitCategory extends RPBCalendarAbstractTrait
 	{
 		$this->ensureCategoryLoaded();
 		if(!isset($this->category->color)) {
-			$value = RPBCalendarHelperValidation::validateColor(get_option('rpbevent_category_'.$this->categoryID.'_color'), true);
+			$value = RPBCalendarHelperValidation::validateColor(get_option('rpbevent_category_' . $this->categoryID . '_color'), true);
 			$this->category->color = isset($value) ? $value : '';
 		}
 		return $this->category->color;
