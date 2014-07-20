@@ -45,7 +45,7 @@
 	<input type="checkbox" value="1" class="widefat"
 		id="<?php echo htmlspecialchars($model->getWithTodayFieldID()); ?>"
 		name="<?php echo htmlspecialchars($model->getWithTodayFieldName()); ?>"
-		<?php if($model->getWithToday()) echo 'checked="1"'; ?>
+		<?php if($model->getWithToday()) { echo 'checked="1"'; } ?>
 	/>
 	<label for="<?php echo htmlspecialchars($model->getWithTodayFieldID()); ?>"><?php
 		_e('Show events of the current day', 'rpbcalendar');
