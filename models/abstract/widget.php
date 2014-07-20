@@ -21,7 +21,6 @@
 
 
 require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
-require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
@@ -31,7 +30,7 @@ abstract class RPBCalendarAbstractModelWidget extends RPBCalendarAbstractModel
 {
 	protected $instance;
 	private $widgetName;
-	private $title;
+	private $fields = array();
 
 
 	/**
@@ -43,7 +42,6 @@ abstract class RPBCalendarAbstractModelWidget extends RPBCalendarAbstractModel
 	{
 		parent::__construct();
 		$this->instance = $instance;
-		$this->setTemplateName($this->getWidgetName());
 	}
 
 
@@ -55,30 +53,91 @@ abstract class RPBCalendarAbstractModelWidget extends RPBCalendarAbstractModel
 	public function getWidgetName()
 	{
 		if(!isset($this->widgetName)) {
-			$this->widgetName = preg_match('/^Widget(?:Edit|Update|Print)(.*)$/', $this->getName(), $matches) ? $matches[1] : '';
+			$this->widgetName = preg_match('/^Widget(?:Edit|Update|Print)(.*)$/', $this->getName(), $m) ? $m[1] : '';
 		}
 		return $this->widgetName;
 	}
 
 
 	/**
-	 * Title of the widget.
+	 * Use the widget name for the template name by default.
 	 *
 	 * @return string
 	 */
-	public function getTitle()
+	public function getTemplateName()
 	{
-		if(!isset($this->title)) {
-			$this->title = isset($this->instance['title']) ? RPBCalendarHelperValidation::trim($this->instance['title']) : $this->getDefaultTitle();
-		}
-		return $this->title;
+		return $this->getWidgetName();
 	}
 
 
 	/**
-	 * Default title of the widget.
+	 * Check whether a field is registered or not for the current widget.
 	 *
-	 * @return string
+	 * @param string $field
+	 * @return boolean
 	 */
-	protected abstract function getDefaultTitle();
+	protected function isFieldRegistered($field)
+	{
+		return in_array($field, $this->fields);
+	}
+
+
+	/**
+	 * Register a new field for the current widget.
+	 *
+	 * For each registered field, the model must provide a method `getField()`,
+	 * that returns the value of the field for the current widget instance.
+	 *
+	 * @param string $field
+	 */
+	protected function registerField($field)
+	{
+		if(!in_array($field, $this->fields)) {
+			$this->fields[] = $field;
+		}
+	}
+
+
+	/**
+	 * Register a new list of fields.
+	 *
+	 * @param array $fields
+	 */
+	protected function registerFields($fields)
+	{
+		$this->fields = array_unique(array_merge($this->fields, $fields));
+	}
+
+
+	/**
+	 * Unregister a field for the current widget.
+	 *
+	 * @param string $field
+	 */
+	protected function unregisterField($field)
+	{
+		$this->fields = array_diff($this->fields, array($field));
+	}
+
+
+	/**
+	 * Unregister a list of fields.
+	 *
+	 * @param array $fields
+	 */
+	protected function unregisterFields($fields)
+	{
+		$this->fields = array_diff($this->fields, $fields);
+	}
+
+
+	/**
+	 * Return all the registered fields.
+	 *
+	 * @return array
+	 */
+	protected function getAllFields()
+	{
+		return $this->fields;
+	}
 }

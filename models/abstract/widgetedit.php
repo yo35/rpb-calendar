@@ -29,8 +29,8 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widget.php');
 abstract class RPBCalendarAbstractModelWidgetEdit extends RPBCalendarAbstractModelWidget
 {
 	private $wpWidget;
-	private $titleFieldID;
-	private $titleFieldName;
+	private $fieldIDs   = array();
+	private $fieldNames = array();
 
 
 	/**
@@ -58,53 +58,47 @@ abstract class RPBCalendarAbstractModelWidgetEdit extends RPBCalendarAbstractMod
 
 
 	/**
-	 * ID for the "title" field.
-	 *
-	 * @return string
+	 * Intercept the calls to methods `getFieldName()` and `getFieldID()`,
+	 * and return the corresponding name or ID.
 	 */
-	public function getTitleFieldID()
+	public function __call($method, $args)
 	{
-		if(!isset($this->titleFieldID)) {
-			$this->titleFieldID = $this->getFieldID('title');
+		$pattern = '/^get(' . implode('|', $this->getAllFields()) . '(Name|ID)$/';
+		if(preg_match($pattern, $method, $m)) {
+			return $m[2] === 'Name' ? $this->getFieldName($m[1]) : $this->getFieldID($m[1]);
 		}
-		return $this->titleFieldID;
-	}
-
-
-	/**
-	 * Name for the "title" field.
-	 *
-	 * @return string
-	 */
-	public function getTitleFieldName()
-	{
-		if(!isset($this->titleFieldName)) {
-			$this->titleFieldName = $this->getFieldName('title');
+		else {
+			return parent::__call($method, $args);
 		}
-		return $this->titleFieldName;
 	}
 
 
 	/**
-	 * ID to use for a field named as `$fieldName`.
+	 * ID to use for the given field.
 	 *
-	 * @param string $fieldName
+	 * @param string $field
 	 * @return string
 	 */
-	protected function getFieldID($fieldName)
+	private function getFieldID($field)
 	{
-		return $this->wpWidget->get_field_id($fieldName);
+		if(!isset($this->fieldIDs[$field])) {
+			$this->fieldIDs[$field] = $this->wpWidget->get_field_id($field);
+		}
+		return $this->fieldIDs[$field];
 	}
 
 
 	/**
-	 * Name attribute to use for a field named as `$fieldName`.
+	 * Name to use for the given field.
 	 *
-	 * @param string $fieldName
+	 * @param string $field
 	 * @return string
 	 */
-	protected function getFieldName($fieldName)
+	private function getFieldName($field)
 	{
-		return $this->wpWidget->get_field_name($fieldName);
+		if(!isset($this->fieldNames[$field])) {
+			$this->fieldNames[$field] = $this->wpWidget->get_field_name($field);
+		}
+		return $this->fieldNames[$field];
 	}
 }

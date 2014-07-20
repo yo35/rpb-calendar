@@ -29,7 +29,8 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widget.php');
 abstract class RPBCalendarAbstractModelWidgetPrint extends RPBCalendarAbstractModelWidget
 {
 	private $theme;
-	private $widgetHidden;
+	private $isWidgetHidden;
+	private $hasTitle;
 
 
 	/**
@@ -81,19 +82,36 @@ abstract class RPBCalendarAbstractModelWidgetPrint extends RPBCalendarAbstractMo
 	 *
 	 * @return boolean
 	 */
-	public function getWidgetHidden()
+	public function isWidgetHidden()
 	{
-		if(!isset($this->widgetHidden)) {
-			$this->widgetHidden = $this->getDefaultWidgetHidden();
+		if(!isset($this->isWidgetHidden)) {
+			$this->isWidgetHidden = $this->computeIsWidgetHidden();
 		}
-		return $this->widgetHidden;
+		return $this->isWidgetHidden;
 	}
 
 
 	/**
-	 * Default "widget-hidden" attribute.
+	 * Override this method to hide the widget in particular situations. By default, the widget is never hidden.
 	 *
 	 * @return boolean
 	 */
-	protected abstract function getDefaultWidgetHidden();
+	protected function computeIsWidgetHidden()
+	{
+		return false;
+	}
+
+
+	/**
+	 * Whether the widget has a title or not.
+	 *
+	 * @return boolean
+	 */
+	public function hasTitle()
+	{
+		if(!isset($this->hasTitle)) {
+			$this->hasTitle = $this->isFieldRegistered('Title') && $this->getTitle() !== '';
+		}
+		return $this->hasTitle;
+	}
 }

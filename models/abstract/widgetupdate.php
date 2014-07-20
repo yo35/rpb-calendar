@@ -21,7 +21,6 @@
 
 
 require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widget.php');
-require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
@@ -29,26 +28,20 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
  */
 abstract class RPBCalendarAbstractModelWidgetUpdate extends RPBCalendarAbstractModelWidget
 {
-	protected $newInstance;
+	private $newInstance;
 	private $validatedInstance;
-	private $newTitle;
 
 
 	/**
 	 * Constructor.
 	 *
-	 * @param array $instance Array containing the information relative to the old widget instance.
-	 * @param array $newInstance New widget parameters.
+	 * @param array $oldInstance
+	 * @param array $newInstance
 	 */
-	public function __construct($instance, $newInstance)
+	public function __construct($newInstance, $oldInstance)
 	{
-		parent::__construct($instance);
+		parent::__construct($oldInstance);
 		$this->newInstance = $newInstance;
-
-		// Initialize the new widget parameters.
-		if(isset($this->newInstance['title'])) {
-			$this->newTitle = RPBCalendarHelperValidation::trim($this->newInstance['title']);
-		}
 	}
 
 
@@ -60,17 +53,40 @@ abstract class RPBCalendarAbstractModelWidgetUpdate extends RPBCalendarAbstractM
 	public function getValidatedInstance()
 	{
 		if(!isset($this->validatedInstance)) {
-			$this->validatedInstance = $this->makeValidatedInstance();
+			$this->validatedInstance = array();
+			foreach($this->getAllFields() as $field) {
+				$value = null;
+				if(isset($this->newInstance[$field])) {
+					$value = $this->validateField($field, $this->newInstance[$field]);
+				}
+				$this->validatedInstance[$field] = isset($value) ? $value : $this->getOldFieldValue($field);
+			}
 		}
 		return $this->validatedInstance;
 	}
 
 
 	/**
-	 * Initialize the set of validated parameters. This method may be overloaded in derived classes.
+	 * Return the value of the given field in the old widget instance.
+	 *
+	 * @param string $field
+	 * @return mixed
 	 */
-	protected function makeValidatedInstance()
+	private function getOldFieldValue($field)
 	{
-		return array('title' => isset($this->newTitle) ? $this->newTitle : $this->getTitle());
+		$methodName = 'get' . $field;
+		return $this->$methodName();
+	}
+
+
+	/**
+	 * Validate the new value of the given field. This method must be overriden in derived classes.
+	 *
+	 * @param string $field
+	 * @param string $value
+	 */
+	protected function validateField($field, $value)
+	{
+		return null;
 	}
 }
