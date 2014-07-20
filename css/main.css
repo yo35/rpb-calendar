@@ -64,7 +64,13 @@
 }
 
 .rpbcalendar-qtip.qtip-tipped .qtip-icon {
-	border-width: 1px;
+	border-width: 0px;
+	top: 50%;
+	right: 5px;
+	margin-top: 0px;
+	transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
 }
 
 .rpbcalendar-qtip.qtip {
