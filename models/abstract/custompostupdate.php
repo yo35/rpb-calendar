@@ -20,16 +20,46 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/custompostupdate.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/abstractmodel.php');
 
 
 /**
- * Process an update event request.
+ * Base class for the models used to process the update requests of custom posts and categories.
  */
-class RPBCalendarModelEventUpdate extends RPBCalendarAbstractModelCustomPostUpdate
+abstract class RPBCalendarAbstractModelCustomPostUpdate extends RPBCalendarAbstractModel
 {
-	public function __construct()
+	private $methodName;
+
+
+	/**
+	 * Constructor.
+	 *
+	 * @param string $slug Post type or taxonomy slug.
+	 * @param boolean $isCategory Whether it is a post type or a category update request.
+	 * @param string $traitName Trait to load.
+	 * @param string $methodName Method to call in the trait to process the request.
+	 */
+	public function __construct($slug, $isCategory, $traitName, $methodName)
 	{
-		parent::__construct('rpbevent', false, 'PostEvent', 'updateEvent');
+		parent::__construct();
+
+		// Determine whether the requests will be skipped or not.
+		$field = $isCategory ? 'taxonomy' : 'post_type';
+		if(isset($_POST[$field]) && $_POST[$field] === $slug) {
+			$this->loadTrait($traitName);
+			$this->methodName = $methodName;
+		}
+	}
+
+
+	/**
+	 * Process the request.
+	 */
+	public function processRequest($id)
+	{
+		if(isset($this->methodName)) {
+			$methodName = $this->methodName;
+			$this->$methodName($id);
+		}
 	}
 }

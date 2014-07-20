@@ -132,8 +132,8 @@ class RPBCalendarEventClass
 	 */
 	public static function updateCategory($categoryID)
 	{
-		$model = RPBCalendarHelperLoader::loadModel('CategoryUpdate', $categoryID);
-		$model->processRequest();
+		$model = RPBCalendarHelperLoader::loadModel('CategoryUpdate');
+		$model->processRequest($categoryID);
 	}
 
 
@@ -169,8 +169,8 @@ class RPBCalendarEventClass
 	 */
 	public static function updateEvent($eventID)
 	{
-		$model = RPBCalendarHelperLoader::loadModel('EventUpdate', $eventID);
-		$model->processRequest();
+		$model = RPBCalendarHelperLoader::loadModel('EventUpdate');
+		$model->processRequest($eventID);
 	}
 
 

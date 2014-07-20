@@ -20,42 +20,16 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH.'models/abstract/abstractmodel.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/custompostupdate.php');
 
 
 /**
  * Process an update event category request.
  */
-class RPBCalendarModelCategoryUpdate extends RPBCalendarAbstractModel
+class RPBCalendarModelCategoryUpdate extends RPBCalendarAbstractModelCustomPostUpdate
 {
-	private $traitLoaded = false;
-	private $categoryID;
-
-
-	public function __construct($categoryID)
+	public function __construct()
 	{
-		parent::__construct();
-		$this->categoryID = $categoryID;
-	}
-
-
-	/**
-	 * Process the request.
-	 */
-	public function processRequest()
-	{
-		// Nothing to do if it is not the expected taxonomy type.
-		if(!(isset($_POST['taxonomy']) && $_POST['taxonomy']=='rpbevent_category')) {
-			return;
-		}
-
-		// Load the required trait.
-		if(!$this->traitLoaded) {
-			$this->loadTrait('PostCategory');
-			$this->traitLoaded = true;
-		}
-
-		// Call the update method.
-		$this->updateCategory($this->categoryID);
+		parent::__construct('rpbevent_category', true, 'PostCategory', 'updateCategory');
 	}
 }

@@ -51,7 +51,7 @@ class RPBCalendarTraitPostCategory extends RPBCalendarAbstractTrait
 	{
 		// Update the color.
 		if(isset($this->color)) {
-			update_option('rpbevent_category_'.$categoryID.'_color', $this->color);
+			update_option('rpbevent_category_' . $categoryID . '_color', $this->color);
 		}
 	}
 }
