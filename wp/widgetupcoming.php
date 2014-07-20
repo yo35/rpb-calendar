@@ -26,14 +26,14 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
 /**
  * Widget presenting the upcoming events.
  */
-class RPBCalendarWidgetUpcomingEvents extends WP_Widget
+class RPBCalendarWidgetUpcoming extends WP_Widget
 {
 	/**
 	 * Register the widget class (should be called only once).
 	 */
 	public static function register()
 	{
-		register_widget('RPBCalendarWidgetUpcomingEvents');
+		register_widget(__CLASS__);
 	}
 
 
@@ -57,7 +57,7 @@ class RPBCalendarWidgetUpcomingEvents extends WP_Widget
 	 */
 	public function widget($theme, $instance)
 	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetPrintUpcomingEvents', $instance, $theme);
+		$model = RPBCalendarHelperLoader::loadModel('WidgetPrintUpcoming', $instance, $theme);
 		$view = RPBCalendarHelperLoader::loadView($model);
 		$view->display();
 	}
@@ -68,7 +68,7 @@ class RPBCalendarWidgetUpcomingEvents extends WP_Widget
 	 */
 	public function update($newInstance, $oldInstance)
 	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetUpdateUpcomingEvents', $oldInstance, $newInstance);
+		$model = RPBCalendarHelperLoader::loadModel('WidgetUpdateUpcoming', $newInstance, $oldInstance);
 		return $model->getValidatedInstance();
 	}
 
@@ -78,7 +78,7 @@ class RPBCalendarWidgetUpcomingEvents extends WP_Widget
 	 */
 	public function form($instance)
 	{
-		$model = RPBCalendarHelperLoader::loadModel('WidgetEditUpcomingEvents', $instance, $this);
+		$model = RPBCalendarHelperLoader::loadModel('WidgetEditUpcoming', $instance, $this);
 		$view = RPBCalendarHelperLoader::loadView($model);
 		$view->display();
 	}

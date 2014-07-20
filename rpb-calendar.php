@@ -144,6 +144,6 @@ if(is_admin()) {
 add_action('widgets_init', 'rpbcalendar_init_widgets');
 function rpbcalendar_init_widgets()
 {
-	require_once(RPBCALENDAR_ABSPATH . 'wp/widgetupcomingevents.php');
-	RPBCalendarWidgetUpcomingEvents::register();
+	require_once(RPBCALENDAR_ABSPATH . 'wp/widgetupcoming.php');
+	RPBCalendarWidgetUpcoming::register();
 }
