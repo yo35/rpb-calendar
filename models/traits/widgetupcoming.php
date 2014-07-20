@@ -25,7 +25,7 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
- * Global parameters relative to an instance of an upcoming widget.
+ * Global parameters relative to an instance of an upcoming events widget.
  */
 class RPBCalendarTraitWidgetUpcoming extends RPBCalendarAbstractTrait
 {

@@ -21,7 +21,6 @@
 
 
 require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetprint.php');
-require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/today.php');
 
 
