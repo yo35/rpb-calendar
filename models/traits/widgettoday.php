@@ -18,22 +18,54 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
-?>
 
-<div class="rpbcalendar-eventBlockList">
-	<?php while($model->fetchEvent()): ?>
 
-		<div class="rpbcalendar-eventBlock"
-			style="<?php echo htmlspecialchars($model->getEventBackgroundStyle()); ?>"
-			data-event-id="<?php echo htmlspecialchars($model->getEventID()); ?>"
-		>
-			<?php echo htmlspecialchars($model->getEventTitle()); ?>
-		</div>
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
-	<?php endwhile; ?>
-</div>
 
-<?php
-	// Decorate the event blocks with tool-tips.
-	include(RPBCALENDAR_ABSPATH . 'templates/widgetprint/tooltips.php');
-?>
+/**
+ * Global parameters relative to an instance of a "today-events" widget.
+ */
+class RPBCalendarTraitWidgetToday extends RPBCalendarAbstractTrait
+{
+	private $instance;
+	private $title;
+
+
+	/**
+	 * Constructor.
+	 *
+	 * @param array $instance
+	 */
+	public function __construct($instance)
+	{
+		$this->instance = $instance;
+	}
+
+
+	/**
+	 * Fields of the widget.
+	 *
+	 * @return array
+	 */
+	public function getTodayWidgetFields()
+	{
+		return array('Title');
+	}
+
+
+	/**
+	 * Title of the widget.
+	 *
+	 * @return string
+	 */
+	public function getTitle()
+	{
+		if(!isset($this->title)) {
+			$value = isset($this->instance['Title']) ? RPBCalendarHelperValidation::validateString($this->instance['Title']) : null;
+			$this->title = isset($value) ? $value : __('Today\'s events', 'rpbcalendar');
+		}
+		return $this->title;
+	}
+}

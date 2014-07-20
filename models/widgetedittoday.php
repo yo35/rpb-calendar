@@ -18,22 +18,20 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
-?>
 
-<div class="rpbcalendar-eventBlockList">
-	<?php while($model->fetchEvent()): ?>
 
-		<div class="rpbcalendar-eventBlock"
-			style="<?php echo htmlspecialchars($model->getEventBackgroundStyle()); ?>"
-			data-event-id="<?php echo htmlspecialchars($model->getEventID()); ?>"
-		>
-			<?php echo htmlspecialchars($model->getEventTitle()); ?>
-		</div>
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetedit.php');
 
-	<?php endwhile; ?>
-</div>
 
-<?php
-	// Decorate the event blocks with tool-tips.
-	include(RPBCALENDAR_ABSPATH . 'templates/widgetprint/tooltips.php');
-?>
+/**
+ * Model for the setting form of the today events widget.
+ */
+class RPBCalendarModelWidgetEditToday extends RPBCalendarAbstractModelWidgetEdit
+{
+	public function __construct($instance, $wpWidget)
+	{
+		parent::__construct($instance, $wpWidget);
+		$this->loadTrait('WidgetToday', $this->instance);
+		$this->registerFields($this->getTodayWidgetFields());
+	}
+}

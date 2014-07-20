@@ -18,22 +18,38 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
-?>
 
-<div class="rpbcalendar-eventBlockList">
-	<?php while($model->fetchEvent()): ?>
 
-		<div class="rpbcalendar-eventBlock"
-			style="<?php echo htmlspecialchars($model->getEventBackgroundStyle()); ?>"
-			data-event-id="<?php echo htmlspecialchars($model->getEventID()); ?>"
-		>
-			<?php echo htmlspecialchars($model->getEventTitle()); ?>
-		</div>
+require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetprint.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/today.php');
 
-	<?php endwhile; ?>
-</div>
 
-<?php
-	// Decorate the event blocks with tool-tips.
-	include(RPBCALENDAR_ABSPATH . 'templates/widgetprint/tooltips.php');
-?>
+/**
+ * Model used to render the today events widget in the frontend.
+ */
+class RPBCalendarModelWidgetPrintToday extends RPBCalendarAbstractModelWidgetPrint
+{
+	public function __construct($instance, $theme)
+	{
+		parent::__construct($instance, $theme);
+		$this->loadTrait('WidgetToday', $this->instance);
+		$this->registerFields($this->getTodayWidgetFields());
+
+		// Additional traits
+		$this->loadTrait('AjaxURLs');
+
+		// Load the events.
+		$today = date('Y-m-d', RPBCalendarHelperToday::timestamp());
+		$where = array(
+			'time_frame_begin' => $today,
+			'time_frame_end'   => $today
+		);
+		$this->loadTrait('EventQuery', $where);
+	}
+
+
+	protected function computeIsWidgetHidden()
+	{
+		return !$this->haveEvent();
+	}
+}

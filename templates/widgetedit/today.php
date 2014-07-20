@@ -20,20 +20,11 @@
  ******************************************************************************/
 ?>
 
-<div class="rpbcalendar-eventBlockList">
-	<?php while($model->fetchEvent()): ?>
-
-		<div class="rpbcalendar-eventBlock"
-			style="<?php echo htmlspecialchars($model->getEventBackgroundStyle()); ?>"
-			data-event-id="<?php echo htmlspecialchars($model->getEventID()); ?>"
-		>
-			<?php echo htmlspecialchars($model->getEventTitle()); ?>
-		</div>
-
-	<?php endwhile; ?>
-</div>
-
-<?php
-	// Decorate the event blocks with tool-tips.
-	include(RPBCALENDAR_ABSPATH . 'templates/widgetprint/tooltips.php');
-?>
+<p>
+	<label for="<?php echo htmlspecialchars($model->getTitleFieldID()); ?>"><?php _e('Title:', 'rpbcalendar'); ?></label>
+	<input type="text" class="widefat"
+		id="<?php echo htmlspecialchars($model->getTitleFieldID()); ?>"
+		name="<?php echo htmlspecialchars($model->getTitleFieldName()); ?>"
+		value="<?php echo htmlspecialchars($model->getTitle()); ?>"
+	/>
+</p>

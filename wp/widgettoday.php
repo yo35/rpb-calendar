@@ -18,22 +18,66 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
-?>
 
-<div class="rpbcalendar-eventBlockList">
-	<?php while($model->fetchEvent()): ?>
 
-		<div class="rpbcalendar-eventBlock"
-			style="<?php echo htmlspecialchars($model->getEventBackgroundStyle()); ?>"
-			data-event-id="<?php echo htmlspecialchars($model->getEventID()); ?>"
-		>
-			<?php echo htmlspecialchars($model->getEventTitle()); ?>
-		</div>
+require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
 
-	<?php endwhile; ?>
-</div>
 
-<?php
-	// Decorate the event blocks with tool-tips.
-	include(RPBCALENDAR_ABSPATH . 'templates/widgetprint/tooltips.php');
-?>
+/**
+ * Widget presenting the events of the current day.
+ */
+class RPBCalendarWidgetToday extends WP_Widget
+{
+	/**
+	 * Register the widget class (should be called only once).
+	 */
+	public static function register()
+	{
+		register_widget(__CLASS__);
+	}
+
+
+	/**
+	 * Constructor.
+	 */
+	public function __construct()
+	{
+		parent::__construct(
+			'rpbcalendar-today-events',
+			__('Today\'s events', 'rpbcalendar'),
+			array('description' => __('A list of the current day events.', 'rpbcalendar'))
+		);
+	}
+
+
+	/**
+	 * Render the widget in the frontend.
+	 */
+	public function widget($theme, $instance)
+	{
+		$model = RPBCalendarHelperLoader::loadModel('WidgetPrintToday', $instance, $theme);
+		$view = RPBCalendarHelperLoader::loadView($model);
+		$view->display();
+	}
+
+
+	/**
+	 * Update the parameters of a widget instance.
+	 */
+	public function update($newInstance, $oldInstance)
+	{
+		$model = RPBCalendarHelperLoader::loadModel('WidgetUpdateToday', $newInstance, $oldInstance);
+		return $model->getValidatedInstance();
+	}
+
+
+	/**
+	 * Generate the configuration form in the backend interface.
+	 */
+	public function form($instance)
+	{
+		$model = RPBCalendarHelperLoader::loadModel('WidgetEditToday', $instance, $this);
+		$view = RPBCalendarHelperLoader::loadView($model);
+		$view->display();
+	}
+}
