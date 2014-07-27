@@ -20,8 +20,16 @@
  ******************************************************************************/
 ?>
 
-<div class="rpbcalendar-eventBlockList">
-	<?php while($model->fetchEvent()): ?>
+<dl>
+	<?php
+		$eventFetched = $model->fetchEvent();
+		while($eventFetched):
+	?>
+
+		<?php if($model->needToOpenNextEventSection()): ?>
+			<dt class="rpbcalendar-eventSectionTitle"><?php echo htmlspecialchars($model->getEventSectionTitle()); ?></dd>
+			<dd class="rpbcalendar-eventBlockList">
+		<?php endif; ?>
 
 		<div class="rpbcalendar-eventBlock"
 			style="<?php echo htmlspecialchars($model->getEventBackgroundStyle()); ?>"
@@ -30,8 +38,14 @@
 			<?php echo htmlspecialchars($model->getEventTitle()); ?>
 		</div>
 
+		<?php $eventFetched = $model->fetchEvent(); ?>
+
+		<?php if($model->needToClosePreviousEventSection()): ?>
+			</dd>
+		<?php endif; ?>
+
 	<?php endwhile; ?>
-</div>
+</dl>
 
 <?php
 	// Decorate the event blocks with tool-tips.

@@ -29,6 +29,10 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/today.php');
  */
 class RPBCalendarModelWidgetPrintUpcoming extends RPBCalendarAbstractModelWidgetPrint
 {
+	private $previousEventDateBegin;
+	private $previousEventDateEnd;
+
+
 	public function __construct($instance, $theme)
 	{
 		parent::__construct($instance, $theme);
@@ -50,6 +54,63 @@ class RPBCalendarModelWidgetPrintUpcoming extends RPBCalendarAbstractModelWidget
 	protected function computeIsWidgetHidden()
 	{
 		return !$this->haveEvent();
+	}
+
+
+	public function fetchEvent()
+	{
+		if($this->getEventID() > 0) {
+			$this->previousEventDateBegin = $this->getEventDateBegin();
+			$this->previousEventDateEnd   = $this->getEventDateEnd  ();
+		}
+		return parent::fetchEvent();
+	}
+
+
+	/**
+	 * Whether the previous event was the last of its event section (= group of events having the same begin and end dates).
+	 *
+	 * @return boolean
+	 */
+	public function needToClosePreviousEventSection()
+	{
+		// There is no event section to close if no event was loaded before the last call to `fetch()`.
+		if($this->previousEventDateBegin===null || $this->previousEventDateEnd===null) {
+			return false;
+		}
+
+		// Close the section is there is no further event or if the next event has not the same begin and end dates.
+		return !($this->getEventID() > 0 && $this->previousEventDateBegin===$this->getEventDateBegin() &&
+			$this->previousEventDateEnd===$this->getEventDateEnd());
+	}
+
+
+	/**
+	 * Whether the current event is the first of its event section (= group of events having the same begin and end dates).
+	 *
+	 * @return boolean
+	 */
+	public function needToOpenNextEventSection()
+	{
+		// Always open a new section if no event was loaded before the last call to `fetch()`.
+		if($this->previousEventDateBegin===null || $this->previousEventDateEnd===null) {
+			return true;
+		}
+
+		// Open a new section if the previous event has not the same begin and end dates.
+		return $this->getEventID() > 0 && !($this->previousEventDateBegin===$this->getEventDateBegin() &&
+			$this->previousEventDateEnd===$this->getEventDateEnd());
+	}
+
+
+	/**
+	 * Title of the current event section.
+	 *
+	 * @return string
+	 */
+	public function getEventSectionTitle()
+	{
+		return 'Event section'; // TODO: compose title with the begin/end dates
 	}
 
 
