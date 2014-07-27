@@ -48,7 +48,8 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 			'post_status' => 'publish',
 			'nopaging'    => true
 		);
-		$metaQuery = array();
+		$dateBeginSubQuery = array('key' => 'rpbevent_date_begin');
+		$dateEndSubQuery   = array('key' => 'rpbevent_date_end'  );
 
 		// Filter: only the event corresponding to the given ID.
 		if(isset($where['id'])) {
@@ -56,29 +57,35 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 		}
 
 		// Filter: only the events within a given time frame.
-		if(isset($where['time_frame_begin'])) {
-			$metaQuery[] = array(
-				'key'     => 'rpbevent_date_end',
-				'value'   => $where['time_frame_begin'],
-				'compare' => '>='
-			);
-		}
 		if(isset($where['time_frame_end'])) {
-			$metaQuery[] = array(
-				'key'     => 'rpbevent_date_begin',
-				'value'   => $where['time_frame_end'],
-				'compare' => '<='
-			);
+			$dateBeginSubQuery['value'  ] = $where['time_frame_end'];
+			$dateBeginSubQuery['compare'] = '<=';
+		}
+		if(isset($where['time_frame_begin'])) {
+			$dateEndSubQuery['value'  ] = $where['time_frame_begin'];
+			$dateEndSubQuery['compare'] = '>=';
 		}
 
 		// Create the WP_Query object.
-		if(!empty($metaQuery)) {
-			$args['meta_query'] = $metaQuery;
-		}
+		add_filter('posts_orderby', array(__CLASS__, 'customOrderBy'));
+		$args['meta_query'] = array($dateBeginSubQuery, $dateEndSubQuery);
 		$this->query = new WP_Query($args);
+		remove_filter('posts_orderby', array(__CLASS__, 'customOrderBy'));
 
 		// At least one event founded?
 		$this->atLeastOneEvent = $this->query->have_posts();
+	}
+
+
+	/**
+	 * Return the ORDER BY clause to use for the query.
+	 *
+	 *  @return string
+	 */
+	public static function customOrderBy()
+	{
+		global $wpdb;
+		return "$wpdb->postmeta.meta_value ASC, mt1.meta_value DESC, $wpdb->posts.post_title ASC";
 	}
 
 
