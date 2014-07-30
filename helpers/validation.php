@@ -151,19 +151,4 @@ abstract class RPBCalendarHelperValidation
 	{
 		return ($value===null || $value==='') ? null : filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
 	}
-
-
-	/**
-	 * Validate a boolean specified as an integer value.
-	 *
-	 * @param mixed $value
-	 * @return boolean May be null is the value is not valid.
-	 */
-	public static function validateBooleanFromInt($value)
-	{
-		$value = filter_var($value, FILTER_VALIDATE_INT);
-		if     ($value===0) return false;
-		else if($value===1) return true ;
-		else                return null ;
-	}
 }
