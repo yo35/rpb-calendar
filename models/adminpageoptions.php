@@ -29,13 +29,11 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
  */
 class RPBCalendarModelAdminPageOptions extends RPBCalendarAbstractModelAdminPage
 {
-	/**
-	 * Constructor.
-	 */
 	public function __construct()
 	{
 		parent::__construct();
 		$this->loadTrait('AdminPageURLs');
 		$this->loadTrait('DefaultColors');
+		$this->loadTrait('DefaultDateFormat');
 	}
 }

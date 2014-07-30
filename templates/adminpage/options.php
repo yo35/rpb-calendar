@@ -36,11 +36,7 @@
 		<tbody>
 
 			<tr valign="top">
-				<th scope="row">
-					<label for="rpbcalendar-defaultCategoryColorField"><?php
-						_e('Default category color', 'rpbcalendar');
-					?></label>
-				</th>
+				<th scope="row"><?php _e('Default category color', 'rpbcalendar'); ?></th>
 				<td>
 					<div id="rpbcalendar-defaultCategoryColorIris"></div>
 					<p class="description">
@@ -53,11 +49,7 @@
 			</tr>
 
 			<tr valign="top">
-				<th scope="row">
-					<label for="rpbcalendar-defaultEventColorField"><?php
-						_e('Default event color', 'rpbcalendar');
-					?></label>
-				</th>
+				<th scope="row"><?php _e('Default event color', 'rpbcalendar'); ?></th>
 				<td>
 					<div id="rpbcalendar-defaultEventColorIris"></div>
 					<p class="description">
@@ -65,6 +57,26 @@
 							_e('The default event color is used to display the events that do not belong to any category.',
 								'rpbcalendar');
 						?>
+					</p>
+				</td>
+			</tr>
+
+			<tr valign="top">
+				<th scope="row"><?php _e('Date format in events', 'rpbcalendar'); ?></th>
+				<td>
+					<p>
+						<input type="hidden" name="defaultShowWeekDay" value="0" />
+						<input id="rpbcalendar-defaultShowWeekDayField" type="checkbox" name="defaultShowWeekDay" value="1"
+							<?php if($model->getDefaultShowWeekDay()): ?>checked="yes"<?php endif; ?>
+						/>
+						<label for="rpbcalendar-defaultShowWeekDayField"><?php _e('Show weekday', 'rpbcalendar'); ?></label>
+					</p>
+					<p>
+						<input type="hidden" name="defaultShowYear" value="0" />
+						<input id="rpbcalendar-defaultShowYearField" type="checkbox" name="defaultShowYear" value="1"
+							<?php if($model->getDefaultShowYear()): ?>checked="yes"<?php endif; ?>
+						/>
+						<label for="rpbcalendar-defaultShowYearField"><?php _e('Show year', 'rpbcalendar'); ?></label>
 					</p>
 				</td>
 			</tr>

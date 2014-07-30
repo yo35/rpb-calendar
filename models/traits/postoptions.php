@@ -31,6 +31,8 @@ class RPBCalendarTraitPostOptions extends RPBCalendarAbstractTrait
 {
 	private $defaultCategoryColor;
 	private $defaultEventColor;
+	private $defaultShowWeekDay;
+	private $defaultShowYear;
 
 
 	/**
@@ -44,6 +46,14 @@ class RPBCalendarTraitPostOptions extends RPBCalendarAbstractTrait
 		}
 		if(isset($_POST['defaultEventColor'])) {
 			$this->defaultEventColor = RPBCalendarHelperValidation::validateColor($_POST['defaultEventColor']);
+		}
+
+		// Load the date format options.
+		if(isset($_POST['defaultShowWeekDay'])) {
+			$this->defaultShowWeekDay = RPBCalendarHelperValidation::validateBoolean($_POST['defaultShowWeekDay']);
+		}
+		if(isset($_POST['defaultShowYear'])) {
+			$this->defaultShowYear = RPBCalendarHelperValidation::validateBoolean($_POST['defaultShowYear']);
 		}
 	}
 
@@ -61,6 +71,14 @@ class RPBCalendarTraitPostOptions extends RPBCalendarAbstractTrait
 		}
 		if(isset($this->defaultEventColor)) {
 			update_option('rpbcalendar_defaultEventColor', $this->defaultEventColor);
+		}
+
+		// Update the date format options.
+		if(isset($this->defaultShowWeekDay)) {
+			update_option('rpbcalendar_defaultShowWeekDay', $this->defaultShowWeekDay ? 1 : 0);
+		}
+		if(isset($this->defaultShowYear)) {
+			update_option('rpbcalendar_defaultShowYear', $this->defaultShowYear ? 1 : 0);
 		}
 
 		// Notify the user.
