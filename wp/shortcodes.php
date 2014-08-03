@@ -18,20 +18,40 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
-?>
 
-<div id="<?php echo htmlspecialchars($model->getUniqueID()); ?>" class="rpbcalendar-calendar"></div>
 
-<script type="text/javascript">
+/**
+ * Register the plugin shortcodes.
+ *
+ * This class is not constructible. Call the static method `register()`
+ * to trigger the registration operations.
+ */
+abstract class RPBCalendarShortcodes
+{
+	/**
+	 * Register the plugin shortcodes. Must be called only once.
+	 */
+	public static function register()
+	{
+		add_shortcode('rpbcalendar', array(__CLASS__, 'callbackShortcodeCalendar'));
+	}
 
-	jQuery(document).ready(function($) {
 
-		$('#' + <?php echo json_encode($model->getUniqueID()); ?>).fullCalendar({
-			header: { left: 'title', center: '', right: 'today prevYear,prev,next,nextYear' },
-			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
-			events: '<?php echo RPBCALENDAR_URL.'/ajax/fetchevents.php'; ?>'
-		});
+	public static function callbackShortcodeCalendar($atts, $content) { return self::runShortcode('Calendar', $atts, $content); }
 
-	});
 
-</script>
+	/**
+	 * Process a shortcode.
+	 *
+	 * @param string $shortcodeName
+	 * @param array $atts
+	 * @param string $content
+	 * @return string
+	 */
+	private static function runShortcode($shortcodeName, $atts, $content)
+	{
+		require_once(RPBCALENDAR_ABSPATH . 'controllers/shortcode.php');
+		$controller = new RPBCalendarControllerShortcode($shortcodeName, $atts, $content);
+		return $controller->run();
+	}
+}

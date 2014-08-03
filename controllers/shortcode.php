@@ -21,48 +21,33 @@
 
 
 require_once(RPBCALENDAR_ABSPATH . 'controllers/abstractcontroller.php');
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
 
 
 /**
- * Set-up the frontend shortcodes.
+ * Execute the requested shortcode.
  */
-class RPBCalendarControllerShortcodes extends RPBCalendarAbstractController
+class RPBCalendarControllerShortcode extends RPBCalendarAbstractController
 {
-	public function __construct()
+	/**
+	 * Constructor
+	 *
+	 * @param string $shortcodeName Name of the shortcode.
+	 * @param array $atts
+	 * @param string $content
+	 */
+	public function __construct($shortcodeName, $atts, $content)
 	{
-		parent::__construct(null);
+		parent::__construct('Shortcode' . $shortcodeName, $atts, $content);
 	}
 
 
+	/**
+	 * Entry-point of the controller.
+	 */
 	public function run()
 	{
-		// Register the shortcodes
-		add_shortcode('rpbcalendar', array(__CLASS__, 'runShortcodeCalendar'));
-	}
-
-
-	/**
-	 * Callback for the [rpbcalendar] shortcode.
-	 */
-	public static function runShortcodeCalendar($atts)
-	{
-		return self::runShortcode('ShortcodeCalendar', $atts, '');
-	}
-
-
-	/**
-	 * Generic callback for the shortcodes.
-	 */
-	private static function runShortcode($modelName, $atts, $content)
-	{
-		// Load the model and the view
-		$model = RPBCalendarHelperLoader::loadModel($modelName, $atts, $content);
-		$view  = RPBCalendarHelperLoader::loadView($model);
-
-		// Display the view
 		ob_start();
-		$view->display();
+		$this->getView()->display();
 		return ob_get_clean();
 	}
 }

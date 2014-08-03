@@ -122,9 +122,8 @@ if(!is_admin()) {
 	add_action('init', 'rpbcalendar_init_shortcodes');
 	function rpbcalendar_init_shortcodes()
 	{
-		require_once(RPBCALENDAR_ABSPATH . 'controllers/shortcodes.php');
-		$controller = new RPBCalendarControllerShortcodes();
-		return $controller->run();
+		require_once(RPBCALENDAR_ABSPATH . 'wp/shortcodes.php');
+		RPBCalendarShortcodes::register();
 	}
 }
 
