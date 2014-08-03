@@ -21,7 +21,7 @@
 
 
 require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetprint.php');
-require_once(RPBCALENDAR_ABSPATH . 'helpers/today.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/date.php');
 
 
 /**
@@ -39,7 +39,7 @@ class RPBCalendarModelWidgetPrintToday extends RPBCalendarAbstractModelWidgetPri
 		$this->loadTrait('AjaxURLs');
 
 		// Load the events.
-		$today = date('Y-m-d', RPBCalendarHelperToday::timestamp());
+		$today = date('Y-m-d', RPBCalendarHelperDate::today());
 		$where = array(
 			'time_frame_begin' => $today,
 			'time_frame_end'   => $today

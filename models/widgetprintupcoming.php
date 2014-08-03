@@ -21,7 +21,7 @@
 
 
 require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetprint.php');
-require_once(RPBCALENDAR_ABSPATH . 'helpers/today.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/date.php');
 
 
 /**
@@ -133,7 +133,7 @@ class RPBCalendarModelWidgetPrintUpcoming extends RPBCalendarAbstractModelWidget
 	 */
 	private function getTimeFrameBegin()
 	{
-		$t = RPBCalendarHelperToday::timestamp();
+		$t = RPBCalendarHelperDate::today();
 		if(!$this->getWithToday()) {
 			$t += 86400; // 86400 = 24*60*60 = number of seconds in a day.
 		}
@@ -148,7 +148,7 @@ class RPBCalendarModelWidgetPrintUpcoming extends RPBCalendarAbstractModelWidget
 	 */
 	private function getTimeFrameEnd()
 	{
-		$t = RPBCalendarHelperToday::timestamp();
+		$t = RPBCalendarHelperDate::today();
 		$t += $this->getTimeFrame() * 86400; // 86400 = 24*60*60 = number of seconds in a day.
 		return date('Y-m-d', $t);
 	}

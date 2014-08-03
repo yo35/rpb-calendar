@@ -20,13 +20,10 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
-
-
 /**
- * Information about the current day.
+ * Date manipulation utilities
  */
-abstract class RPBCalendarHelperToday
+abstract class RPBCalendarHelperDate
 {
 	private static $today;
 
@@ -36,10 +33,10 @@ abstract class RPBCalendarHelperToday
 	 *
 	 * @return int
 	 */
-	public static function timestamp()
+	public static function today()
 	{
 		if(!isset(self::$today)) {
-			self::$today = RPBCalendarHelperValidation::validateDate(time());
+			self::$today = floor(time() / 86400) * 86400;
 		}
 		return self::$today;
 	}

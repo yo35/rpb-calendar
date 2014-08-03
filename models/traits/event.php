@@ -22,7 +22,7 @@
 
 require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
-require_once(RPBCALENDAR_ABSPATH . 'helpers/today.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/date.php');
 require_once(RPBCALENDAR_ABSPATH . 'helpers/color.php');
 
 
@@ -264,7 +264,7 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 		$this->ensureEventLoaded();
 		if(!isset($this->event->dateBegin)) {
 			$value = RPBCalendarHelperValidation::validateDate(get_post_meta($this->eventID, 'rpbevent_date_begin', true));
-			$this->event->dateBegin = isset($value) ? $value : RPBCalendarHelperToday::timestamp();
+			$this->event->dateBegin = isset($value) ? $value : RPBCalendarHelperDate::today();
 		}
 		return $this->event->dateBegin;
 	}
