@@ -290,23 +290,42 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	/**
 	 * Return the begin date of the currently selected event formatted as a string.
 	 *
-	 * @param string $format Date format pattern, as specified by the WP `date_i18n()` function.
+	 * @param string $format Date format pattern, as specified by the WP `date_i18n()` function, or `'text'`.
 	 * @return string
 	 */
 	public function getEventDateBeginAsString($format = 'Y-m-d')
 	{
-		return date_i18n($format, $this->getEventDateBegin());
+		return self::formatEventDate($format, $this->getEventDateBegin());
 	}
 
 
 	/**
 	 * Return the end date of the currently selected event formatted as a string.
 	 *
-	 * @param string $format Date format pattern, as specified by the WP `date_i18n()` function.
+	 * @param string $format Date format pattern, as specified by the WP `date_i18n()` function, or `'text'`.
 	 * @return string
 	 */
 	public function getEventDateEndAsString($format = 'Y-m-d')
 	{
-		return date_i18n($format, $this->getEventDateEnd());
+		return self::formatEventDate($format, $this->getEventDateEnd());
+	}
+
+
+	/**
+	 * Date to text conversion function.
+	 *
+	 * @param string $format Date format pattern, as specified by the WP `date_i18n()` function, or `'text'`.
+	 * @param int $date Timestamp
+	 * @return string
+	 */
+	private static function formatEventDate($format, $date) {
+		if($format === 'text') {
+			$trait = RPBCalendarHelperLoader::loadTrait('DefaultDateFormat');
+			return RPBCalendarHelperDate::format($date, $trait->getDefaultShowWeekDay(), $trait->getDefaultShowYear());
+			// TODO: force show year if the event last more than 1 year.
+		}
+		else {
+			return date_i18n($format, $date);
+		}
 	}
 }

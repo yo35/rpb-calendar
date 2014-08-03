@@ -53,6 +53,8 @@ $eventData = array(
 	'title'       => htmlspecialchars($model->getEventTitle()),
 	'author'      => htmlspecialchars($model->getEventAuthor()),
 	'releaseDate' => htmlspecialchars($model->getEventReleaseDate()),
+	'beginDate'   => htmlspecialchars($model->getEventDateBeginAsString('text')),
+	'endDate'     => $model->getEventDateBegin()===$model->getEventDateEnd() ? '' : htmlspecialchars($model->getEventDateEndAsString('text')),
 	'categories'  => $categories,
 	'link'        => htmlspecialchars($model->getEventLink()),
 	'content'     => $model->getEventContent()
