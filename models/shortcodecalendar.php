@@ -32,6 +32,13 @@ class RPBCalendarModelShortcodeCalendar extends RPBCalendarAbstractModelShortcod
 	private $startOfWeek;
 
 
+	public function __construct($atts, $content)
+	{
+		parent::__construct($atts, $content);
+		$this->loadTrait('AjaxURLs');
+	}
+
+
 	/**
 	 * Day on which the week is assumed to starts.
 	 *

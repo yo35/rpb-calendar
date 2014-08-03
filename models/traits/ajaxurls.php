@@ -28,7 +28,22 @@ require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
  */
 class RPBCalendarTraitAjaxURLs extends RPBCalendarAbstractTrait
 {
+	private static $fetchEventsURL;
 	private static $fetchEventDataURL;
+
+
+	/**
+	 * URL to the fetch-events page.
+	 *
+	 * @return string
+	 */
+	public function getFetchEventsURL()
+	{
+		if(!isset(self::$fetchEventsURL)) {
+			return self::$fetchEventsURL = RPBCALENDAR_URL . '/ajax/fetchevents.php';
+		}
+		return self::$fetchEventsURL;
+	}
 
 
 	/**
