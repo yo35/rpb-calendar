@@ -112,17 +112,7 @@ class RPBCalendarModelWidgetPrintUpcoming extends RPBCalendarAbstractModelWidget
 	{
 		$dateBegin = $this->getEventDateBegin();
 		$dateEnd   = $this->getEventDateEnd  ();
-
-		// The begin and end dates are the same.
-		if($dateBegin===$dateEnd) {
-			return date_i18n(__('F j, Y'), $dateBegin);
-		}
-
-		// They are different...
-		else {
-			return sprintf(__('From %1$s to %2$s', 'rpbcalendar'), date_i18n(__('F j, Y'), $dateBegin), date_i18n(__('F j, Y'), $dateEnd));
-			// TODO: improve date range rendering
-		}
+		return RPBCalendarHelperDate::formatRange($dateBegin, $dateEnd);
 	}
 
 
