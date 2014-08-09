@@ -65,7 +65,7 @@ function rpbcalendar_enqueue_scripts()
 
 	// FullCalendar
 	$dependencies = array('jquery-ui-widget');
-	wp_register_script('rpbcalendar-fullcalendar', RPBCALENDAR_URL.'/fullcalendar/fullcalendar.min.js', $dependencies);
+	wp_register_script('rpbcalendar-fullcalendar', RPBCALENDAR_URL.'/third-party-libs/fullcalendar/fullcalendar.min.js', $dependencies);
 	wp_enqueue_script('rpbcalendar-fullcalendar');
 
 	// Additional scripts for the backend.
@@ -89,7 +89,7 @@ function rpbcalendar_enqueue_css()
 	wp_enqueue_style('rpbcalendar-qtip2');
 
 	// FullCalendar
-	wp_register_style('rpbcalendar-fullcalendar', RPBCALENDAR_URL.'/fullcalendar/fullcalendar.css');
+	wp_register_style('rpbcalendar-fullcalendar', RPBCALENDAR_URL.'/third-party-libs/fullcalendar/fullcalendar.css');
 	wp_enqueue_style('rpbcalendar-fullcalendar');
 
 	// Main CSS.
