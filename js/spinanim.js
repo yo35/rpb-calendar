@@ -173,8 +173,8 @@
 			var sz = this.containerSize();
 			var tx = r*Math.cos(angle) - w/2 + sz/2;
 			var ty = r*Math.sin(angle) - h/2 + sz/2;
-			return 'position:absolute; background-color:black; ' + cssSize(w,h) + ' ' + cssTranslateRotate(tx,ty,angle)
-				+ ' ' + cssBorderRadius(h/2);
+			return 'position:absolute; background-color:black; ' + cssSize(w,h) + ' ' + cssTranslateRotate(tx,ty,angle) +
+				' ' + cssBorderRadius(h/2);
 		},
 
 

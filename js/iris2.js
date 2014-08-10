@@ -79,7 +79,7 @@
 	 */
 	function filterColor(color)
 	{
-		return (color=='' || /^#[0-9a-fA-F]{6}$/.test(color)) ? color : DEFAULT_COLOR;
+		return (color==='' || /^#[0-9a-fA-F]{6}$/.test(color)) ? color : DEFAULT_COLOR;
 	}
 
 
@@ -147,7 +147,7 @@
 		{
 			if(key=='color') {
 				var newColor = filterColor(value);
-				if(newColor=='') {
+				if(newColor==='') {
 					this.selectNone();
 				}
 				else {
@@ -203,18 +203,18 @@
 		_refresh: function()
 		{
 			// CSS class to use for the buttons.
-			var buttonStyle = this.options.buttonClass=='' ? '' : (' ' + this.options.buttonClass);
+			var buttonStyle = this.options.buttonClass==='' ? '' : (' ' + this.options.buttonClass);
 
 			// Build the content skeleton.
 			var content = '<div class="uicalendar-iris2-hBox"><div class="uicalendar-iris2-vBox">';
 			content += '<div class="uicalendar-iris2-preview iris-border"></div>';
 			if(this.options.randomButton) {
-				content += '<button class="uicalendar-iris2-randomButton' + buttonStyle + '" title="' + $.iris2.RANDOM_BUTTON_POPUP + '">'
-					+ $.iris2.RANDOM_BUTTON_LABEL + '</button>';
+				content += '<button class="uicalendar-iris2-randomButton' + buttonStyle + '" title="' + $.iris2.RANDOM_BUTTON_POPUP + '">' +
+					$.iris2.RANDOM_BUTTON_LABEL + '</button>';
 			}
 			if(this.options.clearButton) {
-				content += '<button class="uicalendar-iris2-clearButton' + buttonStyle + '" title="' + $.iris2.CLEAR_BUTTON_POPUP + '">'
-					+ $.iris2.CLEAR_BUTTON_LABEL + '</button>';
+				content += '<button class="uicalendar-iris2-clearButton' + buttonStyle + '" title="' + $.iris2.CLEAR_BUTTON_POPUP + '">' +
+					$.iris2.CLEAR_BUTTON_LABEL + '</button>';
 			}
 			content += '</div><div class="uicalendar-iris2-colorPicker"></div></div>';
 
@@ -227,7 +227,7 @@
 
 			// Set-up the color-picker sub-widget.
 			$('.uicalendar-iris2-colorPicker', this.element).iris({
-				color: this.options.color=='' ? DEFAULT_COLOR : this.options.color,
+				color: this.options.color==='' ? DEFAULT_COLOR : this.options.color,
 				hide: false,
 				palettes: true,
 				change: function(event, ui) {
@@ -247,7 +247,7 @@
 			}
 
 			// Initialize the state of the preview node.
-			if(this.options.color=='') {
+			if(this.options.color==='') {
 				preview.addClass('uicalendar-iris2-transparent').css('background-color', 'transparent');
 			}
 			else {
