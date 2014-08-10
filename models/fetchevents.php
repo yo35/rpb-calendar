@@ -29,113 +29,52 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
  */
 class RPBCalendarModelFetchEvents extends RPBCalendarAbstractModel
 {
-	private $fetchIntervalBegin;
-	private $fetchIntervalEnd  ;
-	private $query;
+	private $queryValid;
 
 
-	public function __construct()
+	/**
+	 * The width of the time frame cannot exceed the number of days defined by this constant.
+	 */
+	const MAXIMUM_NUMBER_OF_DAYS = 366;
+
+
+	/**
+	 * Whether the parameters passed to the query are valid or not.
+	 *
+	 * @return boolean
+	 */
+	public function isQueryValid()
 	{
-		parent::__construct();
-		$this->loadTrait('Event');
+		$this->ensureQueryInitialized();
+		return $this->queryValid;
 	}
 
 
 	/**
-	 * First day of the interval from which the events are fetched.
-	 *
-	 * @return int Timestamp, or null if the parameter is undefined or invalid.
+	 * Initialize the fetch event query.
 	 */
-	public function getFetchIntervalBegin()
+	private function ensureQueryInitialized()
 	{
-		if(!isset($this->fetchIntervalBegin)) {
-			$this->fetchIntervalBegin = isset($_GET['start']) ? RPBCalendarHelperValidation::validateDate($_GET['start']) : null;
+		if(isset($this->queryValid)) {
+			return;
 		}
-		return $this->fetchIntervalBegin;
-	}
+		$this->queryValid = false;
 
-
-	/**
-	 * Last day of the interval from which the events are fetched.
-	 *
-	 * @return int Timestamp, or null if the parameter is undefined or invalid.
-	 */
-	public function getFetchIntervalEnd()
-	{
-		if(!isset($this->fetchIntervalEnd)) {
-			$this->fetchIntervalEnd = isset($_GET['end']) ? RPBCalendarHelperValidation::validateDate($_GET['end']) : null;
+		// Retrieve the GET parameters that define the start/end of the time frame from which events must be fetched.
+		if(!isset($_GET['start']) || !$_GET['end']) {
+			return;
 		}
-		return $this->fetchIntervalEnd;
-	}
-
-
-	/**
-	 * First day of the fetch interval, formatted as a string.
-	 *
-	 * @return string Null if the parameter is undefined or invalid.
-	 */
-	public function getFetchIntervalBeginAsString()
-	{
-		$value = $this->getFetchIntervalBegin();
-		return is_null($value) ? null : date('Y-m-d', $value);
-	}
-
-
-	/**
-	 * Last day of the fetch interval, formatted as a string.
-	 *
-	 * @return string Null if the parameter is undefined or invalid.
-	 */
-	public function getFetchIntervalEndAsString()
-	{
-		$value = $this->getFetchIntervalEnd();
-		return is_null($value) ? null : date('Y-m-d', $value);
-	}
-
-
-	/**
-	 * Title of the currently selected event.
-	 *
-	 * @return string
-	 */
-	public function getEventTitle()
-	{
-		return get_the_title();
-	}
-
-
-	/**
-	 * Try to fetch the next event retrieved by the query.
-	 */
-	public function fetchNextEvent()
-	{
-		$this->ensureQueryExecuted();
-
-		// Return false if there is no more events.
-		if(!$this->query->have_posts()) {
-			return false;
-		}
-
-		// Otherwise, fetch the next event, set its ID, and return true.
-		$this->query->the_post();
-		$this->setEventID(get_the_ID());
-		return true;
-	}
-
-
-	/**
-	 * Define and execute the fetch query if not done yet.
-	 */
-	private function ensureQueryExecuted()
-	{
-		// Nothing to do if the query has already been defined and executed.
-		if(isset($this->query)) {
+		$timeFrameBegin = RPBCalendarHelperValidation::validateDate($_GET['start']);
+		$timeFrameEnd   = RPBCalendarHelperValidation::validateDate($_GET['end'  ]);
+		if($timeFrameBegin===null || $timeFrameEnd===null || $timeFrameEnd-$timeFrameBegin > 86400*self::MAXIMUM_NUMBER_OF_DAYS) {
 			return;
 		}
 
-		// Set-up the query.
-		$this->query = new WP_Query(array(
-			'post_type' => 'rpbevent'
+		// Fetch the requested events.
+		$this->loadTrait('EventQuery', array(
+			'time_frame_begin' => date('Y-m-d', $timeFrameBegin),
+			'time_frame_end'   => date('Y-m-d', $timeFrameEnd  )
 		));
+		$this->queryValid = true;
 	}
 }

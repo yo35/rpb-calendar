@@ -28,8 +28,8 @@ require_once(dirname(__FILE__) . '/bootstrap.php');
 $model = RPBCalendarHelperLoader::loadModel('FetchEvents');
 
 
-// Begin/end dates.
-if($model->getFetchIntervalBegin()===null || $model->getFetchIntervalEnd()===null) {
+// Check the input parameters.
+if(!$model->isQueryValid()) {
 	returnJSON(array(
 		'error'   => true,
 		'message' => 'Missing or invalid start date and/or end date.'
@@ -39,7 +39,7 @@ if($model->getFetchIntervalBegin()===null || $model->getFetchIntervalEnd()===nul
 
 // Retrieve the events.
 $events = array();
-while($model->fetchNextEvent())
+while($model->fetchEvent())
 {
 	$events[] = array(
 		'title' => $model->getEventTitle(),
