@@ -32,6 +32,6 @@
 </div>
 
 <?php
-	// Decorate the event blocks with tool-tips.
+	// Decorate the event blocks with tooltips.
 	include(RPBCALENDAR_ABSPATH . 'templates/widgetprint/tooltips.php');
 ?>
