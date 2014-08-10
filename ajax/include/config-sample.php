@@ -21,40 +21,24 @@
 
 
 /**
- * Bootstrap the WP engine and provide the `returnJSON()` function that must be used
- * to return the answer to an AJAX request.
+ * Special settings for the AJAX API of the RPB Calendar plugin.
+ *
+ * The AJAX API of the RPB Calendar plugin is designed to work "out-of-the-box"
+ * in standard configurations. Therefore, in most situations, the file
+ * `rpb-calendar/ajax/include/config.php` MUST NOT exist. Do not create it unless you
+ * are sure of you do.
  */
-
-
-// Find the root directory of the WP engine.
-define('RPBCALENDAR_AJAX_DIRECTORY', dirname(__FILE__));
-if(file_exists(RPBCALENDAR_AJAX_DIRECTORY . '/config.php')) {
-	require_once(RPBCALENDAR_AJAX_DIRECTORY . '/config.php'); // May provide an alternative definition of the constant RPBCALENDAR_WP_DIRECTORY.
-}
-if(!defined('RPBCALENDAR_WP_DIRECTORY')) {
-	define('RPBCALENDAR_WP_DIRECTORY', dirname(dirname(dirname(dirname(RPBCALENDAR_AJAX_DIRECTORY)))));
-}
-
-
-// Load the WP engine.
-define('WP_USE_THEMES', false);
-require_once(RPBCALENDAR_WP_DIRECTORY . '/wp-load.php');
-
-
-// Loader helper.
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
 
 
 /**
- * Echo the answer to the AJAX request in a JSON format and terminate the PHP script.
+ * Path to the root directory of the WordPress engine.
  *
- * This function does not return.
+ * The constant `RPBCALENDAR_WP_DIRECTORY` must be set such that
+ * `RPBCALENDAR_WP_DIRECTORY . '/wp-load.php'` is a valid path to the PHP file
+ * in charge of loading the WP engine (i.e. `wp-load.php` in the root directory
+ * of your WordPress blog).
  *
- * @param array $data Answer to the AJAX request.
+ * By default, this constant is defined in the file `rpb-calendar/ajax/include/bootstrap.php`
+ * as `dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))))`.
  */
-function returnJSON($data)
-{
-	header('Content-Type: application/json');
-	echo json_encode($data);
-	die;
-}
+define('RPBCALENDAR_WP_DIRECTORY', '/path/to/the/wpEngine');

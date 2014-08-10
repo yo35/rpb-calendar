@@ -21,7 +21,7 @@
 
 
 // Load the WP engine.
-require_once(dirname(__FILE__) . '/bootstrap.php');
+require_once(dirname(__FILE__) . '/include/bootstrap.php');
 
 
 // Load the model.
