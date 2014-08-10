@@ -32,10 +32,22 @@
 			events: <?php echo json_encode($model->getFetchEventsURL()); ?>,
 
 			eventRender: function(event, element) {
+
+				if(event.link !== '') {
+					var content = element.contents();
+					var clazz   = element.attr('class');
+					element = $('<a target="_blank"></a>').attr('href', event.link).attr('class', clazz).append(content);
+				}
+
+				// Class and attributes
 				element.addClass('rpbcalendar-eventBlock');
 				element.data('eventId', event.ID);
 				element.attr('style', event.style);
+
+				// Set-up the tooltip
 				RPBCalendar.addEventTooltip(element);
+
+				// Return the element
 				return element;
 			}
 		});
