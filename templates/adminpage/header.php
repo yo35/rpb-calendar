@@ -22,21 +22,17 @@
 
 <h2><?php echo htmlspecialchars($model->getTitle()); ?></h2>
 
-<div id="rpbcalendar-admin-javascriptWarning" class="error">
-	<p><?php
-		_e('To work properly, the RPB Calendar plugin needs javascript to be activated in your browser.',
-			'rpbcalendar');
-	?></p>
-</div>
+<noscript>
+	<div class="error">
+		<p><?php
+			_e('To work properly, the RPB Calendar plugin needs JavaScript to be activated in your browser.',
+				'rpbcalendar');
+		?></p>
+	</div>
+</noscript>
 
-<?php if($model->getPostMessage()!=''): ?>
+<?php if($model->getPostMessage() !== ''): ?>
 	<div class="updated">
 		<p><?php echo htmlspecialchars($model->getPostMessage()); ?></p>
 	</div>
 <?php endif; ?>
-
-<script type="text/javascript">
-
-	jQuery('#rpbcalendar-admin-javascriptWarning').addClass('rpbcalendar-invisible');
-
-</script>
