@@ -50,7 +50,7 @@
 
 
 	<h3><?php _e('Author', 'rpbcalendar'); ?></h3>
-	<p>Yoann Le Montagner</p>
+	<p><a href="mailto:yo35@melix.net">Yoann Le Montagner</a></p>
 
 
 	<h3><?php _e('Translation', 'rpbcalendar'); ?></h3>
@@ -67,9 +67,10 @@
 	<p class="description">
 		<?php echo sprintf(
 			__(
-				'If you are interested in translating this plugin into your language, please contact the author %1$s.',
+				'If you are interested in translating this plugin into your language, please %1$scontact the author%2$s.',
 			'rpbcalendar'),
-			'Yoann Le Montagner <a href="mailto:yo35@melix.net">yo35@melix.net</a>');
+			'<a href="mailto:yo35@melix.net">',
+			'</a>');
 		?>
 	</p>
 
@@ -78,11 +79,22 @@
 	<p>
 		<?php echo sprintf(
 			__(
-				'This plugin is distributed under the GNU General Public License version 3 (GPLv3). '.
-				'The full text of this license is available at %1$s. A copy of this document '.
-				'is also provided with the plugin source code.',
+				'This plugin is distributed under the terms of the %1$sGNU General Public License version 3%3$s (GPLv3), '.
+				'as published by the %2$sFree Software Foundation%3$s. The full text of this license '.
+				'is available at %4$s. A copy of this document is also provided with the plugin source code.',
 			'rpbcalendar'),
-			'<a href="http://www.gnu.org/licenses/gpl-3.0.html" target="_blank">http://www.gnu.org/licenses/gpl-3.0.html</a>');
+			'<a href="http://www.gnu.org/licenses/gpl.html" target="_blank">',
+			'<a href="http://www.fsf.org/" target="_blank">',
+			'</a>',
+			'<a href="http://www.gnu.org/licenses/gpl.html" target="_blank">http://www.gnu.org/licenses/gpl.html</a>');
+		?>
+	</p>
+	<p>
+		<?php _e(
+			'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; '.
+			'without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. '.
+			'See the GNU General Public License for more details.',
+			'rpbcalendar');
 		?>
 	</p>
 
