@@ -27,10 +27,13 @@
 	jQuery(document).ready(function($) {
 
 		$('#' + <?php echo json_encode($model->getUniqueID()); ?>).fullCalendar({
-			header: { left: 'title', center: '', right: 'today prevYear,prev,next,nextYear' },
-			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
-			events: <?php echo json_encode($model->getFetchEventsURL()); ?>,
 
+			// General calendar options
+			header: { left: 'title', center: '', right: ' today prevYear,prev,next,nextYear' },
+			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
+
+			// Event source and rendering method
+			events: <?php echo json_encode($model->getFetchEventsURL()); ?>,
 			eventRender: function(event, element) {
 
 				if(event.link !== '') {
@@ -58,7 +61,24 @@
 			monthNames: RPBCalendar.i18n.MONTH_NAMES,
 			monthNamesShort: RPBCalendar.i18n.MONTH_SHORT_NAMES,
 			dayNames: RPBCalendar.i18n.WEEKDAY_NAMES,
-			dayNamesShort: RPBCalendar.i18n.WEEKDAY_SHORT_NAMES
+			dayNamesShort: RPBCalendar.i18n.WEEKDAY_SHORT_NAMES,
+
+			// Set-up the loading indicator
+			loading: function(isLoading, view) {
+				if(isLoading) {
+					var todayButton = $('#' + <?php echo json_encode($model->getUniqueID()); ?> + ' .fc-button-today');
+					var anchor = $('#' + <?php echo json_encode($model->getUniqueID()); ?> + ' .fc-header-center');
+					var offset = anchor.offset();
+					var spinAnim = $('<div></div>').spinanim();
+					spinAnim.appendTo(anchor).offset({
+						left: offset.left + anchor.width() - spinAnim.width(),
+						top: offset.top + (todayButton.height() - spinAnim.height())/2
+					});
+				}
+				else {
+					$('#' + <?php echo json_encode($model->getUniqueID()); ?> + ' .uicalendar-spinanim').remove();
+				}
+			}
 		});
 
 	});

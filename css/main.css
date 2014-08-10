@@ -145,3 +145,13 @@ a.rpbcalendar-eventBlock:hover {
 .rpbcalendar-qtip .qtip-content > div + .rpbcalendar-eventTip-releaseInfo {
 	margin-top: -0.4em;
 }
+
+
+
+/* -------------------------------------------------------------------------- */
+/* Calendar table */
+/* -------------------------------------------------------------------------- */
+
+.rpbcalendar-calendar .uicalendar-spinanim {
+	position: absolute;
+}
