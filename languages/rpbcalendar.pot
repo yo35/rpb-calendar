@@ -8,576 +8,330 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-28 21:02+0200\n"
+"POT-Creation-Date: 2014-08-10 19:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: admin.php:9
-msgid "Go back"
+#: controllers/eventlist.php controllers/eventedit.php
+msgid "Date/time"
 msgstr ""
 
-#: admin.php:57 templates/calendar.php:121
-msgid "Today"
-msgstr ""
-
-#: admin.php:82 admin.php:89 admin.php:128 admin.php:134 admin.php:187
-#: admin.php:194
-msgid "Name"
-msgstr ""
-
-#: admin.php:84 admin.php:91
-msgid "Text color"
-msgstr ""
-
-#: admin.php:85 admin.php:92
-msgid "Background color"
-msgstr ""
-
-#: admin.php:86
-msgid "Preview"
-msgstr ""
-
-#: admin.php:96
-msgid "category"
-msgstr ""
-
-#: admin.php:106
-msgid "Event categories"
-msgstr ""
-
-#: admin.php:107
-msgid "Add a new category"
-msgstr ""
-
-#: admin.php:108
-msgid "Edit the event category"
-msgstr ""
-
-#: admin.php:109
-msgid "Delete an event category"
-msgstr ""
-
-#: admin.php:130 admin.php:136
-msgid "First day"
-msgstr ""
-
-#: admin.php:131 admin.php:137
-msgid "Last day"
-msgstr ""
-
-#: admin.php:143
-msgid "holiday"
-msgstr ""
-
-#: admin.php:154
-msgid "Holidays"
-msgstr ""
-
-#: admin.php:155
-msgid "Add a new holiday"
-msgstr ""
-
-#: admin.php:156
-msgid "Edit the holiday"
-msgstr ""
-
-#: admin.php:157
-msgid "Delete a holiday"
-msgstr ""
-
-#: admin.php:189 admin.php:196
-msgid "Month"
-msgstr ""
-
-#: admin.php:190 admin.php:201
-msgid "Day"
-msgstr ""
-
-#: admin.php:191
-msgid "Date this year"
-msgstr ""
-
-#: admin.php:197
-msgid "Use 13 to specify a day relative to the Easter date"
-msgstr ""
-
-#: admin.php:205
-msgid "highday"
-msgstr ""
-
-#: admin.php:216
-msgid "Highdays"
-msgstr ""
-
-#: admin.php:217
-msgid "Add a new highday"
-msgstr ""
-
-#: admin.php:218
-msgid "Edit the highday"
-msgstr ""
-
-#: admin.php:219
-msgid "Delete a highday"
-msgstr ""
-
-#: admin.php:255
-#, php-format
-msgid "%1$s<br />to %2$s"
-msgstr ""
-
-#: admin.php:259
-#, php-format
-msgid "At %s"
-msgstr ""
-
-#: admin.php:285
-msgid "No category"
-msgstr ""
-
-#: admin.php:291 admin.php:303
-msgid "Title"
-msgstr ""
-
-#: admin.php:293 admin.php:305 templates/explorer.php:21
-msgid "Description"
-msgstr ""
-
-#: admin.php:294 templates/explorer.php:22
-msgid "Date"
-msgstr ""
-
-#: admin.php:295 admin.php:301 admin.php:390
-msgid "Author"
-msgstr ""
-
-#: admin.php:296 admin.php:313
-msgid "Category"
-msgstr ""
-
-#: admin.php:297 admin.php:316
+#: controllers/eventlist.php controllers/eventedit.php
 msgid "Link"
 msgstr ""
 
-#: admin.php:307
-msgid "Begin"
-msgstr ""
-
-#: admin.php:308
-msgid "End"
-msgstr ""
-
-#: admin.php:311 templates/explorer.php:23
-msgid "Time"
-msgstr ""
-
-#: admin.php:321
-msgid "event"
-msgstr ""
-
-#: admin.php:332
-msgid "Events"
-msgstr ""
-
-#: admin.php:333
-msgid "Add a new event"
-msgstr ""
-
-#: admin.php:334
-msgid "Edit the event"
-msgstr ""
-
-#: admin.php:335
-msgid "Delete an event"
-msgstr ""
-
-#: admin.php:354
-msgid "Option &quot;Permissions&quot; saved"
-msgstr ""
-
-#: admin.php:363
-msgid "Option &quot;Display author&quot; saved"
-msgstr ""
-
-#: admin.php:372
-msgid "Option &quot;Display category&quot; saved"
-msgstr ""
-
-#: admin.php:378 rpbcalendar.php:152
-msgid "Calendar options"
-msgstr ""
-
-#: admin.php:385
-msgid "Permissions"
-msgstr ""
-
-#: admin.php:388
-msgid "Administrator"
-msgstr ""
-
-#: admin.php:389
-msgid "Editor"
-msgstr ""
-
-#: admin.php:391
-msgid "Contributor"
-msgstr ""
-
-#: admin.php:392
-msgid "Subscriber"
-msgstr ""
-
-#: admin.php:394
-msgid ""
-"Choose the lowest user group that is allowed to manage events and holidays"
-msgstr ""
-
-#: admin.php:399
-msgid "Author name"
-msgstr ""
-
-#: admin.php:402
-msgid "Display the name of the author name on events"
-msgstr ""
-
-#: admin.php:407
+#: controllers/eventlist.php
 msgid "Categories"
 msgstr ""
 
-#: admin.php:410
-msgid "Use event categories"
+#: controllers/eventlist.php
+msgid "State"
 msgstr ""
 
-#: admin.php:416
-msgid "Save changes"
+#: controllers/eventlist.php
+msgid "View all categories"
 msgstr ""
 
-#: config.php:83
-#, php-format
-msgid "From %1$s to %2$s"
+#: controllers/categorylist.php templates/categoryedit/colorfield.php
+msgid "Color"
 msgstr ""
 
-#: config.php:106
-msgid "sunday"
+#. Date format, full (e.g. "Sunday, August 3, 2014")
+#: helpers/date.php
+msgid "%w$s, %m$s %d$s, %y$s"
 msgstr ""
 
-#: config.php:107
-msgid "monday"
+#. Date format, without year (e.g. "Sunday, August, 3")
+#: helpers/date.php
+msgid "%w$s, %m$s %d$s"
 msgstr ""
 
-#: config.php:108
-msgid "tuesday"
+#. Date format, without weekday (e.g. "August 3, 2014")
+#: helpers/date.php
+msgid "%m$s %d$s, %y$s"
 msgstr ""
 
-#: config.php:109
-msgid "wednesday"
+#. Date format, only month and day (e.g. "August 3")
+#: helpers/date.php
+msgid "%m$s %d$s"
 msgstr ""
 
-#: config.php:110
-msgid "thursday"
+#. Date range format, same begin/end month
+#: helpers/date.php
+msgid "%m1$s %d1$s–%d2$s, %y1$s"
 msgstr ""
 
-#: config.php:111
-msgid "friday"
+#. Date range format, same begin/end year
+#: helpers/date.php
+msgid "%m1$s %d1$s – %m2$s %d2$s, %y1$s"
 msgstr ""
 
-#: config.php:112
-msgid "saturday"
+#. Date range format, large range
+#: helpers/date.php
+msgid "%m1$s %d1$s, %y1$s – %m2$s %d2$s, %y2$s"
 msgstr ""
 
-#: config.php:135
-msgid "january"
-msgstr ""
-
-#: config.php:136
-msgid "february"
-msgstr ""
-
-#: config.php:137
-msgid "march"
-msgstr ""
-
-#: config.php:138
-msgid "april"
-msgstr ""
-
-#: config.php:139
-msgid "may"
-msgstr ""
-
-#: config.php:140
-msgid "june"
-msgstr ""
-
-#: config.php:141
-msgid "july"
-msgstr ""
-
-#: config.php:142
-msgid "august"
-msgstr ""
-
-#: config.php:143
-msgid "september"
-msgstr ""
-
-#: config.php:144
-msgid "october"
-msgstr ""
-
-#: config.php:145
-msgid "november"
-msgstr ""
-
-#: config.php:146
-msgid "december"
-msgstr ""
-
-#: print.php:21
-msgid "Cannot print more than 12 months in the same PDF"
-msgstr ""
-
-#: print.php:23
-msgid "The stop date must be greater than the start date"
-msgstr ""
-
-#: print.php:31 rpbcalendar.php:122
-msgid "Calendar"
-msgstr ""
-
-#: print.php:40 templates/printer.php:24
-msgid "From"
-msgstr ""
-
-#: print.php:40 templates/printer.php:33
-msgid "to"
-msgstr ""
-
-#: rpbcalendar.php:128
-msgid "Manage events"
-msgstr ""
-
-#: rpbcalendar.php:134
-msgid "Manage holidays"
-msgstr ""
-
-#: rpbcalendar.php:140
-msgid "Manage highdays"
-msgstr ""
-
-#: rpbcalendar.php:146
-msgid "Manage categories"
-msgstr ""
-
-#: rpbcalendarpdf.class.php:109
-#, php-format
-msgid "Generated from %1$s on %2$s"
-msgstr ""
-
-#: rpbcalendarpdf.class.php:110
-#, php-format
-msgid "Page %d on %d"
-msgstr ""
-
-#: rpbcalendarpdf.class.php:151 templates/calendar.php:10
-msgid "The year must be a numeric value"
-msgstr ""
-
-#: rpbcalendarpdf.class.php:158 templates/calendar.php:17
-msgid "The month must be a numeric value"
-msgstr ""
-
-#: rpbcalendarpdf.class.php:163 templates/calendar.php:22
-msgid "The month must be valued between 1 and 12"
-msgstr ""
-
-#: rpbcalendarpdf.class.php:376 templates/events.php:41
-msgid " at "
-msgstr ""
-
-#: todaysevents.class.php:10
-msgid "Display the list of today's events"
-msgstr ""
-
-#: todaysevents.class.php:12 todaysevents.class.php:32
+#: models/traits/widgettoday.php wp/widgettoday.php
 msgid "Today's events"
 msgstr ""
 
-#: todaysevents.class.php:37 upcomingevents.class.php:52
-msgid "Title:"
+#: models/traits/postoptions.php
+msgid "Settings saved."
 msgstr ""
 
-#: upcomingevents.class.php:10
-msgid "Display a list of upcoming events"
-msgstr ""
-
-#: upcomingevents.class.php:12 upcomingevents.class.php:38
+#: models/traits/widgetupcoming.php wp/widgetupcoming.php
 msgid "Upcoming events"
 msgstr ""
 
-#: upcomingevents.class.php:57
-msgid "Length of the upcoming period (in days):"
+#: templates/adminpage/about.php
+msgid ""
+"The RPB Calendar plugin allows you to create, organize, plan and publish "
+"events through your Wordpress blog."
 msgstr ""
 
-#: upcomingevents.class.php:61
-msgid "Show today events:"
+#: templates/adminpage/about.php
+msgid "developer link"
 msgstr ""
 
-#: admin/colorfield.class.php:12
-msgid "Use HTML hexa format (ex: #0000ff for blue or #ffff00 for yellow)"
-msgstr ""
-
-#: admin/colorfield.class.php:22
-#, php-format
-msgid "Badly formatted color field: &quot;%s&quot;"
-msgstr ""
-
-#: admin/datefield.class.php:12
-msgid "Use the following format: yyyy-mm-dd"
-msgstr ""
-
-#: admin/datefield.class.php:39
-msgid "Select"
-msgstr ""
-
-#: admin/datefield.class.php:49
-#, php-format
-msgid "Badly formatted date field: &quot;%s&quot;"
-msgstr ""
-
-#: admin/datefield.class.php:55
-#, php-format
-msgid "Wrong date value in the date field: &quot;%s&quot;"
-msgstr ""
-
-#: admin/enddatefield.class.php:25
+#: templates/adminpage/about.php
 #, php-format
 msgid ""
-"End date unconsistent with respect to the corresponding day range: &quot;"
-"%s&quot;"
+"If you encounter some bugs with this plugin, or if you wish to get new "
+"features in the future versions, you can report/propose them in the bug "
+"tracker at %1$s."
 msgstr ""
 
-#: admin/field.class.php:137
+#: templates/adminpage/about.php
+msgid "Plugin version"
+msgstr ""
+
+#: templates/adminpage/about.php
+msgid "Author"
+msgstr ""
+
+#: templates/adminpage/about.php
+msgid "Translation"
+msgstr ""
+
+#: templates/adminpage/about.php
 #, php-format
-msgid "Empty or undefined field: &quot;%s&quot;"
+msgid ""
+"If you are interested in translating this plugin into your language, please "
+"%1$scontact the author%2$s."
 msgstr ""
 
-#: admin/form.class.php:53 admin/form.class.php:96
-msgid "Add"
+#: templates/adminpage/about.php
+msgid "License"
 msgstr ""
 
-#: admin/form.class.php:96
-msgid "Update"
-msgstr ""
-
-#: admin/form.class.php:107
+#: templates/adminpage/about.php
 #, php-format
-msgid "No %1$s ID provided"
+msgid ""
+"This plugin is distributed under the terms of the %1$sGNU General Public "
+"License version 3%3$s (GPLv3), as published by the %2$sFree Software "
+"Foundation%3$s. The full text of this license is available at %4$s. A copy "
+"of this document is also provided with the plugin source code."
 msgstr ""
 
-#: admin/form.class.php:121
+#: templates/adminpage/about.php
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for "
+"more details."
+msgstr ""
+
+#: templates/adminpage/options.php
+msgid "Default category color"
+msgstr ""
+
+#: templates/adminpage/options.php
+msgid ""
+"The default category color is used to display the events that belong to "
+"categories with no color."
+msgstr ""
+
+#: templates/adminpage/options.php
+msgid "Default event color"
+msgstr ""
+
+#: templates/adminpage/options.php
+msgid ""
+"The default event color is used to display the events that do not belong to "
+"any category."
+msgstr ""
+
+#: templates/adminpage/options.php
+msgid "Date format in events"
+msgstr ""
+
+#: templates/adminpage/options.php
+msgid "Show weekday"
+msgstr ""
+
+#: templates/adminpage/options.php
+msgid "Show year"
+msgstr ""
+
+#: templates/adminpage/options.php
+msgid "Save changes"
+msgstr ""
+
+#: templates/adminpage/header.php
+msgid ""
+"To work properly, the RPB Calendar plugin needs JavaScript to be activated "
+"in your browser."
+msgstr ""
+
+#: templates/eventlist/datetimecolumn.php
+msgid "Until:"
+msgstr ""
+
+#: templates/initialization.php
 #, php-format
-msgid "Are you sure that you want to delete the %1$s with ID %2$s?"
+msgid "Posted on %1$s by %2$s"
 msgstr ""
 
-#: admin/form.class.php:124 admin/form.class.php:203
-msgid "Delete"
+#: templates/initialization.php
+msgid "Today"
 msgstr ""
 
-#: admin/form.class.php:186
+#: templates/widgetedit/today.php templates/widgetedit/upcoming.php
+msgid "Title:"
+msgstr ""
+
+#: templates/widgetedit/upcoming.php
+msgid "Length of the time frame (in days):"
+msgstr ""
+
+#: templates/widgetedit/upcoming.php
+msgid "Show events of the current day"
+msgstr ""
+
+#: templates/categorylist/colorcolumn.php
+msgid "Displayed as:"
+msgstr ""
+
+#: templates/eventedit/linkeditionbox.php
+msgid "Preview the target link in a new window"
+msgstr ""
+
+#: templates/eventedit/linkeditionbox.php
+msgid "Preview"
+msgstr ""
+
+#: templates/eventedit/datetimeeditionbox.php
+msgid "From:"
+msgstr ""
+
+#: templates/eventedit/datetimeeditionbox.php
+msgid "To:"
+msgstr ""
+
+#: templates/categoryedit/colorfield.php
 #, php-format
-msgid "No %s found."
+msgid ""
+"The color is used to display the events that belong to the category. The "
+"events belonging to a category for which no color is defined are displayed "
+"either with the color associated to the category parent (if the latter "
+"exists), or with the default category color (see the %1$sglobal settings"
+"%2$s)."
 msgstr ""
 
-#: admin/form.class.php:202
-msgid "Edit"
+#: wp/eventclass.php
+msgid "Events"
 msgstr ""
 
-#: admin/form.class.php:222
-#, php-format
-msgid "Unable to retrieve the %1$s with ID &quot;%2$s&quot;"
-msgstr ""
-
-#: admin/form.class.php:260
-msgid "Unspecified or badly formatted ID string"
-msgstr ""
-
-#: admin/form.class.php:298
-#, php-format
-msgid "1 %s successfully added"
-msgstr ""
-
-#: admin/form.class.php:329
-#, php-format
-msgid "1 %s successfully updated"
-msgstr ""
-
-#: admin/form.class.php:352
-#, php-format
-msgid "1 %s successfully deleted"
-msgstr ""
-
-#: admin/intfield.class.php:24
-#, php-format
-msgid "Badly formatted integer field: &quot;%s&quot;"
-msgstr ""
-
-#: admin/intfield.class.php:30
-#, php-format
-msgid "Value out of the valid range in the following field: &quot;%s&quot;"
-msgstr ""
-
-#: admin/timefield.class.php:12
-msgid "Use the following format: hh:mm"
-msgstr ""
-
-#: admin/timefield.class.php:30
-#, php-format
-msgid "Badly formatted time field: &quot;%s&quot;"
-msgstr ""
-
-#: admin/timefield.class.php:34
-#, php-format
-msgid "Wrong time value in the time field: &quot;%s&quot;"
-msgstr ""
-
-#: templates/calendar.php:138
-msgid "Go"
-msgstr ""
-
-#: templates/categories.php:6
-msgid "Unable to print the list of categories"
-msgstr ""
-
-#: templates/events.php:6
-msgid "Unable to print the list of events"
-msgstr ""
-
-#: templates/explorer.php:20
+#: wp/eventclass.php
 msgid "Event"
 msgstr ""
 
-#: templates/explorer.php:29
+#: wp/eventclass.php
+msgid "Add new event"
+msgstr ""
+
+#: wp/eventclass.php
+msgid "Edit event"
+msgstr ""
+
+#: wp/eventclass.php
+msgid "New event"
+msgstr ""
+
+#: wp/eventclass.php
+msgid "View event"
+msgstr ""
+
+#: wp/eventclass.php
+msgid "Search events"
+msgstr ""
+
+#: wp/eventclass.php
 msgid "No event found"
 msgstr ""
 
-#: templates/explorer.php:63
-msgid "Search for an event:"
+#: wp/eventclass.php
+msgid "No event found in trash"
 msgstr ""
 
-#: templates/explorer.php:65
-msgid "Search"
+#: wp/eventclass.php
+msgid "Event categories"
 msgstr ""
 
-#: templates/printer.php:42
-msgid "Print"
+#: wp/eventclass.php
+msgid "Event category"
 msgstr ""
 
-#: templates/printer.php:43
-msgid "Generate the PDF for printing"
+#: wp/eventclass.php
+msgid "Add new event category"
+msgstr ""
+
+#: wp/eventclass.php
+msgid "Edit event category"
+msgstr ""
+
+#: wp/eventclass.php
+msgid "View event category"
+msgstr ""
+
+#: wp/eventclass.php
+msgid "Search event categories"
+msgstr ""
+
+#: wp/eventclass.php
+msgid "No event category found"
+msgstr ""
+
+#: wp/widgettoday.php
+msgid "A list of the current day events."
+msgstr ""
+
+#: wp/adminpages.php
+msgid "Events and calendar settings"
+msgstr ""
+
+#: wp/adminpages.php
+msgid "Settings"
+msgstr ""
+
+#: wp/adminpages.php
+#, php-format
+msgid "About %1$s"
+msgstr ""
+
+#: wp/adminpages.php
+msgid "About"
+msgstr ""
+
+#: wp/widgetupcoming.php
+msgid "A list of the upcoming events within a certain date range."
+msgstr ""
+
+#: rpb-calendar.php
+msgid "Create and organize events, and display them in a calendar in post/page on your website."
 msgstr ""
