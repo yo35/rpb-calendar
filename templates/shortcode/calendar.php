@@ -33,8 +33,9 @@
 
 			eventRender: function(event, element) {
 				element.addClass('rpbcalendar-eventBlock');
-				element.data('event-id', event.ID);
+				element.data('eventId', event.ID);
 				element.attr('style', event.style);
+				RPBCalendar.addEventTooltip(element);
 				return element;
 			}
 		});
