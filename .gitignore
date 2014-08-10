@@ -1,4 +1,18 @@
+# Eclipse's stuff
 /.buildpath
 /.project
 /.settings
-/ajax/include/config.php
+
+# Directory for temporary objects
+/.temp
+
+# Deployment file
+/rpb-calendar.zip
+
+# Automatically generated files
+/js/*.min.js
+/languages/*.mo
+
+# AJAX configuration file
+/ajax-config.php
+

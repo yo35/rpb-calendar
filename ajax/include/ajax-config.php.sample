@@ -25,7 +25,7 @@
  *
  * The AJAX API of the RPB Calendar plugin is designed to work "out-of-the-box"
  * in standard configurations. Therefore, in most situations, the file
- * `rpb-calendar/ajax/include/config.php` MUST NOT exist. Do not create it unless you
+ * `rpb-calendar/ajax-config.php` MUST NOT exist. Do not create it unless you
  * are sure of you do.
  */
 
