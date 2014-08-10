@@ -154,4 +154,7 @@ a.rpbcalendar-eventBlock:hover {
 
 .rpbcalendar-calendar .uicalendar-spinanim {
 	position: absolute;
+	transform-origin: right top;
+	-ms-transform-origin: right top;
+	-webkit-transform-origin: right top;
 }

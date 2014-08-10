@@ -67,13 +67,14 @@
 			loading: function(isLoading, view) {
 				if(isLoading) {
 					var todayButton = $('#' + <?php echo json_encode($model->getUniqueID()); ?> + ' .fc-button-today');
-					var anchor = $('#' + <?php echo json_encode($model->getUniqueID()); ?> + ' .fc-header-center');
-					var offset = anchor.offset();
-					var spinAnim = $('<div></div>').spinanim();
-					spinAnim.appendTo(anchor).offset({
-						left: offset.left + anchor.width() - spinAnim.width(),
-						top: offset.top + (todayButton.height() - spinAnim.height())/2
+					var anchor = $('#' + <?php echo json_encode($model->getUniqueID()); ?> + ' .fc-header-right .fc-header-space').first();
+					var spinAnim = $('<div></div>').spinanim().appendTo(anchor);
+					spinAnim.offset({
+						left: anchor.offset().left - spinAnim.width(),
+						top: todayButton.offset().top
 					});
+					var scale = 'scale(' + (todayButton.height() / spinAnim.height()) + ')';
+					spinAnim.css('transform', scale).css('-ms-transform', scale).css('-webkit-transform', scale);
 				}
 				else {
 					$('#' + <?php echo json_encode($model->getUniqueID()); ?> + ' .uicalendar-spinanim').remove();
