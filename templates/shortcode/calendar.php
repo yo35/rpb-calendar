@@ -49,7 +49,16 @@
 
 				// Return the element
 				return element;
-			}
+			},
+
+			// Localization
+			buttonText: {
+				today: RPBCalendar.i18n.TODAY
+			},
+			monthNames: RPBCalendar.i18n.MONTH_NAMES,
+			monthNamesShort: RPBCalendar.i18n.MONTH_SHORT_NAMES,
+			dayNames: RPBCalendar.i18n.WEEKDAY_NAMES,
+			dayNamesShort: RPBCalendar.i18n.WEEKDAY_SHORT_NAMES
 		});
 
 	});
