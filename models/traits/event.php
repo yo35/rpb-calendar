@@ -126,13 +126,13 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	 *
 	 * @return string
 	 */
-	public function getEventBackgroundStyle()
+	public function getEventBlockStyle()
 	{
 		$this->ensureEventLoaded();
-		if(!isset($this->event->backgroundStyle)) {
-			$this->event->backgroundStyle = $this->buildEventBackgroundStyle();
+		if(!isset($this->event->blockStyle)) {
+			$this->event->blockStyle = $this->buildEventBlockStyle();
 		}
-		return $this->event->backgroundStyle;
+		return $this->event->blockStyle;
 	}
 
 
@@ -141,7 +141,7 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	 *
 	 * @return string
 	 */
-	private function buildEventBackgroundStyle()
+	private function buildEventBlockStyle()
 	{
 		$colors = array();
 		foreach($this->getEventCategories() as $category) {

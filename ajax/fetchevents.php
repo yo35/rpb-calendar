@@ -46,7 +46,7 @@ while($model->fetchEvent())
 		'title' => $model->getEventTitle(),
 		'start' => $model->getEventDateBegin(),
 		'end'   => $model->getEventDateEnd(),
-		'style' => $model->getEventBackgroundStyle()
+		'style' => $model->getEventBlockStyle()
 	);
 }
 

@@ -24,7 +24,7 @@
 	<?php while($model->fetchEvent()): ?>
 
 		<div class="rpbcalendar-eventBlock"
-			style="<?php echo htmlspecialchars($model->getEventBackgroundStyle()); ?>"
+			style="<?php echo htmlspecialchars($model->getEventBlockStyle()); ?>"
 			data-event-id="<?php echo htmlspecialchars($model->getEventID()); ?>"
 		>
 			<?php echo htmlspecialchars($model->getEventTitle()); ?>
