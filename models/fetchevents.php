@@ -70,6 +70,11 @@ class RPBCalendarModelFetchEvents extends RPBCalendarAbstractModel
 			return;
 		}
 
+		// Fix: FullCalendar provides inexact time interval bounds, that may depends on the user's time zone.
+		//  -> add one day to the begin/end dates to fetch all the events
+		$timeFrameBegin -= 86400;
+		$timeFrameEnd   += 86400;
+
 		// Fetch the requested events.
 		$this->loadTrait('EventQuery', array(
 			'time_frame_begin' => date('Y-m-d', $timeFrameBegin),
