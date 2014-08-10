@@ -65,6 +65,16 @@ RPBCalendar = (function($)
 	 */
 	function renderTooltipContent(json, api)
 	{
+		// Title
+		var title = '<div class="rpbcalendar-eventTip-title">' + json.title + '</div>';
+
+		// Begin/end dates
+		var beginEndDates = '<div class="rpbcalendar-eventTip-beginEndDates">' + json.beginDate;
+		if(json.endDate !== '') {
+			beginEndDates += '<span class="rpbcalendar-dateSeparator">&#9654;</span>' + json.endDate;
+		}
+		beginEndDates += '</div>';
+
 		// Event categories
 		var categories = '';
 		if(json.categories.length>0) {
@@ -78,13 +88,6 @@ RPBCalendar = (function($)
 			}
 			categories += '</div>';
 		}
-
-		// Begin/end dates
-		var beginEndDates = '<div class="rpbcalendar-eventTip-beginEndDates"><span class="rpbcalendar-dateMark"></span>' + json.beginDate;
-		if(json.endDate !== '') {
-			beginEndDates += '<span class="rpbcalendar-dateSeparator"></span>' + json.endDate;
-		}
-		beginEndDates += '</div>';
 
 		// Event author and release date
 		var releaseInfo = '<div class="rpbcalendar-eventTip-releaseInfo">' + i18n.POSTED_ON_BY + '</div>';
@@ -101,7 +104,8 @@ RPBCalendar = (function($)
 		var separator = link==='' ? '' : '<hr class="rpbcalendar-eventTip-separator" />';
 
 		// Replace the content of the tooltip.
-		api.set('content.text', categories + beginEndDates + releaseInfo + text + separator + link);
+		api.set('content.title', title + beginEndDates );
+		api.set('content.text', categories + releaseInfo + text + separator + link);
 	}
 
 

@@ -35,28 +35,14 @@
 
 
 /* -------------------------------------------------------------------------- */
-/* Date mark & separator */
+/* Date separator */
 /* -------------------------------------------------------------------------- */
-
-.rpbcalendar-dateMark {
-	display: inline-block;
-	width : 0px;
-	height: 0px;
-	border: 0.4em solid;
-	vertical-align: 0.1em;
-	margin-right: 0.3em;
-}
 
 .rpbcalendar-dateSeparator {
 	display: inline-block;
-	width : 0px;
-	height: 0px;
-	border-top   : 0.4em solid transparent;
-	border-bottom: 0.4em solid transparent;
-	border-left  : 0.7em solid;
 	vertical-align: 0.1em;
-	margin-left : 0.4em;
-	margin-right: 0.35em;
+	margin-left : 1.1em;
+	margin-right: 0.9em;
 }
 
 
@@ -127,7 +113,25 @@ a.rpbcalendar-eventBlock:hover {
 	margin-bottom: 0em;
 }
 
-.rpbcalendar-qtip .rpbcalendar-eventTip-beginEndDates,
+.rpbcalendar-qtip .rpbcalendar-eventTip-title {
+	font-size: 120%;
+	font-weight: bold;
+	margin-top: 0.3em;
+}
+
+.rpbcalendar-qtip .rpbcalendar-eventTip-beginEndDates {
+	font-style: italic;
+	font-size: 75%;
+	color: #eee;
+	margin-top: 0.6em;
+	margin-bottom: 0.2em;
+}
+
+.rpbcalendar-qtip .rpbcalendar-eventTip-title,
+.rpbcalendar-qtip .rpbcalendar-eventTip-beginEndDates {
+	margin-right: 3em;
+}
+
 .rpbcalendar-qtip .rpbcalendar-eventTip-releaseInfo {
 	color: #888;
 	font-style: italic;
@@ -138,7 +142,6 @@ a.rpbcalendar-eventBlock:hover {
 	margin-top: -0.2em;
 }
 
-.rpbcalendar-qtip .qtip-content > div + .rpbcalendar-eventTip-beginEndDates,
 .rpbcalendar-qtip .qtip-content > div + .rpbcalendar-eventTip-releaseInfo {
 	margin-top: -0.4em;
 }
