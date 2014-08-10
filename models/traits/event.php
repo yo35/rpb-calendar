@@ -239,6 +239,17 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 
 
 	/**
+	 * Whether a link is defined or not for the currently selected event.
+	 *
+	 * @return boolean
+	 */
+	public function isEventLinkDefined()
+	{
+		return $this->getEventLink() !== '';
+	}
+
+
+	/**
 	 * Return the web link associated to the currently selected event.
 	 *
 	 * @return string Either a valid URL or an empty string.

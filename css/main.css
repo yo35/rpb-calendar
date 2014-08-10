@@ -67,7 +67,10 @@
 
 .rpbcalendar-eventBlock {
 	padding: 3px 5px 2px;
-	cursor: pointer;
+}
+
+a.rpbcalendar-eventBlock:hover {
+	text-decoration: inherit;
 }
 
 .rpbcalendar-eventBlockList .rpbcalendar-eventBlock {

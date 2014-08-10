@@ -20,18 +20,21 @@
  ******************************************************************************/
 ?>
 
-<div class="rpbcalendar-eventBlockList">
-	<?php while($model->fetchEvent()): ?>
+<?php if($model->isEventLinkDefined()): ?>
+	<a href="<?php echo htmlspecialchars($model->getEventLink()); ?>" target="_blank"
+<?php else: ?>
+	<span
+<?php endif; ?>
 
-		<?php
-			// Render the current event block.
-			include(RPBCALENDAR_ABSPATH . 'templates/widgetprint/event.php');
-		?>
+	class="rpbcalendar-eventBlock"
+	style="<?php echo htmlspecialchars($model->getEventBlockStyle()); ?>"
+	data-event-id="<?php echo htmlspecialchars($model->getEventID()); ?>"
+>
 
-	<?php endwhile; ?>
-</div>
+	<?php echo htmlspecialchars($model->getEventTitle()); ?>
 
-<?php
-	// Decorate the event blocks with tool-tips.
-	include(RPBCALENDAR_ABSPATH . 'templates/widgetprint/tooltips.php');
-?>
+<?php if($model->isEventLinkDefined()): ?>
+	</a>
+<?php else: ?>
+	</span>
+<?php endif; ?>
