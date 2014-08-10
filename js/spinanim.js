@@ -43,7 +43,7 @@
 	 *
 	 * @constant
 	 */
-	var DEFAULT_STICK_WIDTH = 20;
+	var DEFAULT_STICK_WIDTH = 12;
 
 
 	/**
@@ -51,7 +51,7 @@
 	 *
 	 * @constant
 	 */
-	var DEFAULT_STICK_HEIGHT = 6;
+	var DEFAULT_STICK_HEIGHT = 4;
 
 
 	/**
@@ -59,7 +59,7 @@
 	 *
 	 * @constant
 	 */
-	var DEFAULT_DIAMETER = 30;
+	var DEFAULT_DIAMETER = 16;
 
 
 	/**
