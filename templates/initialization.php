@@ -22,10 +22,14 @@
 
 <script type="text/javascript">
 
-	jQuery(document).ready(function($) {
-		RPBCalendar.addEventTooltip(
-			$('#' + <?php echo json_encode($model->getWidgetID()); ?> + ' .rpbcalendar-eventBlock')
-		);
-	});
+	(function() {
+
+		// Localization
+		RPBCalendar.i18n.POSTED_ON_BY = <?php echo json_encode(__('Posted on %1$s by %2$s', 'rpbcalendar')); ?>;
+
+		// Configuration
+		RPBCalendar.config.FETCH_EVENT_DATA_URL = <?php echo json_encode(RPBCALENDAR_URL . '/ajax/fetcheventdata.php'); /* TODO: use trait AjaxURLs instead */ ?>;
+
+	})();
 
 </script>
