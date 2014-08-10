@@ -196,17 +196,21 @@
 			content += '</div>';
 			$(content).appendTo(this.element.empty());
 
-			// Animate the content.
+			// Build the stick update callback.
 			var indexOffset = 0;
 			var sticks = $('.uicalendar-spinanim-stick', this.element);
-			this._destroyTimer();
-			this._timerID = window.setInterval(function() {
+			var callback = function() {
 				sticks.each(function(i,e) {
 					var val = (indexOffset - i) / DEFAULT_NUMBER_OF_STICKS;
 					$(e).css('opacity', 1 - (val - Math.floor(val)));
 				});
 				++indexOffset;
-			}, 1000 / DEFAULT_NUMBER_OF_STICKS);
+			};
+
+			// Animate the content.
+			this._destroyTimer();
+			this._timerID = window.setInterval(callback, 1000 / DEFAULT_NUMBER_OF_STICKS);
+			callback();
 		},
 
 
