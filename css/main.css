@@ -66,11 +66,18 @@
 /* -------------------------------------------------------------------------- */
 
 .rpbcalendar-eventBlock {
+	padding: 3px 5px 2px;
+	cursor: pointer;
+}
+
+.rpbcalendar-eventBlockList .rpbcalendar-eventBlock {
 	display: inline-block;
 	margin-bottom: 5px;
 	border-radius: 0.3em;
-	padding: 3px 5px 2px;
-	cursor: pointer;
+}
+
+.rpbcalendar-eventBlock.fc-event {
+	border: none;
 }
 
 

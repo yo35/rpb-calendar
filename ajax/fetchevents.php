@@ -42,9 +42,11 @@ $events = array();
 while($model->fetchEvent())
 {
 	$events[] = array(
+		'ID'    => $model->getEventID(),
 		'title' => $model->getEventTitle(),
 		'start' => $model->getEventDateBegin(),
-		'end'   => $model->getEventDateEnd()
+		'end'   => $model->getEventDateEnd(),
+		'style' => $model->getEventBackgroundStyle()
 	);
 }
 

@@ -29,7 +29,14 @@
 		$('#' + <?php echo json_encode($model->getUniqueID()); ?>).fullCalendar({
 			header: { left: 'title', center: '', right: 'today prevYear,prev,next,nextYear' },
 			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
-			events: <?php echo json_encode($model->getFetchEventsURL()); ?>
+			events: <?php echo json_encode($model->getFetchEventsURL()); ?>,
+
+			eventRender: function(event, element) {
+				element.addClass('rpbcalendar-eventBlock');
+				element.data('event-id', event.ID);
+				element.attr('style', event.style);
+				return element;
+			}
 		});
 
 	});
