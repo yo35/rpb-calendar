@@ -127,6 +127,10 @@ a.rpbcalendar-eventBlock:hover {
 	margin-bottom: 0.2em;
 }
 
+.rpbcalendar-qtip .rpbcalendar-eventTip-beginEndDates .rpbcalendar-dateSeparator {
+	font-style: normal;
+}
+
 .rpbcalendar-qtip .rpbcalendar-eventTip-title,
 .rpbcalendar-qtip .rpbcalendar-eventTip-beginEndDates {
 	margin-right: 3em;
