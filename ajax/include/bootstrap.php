@@ -40,10 +40,6 @@ define('WP_USE_THEMES', false);
 require_once(RPBCALENDAR_WP_DIRECTORY . '/wp-load.php');
 
 
-// Loader helper.
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
-
-
 /**
  * Echo the answer to the AJAX request in a JSON format and terminate the PHP script.
  *

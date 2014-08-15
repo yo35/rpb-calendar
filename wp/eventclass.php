@@ -20,9 +20,6 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
-
-
 /**
  * Register the `rpbevent` post type in the WordPress database.
  *

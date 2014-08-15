@@ -20,9 +20,6 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
-
-
 /**
  * Base class for the controllers.
  */

@@ -40,6 +40,10 @@ define('RPBCALENDAR_URL'       , site_url().'/wp-content/plugins/'.RPBCALENDAR_P
 load_plugin_textdomain('rpbcalendar', false, RPBCALENDAR_PLUGIN_DIR.'/languages/');
 
 
+// MVC loading tools
+require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
+
+
 // Initialize the database objects
 add_action('init', 'rpbcalendar_init');
 function rpbcalendar_init()

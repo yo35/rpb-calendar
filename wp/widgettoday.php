@@ -20,9 +20,6 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'helpers/loader.php');
-
-
 /**
  * Widget presenting the events of the current day.
  */
