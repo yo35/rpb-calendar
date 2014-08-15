@@ -43,21 +43,53 @@
 	</div>
 </div>
 
+<div id="rpbcalendar-eventDateBeginPicker" class="rpbcalendar-datePickerPopup rpbcalendar-jQuery-enableSmoothness">
+	<div class="rpbcalendar-datePickerPopup-background"></div>
+	<div class="rpbcalendar-datePickerPopup-widget"></div>
+</div>
+
+<div id="rpbcalendar-eventDateEndPicker" class="rpbcalendar-datePickerPopup rpbcalendar-jQuery-enableSmoothness">
+	<div class="rpbcalendar-datePickerPopup-background"></div>
+	<div class="rpbcalendar-datePickerPopup-widget"></div>
+</div>
+
 
 <script type="text/javascript">
 
 	jQuery(document).ready(function($)
 	{
-		$('#rpbcalendar-admin-eventDateBeginField').prop('readonly', true).datepicker({
+		$('#rpbcalendar-admin-eventDateBeginField').prop('readonly', true).focusin(function() {
+			$('#rpbcalendar-eventDateBeginPicker').addClass('rpbcalendar-popupVisible');
+		});
+
+		$('#rpbcalendar-admin-eventDateEndField').prop('readonly', true).focusin(function() {
+			$('#rpbcalendar-eventDateEndPicker').addClass('rpbcalendar-popupVisible');
+		});
+
+		$('#rpbcalendar-eventDateBeginPicker .rpbcalendar-datePickerPopup-widget').datepicker({
+			altField: '#rpbcalendar-admin-eventDateBeginField',
 			dateFormat: 'yy-mm-dd',
+			defaultDate: $('#rpbcalendar-admin-eventDateBeginField').val(),
 			onSelect: function(dateBegin) {
-				$('#rpbcalendar-admin-eventDateEndField').datepicker('option', 'minDate', dateBegin);
+				$('#rpbcalendar-eventDateEndPicker .rpbcalendar-datePickerPopup-widget').datepicker('option', 'minDate', dateBegin);
+				$('#rpbcalendar-eventDateBeginPicker').removeClass('rpbcalendar-popupVisible');
 			}
 		});
-		$('#rpbcalendar-admin-eventDateEndField').prop('readonly', true).datepicker({
+
+		$('#rpbcalendar-eventDateEndPicker .rpbcalendar-datePickerPopup-widget').datepicker({
+			altField: '#rpbcalendar-admin-eventDateEndField',
 			dateFormat: 'yy-mm-dd',
-			minDate: $('#rpbcalendar-admin-eventDateBeginField').val()
+			defaultDate: $('#rpbcalendar-admin-eventDateEndField').val(),
+			minDate: $('#rpbcalendar-admin-eventDateBeginField').val(),
+			onSelect: function() {
+				$('#rpbcalendar-eventDateEndPicker').removeClass('rpbcalendar-popupVisible');
+			}
 		});
+
+		$('.rpbcalendar-datePickerPopup-background').click(function() {
+			$('.rpbcalendar-datePickerPopup').removeClass('rpbcalendar-popupVisible');
+		});
+
 	});
 
 </script>
