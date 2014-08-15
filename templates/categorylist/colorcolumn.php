@@ -20,20 +20,20 @@
  ******************************************************************************/
 ?>
 
-<?php if($model->getCategoryColor()==''): ?>
+<?php if($model->isCategoryColorDefined()): ?>
+
+	<div class="rpbcalendar-bigCategoryTag" style="background-color: <?php
+		 echo htmlspecialchars($model->getCategoryColor());
+	?>"></div>
+
+<?php else: ?>
 
 	<div>&mdash;</div>
 	<div>
-		<span class="rpbcalendar-admin-label"><?php _e('Displayed as:', 'rpbcalendar'); ?></span>
+		<span class="rpbcalendar-adminTableLabel"><?php _e('Displayed as:', 'rpbcalendar'); ?></span>
 		<span class="rpbcalendar-categoryTag" style="background-color: <?php
 			echo htmlspecialchars($model->getCategoryInheritedColor());
 		?>"></span>
 	</div>
-
-<?php else: ?>
-
-	<div class="rpbcalendar-admin-colorPatch" style="background-color: <?php
-		 echo htmlspecialchars($model->getCategoryColor());
-	?>"></div>
 
 <?php endif; ?>

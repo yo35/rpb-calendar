@@ -27,7 +27,7 @@
 <?php if($model->getEventDateBegin()!=$model->getEventDateEnd()): ?>
 
 	<div class="rpbcalendar-admin-eventDateEnd">
-		<span class="rpbcalendar-admin-label"><?php _e('Until:', 'rpbcalendar'); ?></span>
+		<span class="rpbcalendar-adminTableLabel"><?php _e('Until:', 'rpbcalendar'); ?></span>
 		<?php echo htmlspecialchars($model->getEventDateEndAsString('Y-M-j (D)')); ?>
 	</div>
 
