@@ -107,61 +107,33 @@ function rpbcalendar_inlined_scripts()
 }
 
 
-// Enqueue CSS
-add_action(is_admin() ? 'admin_print_styles' : 'wp_print_styles', 'rpbcalendar_enqueue_css');
-function rpbcalendar_enqueue_css()
+// CSS
+add_action(is_admin() ? 'admin_print_styles' : 'wp_print_styles', 'rpbcalendar_init_style_sheets');
+function rpbcalendar_init_style_sheets()
 {
-	// qTip2
-	wp_register_style('rpbcalendar-qtip2', RPBCALENDAR_URL.'/third-party-libs/qtip2/jquery.qtip.min.css');
-	wp_enqueue_style('rpbcalendar-qtip2');
-
-	// FullCalendar
-	wp_register_style('rpbcalendar-fullcalendar', RPBCALENDAR_URL.'/third-party-libs/fullcalendar/fullcalendar.css');
-	wp_enqueue_style('rpbcalendar-fullcalendar');
-
-	// Main CSS.
-	wp_register_style('rpbcalendar-main', RPBCALENDAR_URL.'/css/main.css');
-	wp_enqueue_style('rpbcalendar-main');
-
-	// Additional CSS for the backend.
-	if(is_admin()) {
-
-		// Color-picker
-		wp_register_style('rpbcalendar-iris2', RPBCALENDAR_URL.'/css/iris2.css');
-		wp_enqueue_style('rpbcalendar-iris2');
-
-		wp_register_style('rpbcalendar-jquery-ui', RPBCALENDAR_URL.'/css/jquery-ui-1.10.4.custom.min.css');
-		wp_register_style('rpbcalendar-backend'  , RPBCALENDAR_URL.'/css/backend.css');
-		wp_enqueue_style('rpbcalendar-jquery-ui');
-		wp_enqueue_style('rpbcalendar-backend'  );
-	}
-
-	// Additional CSS for the frontend.
-	else {
-		wp_register_style('rpbcalendar-frontend', RPBCALENDAR_URL.'/css/frontend.css');
-		wp_enqueue_style('rpbcalendar-frontend');
-	}
+	require_once(RPBCALENDAR_ABSPATH . 'wp/stylesheets.php');
+	RPBCalendarStyleSheets::register();
 }
 
 
-// Short-code registration
-if(!is_admin()) {
-	add_action('init', 'rpbcalendar_init_shortcodes');
-	function rpbcalendar_init_shortcodes()
-	{
-		require_once(RPBCALENDAR_ABSPATH . 'wp/shortcodes.php');
-		RPBCalendarShortcodes::register();
-	}
-}
-
-
-// Plugin administration pages
+// Administration pages
 if(is_admin()) {
 	add_action('admin_menu', 'rpbcalendar_init_admin_pages');
 	function rpbcalendar_init_admin_pages()
 	{
 		require_once(RPBCALENDAR_ABSPATH . 'wp/adminpages.php');
 		RPBCalendarAdminPages::register();
+	}
+}
+
+
+// Shortcodes
+if(!is_admin()) {
+	add_action('init', 'rpbcalendar_init_shortcodes');
+	function rpbcalendar_init_shortcodes()
+	{
+		require_once(RPBCALENDAR_ABSPATH . 'wp/shortcodes.php');
+		RPBCalendarShortcodes::register();
 	}
 }
 
