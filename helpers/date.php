@@ -36,9 +36,7 @@ abstract class RPBCalendarHelperDate
 	public static function today()
 	{
 		if(!isset(self::$today)) {
-			//self::$today = floor(time() / 86400) * 86400;
-			//self::$today = mktime(0, 0, 0, 7, 25, 2014);
-			self::$today = mktime(0, 0, 0, 4, 1, 2014);
+			self::$today = floor(time() / 86400) * 86400;
 		}
 		return self::$today;
 	}
