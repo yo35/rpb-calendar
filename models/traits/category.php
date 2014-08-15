@@ -53,7 +53,7 @@ class RPBCalendarTraitCategory extends RPBCalendarAbstractTrait
 	 */
 	public function setCategoryID($categoryID)
 	{
-		if($this->categoryID==$categoryID) {
+		if($this->categoryID === $categoryID) {
 			return;
 		}
 		$this->categoryID = $categoryID;
@@ -88,6 +88,17 @@ class RPBCalendarTraitCategory extends RPBCalendarAbstractTrait
 			$this->category->parentID = get_term($this->categoryID, 'rpbevent_category')->parent;
 		}
 		return $this->category->parentID;
+	}
+
+
+	/**
+	 * Whether a color is associated to the currently selected event category.
+	 *
+	 * @return boolean
+	 */
+	public function isCategoryColorDefined()
+	{
+		return $this->getCategoryColor() !== '';
 	}
 
 
@@ -135,7 +146,7 @@ class RPBCalendarTraitCategory extends RPBCalendarAbstractTrait
 	{
 		// Is there a color associated to the current category? If yes, return it.
 		$color = $this->getCategoryColor();
-		if($color!='') {
+		if($color !== '') {
 			return $color;
 		}
 
