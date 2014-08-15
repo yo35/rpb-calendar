@@ -20,7 +20,7 @@
  ******************************************************************************/
 ?>
 
-<div id="rpbcalendar-admin-aboutPage">
+<div id="rpbcalendar-aboutPage">
 
 	<p>
 		<?php _e(
@@ -54,7 +54,7 @@
 
 
 	<h3><?php _e('Translation', 'rpbcalendar'); ?></h3>
-	<dl id="rpbcalendar-admin-translator-list">
+	<dl id="rpbcalendar-translatorList">
 		<div>
 			<dt><img src="<?php echo RPBCALENDAR_URL.'/images/flags/gb.png'; ?>" />English</dt>
 			<dd>Yoann Le Montagner</dd>

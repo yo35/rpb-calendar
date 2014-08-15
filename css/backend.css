@@ -216,26 +216,28 @@ td.rpbevent_categories ul {
 
 
 
-/******************************************************************************/
-/*** About page ***/
+/* -------------------------------------------------------------------------- */
+/* About page */
+/* -------------------------------------------------------------------------- */
 
-#rpbcalendar-admin-translator-list {
+#rpbcalendar-translatorList {
 	display: table;
 }
 
-#rpbcalendar-admin-translator-list div {
+#rpbcalendar-translatorList div {
 	display: table-row;
 }
 
-#rpbcalendar-admin-translator-list dt,
-#rpbcalendar-admin-translator-list dd {
+#rpbcalendar-translatorList dt,
+#rpbcalendar-translatorList dd {
 	display: table-cell;
 }
 
-#rpbcalendar-admin-translator-list dd {
-	padding-left: 15px;
+#rpbcalendar-translatorList dd {
+	padding-left: 1.5em;
 }
 
-#rpbcalendar-admin-translator-list img {
+#rpbcalendar-translatorList img {
 	vertical-align: middle;
+	margin-right: 0.25em;
 }
