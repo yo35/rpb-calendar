@@ -70,6 +70,7 @@
 			altField: '#rpbcalendar-admin-eventDateBeginField',
 			dateFormat: 'yy-mm-dd',
 			defaultDate: $('#rpbcalendar-admin-eventDateBeginField').val(),
+			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
 			onSelect: function(dateBegin) {
 				$('#rpbcalendar-eventDateEndPicker .rpbcalendar-datePickerPopup-widget').datepicker('option', 'minDate', dateBegin);
 				$('#rpbcalendar-eventDateBeginPicker').removeClass('rpbcalendar-popupVisible');
@@ -80,6 +81,7 @@
 			altField: '#rpbcalendar-admin-eventDateEndField',
 			dateFormat: 'yy-mm-dd',
 			defaultDate: $('#rpbcalendar-admin-eventDateEndField').val(),
+			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
 			minDate: $('#rpbcalendar-admin-eventDateBeginField').val(),
 			onSelect: function() {
 				$('#rpbcalendar-eventDateEndPicker').removeClass('rpbcalendar-popupVisible');

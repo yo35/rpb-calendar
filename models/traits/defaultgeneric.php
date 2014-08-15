@@ -20,18 +20,29 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/customposteditlist.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
 
 
 /**
- * Model for the edition form for events.
+ * Global WordPress settings.
  */
-class RPBCalendarModelEventEdit extends RPBCalendarAbstractModelCustomPostEditList
+class RPBCalendarTraitDefaultGeneric extends RPBCalendarAbstractTrait
 {
-	public function __construct()
+	private static $startOfWeek;
+
+
+	/**
+	 * Day on which the week starts.
+	 *
+	 * @return int 0 for Sunday, 1 for Monday, ..., 6 for Saturday.
+	 */
+	public function getStartOfWeek()
 	{
-		parent::__construct();
-		$this->loadTrait('Event');
-		$this->loadTrait('DefaultGeneric');
+		if(!isset(self::$startOfWeek)) {
+			$value = RPBCalendarHelperValidation::validateInteger(get_option('start_of_week'), 0, 6);
+			self::$startOfWeek = isset($value) ? $value : 0;
+		}
+		return self::$startOfWeek;
 	}
 }
