@@ -53,57 +53,12 @@ function rpbcalendar_init()
 }
 
 
-// Enqueue scripts
-add_action(is_admin() ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts', 'rpbcalendar_enqueue_scripts');
-function rpbcalendar_enqueue_scripts()
+// JavaScript
+add_action(is_admin() ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts', 'rpbcalendar_init_scripts');
+function rpbcalendar_init_scripts()
 {
-	$ext = WP_DEBUG ? '.js' : '.min.js';
-
-	// qTip2
-	wp_register_script('rpbcalendar-qtip2', RPBCALENDAR_URL . '/third-party-libs/qtip2/jquery.qtip' . $ext, array(
-		'jquery'
-	));
-
-	// FullCalendar
-	wp_register_script('rpbcalendar-fullcalendar', RPBCALENDAR_URL . '/third-party-libs/fullcalendar/fullcalendar' . $ext, array(
-		'jquery-ui-widget'
-	));
-
-	// Loading indicator
-	wp_register_script('rpbcalendar-spinamin', RPBCALENDAR_URL . '/js/spinanim' . $ext, array(
-		'jquery-ui-widget'
-	));
-
-	// Color-picker
-	wp_register_script('rpbcalendar-iris2', RPBCALENDAR_URL . '/js/iris2' . $ext, array(
-		'jquery-ui-widget',
-		'iris'
-	));
-
-	// Plugin functions
-	wp_register_script('rpbcalendar-main', RPBCALENDAR_URL . '/js/main' . $ext, array(
-		'jquery',
-		'rpbcalendar-qtip2',
-		'rpbcalendar-spinamin'
-	));
-
-	// Enqueue the scripts.
-	wp_enqueue_script('rpbcalendar-fullcalendar');
-	wp_enqueue_script('rpbcalendar-main'        );
-
-	// Additional scripts for the backend.
-	if(is_admin()) {
-		wp_enqueue_script('jquery-ui-datepicker');
-		wp_enqueue_script('rpbcalendar-iris2'   );
-	}
-}
-
-
-// Localization & configuration scripts
-add_action(is_admin() ? 'admin_print_footer_scripts' : 'wp_print_footer_scripts', 'rpbcalendar_inlined_scripts');
-function rpbcalendar_inlined_scripts()
-{
-	include(RPBCALENDAR_ABSPATH . 'templates/initialization.php');
+	require_once(RPBCALENDAR_ABSPATH . 'wp/scripts.php');
+	RPBCalendarScripts::register();
 }
 
 
