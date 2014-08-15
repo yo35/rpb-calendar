@@ -53,19 +53,13 @@ function rpbcalendar_init()
 }
 
 
-// JavaScript
-add_action(is_admin() ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts', 'rpbcalendar_init_scripts');
-function rpbcalendar_init_scripts()
+// JavaScript & CSS
+add_action(is_admin() ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts', 'rpbcalendar_init_js_css');
+function rpbcalendar_init_js_css()
 {
 	require_once(RPBCALENDAR_ABSPATH . 'wp/scripts.php');
 	RPBCalendarScripts::register();
-}
 
-
-// CSS
-add_action(is_admin() ? 'admin_print_styles' : 'wp_print_styles', 'rpbcalendar_init_style_sheets');
-function rpbcalendar_init_style_sheets()
-{
 	require_once(RPBCALENDAR_ABSPATH . 'wp/stylesheets.php');
 	RPBCalendarStyleSheets::register();
 }
