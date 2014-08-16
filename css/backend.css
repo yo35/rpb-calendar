@@ -29,12 +29,12 @@
 	margin-right: 0.2em;
 }
 
-#rpbcalendar-eventLinkEditionBox #rpbcalendar-eventLinkField {
+#rpbcalendar-linkEditionBox #rpbcalendar-eventLinkField {
 	width: 100%;
 }
 
-#rpbcalendar-eventDateTimeEditionBox #rpbcalendar-eventDateBeginPicker,
-#rpbcalendar-eventDateTimeEditionBox #rpbcalendar-eventDateEndPicker {
+#rpbcalendar-dateTimeEditionBox #rpbcalendar-eventDateBeginPicker,
+#rpbcalendar-dateTimeEditionBox #rpbcalendar-eventDateEndPicker {
 	margin-top: 5px;
 	margin-bottom: -5px;
 }
