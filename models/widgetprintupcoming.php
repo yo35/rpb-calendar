@@ -53,7 +53,7 @@ class RPBCalendarModelWidgetPrintUpcoming extends RPBCalendarAbstractModelWidget
 
 	protected function computeIsWidgetHidden()
 	{
-		return !$this->haveEvent();
+		return !$this->hasEvent();
 	}
 
 

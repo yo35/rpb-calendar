@@ -50,6 +50,6 @@ class RPBCalendarModelWidgetPrintToday extends RPBCalendarAbstractModelWidgetPri
 
 	protected function computeIsWidgetHidden()
 	{
-		return !$this->haveEvent();
+		return !$this->hasEvent();
 	}
 }

@@ -94,7 +94,7 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	 *
 	 * @return boolean
 	 */
-	public function haveEvent()
+	public function hasEvent()
 	{
 		return $this->atLeastOneEvent;
 	}
