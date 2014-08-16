@@ -68,10 +68,6 @@
 	border-radius: 0.3em;
 }
 
-.rpbcalendar-eventBlock.fc-event {
-	border: none;
-}
-
 
 
 /* -------------------------------------------------------------------------- */
@@ -164,4 +160,8 @@
 	transform-origin: right top;
 	-ms-transform-origin: right top;
 	-webkit-transform-origin: right top;
+}
+
+.rpbcalendar-calendar .fc-event {
+	border: none;
 }
