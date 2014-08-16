@@ -20,13 +20,13 @@
  ******************************************************************************/
 ?>
 
-<div class="rpbcalendar-admin-eventDateBegin">
+<div class="rpbcalendar-eventDateBegin">
 	<?php echo htmlspecialchars($model->getEventDateBeginAsString('Y-M-j (D)')); ?>
 </div>
 
 <?php if($model->getEventDateBegin()!=$model->getEventDateEnd()): ?>
 
-	<div class="rpbcalendar-admin-eventDateEnd">
+	<div class="rpbcalendar-eventDateEnd">
 		<span class="rpbcalendar-adminTableLabel"><?php _e('Until:', 'rpbcalendar'); ?></span>
 		<?php echo htmlspecialchars($model->getEventDateEndAsString('Y-M-j (D)')); ?>
 	</div>

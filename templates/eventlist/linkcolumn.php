@@ -20,14 +20,14 @@
  ******************************************************************************/
 ?>
 
-<?php if($model->getEventLink()==''): ?>
-
-	&mdash;
-
-<?php else: ?>
+<?php if($model->isEventLinkDefined()): ?>
 
 	<a href="<?php echo htmlspecialchars($model->getEventLink()); ?>" target="_blank"><?php
 		echo htmlspecialchars($model->getEventLink());
 	?></a>
+
+<?php else: ?>
+
+	&mdash;
 
 <?php endif; ?>

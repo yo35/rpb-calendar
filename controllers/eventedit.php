@@ -38,7 +38,7 @@ class RPBCalendarControllerEventEdit extends RPBCalendarAbstractController
 	{
 		// Register the link edition box
 		add_meta_box(
-			'rpbcalendar-admin-eventLink',
+			'rpbcalendar-linkEditionBox',
 			__('Link', 'rpbcalendar'),
 			array($this, 'printLinkEditionBox'),
 			'rpbevent',
@@ -48,7 +48,7 @@ class RPBCalendarControllerEventEdit extends RPBCalendarAbstractController
 
 		// Register the date/time edition box
 		add_meta_box(
-			'rpbcalendar-admin-eventDateTime',
+			'rpbcalendar-dateTimeEditionBox',
 			__('Date/time', 'rpbcalendar'),
 			array($this, 'printDateTimeEditionBox'),
 			'rpbevent',

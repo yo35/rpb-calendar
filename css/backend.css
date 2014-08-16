@@ -19,44 +19,37 @@
  ******************************************************************************/
 
 
-#rpbcalendar-admin-eventLink input[type="text"] {
-	width: 100%;
-}
 
-input[type="text"].rpbcalendar-admin-invalidField {
-	border-color: red;
-	background-color: #ffd0d0;
-}
-
-a.button.rpbcalendar-admin-disabled,
-a.button.rpbcalendar-admin-disabled:hover,
-a.button.rpbcalendar-admin-disabled:focus {
-	color: #c0c0c0;
-	border-color: #c0c0c0;
-	cursor: initial;
-}
-
-a.button.rpbcalendar-admin-disabled:active {
-	box-shadow: none;
-	background-color: initial;
-}
-
-th#rpbevent_date_time {
-	width: 18%;
-}
-
-th#rpbevent_link,
-th#rpbevent_categories {
-	width: 10%;
-}
-
-th#rpbevent_category_color {
-	width: 15%;
-}
+/* -------------------------------------------------------------------------- */
+/* Events & categories edition & list forms  */
+/* -------------------------------------------------------------------------- */
 
 .rpbcalendar-adminTableLabel {
 	color: #888;
-	margin-right: 5px;
+	margin-right: 0.2em;
+}
+
+#rpbcalendar-eventLinkEditionBox #rpbcalendar-eventLinkField {
+	width: 100%;
+}
+
+#rpbcalendar-eventDateTimeEditionBox #rpbcalendar-eventDateBeginPicker,
+#rpbcalendar-eventDateTimeEditionBox #rpbcalendar-eventDateEndPicker {
+	margin-top: 5px;
+	margin-bottom: -5px;
+}
+
+th#rpbevent_date_time { /* Event list -> date/time column */
+	width: 18%;
+}
+
+th#rpbevent_link,        /* Event list -> link column */
+th#rpbevent_categories { /* Event list -> category column */
+	width: 10%;
+}
+
+th#rpbevent_category_color { /* Category list -> color colum */
+	width: 15%;
 }
 
 td.rpbevent_categories ul {
@@ -64,19 +57,12 @@ td.rpbevent_categories ul {
 	margin-bottom: 0px;
 }
 
-.rpbcalendar-admin-eventDateBegin,
-.rpbcalendar-admin-eventDateEnd {
-	color: #444;
+td.rpbevent_date_time div {
+	color: #333;
 }
 
-.rpbcalendar-admin-eventDateEnd {
-	margin-top: 3px;
-}
-
-#rpbcalendar-admin-defaultColorPreview,
-#rpbcalendar-admin-categoryColorPreview {
-	width : 100px;
-	height: 100px;
+td.rpbevent_date_time .rpbcalendar-eventDateEnd {
+	margin-top: 0.25em;
 }
 
 
@@ -105,12 +91,6 @@ td.rpbevent_categories ul {
 .rpbcalendar-datePickerPopup .rpbcalendar-datePickerPopup-widget {
 	position: absolute;
 	z-index: 100001;
-}
-
-#rpbcalendar-eventDateBeginPicker,
-#rpbcalendar-eventDateEndPicker {
-	margin-top: 5px;
-	margin-bottom: -5px;
 }
 
 
