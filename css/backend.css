@@ -138,25 +138,24 @@ td.rpbevent_categories ul {
 
 
 
-/******************************************************************************/
-/*** Vertical box layout ***/
+/* -------------------------------------------------------------------------- */
+/* Vertical box layout */
+/* -------------------------------------------------------------------------- */
 
-.rpbcalendar-admin-vBox {
+.rpbcalendar-vBox {
 	display: flex;
+	display: -webkit-flex;
 	flex-direction: column;
+	-webkit-flex-direction: column;
 }
 
-.rpbcalendar-admin-vBox > input {
-	margin: 0px;
+.rpbcalendar-vBox > *,
+.wp-core-ui .rpbcalendar-vBox > * {
+	margin: 5px 0px 0px 0px;
 }
 
-.rpbcalendar-admin-vBox > *,
-.wp-core-ui .rpbcalendar-admin-vBox > * {
-	margin-top: 5px;
-}
-
-.rpbcalendar-admin-vBox > :first-child,
-.wp-core-ui .rpbcalendar-admin-vBox > :first-child {
+.rpbcalendar-vBox > :first-child,
+.wp-core-ui .rpbcalendar-vBox > :first-child {
 	margin-top: 0px;
 }
 
