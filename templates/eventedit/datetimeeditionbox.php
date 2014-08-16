@@ -23,20 +23,20 @@
 <div class="rpbcalendar-gridLayout">
 	<div>
 		<div>
-			<label for="rpbcalendar-admin-eventDateBeginField"><?php _e('From:', 'rpbcalendar'); ?></label>
+			<label for="rpbcalendar-eventDateBeginField"><?php _e('From:', 'rpbcalendar'); ?></label>
 		</div>
 		<div>
-			<input type="text" name="rpbevent_date_begin" id="rpbcalendar-admin-eventDateBeginField" value="<?php
+			<input type="text" name="rpbevent_date_begin" id="rpbcalendar-eventDateBeginField" value="<?php
 				echo htmlspecialchars($model->getEventDateBeginAsString());
 			?>" size="10" />
 		</div>
 	</div>
 	<div>
 		<div>
-			<label for="rpbcalendar-admin-eventDateBeginField"><?php _e('To:', 'rpbcalendar'); ?></label>
+			<label for="rpbcalendar-eventDateEndField"><?php _e('To:', 'rpbcalendar'); ?></label>
 		</div>
 		<div>
-			<input type="text" name="rpbevent_date_end" id="rpbcalendar-admin-eventDateEndField" value="<?php
+			<input type="text" name="rpbevent_date_end" id="rpbcalendar-eventDateEndField" value="<?php
 				echo htmlspecialchars($model->getEventDateEndAsString());
 			?>" size="10" />
 		</div>
@@ -58,18 +58,18 @@
 
 	jQuery(document).ready(function($)
 	{
-		$('#rpbcalendar-admin-eventDateBeginField').prop('readonly', true).focusin(function() {
+		$('#rpbcalendar-eventDateBeginField').prop('readonly', true).focusin(function() {
 			$('#rpbcalendar-eventDateBeginPicker').addClass('rpbcalendar-popupVisible');
 		});
 
-		$('#rpbcalendar-admin-eventDateEndField').prop('readonly', true).focusin(function() {
+		$('#rpbcalendar-eventDateEndField').prop('readonly', true).focusin(function() {
 			$('#rpbcalendar-eventDateEndPicker').addClass('rpbcalendar-popupVisible');
 		});
 
 		$('#rpbcalendar-eventDateBeginPicker .rpbcalendar-datePickerPopup-widget').datepicker({
-			altField: '#rpbcalendar-admin-eventDateBeginField',
+			altField: '#rpbcalendar-eventDateBeginField',
 			dateFormat: 'yy-mm-dd',
-			defaultDate: $('#rpbcalendar-admin-eventDateBeginField').val(),
+			defaultDate: $('#rpbcalendar-eventDateBeginField').val(),
 			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
 			onSelect: function(dateBegin) {
 				$('#rpbcalendar-eventDateEndPicker .rpbcalendar-datePickerPopup-widget').datepicker('option', 'minDate', dateBegin);
@@ -78,11 +78,11 @@
 		});
 
 		$('#rpbcalendar-eventDateEndPicker .rpbcalendar-datePickerPopup-widget').datepicker({
-			altField: '#rpbcalendar-admin-eventDateEndField',
+			altField: '#rpbcalendar-eventDateEndField',
 			dateFormat: 'yy-mm-dd',
-			defaultDate: $('#rpbcalendar-admin-eventDateEndField').val(),
+			defaultDate: $('#rpbcalendar-eventDateEndField').val(),
 			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
-			minDate: $('#rpbcalendar-admin-eventDateBeginField').val(),
+			minDate: $('#rpbcalendar-eventDateBeginField').val(),
 			onSelect: function() {
 				$('#rpbcalendar-eventDateEndPicker').removeClass('rpbcalendar-popupVisible');
 			}
