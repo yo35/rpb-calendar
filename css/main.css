@@ -62,10 +62,6 @@
 	padding: 3px 5px 2px;
 }
 
-a.rpbcalendar-eventBlock:hover {
-	text-decoration: inherit;
-}
-
 .rpbcalendar-eventBlockList .rpbcalendar-eventBlock {
 	display: inline-block;
 	margin-bottom: 5px;

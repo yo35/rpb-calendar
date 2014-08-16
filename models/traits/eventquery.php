@@ -127,7 +127,11 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	 */
 	public function getEventTitle()
 	{
-		return html_entity_decode(get_the_title(), ENT_QUOTES);
+		$this->ensureEventLoaded();
+		if(!isset($this->event->title)) {
+			$this->event->title = html_entity_decode(get_the_title(), ENT_QUOTES);
+		}
+		return $this->event->title;
 	}
 
 
@@ -138,7 +142,11 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	 */
 	public function getEventAuthor()
 	{
-		return get_the_author();
+		$this->ensureEventLoaded();
+		if(!isset($this->event->author)) {
+			$this->event->author = get_the_author();
+		}
+		return $this->event->author;
 	}
 
 
@@ -150,7 +158,39 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	 */
 	public function getEventReleaseDate()
 	{
-		return get_the_date();
+		$this->ensureEventLoaded();
+		if(!isset($this->event->releaseDate)) {
+			$this->event->releaseDate = get_the_date();
+		}
+		return $this->event->releaseDate;
+	}
+
+	/**
+	 * Whether a teaser is defined for the current event.
+	 *
+	 * @return boolean
+	 */
+	public function isEventTeaserDefined()
+	{
+		return $this->getEventTeaser() !== '';
+	}
+
+
+	/**
+	 * Return the teaser of the event.
+	 *
+	 * @return string
+	 */
+	public function getEventTeaser()
+	{
+		$this->ensureEventLoaded();
+		if(!isset($this->event->teaser)) {
+			add_filter('the_content_more_link', array(__CLASS__, 'buildEventMoreLink'));
+			$teaser = $this->callGetTheContent(false);
+			remove_filter('the_content_more_link', array(__CLASS__, 'buildEventMoreLink'));
+			$this->event->teaser = convert_chars(convert_smilies(wptexturize($teaser)));
+		}
+		return $this->event->teaser;
 	}
 
 
@@ -161,11 +201,40 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	 */
 	public function getEventContent()
 	{
+		$this->ensureEventLoaded();
+		if(!isset($this->event->content)) {
+			$content = $this->callGetTheContent(true);
+			$this->event->content = apply_filters('the_content', $content);
+		}
+		return $this->event->content;
+	}
+
+
+	/**
+	 * Wrap a call to the WP native function `get_the_content()` into a context in which the global variables that affect
+	 * the behavior of this function are properly set.
+	 *
+	 * @param boolean $globalMore
+	 * @return string
+	 */
+	private function callGetTheContent($globalMore)
+	{
 		global $more;
-		$m = $more;
-		$more = true;
-		$rawContent = get_the_content();
-		$more = $m;
-		return apply_filters('the_content', $rawContent);
+		$oldMore = $more;
+		$more = $globalMore;
+		$retVal = get_the_content();
+		$more = $oldMore;
+		return $retVal;
+	}
+
+
+	/**
+	 * Return how more "more" links are represented in events.
+	 *
+	 * @return string
+	 */
+	public static function buildEventMoreLink()
+	{
+		return '[+]';
 	}
 }

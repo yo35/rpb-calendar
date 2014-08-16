@@ -32,8 +32,8 @@ require_once(RPBCALENDAR_ABSPATH . 'helpers/color.php');
 class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 {
 	private static $data = array();
+	protected $event;
 	private $eventID = -1;
-	private $event;
 	private $categoryTrait;
 	private $defaultColorsTrait;
 
@@ -56,7 +56,7 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	 */
 	public function setEventID($eventID)
 	{
-		if($this->eventID==$eventID) {
+		if($this->eventID === $eventID) {
 			return;
 		}
 		$this->eventID = $eventID;
@@ -67,7 +67,7 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	/**
 	 * Ensure that the object `$this->event` is equal to `self::$data[$this->eventID]`.
 	 */
-	private function ensureEventLoaded()
+	protected function ensureEventLoaded()
 	{
 		if(isset($this->event)) {
 			return;

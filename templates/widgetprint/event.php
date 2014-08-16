@@ -21,20 +21,19 @@
 ?>
 
 <?php if($model->isEventLinkDefined()): ?>
-	<a href="<?php echo htmlspecialchars($model->getEventLink()); ?>" target="_blank"
-<?php else: ?>
-	<span
+	<a href="<?php echo htmlspecialchars($model->getEventLink()); ?>" target="_blank">
 <?php endif; ?>
 
-	class="rpbcalendar-eventBlock"
+<div class="rpbcalendar-eventBlock"
 	style="<?php echo htmlspecialchars($model->getEventBlockStyle()); ?>"
 	data-event-id="<?php echo htmlspecialchars($model->getEventID()); ?>"
 >
-
-	<?php echo htmlspecialchars($model->getEventTitle()); ?>
+	<div class="rpbcalendar-eventTitle"><?php echo htmlspecialchars($model->getEventTitle()); ?></div>
+	<?php if($model->isEventTeaserDefined()): ?>
+		<div class="rpbcalendar-eventTeaser"><?php echo $model->getEventTeaser(); ?></div>
+	<?php endif;?>
+</div>
 
 <?php if($model->isEventLinkDefined()): ?>
 	</a>
-<?php else: ?>
-	</span>
 <?php endif; ?>
