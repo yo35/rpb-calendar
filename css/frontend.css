@@ -30,3 +30,8 @@
 #content .rpbcalendar-calendar td {
 	padding: 0px;
 }
+
+#content .rpbcalendar-calendar table.fc-header h2 {
+	margin-top: 0px;
+	text-transform: capitalize;
+}
