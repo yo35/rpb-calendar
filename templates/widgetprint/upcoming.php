@@ -20,30 +20,28 @@
  ******************************************************************************/
 ?>
 
-<dl>
+<?php
+	$eventFetched = $model->fetchEvent();
+	while($eventFetched):
+?>
+
+	<?php if($model->needToOpenNextEventSection()): ?>
+		<h3 class="rpbcalendar-eventSectionTitle"><?php echo htmlspecialchars($model->getEventSectionTitle()); ?></h3>
+		<div class="rpbcalendar-eventBlockList">
+	<?php endif; ?>
+
 	<?php
-		$eventFetched = $model->fetchEvent();
-		while($eventFetched):
+		// Render the current event block.
+		include(RPBCALENDAR_ABSPATH . 'templates/widgetprint/event.php');
 	?>
 
-		<?php if($model->needToOpenNextEventSection()): ?>
-			<dt class="rpbcalendar-eventSectionTitle"><?php echo htmlspecialchars($model->getEventSectionTitle()); ?></dd>
-			<dd class="rpbcalendar-eventBlockList">
-		<?php endif; ?>
+	<?php $eventFetched = $model->fetchEvent(); ?>
 
-		<?php
-			// Render the current event block.
-			include(RPBCALENDAR_ABSPATH . 'templates/widgetprint/event.php');
-		?>
+	<?php if($model->needToClosePreviousEventSection()): ?>
+		</div>
+	<?php endif; ?>
 
-		<?php $eventFetched = $model->fetchEvent(); ?>
-
-		<?php if($model->needToClosePreviousEventSection()): ?>
-			</dd>
-		<?php endif; ?>
-
-	<?php endwhile; ?>
-</dl>
+<?php endwhile; ?>
 
 <?php
 	// Decorate the event blocks with tooltips.
