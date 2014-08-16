@@ -100,7 +100,7 @@ var RPBCalendar = (function($) /* exported RPBCalendar */
 
 		// Begin/end dates
 		var beginEndDates = '<div class="rpbcalendar-eventTip-beginEndDates">' + json.beginDate;
-		if(json.endDate !== '') {
+		if(json.endDate !== null) {
 			beginEndDates += '<span class="rpbcalendar-dateSeparator">&#9654;</span>' + json.endDate;
 		}
 		beginEndDates += '</div>';
@@ -128,7 +128,7 @@ var RPBCalendar = (function($) /* exported RPBCalendar */
 		var text = json.content==='' ? '' : '<div class="rpbcalendar-eventTip-content">' + json.content + '</div>';
 
 		// Event link
-		var link = json.link==='' ? '' : '<div class="rpbcalendar-eventTip-link"><a href="' + json.link + '" target=_blank>' + json.link + '</a></div>';
+		var link = json.link===null ? '' : '<div class="rpbcalendar-eventTip-link"><a href="' + json.link + '" target=_blank>' + json.link + '</a></div>';
 
 		// Separator above the event link
 		var separator = link==='' ? '' : '<hr class="rpbcalendar-eventTip-separator" />';

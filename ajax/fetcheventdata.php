@@ -54,9 +54,9 @@ $eventData = array(
 	'author'      => htmlspecialchars($model->getEventAuthor()),
 	'releaseDate' => htmlspecialchars($model->getEventReleaseDate()),
 	'beginDate'   => htmlspecialchars($model->getEventDateBeginAsString('text')),
-	'endDate'     => $model->getEventDateBegin()===$model->getEventDateEnd() ? '' : htmlspecialchars($model->getEventDateEndAsString('text')),
+	'endDate'     => $model->getEventDateBegin()===$model->getEventDateEnd() ? null : htmlspecialchars($model->getEventDateEndAsString('text')),
 	'categories'  => $categories,
-	'link'        => htmlspecialchars($model->getEventLink()),
+	'link'        => $model->isEventLinkDefined() ? htmlspecialchars($model->getEventLink()) : null,
 	'content'     => $model->getEventContent()
 );
 
