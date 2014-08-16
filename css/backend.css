@@ -167,34 +167,35 @@ td.rpbevent_categories ul {
 
 
 
-/******************************************************************************/
-/*** Grid layout ***/
+/* -------------------------------------------------------------------------- */
+/* Grid layout */
+/* -------------------------------------------------------------------------- */
 
-.rpbcalendar-admin-gridLayout {
+.rpbcalendar-gridLayout {
 	display: table;
 }
 
-.rpbcalendar-admin-gridLayout > div {
+.rpbcalendar-gridLayout > div {
 	display: table-row;
 	}
 
-.rpbcalendar-admin-gridLayout > div > div {
+.rpbcalendar-gridLayout > div > div {
 	display: table-cell;
 	vertical-align: middle;
 	padding-top : 5px;
 	padding-left: 5px;
 }
 
-.rpbcalendar-admin-gridLayout > div:first-child > div {
+.rpbcalendar-gridLayout > div:first-child > div {
 	padding-top: 0px;
 }
 
-.rpbcalendar-admin-gridLayout > div > div:first-child {
+.rpbcalendar-gridLayout > div > div:first-child {
 	padding-left: 0px;
 }
 
-.rpbcalendar-admin-gridLayout > div > div > *,
-.wp-core-ui .rpbcalendar-admin-gridLayout > div > div > * {
+.rpbcalendar-gridLayout > div > div > *,
+.wp-core-ui .rpbcalendar-gridLayout > div > div > * {
 	margin: 0px;
 }
 

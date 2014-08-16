@@ -20,7 +20,7 @@
  ******************************************************************************/
 ?>
 
-<div class="rpbcalendar-admin-gridLayout">
+<div class="rpbcalendar-gridLayout">
 	<div>
 		<div>
 			<label for="rpbcalendar-admin-eventDateBeginField"><?php _e('From:', 'rpbcalendar'); ?></label>
