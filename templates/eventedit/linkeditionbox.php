@@ -20,11 +20,11 @@
  ******************************************************************************/
 ?>
 
-<div class="rpbcalendar-admin-hBox">
-	<input type="text" name="rpbevent_link" id="rpbcalendar-admin-eventLinkField" value="<?php
+<div class="rpbcalendar-hBox">
+	<input type="text" name="rpbevent_link" id="rpbcalendar-eventLinkField" value="<?php
 		echo htmlspecialchars($model->getEventLink());
 	?>" />
-	<a class="button" id="rpbcalendar-admin-eventLinkPreview" href="#" title="<?php
+	<a class="button" id="rpbcalendar-eventLinkPreview" href="#" title="<?php
 		_e('Preview the target link in a new window', 'rpbcalendar');
 	?>"><?php _e('Preview', 'rpbcalendar'); ?></a>
 </div>
@@ -32,53 +32,30 @@
 
 <script type="text/javascript">
 
-	// Mark the field as valid
-	function rpbcalendarUpdateEventLinkState($, isValid)
+	jQuery(document).ready(function($)
 	{
-		if(isValid) {
-			$('#rpbcalendar-admin-eventLinkField').removeClass('rpbcalendar-admin-invalidField');
-			$('#rpbcalendar-admin-eventLinkPreview').removeClass('rpbcalendar-admin-disabled');
-		}
-		else {
-			$('#rpbcalendar-admin-eventLinkField').addClass('rpbcalendar-admin-invalidField');
-			$('#rpbcalendar-admin-eventLinkPreview').addClass('rpbcalendar-admin-disabled');
-		}
-	}
+		// Preview window for the event link.
+		var previewWindow = null;
 
+		// Open the event link target in a dedicated window when the 'Preview' button is clicked.
+		$('#rpbcalendar-eventLinkPreview').click(function(e) {
+			e.preventDefault();
 
-	// Call the AJAX validation request when the value of the field changes.
-	jQuery('#rpbcalendar-admin-eventLinkField').change(function()
-	{
-		jQuery.ajax(
-			'<?php echo RPBCALENDAR_URL . '/validate.php'; ?>',
-			{
-				data: { method: 'validateURL', arg1: true, value: jQuery('#rpbcalendar-admin-eventLinkField').val() },
-				dataType: 'json',
-				success: function(answer) { rpbcalendarUpdateEventLinkState(jQuery, answer.result); },
-				error: function() { rpbcalendarUpdateEventLinkState(jQuery, false); }
+			// Basic check on the URL
+			var url = $('#rpbcalendar-eventLinkField').val();
+			if(!url.match(/^https?:\/\//)) {
+				alert(<?php echo json_encode(__('The link must start with http:// or https://.', 'rpbcalendar')); ?>);
+				return;
 			}
-		);
-	}).change();
 
-
-	// Preview window for the event link.
-	var rpbcalendarEventLinkPreviewWindow = null;
-
-
-	// Open the event link target in a dedicated window when the 'Preview' button is clicked.
-	jQuery('#rpbcalendar-admin-eventLinkPreview').click(function(e)
-	{
-		e.preventDefault();
-		if(jQuery('#rpbcalendar-admin-eventLinkPreview').hasClass('rpbcalendar-admin-disabled')) {
-			return;
-		}
-		var url = jQuery('#rpbcalendar-admin-eventLinkField').val();
-		if(rpbcalendarEventLinkPreviewWindow==null || rpbcalendarEventLinkPreviewWindow.closed) {
-			rpbcalendarEventLinkPreviewWindow = window.open(url);
-		}
-		else {
-			rpbcalendarEventLinkPreviewWindow.location.replace(url);
-		}
+			// Open the link
+			if(previewWindow===null || previewWindow.closed) {
+				previewWindow = window.open(url);
+			}
+			else {
+				previewWindow.location.replace(url);
+			}
+		});
 	});
 
 </script>
