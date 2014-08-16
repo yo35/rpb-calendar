@@ -36,21 +36,27 @@
 			events: <?php echo json_encode($model->getFetchEventsURL()); ?>,
 			eventRender: function(event, element) {
 
-				if(event.link !== '') {
-					var content = element.contents();
-					var clazz   = element.attr('class');
-					element = $('<a target="_blank"></a>').attr('href', event.link).attr('class', clazz).append(content);
+				// Build the event block
+				var content = $('<div class="rpbcalendar-eventBlock"></div>');
+				content.data('eventId', event.ID);
+				content.attr('style', event.style);
+
+				// Event title
+				$('<div class="rpbcalendar-eventTitle"></div>').text(event.title).appendTo(content);
+				if(event.teaser !== null) {
+					$('<div class="rpbcalendar-eventTeaser">' + event.teaser + '</div>').appendTo(content);
 				}
 
-				// Class and attributes
-				element.addClass('rpbcalendar-eventBlock');
-				element.data('eventId', event.ID);
-				element.attr('style', event.style);
-
 				// Set-up the tooltip
-				RPBCalendar.addEventTooltip(element);
+				RPBCalendar.addEventTooltip(content);
+
+				// Event link
+				if(event.link !== null) {
+					content = $('<a target="_blank"></a>').attr('href', event.link).append(content);
+				}
 
 				// Return the element
+				element.empty().append(content);
 				return element;
 			},
 

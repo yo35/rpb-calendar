@@ -42,12 +42,13 @@ $events = array();
 while($model->fetchEvent())
 {
 	$events[] = array(
-		'ID'    => $model->getEventID(),
-		'title' => $model->getEventTitle(),
-		'start' => $model->getEventDateBegin(),
-		'end'   => $model->getEventDateEnd(),
-		'style' => $model->getEventBlockStyle(),
-		'link'  => $model->getEventLink()
+		'ID'     => $model->getEventID(),
+		'title'  => $model->getEventTitle(),
+		'start'  => $model->getEventDateBegin(),
+		'end'    => $model->getEventDateEnd(),
+		'style'  => $model->getEventBlockStyle(),
+		'link'   => $model->isEventLinkDefined() ? $model->getEventLink() : null,
+		'teaser' => $model->isEventTeaserDefined() ? $model->getEventTeaser() : null
 	);
 }
 
