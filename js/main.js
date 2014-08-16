@@ -26,7 +26,7 @@
  * @requires qTip2
  * @requires spinanim.js
  */
-RPBCalendar = (function($)
+var RPBCalendar = (function($) /* exported RPBCalendar */
 {
 	'use strict';
 
@@ -165,7 +165,7 @@ RPBCalendar = (function($)
 						$.ajax({
 							url     : config.FETCH_EVENT_DATA_URL,
 							data    : { id: id },
-							dataType: 'json',
+							dataType: 'json'
 						})
 
 						// Render the event data if the AJAX request succeeds.
@@ -194,4 +194,4 @@ RPBCalendar = (function($)
 		addEventTooltip: addEventTooltip
 	};
 
-})(jQuery);
+})( /* global jQuery */ jQuery );

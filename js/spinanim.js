@@ -29,6 +29,8 @@
  */
 (function($)
 {
+	'use strict';
+
 
 	/**
 	 * Default number of sticks.
@@ -233,4 +235,4 @@
 
 	});
 
-})(jQuery);
+})( /* global jQuery */ jQuery );

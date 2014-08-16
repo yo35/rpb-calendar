@@ -30,6 +30,8 @@
  */
 (function($)
 {
+	'use strict';
+
 
 	/**
 	 * Internationalization constants.
@@ -145,9 +147,9 @@
 		 */
 		_setOption: function(key, value)
 		{
-			if(key=='color') {
+			if(key === 'color') {
 				var newColor = filterColor(value);
-				if(newColor==='') {
+				if(newColor === '') {
 					this.selectNone();
 				}
 				else {
@@ -189,7 +191,7 @@
 		 */
 		_updateColor: function(newColor)
 		{
-			if(this.options.color==newColor) {
+			if(this.options.color === newColor) {
 				return;
 			}
 			this.options.color = newColor;
@@ -257,4 +259,4 @@
 
 	});
 
-})(jQuery);
+})( /* global jQuery */ jQuery );
