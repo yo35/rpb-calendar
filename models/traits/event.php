@@ -258,7 +258,7 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	{
 		$this->ensureEventLoaded();
 		if(!isset($this->event->link)) {
-			$value = RPBCalendarHelperValidation::validateURL(get_post_meta($this->eventID, 'rpbevent_link', true), true);
+			$value = RPBCalendarHelperValidation::validateString(get_post_meta($this->eventID, 'rpbevent_link', true));
 			$this->event->link = isset($value) ? $value : '';
 		}
 		return $this->event->link;

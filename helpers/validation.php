@@ -87,29 +87,6 @@ abstract class RPBCalendarHelperValidation
 
 
 	/**
-	 * Validate an URL.
-	 *
-	 * @param mixed $value
-	 * @param boolean $allowEmptyString Whether `''` is considered as a valid URL or not (default: false).
-	 * @return string May be null if the value does not represent a valid URL.
-	 */
-	public static function validateURL($value, $allowEmptyString=false)
-	{
-		if(!is_string($value)) {
-			return null;
-		}
-		$value = trim($value);
-		if($allowEmptyString && $value=='') {
-			return '';
-		}
-		else {
-			$value = filter_var($value, FILTER_VALIDATE_URL);
-			return $value===false ? null : $value;
-		}
-	}
-
-
-	/**
 	 * Validate a string.
 	 *
 	 * @param mixed $value

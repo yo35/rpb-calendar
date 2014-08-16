@@ -51,7 +51,7 @@ class RPBCalendarTraitPostEvent extends RPBCalendarAbstractTrait
 
 		// Load the link.
 		if(isset($_POST['rpbevent_link'])) {
-			$this->link = RPBCalendarHelperValidation::validateURL($_POST['rpbevent_link'], true);
+			$this->link = RPBCalendarHelperValidation::validateString($_POST['rpbevent_link']);
 		}
 	}
 
