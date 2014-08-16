@@ -61,7 +61,7 @@ class RPBCalendarModelFetchEvents extends RPBCalendarAbstractModel
 		$this->queryValid = false;
 
 		// Retrieve the GET parameters that define the start/end of the time frame from which events must be fetched.
-		if(!isset($_GET['start']) || !$_GET['end']) {
+		if(!(isset($_GET['start']) && isset($_GET['end']))) {
 			return;
 		}
 		$timeFrameBegin = RPBCalendarHelperValidation::validateDate($_GET['start']);
