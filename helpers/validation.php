@@ -77,7 +77,7 @@ abstract class RPBCalendarHelperValidation
 			return null;
 		}
 		$value = trim($value);
-		if($allowEmptyString && $value=='') {
+		if($allowEmptyString && $value==='') {
 			return '';
 		}
 		else {

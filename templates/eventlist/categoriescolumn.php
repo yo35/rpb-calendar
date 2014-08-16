@@ -20,7 +20,7 @@
  ******************************************************************************/
 ?>
 
-<?php if(count($model->getEventCategories())==0): ?>
+<?php if(count($model->getEventCategories()) === 0): ?>
 
 	&mdash;
 
