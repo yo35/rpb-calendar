@@ -35,9 +35,6 @@ class RPBCalendarModelWidgetPrintToday extends RPBCalendarAbstractModelWidgetPri
 		$this->loadTrait('WidgetToday', $this->instance);
 		$this->registerFields($this->getTodayWidgetFields());
 
-		// Additional traits
-		$this->loadTrait('AjaxURLs');
-
 		// Load the events.
 		$today = date('Y-m-d', RPBCalendarHelperDate::today());
 		$where = array(

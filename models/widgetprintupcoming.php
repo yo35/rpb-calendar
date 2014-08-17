@@ -39,9 +39,6 @@ class RPBCalendarModelWidgetPrintUpcoming extends RPBCalendarAbstractModelWidget
 		$this->loadTrait('WidgetUpcoming', $this->instance);
 		$this->registerFields($this->getUpcomingWidgetFields());
 
-		// Additional traits
-		$this->loadTrait('AjaxURLs');
-
 		// Load the events.
 		$where = array(
 			'time_frame_begin' => $this->getTimeFrameBegin(),
