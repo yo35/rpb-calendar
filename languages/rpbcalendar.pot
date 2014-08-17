@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-10 19:30+0200\n"
+"POT-Creation-Date: 2014-08-17 12:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -201,6 +201,22 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
+#: templates/initialization.php
+msgid "Random"
+msgstr ""
+
+#: templates/initialization.php
+msgid "Clear"
+msgstr ""
+
+#: templates/initialization.php
+msgid "Select a color at random"
+msgstr ""
+
+#: templates/initialization.php
+msgid "Unselect the current color"
+msgstr ""
+
 #: templates/widgetedit/today.php templates/widgetedit/upcoming.php
 msgid "Title:"
 msgstr ""
@@ -223,6 +239,10 @@ msgstr ""
 
 #: templates/eventedit/linkeditionbox.php
 msgid "Preview"
+msgstr ""
+
+#: templates/eventedit/linkeditionbox.php
+msgid "The link must start with http:// or https://."
 msgstr ""
 
 #: templates/eventedit/datetimeeditionbox.php

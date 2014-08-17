@@ -28,6 +28,14 @@
 		RPBCalendar.i18n.POSTED_ON_BY = <?php echo json_encode(__('Posted on %1$s by %2$s', 'rpbcalendar')); ?>;
 		RPBCalendar.i18n.TODAY = <?php echo json_encode(__('Today', 'rpbcalendar')); ?>;
 
+		// Color-picker localization
+		if(jQuery && jQuery.iris2) {
+			jQuery.iris2.RANDOM_BUTTON_LABEL = <?php echo json_encode(__('Random', 'rpbcalendar')); ?>;
+			jQuery.iris2.CLEAR_BUTTON_LABEL = <?php echo json_encode(__('Clear', 'rpbcalendar')); ?>;
+			jQuery.iris2.RANDOM_BUTTON_POPUP = <?php echo json_encode(__('Select a color at random', 'rpbcalendar')); ?>;
+			jQuery.iris2.CLEAR_BUTTON_POPUP = <?php echo json_encode(__('Unselect the current color', 'rpbcalendar')); ?>;
+		}
+
 		// Configuration
 		RPBCalendar.config.FETCH_EVENTS_URL = <?php echo json_encode(RPBCALENDAR_URL . '/ajax/fetchevents.php'); ?>;
 		RPBCalendar.config.FETCH_EVENT_DATA_URL = <?php echo json_encode(RPBCALENDAR_URL . '/ajax/fetcheventdata.php'); ?>;

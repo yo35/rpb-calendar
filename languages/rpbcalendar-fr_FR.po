@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-10 19:30+0200\n"
+"POT-Creation-Date: 2014-08-17 12:53+0200\n"
 "PO-Revision-Date: 2011-08-29 00:37+0200\n"
 "Last-Translator: Yoann <yoann.le-montagner@m4x.org>\n"
 "Language-Team: French\n"
@@ -214,6 +214,22 @@ msgstr "Posté le %1$s par %2$s"
 msgid "Today"
 msgstr "Aujourd'hui"
 
+#: templates/initialization.php
+msgid "Random"
+msgstr "Aléatoire"
+
+#: templates/initialization.php
+msgid "Clear"
+msgstr "Aucune"
+
+#: templates/initialization.php
+msgid "Select a color at random"
+msgstr "Sélectionne une couleur au hasard"
+
+#: templates/initialization.php
+msgid "Unselect the current color"
+msgstr "Désélectionne la couleur courante"
+
 #: templates/widgetedit/today.php templates/widgetedit/upcoming.php
 msgid "Title:"
 msgstr "Titre&nbsp;:"
@@ -238,6 +254,10 @@ msgstr ""
 #: templates/eventedit/linkeditionbox.php
 msgid "Preview"
 msgstr "Aperçu"
+
+#: templates/eventedit/linkeditionbox.php
+msgid "The link must start with http:// or https://."
+msgstr ""
 
 #: templates/eventedit/datetimeeditionbox.php
 msgid "From:"
@@ -351,7 +371,6 @@ msgid ""
 "Create and organize events, and display them in a calendar in post/page on "
 "your website."
 msgstr ""
-
 
 #~ msgid "Go back"
 #~ msgstr "Revenir"
