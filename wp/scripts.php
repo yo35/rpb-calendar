@@ -32,6 +32,10 @@ abstract class RPBCalendarScripts
 	{
 		$ext = WP_DEBUG ? '.js' : '.min.js';
 
+		// Moment.js (http://momentjs.com/)
+		wp_register_script('rpbcalendar-momentjs', RPBCALENDAR_URL . '/third-party-libs/moment-js/moment' . $ext);
+		$momentjs = self::localizeJavaScriptLib('rpbcalendar-momentjs', 'third-party-libs/moment-js/locales/%1$s.js');
+
 		// qTip2
 		wp_register_script('rpbcalendar-qtip2', RPBCALENDAR_URL . '/third-party-libs/qtip2/jquery.qtip' . $ext, array(
 			'jquery'
@@ -53,9 +57,13 @@ abstract class RPBCalendarScripts
 			'iris'
 		));
 
+		// jQuery date picker
+		$jQueryDatePicker = self::localizeJavaScriptLib('jquery-ui-datepicker', 'third-party-libs/jquery/locales/jquery.ui.datepicker-%1$s.js');
+
 		// Plugin functions
 		wp_register_script('rpbcalendar-main', RPBCALENDAR_URL . '/js/main' . $ext, array(
 			'jquery',
+			$momentjs,
 			'rpbcalendar-qtip2',
 			'rpbcalendar-spinamin'
 		));
@@ -66,9 +74,8 @@ abstract class RPBCalendarScripts
 
 		// Additional scripts for the backend.
 		if(is_admin()) {
-			wp_enqueue_script('jquery-ui-datepicker');
-			wp_enqueue_script('rpbcalendar-iris2'   );
-			self::localizeDatePicker();
+			wp_enqueue_script($jQueryDatePicker);
+			wp_enqueue_script('rpbcalendar-iris2');
 		}
 
 		// Inlined scripts
@@ -84,23 +91,29 @@ abstract class RPBCalendarScripts
 
 	/**
 	 * Determine the language code to use to configure the jQuery date picker widget, and enqueue the required file.
+	 *
+	 * @param string $handle Handle of the file to localize.
+	 * @param string $relativeFilePathTemplate Where the localized files should be searched.
+	 * @return string Handle of the localized file a suitable translation has been found, original handle otherwise.
 	 */
-	private static function localizeDatePicker()
+	private static function localizeJavaScriptLib($handle, $relativeFilePathTemplate)
 	{
 		foreach(self::getBlogLangCodes() as $langCode)
 		{
 			// Does the translation script file exist for the current language code?
-			$relativeFilePath = 'third-party-libs/jquery/locales/jquery.ui.datepicker-' . $langCode . '.js';
+			$relativeFilePath = sprintf($relativeFilePathTemplate, $langCode);
 			if(!file_exists(RPBCALENDAR_ABSPATH . $relativeFilePath)) {
 				continue;
 			}
 
-			// If it exists, enqueue it, set language code, and return.
-			wp_enqueue_script('rpbcalendar-datePicker-localization', RPBCALENDAR_URL . '/' . $relativeFilePath, array(
-				'jquery-ui-datepicker'
-			));
-			return;
+			// If it exists, register it, and return a handle pointing to the localization file.
+			$localizedHandle = $handle . '-localized';
+			wp_register_script($localizedHandle, RPBCALENDAR_URL . '/' . $relativeFilePath, array($handle));
+			return $localizedHandle;
 		}
+
+		// Otherwise, if no translation file exists, return the handle of the original library.
+		return $handle;
 	}
 
 
@@ -111,13 +124,20 @@ abstract class RPBCalendarScripts
 	 */
 	private static function getBlogLangCodes()
 	{
-		$mainLanguage = str_replace('_', '-', strtolower(get_locale()));
-		$retVal = array($mainLanguage);
+		if(!isset(self::$blogLangCodes)) {
+			$mainLanguage = str_replace('_', '-', strtolower(get_locale()));
+			self::$blogLangCodes = array($mainLanguage);
 
-		if(preg_match('/([a-z]+)\\-([a-z]+)/', $mainLanguage, $m)) {
-			$retVal[] = $m[1];
+			if(preg_match('/([a-z]+)\\-([a-z]+)/', $mainLanguage, $m)) {
+				self::$blogLangCodes[] = $m[1];
+			}
 		}
-
-		return $retVal;
+		return self::$blogLangCodes;
 	}
+
+
+	/**
+	 * Blog language codes.
+	 */
+	private static $blogLangCodes;
 }

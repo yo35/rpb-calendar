@@ -46,31 +46,7 @@ var RPBCalendar = (function($) /* exported RPBCalendar */
 		 * Today button text.
 		 * @type {string}
 		 */
-		TODAY: 'Today',
-
-		/**
-		 * Month names
-		 * @type {string[]}
-		 */
-		MONTH_NAMES: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-
-		/**
-		 * Month names (3-letter abbreviation)
-		 * @type {string[]}
-		 */
-		MONTH_SHORT_NAMES: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-
-		/**
-		 * Weekday names
-		 * @type {string[]}
-		 */
-		WEEKDAY_NAMES: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-
-		/**
-		 * Weekday names
-		 * @type {string[]}
-		 */
-		WEEKDAY_SHORT_NAMES: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+		TODAY: 'Today'
 	};
 
 

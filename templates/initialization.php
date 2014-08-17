@@ -20,10 +20,6 @@
  ******************************************************************************/
 ?>
 
-<?php
-	global $wp_locale;
-?>
-
 <script type="text/javascript">
 
 	(function() {
@@ -31,54 +27,6 @@
 		// Localization
 		RPBCalendar.i18n.POSTED_ON_BY = <?php echo json_encode(__('Posted on %1$s by %2$s', 'rpbcalendar')); ?>;
 		RPBCalendar.i18n.TODAY = <?php echo json_encode(__('Today', 'rpbcalendar')); ?>;
-
-		// Localization (month & weekdays)
-		RPBCalendar.i18n.MONTH_NAMES = [
-			<?php echo json_encode($wp_locale->get_month( 1)); ?>,
-			<?php echo json_encode($wp_locale->get_month( 2)); ?>,
-			<?php echo json_encode($wp_locale->get_month( 3)); ?>,
-			<?php echo json_encode($wp_locale->get_month( 4)); ?>,
-			<?php echo json_encode($wp_locale->get_month( 5)); ?>,
-			<?php echo json_encode($wp_locale->get_month( 6)); ?>,
-			<?php echo json_encode($wp_locale->get_month( 7)); ?>,
-			<?php echo json_encode($wp_locale->get_month( 8)); ?>,
-			<?php echo json_encode($wp_locale->get_month( 9)); ?>,
-			<?php echo json_encode($wp_locale->get_month(10)); ?>,
-			<?php echo json_encode($wp_locale->get_month(11)); ?>,
-			<?php echo json_encode($wp_locale->get_month(12)); ?>
-		];
-		RPBCalendar.i18n.MONTH_SHORT_NAMES = [
-			<?php echo json_encode($wp_locale->get_month_abbrev($wp_locale->get_month( 1))); ?>,
-			<?php echo json_encode($wp_locale->get_month_abbrev($wp_locale->get_month( 2))); ?>,
-			<?php echo json_encode($wp_locale->get_month_abbrev($wp_locale->get_month( 3))); ?>,
-			<?php echo json_encode($wp_locale->get_month_abbrev($wp_locale->get_month( 4))); ?>,
-			<?php echo json_encode($wp_locale->get_month_abbrev($wp_locale->get_month( 5))); ?>,
-			<?php echo json_encode($wp_locale->get_month_abbrev($wp_locale->get_month( 6))); ?>,
-			<?php echo json_encode($wp_locale->get_month_abbrev($wp_locale->get_month( 7))); ?>,
-			<?php echo json_encode($wp_locale->get_month_abbrev($wp_locale->get_month( 8))); ?>,
-			<?php echo json_encode($wp_locale->get_month_abbrev($wp_locale->get_month( 9))); ?>,
-			<?php echo json_encode($wp_locale->get_month_abbrev($wp_locale->get_month(10))); ?>,
-			<?php echo json_encode($wp_locale->get_month_abbrev($wp_locale->get_month(11))); ?>,
-			<?php echo json_encode($wp_locale->get_month_abbrev($wp_locale->get_month(12))); ?>
-		];
-		RPBCalendar.i18n.WEEKDAY_NAMES = [
-			<?php echo json_encode($wp_locale->get_weekday(0)); ?>,
-			<?php echo json_encode($wp_locale->get_weekday(1)); ?>,
-			<?php echo json_encode($wp_locale->get_weekday(2)); ?>,
-			<?php echo json_encode($wp_locale->get_weekday(3)); ?>,
-			<?php echo json_encode($wp_locale->get_weekday(4)); ?>,
-			<?php echo json_encode($wp_locale->get_weekday(5)); ?>,
-			<?php echo json_encode($wp_locale->get_weekday(6)); ?>
-		];
-		RPBCalendar.i18n.WEEKDAY_SHORT_NAMES = [
-			<?php echo json_encode($wp_locale->get_weekday_abbrev($wp_locale->get_weekday(0))); ?>,
-			<?php echo json_encode($wp_locale->get_weekday_abbrev($wp_locale->get_weekday(1))); ?>,
-			<?php echo json_encode($wp_locale->get_weekday_abbrev($wp_locale->get_weekday(2))); ?>,
-			<?php echo json_encode($wp_locale->get_weekday_abbrev($wp_locale->get_weekday(3))); ?>,
-			<?php echo json_encode($wp_locale->get_weekday_abbrev($wp_locale->get_weekday(4))); ?>,
-			<?php echo json_encode($wp_locale->get_weekday_abbrev($wp_locale->get_weekday(5))); ?>,
-			<?php echo json_encode($wp_locale->get_weekday_abbrev($wp_locale->get_weekday(6))); ?>
-		];
 
 		// Configuration
 		RPBCalendar.config.FETCH_EVENT_DATA_URL = <?php echo json_encode(RPBCALENDAR_URL . '/ajax/fetcheventdata.php'); /* TODO: use trait AjaxURLs instead */ ?>;
