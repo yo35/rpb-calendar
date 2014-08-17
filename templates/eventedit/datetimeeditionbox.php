@@ -30,6 +30,9 @@
 				echo htmlspecialchars($model->getEventDateBeginAsString());
 			?>" size="10" />
 		</div>
+		<div>
+			<span id="rpbcalendar-eventDateBeginWeekday"></span>
+		</div>
 	</div>
 	<div>
 		<div>
@@ -39,6 +42,9 @@
 			<input type="text" name="rpbevent_date_end" id="rpbcalendar-eventDateEndField" value="<?php
 				echo htmlspecialchars($model->getEventDateEndAsString());
 			?>" size="10" />
+		</div>
+		<div>
+			<span id="rpbcalendar-eventDateEndWeekday"></span>
 		</div>
 	</div>
 </div>
@@ -54,14 +60,27 @@
 		$('#rpbcalendar-eventDateBeginField').prop('readonly', true);
 		$('#rpbcalendar-eventDateEndField'  ).prop('readonly', true);
 
+		$('#rpbcalendar-eventDateBeginField').change(function() {
+			$('#rpbcalendar-eventDateBeginWeekday').text('(' + moment($('#rpbcalendar-eventDateBeginField').val()).format('dddd') + ')');
+		}).change();
+
+		$('#rpbcalendar-eventDateEndField').change(function() {
+			$('#rpbcalendar-eventDateEndWeekday').text('(' + moment($('#rpbcalendar-eventDateEndField').val()).format('dddd') + ')');
+		}).change();
+
 		RPBCalendar.addDatePicker($('#rpbcalendar-eventDateBeginPicker'), $('#rpbcalendar-eventDateBeginField'), {
 			onSelect: function(dateBegin) {
 				$('#rpbcalendar-eventDateEndPicker').datepicker('option', 'minDate', dateBegin);
+				$('#rpbcalendar-eventDateBeginField').change();
+				$('#rpbcalendar-eventDateEndField').change();
 			}
 		});
 
 		RPBCalendar.addDatePicker($('#rpbcalendar-eventDateEndPicker'), $('#rpbcalendar-eventDateEndField'), {
-			minDate: $('#rpbcalendar-eventDateBeginField').val()
+			minDate: $('#rpbcalendar-eventDateBeginField').val(),
+			onSelect: function() {
+				$('#rpbcalendar-eventDateEndField').change();
+			}
 		});
 	});
 
