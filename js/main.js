@@ -179,75 +179,72 @@ var RPBCalendar = (function(moment, $) /* exported RPBCalendar */
 
 
 	/**
-	 * Create a calendar table to the given DOM nodes.
+	 * Create a calendar table to the given DOM node.
 	 *
-	 * @param {jQuery} elements
+	 * @param {jQuery} element
 	 */
-	function addCalendar(elements)
+	function addCalendar(element)
 	{
-		elements.each(function(i,e)
-		{
-			$(e).fullCalendar({
+		element.fullCalendar({
 
-				// General calendar options
-				header: { left: 'title', center: '', right: ' today prevYear,prev,next,nextYear' },
-				firstDay: config.FIRST_DAY_OF_WEEK,
+			// General calendar options
+			header: { left: 'title', center: '', right: ' today prevYear,prev,next,nextYear' },
+			firstDay: config.FIRST_DAY_OF_WEEK,
 
-				// Event source and rendering method
-				events: config.FETCH_EVENTS_URL,
-				eventRender: function(event, element) {
+			// Event source and rendering method
+			events: config.FETCH_EVENTS_URL,
+			eventRender: function(event, element) {
 
-					// Build the event block
-					var content = $('<div class="rpbcalendar-eventBlock"></div>');
-					content.data('eventId', event.ID);
-					content.attr('style', event.style);
+				// Build the event block
+				var content = $('<div class="rpbcalendar-eventBlock"></div>');
+				content.data('eventId', event.ID);
+				content.attr('style', event.style);
 
-					// Event title
-					$('<div class="rpbcalendar-eventTitle"></div>').text(event.title).appendTo(content);
-					if(event.teaser !== null) {
-						$('<div class="rpbcalendar-eventTeaser">' + event.teaser + '</div>').appendTo(content);
-					}
-
-					// Set-up the tooltip
-					addEventTooltip(content);
-
-					// Event link
-					if(event.link !== null) {
-						content = $('<a target="_blank"></a>').attr('href', event.link).append(content);
-					}
-
-					// Return the element
-					element.empty().append(content);
-					return element;
-				},
-
-				// Localization
-				buttonText: {
-					today: i18n.TODAY
-				},
-				monthNames: moment.months(),
-				monthNamesShort: moment.monthsShort(),
-				dayNames: moment.weekdays(),
-				dayNamesShort: moment.weekdaysShort(),
-
-				// Loading indicator
-				loading: function(isLoading) {
-					if(isLoading) {
-						var todayButton = $('.fc-button-today', e);
-						var anchor = $('.fc-header-right .fc-header-space', e).first();
-						var spinAnim = $('<div></div>').spinanim().appendTo(anchor);
-						spinAnim.offset({
-							left: anchor.offset().left - spinAnim.width(),
-							top: todayButton.offset().top
-						});
-						var scale = 'scale(' + (todayButton.height() / spinAnim.height()) + ')';
-						spinAnim.css('transform', scale).css('-ms-transform', scale).css('-webkit-transform', scale);
-					}
-					else {
-						$('.uicalendar-spinanim', e).remove();
-					}
+				// Event title
+				$('<div class="rpbcalendar-eventTitle"></div>').text(event.title).appendTo(content);
+				if(event.teaser !== null) {
+					$('<div class="rpbcalendar-eventTeaser">' + event.teaser + '</div>').appendTo(content);
 				}
-			});
+
+				// Set-up the tooltip
+				addEventTooltip(content);
+
+				// Event link
+				if(event.link !== null) {
+					content = $('<a target="_blank"></a>').attr('href', event.link).append(content);
+				}
+
+				// Return the element
+				element.empty().append(content);
+				return element;
+			},
+
+			// Localization
+			buttonText: {
+				today: i18n.TODAY
+			},
+			monthNames: moment.months(),
+			monthNamesShort: moment.monthsShort(),
+			dayNames: moment.weekdays(),
+			dayNamesShort: moment.weekdaysShort(),
+
+			// Loading indicator
+			loading: function(isLoading) {
+				if(isLoading) {
+					var todayButton = $('.fc-button-today', element);
+					var anchor = $('.fc-header-right .fc-header-space', element).first();
+					var spinAnim = $('<div></div>').spinanim().appendTo(anchor);
+					spinAnim.offset({
+						left: anchor.offset().left - spinAnim.width(),
+						top: todayButton.offset().top
+					});
+					var scale = 'scale(' + (todayButton.height() / spinAnim.height()) + ')';
+					spinAnim.css('transform', scale).css('-ms-transform', scale).css('-webkit-transform', scale);
+				}
+				else {
+					$('.uicalendar-spinanim', element).remove();
+				}
+			}
 		});
 	}
 
