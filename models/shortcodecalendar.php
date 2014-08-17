@@ -28,10 +28,5 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/shortcode.php');
  */
 class RPBCalendarModelShortcodeCalendar extends RPBCalendarAbstractModelShortcode
 {
-	public function __construct($atts, $content)
-	{
-		parent::__construct($atts, $content);
-		$this->loadTrait('AjaxURLs');
-		$this->loadTrait('DefaultGeneric');
-	}
+	// Nothing to do...
 }

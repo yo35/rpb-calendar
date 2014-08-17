@@ -22,11 +22,13 @@
 /**
  * Miscellaneous functions used by the plugin.
  *
+ * @requires Moment.js {@link http://momentjs.com/}
  * @requires jQuery
- * @requires qTip2
  * @requires spinanim.js
+ * @requires qTip2 {@link http://qtip2.com/}
+ * @requires FullCalendar {@link http://arshaw.com/fullcalendar/}
  */
-var RPBCalendar = (function($) /* exported RPBCalendar */
+var RPBCalendar = (function(moment, $) /* exported RPBCalendar */
 {
 	'use strict';
 
@@ -56,10 +58,22 @@ var RPBCalendar = (function($) /* exported RPBCalendar */
 	var config = {
 
 		/**
+		 * Target URL to use to fetch event lists.
+		 * @type {string}
+		 */
+		FETCH_EVENTS_URL: '',
+
+		/**
 		 * Target URL to use to fetch event descriptions.
 		 * @type {string}
 		 */
-		FETCH_EVENT_DATA_URL: ''
+		FETCH_EVENT_DATA_URL: '',
+
+		/**
+		 * First day of the week (0 = Sunday, 1 = Monday, ...,  6 = Saturday).
+		 * @type {number}
+		 */
+		FIRST_DAY_OF_WEEK: 0
 	};
 
 
@@ -164,10 +178,85 @@ var RPBCalendar = (function($) /* exported RPBCalendar */
 	}
 
 
+	/**
+	 * Create a calendar table to the given DOM nodes.
+	 *
+	 * @param {jQuery} elements
+	 */
+	function addCalendar(elements)
+	{
+		elements.each(function(i,e)
+		{
+			$(e).fullCalendar({
+
+				// General calendar options
+				header: { left: 'title', center: '', right: ' today prevYear,prev,next,nextYear' },
+				firstDay: config.FIRST_DAY_OF_WEEK,
+
+				// Event source and rendering method
+				events: config.FETCH_EVENTS_URL,
+				eventRender: function(event, element) {
+
+					// Build the event block
+					var content = $('<div class="rpbcalendar-eventBlock"></div>');
+					content.data('eventId', event.ID);
+					content.attr('style', event.style);
+
+					// Event title
+					$('<div class="rpbcalendar-eventTitle"></div>').text(event.title).appendTo(content);
+					if(event.teaser !== null) {
+						$('<div class="rpbcalendar-eventTeaser">' + event.teaser + '</div>').appendTo(content);
+					}
+
+					// Set-up the tooltip
+					addEventTooltip(content);
+
+					// Event link
+					if(event.link !== null) {
+						content = $('<a target="_blank"></a>').attr('href', event.link).append(content);
+					}
+
+					// Return the element
+					element.empty().append(content);
+					return element;
+				},
+
+				// Localization
+				buttonText: {
+					today: i18n.TODAY
+				},
+				monthNames: moment.months(),
+				monthNamesShort: moment.monthsShort(),
+				dayNames: moment.weekdays(),
+				dayNamesShort: moment.weekdaysShort(),
+
+				// Loading indicator
+				loading: function(isLoading) {
+					if(isLoading) {
+						var todayButton = $('.fc-button-today', e);
+						var anchor = $('.fc-header-right .fc-header-space', e).first();
+						var spinAnim = $('<div></div>').spinanim().appendTo(anchor);
+						spinAnim.offset({
+							left: anchor.offset().left - spinAnim.width(),
+							top: todayButton.offset().top
+						});
+						var scale = 'scale(' + (todayButton.height() / spinAnim.height()) + ')';
+						spinAnim.css('transform', scale).css('-ms-transform', scale).css('-webkit-transform', scale);
+					}
+					else {
+						$('.uicalendar-spinanim', e).remove();
+					}
+				}
+			});
+		});
+	}
+
+
 	return {
 		i18n: i18n,
 		config: config,
-		addEventTooltip: addEventTooltip
+		addEventTooltip: addEventTooltip,
+		addCalendar: addCalendar
 	};
 
-})( /* global jQuery */ jQuery );
+})( /* global moment */ moment, /* global jQuery */ jQuery );

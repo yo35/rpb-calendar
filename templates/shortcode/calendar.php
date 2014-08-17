@@ -25,69 +25,7 @@
 <script type="text/javascript">
 
 	jQuery(document).ready(function($) {
-
-		$('#' + <?php echo json_encode($model->getUniqueID()); ?>).fullCalendar({
-
-			// General calendar options
-			header: { left: 'title', center: '', right: ' today prevYear,prev,next,nextYear' },
-			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
-
-			// Event source and rendering method
-			events: <?php echo json_encode($model->getFetchEventsURL()); ?>,
-			eventRender: function(event, element) {
-
-				// Build the event block
-				var content = $('<div class="rpbcalendar-eventBlock"></div>');
-				content.data('eventId', event.ID);
-				content.attr('style', event.style);
-
-				// Event title
-				$('<div class="rpbcalendar-eventTitle"></div>').text(event.title).appendTo(content);
-				if(event.teaser !== null) {
-					$('<div class="rpbcalendar-eventTeaser">' + event.teaser + '</div>').appendTo(content);
-				}
-
-				// Set-up the tooltip
-				RPBCalendar.addEventTooltip(content);
-
-				// Event link
-				if(event.link !== null) {
-					content = $('<a target="_blank"></a>').attr('href', event.link).append(content);
-				}
-
-				// Return the element
-				element.empty().append(content);
-				return element;
-			},
-
-			// Localization
-			buttonText: {
-				today: RPBCalendar.i18n.TODAY
-			},
-			monthNames: moment.months(),
-			monthNamesShort: moment.monthsShort(),
-			dayNames: moment.weekdays(),
-			dayNamesShort: moment.weekdaysShort(),
-
-			// Set-up the loading indicator
-			loading: function(isLoading, view) {
-				if(isLoading) {
-					var todayButton = $('#' + <?php echo json_encode($model->getUniqueID()); ?> + ' .fc-button-today');
-					var anchor = $('#' + <?php echo json_encode($model->getUniqueID()); ?> + ' .fc-header-right .fc-header-space').first();
-					var spinAnim = $('<div></div>').spinanim().appendTo(anchor);
-					spinAnim.offset({
-						left: anchor.offset().left - spinAnim.width(),
-						top: todayButton.offset().top
-					});
-					var scale = 'scale(' + (todayButton.height() / spinAnim.height()) + ')';
-					spinAnim.css('transform', scale).css('-ms-transform', scale).css('-webkit-transform', scale);
-				}
-				else {
-					$('#' + <?php echo json_encode($model->getUniqueID()); ?> + ' .uicalendar-spinanim').remove();
-				}
-			}
-		});
-
+		RPBCalendar.addCalendar($('#' + <?php echo json_encode($model->getUniqueID()); ?>));
 	});
 
 </script>
