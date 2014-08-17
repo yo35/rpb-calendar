@@ -24,6 +24,7 @@
  *
  * @requires Moment.js {@link http://momentjs.com/}
  * @requires jQuery
+ * @requires jQuery UI Date Picker
  * @requires spinanim.js
  * @requires qTip2 {@link http://qtip2.com/}
  * @requires FullCalendar {@link http://arshaw.com/fullcalendar/}

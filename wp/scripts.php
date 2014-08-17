@@ -36,12 +36,12 @@ abstract class RPBCalendarScripts
 		wp_register_script('rpbcalendar-momentjs', RPBCALENDAR_URL . '/third-party-libs/moment-js/moment' . $ext);
 		$momentjs = self::localizeJavaScriptLib('rpbcalendar-momentjs', 'third-party-libs/moment-js/locales/%1$s.js');
 
-		// qTip2
+		// qTip2 (http://qtip2.com/)
 		wp_register_script('rpbcalendar-qtip2', RPBCALENDAR_URL . '/third-party-libs/qtip2/jquery.qtip' . $ext, array(
 			'jquery'
 		));
 
-		// FullCalendar
+		// FullCalendar (http://arshaw.com/fullcalendar/)
 		wp_register_script('rpbcalendar-fullcalendar', RPBCALENDAR_URL . '/third-party-libs/fullcalendar/fullcalendar' . $ext, array(
 			'jquery-ui-widget'
 		));
@@ -62,19 +62,19 @@ abstract class RPBCalendarScripts
 
 		// Plugin functions
 		wp_register_script('rpbcalendar-main', RPBCALENDAR_URL . '/js/main' . $ext, array(
-			'jquery',
 			$momentjs,
+			'jquery',
+			$jQueryDatePicker, // TODO: registration only in backend
+			'rpbcalendar-spinamin',
 			'rpbcalendar-qtip2',
-			'rpbcalendar-spinamin'
+			'rpbcalendar-fullcalendar'
 		));
 
 		// Enqueue the scripts.
-		wp_enqueue_script('rpbcalendar-fullcalendar');
-		wp_enqueue_script('rpbcalendar-main'        );
+		wp_enqueue_script('rpbcalendar-main');
 
 		// Additional scripts for the backend.
 		if(is_admin()) {
-			wp_enqueue_script($jQueryDatePicker);
 			wp_enqueue_script('rpbcalendar-iris2');
 		}
 
