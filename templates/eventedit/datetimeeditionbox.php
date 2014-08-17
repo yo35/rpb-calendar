@@ -43,55 +43,26 @@
 	</div>
 </div>
 
-<div id="rpbcalendar-eventDateBeginPicker" class="rpbcalendar-datePickerPopup rpbcalendar-jQuery-enableSmoothness">
-	<div class="rpbcalendar-datePickerPopup-background"></div>
-	<div class="rpbcalendar-datePickerPopup-widget"></div>
-</div>
-
-<div id="rpbcalendar-eventDateEndPicker" class="rpbcalendar-datePickerPopup rpbcalendar-jQuery-enableSmoothness">
-	<div class="rpbcalendar-datePickerPopup-background"></div>
-	<div class="rpbcalendar-datePickerPopup-widget"></div>
-</div>
+<div id="rpbcalendar-eventDateBeginPicker" class="rpbcalendar-jQuery-enableSmoothness"></div>
+<div id="rpbcalendar-eventDateEndPicker" class="rpbcalendar-jQuery-enableSmoothness"></div>
 
 
 <script type="text/javascript">
 
 	jQuery(document).ready(function($)
 	{
-		$('#rpbcalendar-eventDateBeginField').prop('readonly', true).focusin(function() {
-			$('#rpbcalendar-eventDateBeginPicker').addClass('rpbcalendar-popupVisible');
-		});
+		$('#rpbcalendar-eventDateBeginField').prop('readonly', true);
+		$('#rpbcalendar-eventDateEndField'  ).prop('readonly', true);
 
-		$('#rpbcalendar-eventDateEndField').prop('readonly', true).focusin(function() {
-			$('#rpbcalendar-eventDateEndPicker').addClass('rpbcalendar-popupVisible');
-		});
-
-		$('#rpbcalendar-eventDateBeginPicker .rpbcalendar-datePickerPopup-widget').datepicker({
-			altField: '#rpbcalendar-eventDateBeginField',
-			dateFormat: 'yy-mm-dd',
-			defaultDate: $('#rpbcalendar-eventDateBeginField').val(),
-			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
+		RPBCalendar.addDatePicker($('#rpbcalendar-eventDateBeginPicker'), $('#rpbcalendar-eventDateBeginField'), {
 			onSelect: function(dateBegin) {
-				$('#rpbcalendar-eventDateEndPicker .rpbcalendar-datePickerPopup-widget').datepicker('option', 'minDate', dateBegin);
-				$('#rpbcalendar-eventDateBeginPicker').removeClass('rpbcalendar-popupVisible');
+				$('#rpbcalendar-eventDateEndPicker').datepicker('option', 'minDate', dateBegin);
 			}
 		});
 
-		$('#rpbcalendar-eventDateEndPicker .rpbcalendar-datePickerPopup-widget').datepicker({
-			altField: '#rpbcalendar-eventDateEndField',
-			dateFormat: 'yy-mm-dd',
-			defaultDate: $('#rpbcalendar-eventDateEndField').val(),
-			firstDay: <?php echo json_encode($model->getStartOfWeek()); ?>,
-			minDate: $('#rpbcalendar-eventDateBeginField').val(),
-			onSelect: function() {
-				$('#rpbcalendar-eventDateEndPicker').removeClass('rpbcalendar-popupVisible');
-			}
+		RPBCalendar.addDatePicker($('#rpbcalendar-eventDateEndPicker'), $('#rpbcalendar-eventDateEndField'), {
+			minDate: $('#rpbcalendar-eventDateBeginField').val()
 		});
-
-		$('.rpbcalendar-datePickerPopup-background').click(function() {
-			$('.rpbcalendar-datePickerPopup').removeClass('rpbcalendar-popupVisible');
-		});
-
 	});
 
 </script>

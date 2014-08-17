@@ -32,6 +32,5 @@ class RPBCalendarModelEventEdit extends RPBCalendarAbstractModelCustomPostEditLi
 	{
 		parent::__construct();
 		$this->loadTrait('Event');
-		$this->loadTrait('DefaultGeneric');
 	}
 }

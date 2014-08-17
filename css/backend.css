@@ -73,24 +73,25 @@ td.rpbevent_date_time .rpbcalendar-eventDateEnd {
 
 .rpbcalendar-datePickerPopup {
 	display: none;
+	position: absolute;
 }
 
 .rpbcalendar-datePickerPopup.rpbcalendar-popupVisible {
 	display: block;
 }
 
-.rpbcalendar-datePickerPopup .rpbcalendar-datePickerPopup-background {
+.rpbcalendar-datePickerPopup .ui-datepicker {
+	position: relative;
+	z-index: 100001;
+}
+
+.rpbcalendar-datePickerPopup .rpbcalendar-popupBackground {
 	position: fixed;
 	z-index: 100000;
 	width : 100%;
 	height: 100%;
 	left: 0px;
 	top : 0px;
-}
-
-.rpbcalendar-datePickerPopup .rpbcalendar-datePickerPopup-widget {
-	position: absolute;
-	z-index: 100001;
 }
 
 

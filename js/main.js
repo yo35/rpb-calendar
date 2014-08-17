@@ -249,11 +249,48 @@ var RPBCalendar = (function(moment, $) /* exported RPBCalendar */
 	}
 
 
+	/**
+	 * Create a date picker popup widget associated to an input text field.
+	 *
+	 * @param {jQuery} element Anchor for the date picker widget.
+	 * @param {jQuery} inputElement Input element associated to the date picker.
+	 * @param {object} options Parameter passed to the date picker widget.
+	 */
+	function addDatePicker(element, inputElement, options)
+	{
+		// Default 'onSelect' callback
+		var callbackOnSelect = typeof options.onSelect === 'function' ? options.onSelect : null;
+
+		// Set the default options
+		options.altField    = inputElement;
+		options.dateFormat  = 'yy-mm-dd';
+		options.defaultDate = inputElement.val();
+		options.firstDay    = config.FIRST_DAY_OF_WEEK;
+		options.onSelect    = function(value) {
+			element.removeClass('rpbcalendar-popupVisible');
+			if(callbackOnSelect !== null) {
+				callbackOnSelect(value);
+			}
+		};
+
+		// Build the date picker
+		element.addClass('rpbcalendar-datePickerPopup').datepicker(options);
+		var background = $('<div class="rpbcalendar-popupBackground"></div>').appendTo(element);
+		background.click(function() {
+			element.removeClass('rpbcalendar-popupVisible');
+		});
+		inputElement.focusin(function() {
+			element.addClass('rpbcalendar-popupVisible');
+		});
+	}
+
+
 	return {
 		i18n: i18n,
 		config: config,
 		addEventTooltip: addEventTooltip,
-		addCalendar: addCalendar
+		addCalendar: addCalendar,
+		addDatePicker: addDatePicker
 	};
 
 })( /* global moment */ moment, /* global jQuery */ jQuery );
