@@ -169,3 +169,8 @@
 	border: none;
 	font-size: 100%;
 }
+
+.rpbcalendar-calendar table.fc-header .fc-header-title h2,
+.rpbcalendar-calendar th.fc-day-header {
+	text-transform: capitalize;
+}
