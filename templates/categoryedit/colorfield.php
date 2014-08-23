@@ -51,6 +51,7 @@
 		'rpbcalendar'),
 		'<a href="'.htmlspecialchars($model->getPageOptionsURL()).'">',
 		'</a>');
+		// TODO: do not show the link if the user do not have the 'manage_options' capability, or create a specific setting page for default colors.
 	?>
 </p>
 
