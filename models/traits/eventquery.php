@@ -130,6 +130,7 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 		$this->ensureEventLoaded();
 		if(!isset($this->event->title)) {
 			$this->event->title = html_entity_decode(get_the_title(), ENT_QUOTES);
+			$this->event->title = preg_replace('/&rsquo;/', '’', $this->event->title); // `html_entity_decode` misses some caracters in PHP 5.2.
 		}
 		return $this->event->title;
 	}
