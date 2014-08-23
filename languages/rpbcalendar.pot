@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-17 12:53+0200\n"
+"POT-Creation-Date: 2014-08-23 16:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -234,7 +234,7 @@ msgid "Displayed as:"
 msgstr ""
 
 #: templates/eventedit/linkeditionbox.php
-msgid "Preview the target link in a new window"
+msgid "Preview the link target in a new window"
 msgstr ""
 
 #: templates/eventedit/linkeditionbox.php
@@ -259,8 +259,7 @@ msgid ""
 "The color is used to display the events that belong to the category. The "
 "events belonging to a category for which no color is defined are displayed "
 "either with the color associated to the category parent (if the latter "
-"exists), or with the default category color (see the %1$sglobal settings"
-"%2$s)."
+"exists), or with a default color (see the %1$splugin settings%2$s)."
 msgstr ""
 
 #: wp/eventclass.php
@@ -332,7 +331,8 @@ msgid "A list of the current day events."
 msgstr ""
 
 #: wp/adminpages.php
-msgid "Events and calendar settings"
+#, php-format
+msgid "Settings of the %1$s plugin"
 msgstr ""
 
 #: wp/adminpages.php
