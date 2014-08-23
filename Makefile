@@ -26,7 +26,7 @@ PLUGIN_NAME = rpb-calendar
 SRC_MAIN_FILE         = $(PLUGIN_NAME).php
 SRC_FOLDERS           = ajax controllers css helpers images js languages models templates views wp
 THIRD_PARTY_FOLDER    = third-party-libs
-ASSET_FOLDER          = assets
+#ASSET_FOLDER          = assets
 WORDPRESS_README_FILE = wordpress.readme.txt
 INFO_FILES            = LICENSE README.md
 
@@ -164,8 +164,8 @@ pack: i18n-compile js-minify
 	@mkdir -p $(SNAPSHOT_FOLDER)/$(PLUGIN_NAME)
 	@cp -r $(SRC_MAIN_FILE) $(SRC_FOLDERS) $(THIRD_PARTY_FOLDER) $(INFO_FILES) $(SNAPSHOT_FOLDER)/$(PLUGIN_NAME)
 	@cp $(WORDPRESS_README_FILE) $(SNAPSHOT_FOLDER)/$(PLUGIN_NAME)/readme.txt
-	@cp -r $(ASSET_FOLDER) $(SNAPSHOT_FOLDER)/$(PLUGIN_NAME)-assets
-	@cd $(SNAPSHOT_FOLDER) && zip -qr ../../$(DEPLOYMENT_FILE) $(PLUGIN_NAME) $(PLUGIN_NAME)-assets
+#	@cp -r $(ASSET_FOLDER) $(SNAPSHOT_FOLDER)/$(PLUGIN_NAME)-assets
+	@cd $(SNAPSHOT_FOLDER) && zip -qr ../../$(DEPLOYMENT_FILE) $(PLUGIN_NAME) #$(PLUGIN_NAME)-assets
 	@$(ECHO) "$(COLOR_IN)$(DEPLOYMENT_FILE) updated$(COLOR_OUT)"
 
 
