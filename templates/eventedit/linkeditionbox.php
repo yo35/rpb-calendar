@@ -25,7 +25,7 @@
 		echo htmlspecialchars($model->getEventLink());
 	?>" />
 	<a class="button" id="rpbcalendar-eventLinkPreview" href="#" title="<?php
-		_e('Preview the target link in a new window', 'rpbcalendar');
+		_e('Preview the link target in a new window', 'rpbcalendar');
 	?>"><?php _e('Preview', 'rpbcalendar'); ?></a>
 </div>
 

@@ -35,7 +35,7 @@ abstract class RPBCalendarAdminPages
 	{
 		// Page "options"
 		add_submenu_page('edit.php?post_type=rpbevent',
-			__('Events and calendar settings', 'rpbcalendar'),
+			sprintf(__('Settings of the %1$s plugin', 'rpbcalendar'), 'RPB Calendar'),
 			__('Settings', 'rpbcalendar'),
 			'manage_options', 'rpbcalendar-options', array(__CLASS__, 'callbackPageOptions')
 		);
