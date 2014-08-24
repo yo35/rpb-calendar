@@ -148,7 +148,7 @@ var RPBCalendar = (function(moment, $) /* exported RPBCalendar */
 			// Tooltip factory.
 			$(e).qtip({
 				content: {
-					title: $(e).text(),
+					title: $('.rpbcalendar-eventTitle', e).text(),
 					button: true,
 					text: function(event, api) {
 
