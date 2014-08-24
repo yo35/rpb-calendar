@@ -186,9 +186,7 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	{
 		$this->ensureEventLoaded();
 		if(!isset($this->event->teaser)) {
-			add_filter('the_content_more_link', array(__CLASS__, 'buildEventMoreLink'));
-			$teaser = $this->callGetTheContent(false);
-			remove_filter('the_content_more_link', array(__CLASS__, 'buildEventMoreLink'));
+			$teaser = get_the_excerpt();
 			$this->event->teaser = convert_chars(convert_smilies(wptexturize($teaser)));
 		}
 		return $this->event->teaser;
@@ -226,16 +224,5 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 		$retVal = get_the_content();
 		$more = $oldMore;
 		return $retVal;
-	}
-
-
-	/**
-	 * Return how more "more" links are represented in events.
-	 *
-	 * @return string
-	 */
-	public static function buildEventMoreLink()
-	{
-		return '[+]';
 	}
 }

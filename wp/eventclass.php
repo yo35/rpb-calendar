@@ -49,7 +49,7 @@ class RPBCalendarEventClass
 			'public'       => true,
 			'menu_icon'    => null, // TODO: icon for the event post type
 			'hierarchical' => false,
-			'supports'     => array('title', 'editor', 'author', 'comments'),
+			'supports'     => array('title', 'editor', 'excerpt', 'author'),
 			'rewrite'      => array('slug' => 'event'),
 			'register_meta_box_cb' => array(__CLASS__, 'callbackEventEdit'),
 		));
