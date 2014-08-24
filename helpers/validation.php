@@ -119,6 +119,30 @@ abstract class RPBCalendarHelperValidation
 
 
 	/**
+	 * Validate an array of integers.
+	 *
+	 * @param mixed $value
+	 * @return array May be null is the value is not valid.
+	 */
+	public static function validateIntegerArray($value)
+	{
+		if(is_string($value)) {
+			$value = explode(',', $value);
+		}
+		if(!is_array($value)) {
+			return null;
+		}
+		foreach($value as &$item) {
+			$item = filter_var($item, FILTER_VALIDATE_INT);
+			if($item===false) {
+				return null;
+			}
+		}
+		return $value;
+	}
+
+
+	/**
 	 * Validate a boolean.
 	 *
 	 * @param mixed $value
