@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-23 16:50+0200\n"
+"POT-Creation-Date: 2014-08-24 19:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -217,7 +217,23 @@ msgstr ""
 msgid "Unselect the current color"
 msgstr ""
 
-#: templates/widgetedit/today.php templates/widgetedit/upcoming.php
+#: templates/widgetedit/filterfields.php
+msgid "Event category filter:"
+msgstr ""
+
+#: templates/widgetedit/filterfields.php
+msgid "Hide the selected categories"
+msgstr ""
+
+#: templates/widgetedit/filterfields.php
+msgid "Only show the selected categories"
+msgstr ""
+
+#: templates/widgetedit/filterfields.php
+msgid "IDs of the filtered categories (comma separated string):"
+msgstr ""
+
+#: templates/widgetedit/titlefield.php
 msgid "Title:"
 msgstr ""
 
@@ -354,4 +370,8 @@ msgstr ""
 
 #: rpb-calendar.php
 msgid "Create and organize events, and display them in a calendar in post/page on your website."
+msgstr ""
+
+#: rpb-calendar.php
+msgid "This plugin allows you to list and schedule events, and to display them in a calendar in a post or a page."
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-23 16:50+0200\n"
+"POT-Creation-Date: 2014-08-24 19:30+0200\n"
 "PO-Revision-Date: 2011-08-29 00:37+0200\n"
 "Last-Translator: Yoann <yoann.le-montagner@m4x.org>\n"
 "Language-Team: French\n"
@@ -234,7 +234,23 @@ msgstr "Sélectionne une couleur au hasard"
 msgid "Unselect the current color"
 msgstr "Désélectionne la couleur courante"
 
-#: templates/widgetedit/today.php templates/widgetedit/upcoming.php
+#: templates/widgetedit/filterfields.php
+msgid "Event category filter:"
+msgstr "Filtrage des catégories d'événement&nbsp;:"
+
+#: templates/widgetedit/filterfields.php
+msgid "Hide the selected categories"
+msgstr "Masquer les catégories sélectionnées"
+
+#: templates/widgetedit/filterfields.php
+msgid "Only show the selected categories"
+msgstr "Afficher seulement les catégories sélectionnées"
+
+#: templates/widgetedit/filterfields.php
+msgid "IDs of the filtered categories (comma separated string):"
+msgstr ""
+
+#: templates/widgetedit/titlefield.php
 msgid "Title:"
 msgstr "Titre&nbsp;:"
 
@@ -381,6 +397,14 @@ msgid ""
 msgstr ""
 "Créez et organisez vos événements, et affichez-les sur un calendrier dans un "
 "article ou une page de votre site."
+
+#: rpb-calendar.php
+msgid ""
+"This plugin allows you to list and schedule events, and to display them in a "
+"calendar in a post or a page."
+msgstr ""
+"Ce plugin vous permets de répertorier et de planifier des événements, et de "
+"les afficher dans sur un calendrier dans un article ou une page."
 
 #~ msgid "Go back"
 #~ msgstr "Revenir"
@@ -653,9 +677,6 @@ msgstr ""
 
 #~ msgid "Go"
 #~ msgstr "Go"
-
-#~ msgid "Unable to print the list of categories"
-#~ msgstr "Impossible d'afficher la liste de catégories"
 
 #~ msgid "Unable to print the list of events"
 #~ msgstr "Impossible d'afficher la liste d'événements"
