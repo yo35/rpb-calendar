@@ -22,7 +22,7 @@
 
 <p>
 	<label for="<?php echo htmlspecialchars($model->getInclusiveModeFieldID()); ?>"><?php
-		_e('Event category filter:', '');
+		_e('Event category filter:', 'rpbcalendar');
 	?></label>
 	<select class="widefat"
 		id="<?php echo htmlspecialchars($model->getInclusiveModeFieldID()); ?>"
