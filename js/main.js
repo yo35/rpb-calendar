@@ -191,6 +191,7 @@ var RPBCalendar = (function(moment, $) /* exported RPBCalendar */
 			// General calendar options
 			header: { left: 'title', center: '', right: ' today prevYear,prev,next,nextYear' },
 			firstDay: config.FIRST_DAY_OF_WEEK,
+			weekMode: 'variable',
 
 			// Event source and rendering method
 			events: config.FETCH_EVENTS_URL,
