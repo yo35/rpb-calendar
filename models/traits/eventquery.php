@@ -185,8 +185,7 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	{
 		$this->ensureEventLoaded();
 		if(!isset($this->event->teaser)) {
-			$teaser = get_the_excerpt();
-			$this->event->teaser = convert_chars(convert_smilies(wptexturize($teaser)));
+			$this->event->teaser = convert_chars(convert_smilies(wptexturize(get_the_excerpt())));
 		}
 		return $this->event->teaser;
 	}
@@ -201,8 +200,8 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	{
 		$this->ensureEventLoaded();
 		if(!isset($this->event->content)) {
-			$content = $this->callGetTheContent(true);
-			$this->event->content = apply_filters('the_content', $content);
+			$content = apply_filters('the_content', $this->callGetTheContent(true));
+			$this->event->content = $content === '' ? $this->getEventTeaser() : $content;
 		}
 		return $this->event->content;
 	}
