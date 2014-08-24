@@ -1,10 +1,34 @@
-=== RPB Chessboard ===
+=== RPB Calendar ===
 Contributors: yo35
-Tags: TODO
+Tags: calendar, dates, events, event management, event organizer
 Requires at least: 3.9
 Tested up to: 3.9.2
 Stable tag: trunk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-TODO
+This plugin allows you to list and schedule events, and to display them in a calendar in a post or a page.
+
+
+
+== Description ==
+
+TODO: description section
+
+
+
+== Installation ==
+
+TODO: installation section
+
+
+
+== Screenshots ==
+
+TODO: screenshots section
+
+
+
+== Changelog ==
+
+TODO: changelog section
