@@ -28,7 +28,7 @@
 	style="<?php echo htmlspecialchars($model->getEventBlockStyle()); ?>"
 	data-event-id="<?php echo htmlspecialchars($model->getEventID()); ?>"
 >
-	<div class="rpbcalendar-eventTitle"><?php echo htmlspecialchars($model->getEventTitle()); ?></div>
+	<div class="rpbcalendar-eventTitle"><?php echo $model->getEventTitle(); ?></div>
 	<?php if($model->isEventTeaserDefined()): ?>
 		<div class="rpbcalendar-eventTeaser"><?php echo $model->getEventTeaser(); ?></div>
 	<?php endif;?>

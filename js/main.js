@@ -202,7 +202,7 @@ var RPBCalendar = (function(moment, $) /* exported RPBCalendar */
 				content.attr('style', event.style);
 
 				// Event title
-				$('<div class="rpbcalendar-eventTitle"></div>').text(event.title).appendTo(content);
+				$('<div class="rpbcalendar-eventTitle">' + event.title + '</div>').appendTo(content);
 				if(event.teaser !== null) {
 					$('<div class="rpbcalendar-eventTeaser">' + event.teaser + '</div>').appendTo(content);
 				}
