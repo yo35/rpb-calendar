@@ -20,29 +20,11 @@
  ******************************************************************************/
 ?>
 
-<?php
-	include(RPBCALENDAR_ABSPATH . 'templates/widgetedit/titlefield.php');
-?>
-
 <p>
-	<label for="<?php echo htmlspecialchars($model->getTimeFrameFieldID()); ?>"><?php
-		_e('Length of the time frame (in days):', 'rpbcalendar');
-	?></label>
+	<label for="<?php echo htmlspecialchars($model->getTitleFieldID()); ?>"><?php _e('Title:', 'rpbcalendar'); ?></label>
 	<input type="text" class="widefat"
-		id="<?php echo htmlspecialchars($model->getTimeFrameFieldID()); ?>"
-		name="<?php echo htmlspecialchars($model->getTimeFrameFieldName()); ?>"
-		value="<?php echo htmlspecialchars($model->getTimeFrame()); ?>"
+		id="<?php echo htmlspecialchars($model->getTitleFieldID()); ?>"
+		name="<?php echo htmlspecialchars($model->getTitleFieldName()); ?>"
+		value="<?php echo htmlspecialchars($model->getTitle()); ?>"
 	/>
-</p>
-
-<p>
-	<input type="hidden" value="0" name="<?php echo htmlspecialchars($model->getWithTodayFieldName()); ?>" />
-	<input type="checkbox" value="1" class="widefat"
-		id="<?php echo htmlspecialchars($model->getWithTodayFieldID()); ?>"
-		name="<?php echo htmlspecialchars($model->getWithTodayFieldName()); ?>"
-		<?php if($model->getWithToday()) { echo 'checked="1"'; } ?>
-	/>
-	<label for="<?php echo htmlspecialchars($model->getWithTodayFieldID()); ?>"><?php
-		_e('Show events of the current day', 'rpbcalendar');
-	?></label>
 </p>

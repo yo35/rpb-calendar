@@ -20,11 +20,6 @@
  ******************************************************************************/
 ?>
 
-<p>
-	<label for="<?php echo htmlspecialchars($model->getTitleFieldID()); ?>"><?php _e('Title:', 'rpbcalendar'); ?></label>
-	<input type="text" class="widefat"
-		id="<?php echo htmlspecialchars($model->getTitleFieldID()); ?>"
-		name="<?php echo htmlspecialchars($model->getTitleFieldName()); ?>"
-		value="<?php echo htmlspecialchars($model->getTitle()); ?>"
-	/>
-</p>
+<?php
+	include(RPBCALENDAR_ABSPATH . 'templates/widgetedit/titlefield.php');
+?>
