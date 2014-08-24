@@ -41,6 +41,7 @@ class RPBCalendarModelWidgetPrintToday extends RPBCalendarAbstractModelWidgetPri
 			'time_frame_begin' => $today,
 			'time_frame_end'   => $today
 		);
+		$where[$this->getInclusiveMode() ? 'category_in' : 'category_not_in'] = $this->getFilteredCategories();
 		$this->loadTrait('EventQuery', $where);
 	}
 

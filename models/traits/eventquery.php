@@ -37,6 +37,9 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	 *
 	 * @param array $where Selection criterias:
 	 *
+	 *  - `$where['id']`: only the event corresponding to the given ID,
+	 *  - `$where['category_in']` (array of category IDs): only the events that belong to the given categories,
+	 *  - `$where['category_not_in']` (array of category IDs): only the events that DO NOT belong to the given categories,
 	 *  - `$where['time_frame_begin']`: only the events that end at or after this date,
 	 *  - `$where['time_frame_end']`: only the events that start before or at this date.
 	 */
@@ -56,6 +59,26 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 			$args['p'] = $where['id'];
 		}
 
+		// Filter: only the events that belong to certain categories.
+		$categorySubQuery = null;
+		if(isset($where['category_in'])) {
+			$categorySubQuery = array(
+				'operator' => 'IN',
+				'terms'    => empty($where['category_in']) ? array(0) : $where['category_in']
+			);
+		}
+		else if(isset($where['category_not_in'])) {
+			$categorySubQuery = array(
+				'operator' => 'NOT IN',
+				'terms'    => $where['category_not_in']
+			);
+		}
+		if(isset($categorySubQuery)) {
+			$categorySubQuery['taxonomy'        ] = 'rpbevent_category';
+			$categorySubQuery['include_children'] = true;
+			$args['tax_query'] = array($categorySubQuery);
+		}
+
 		// Filter: only the events within a given time frame.
 		if(isset($where['time_frame_end'])) {
 			$dateBeginSubQuery['value'  ] = $where['time_frame_end'];
@@ -65,10 +88,10 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 			$dateEndSubQuery['value'  ] = $where['time_frame_begin'];
 			$dateEndSubQuery['compare'] = '>=';
 		}
+		$args['meta_query'] = array($dateBeginSubQuery, $dateEndSubQuery);
 
 		// Create the WP_Query object.
 		add_filter('posts_orderby', array(__CLASS__, 'customOrderBy'));
-		$args['meta_query'] = array($dateBeginSubQuery, $dateEndSubQuery);
 		$this->query = new WP_Query($args);
 		remove_filter('posts_orderby', array(__CLASS__, 'customOrderBy'));
 

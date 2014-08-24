@@ -44,6 +44,7 @@ class RPBCalendarModelWidgetPrintUpcoming extends RPBCalendarAbstractModelWidget
 			'time_frame_begin' => $this->getTimeFrameBegin(),
 			'time_frame_end'   => $this->getTimeFrameEnd  ()
 		);
+		$where[$this->getInclusiveMode() ? 'category_in' : 'category_not_in'] = $this->getFilteredCategories();
 		$this->loadTrait('EventQuery', $where);
 	}
 
