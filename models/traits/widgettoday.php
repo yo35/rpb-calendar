@@ -20,27 +20,17 @@
  ******************************************************************************/
 
 
-require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
-require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
+require_once(RPBCALENDAR_ABSPATH . 'models/traits/widgetbase.php');
 
 
 /**
- * Global parameters relative to an instance of a "today-events" widget.
+ * Parameters of "upcoming events" widgets.
  */
-class RPBCalendarTraitWidgetToday extends RPBCalendarAbstractTrait
+class RPBCalendarTraitWidgetToday extends RPBCalendarTraitWidgetBase
 {
-	private $instance;
-	private $title;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param array $instance
-	 */
-	public function __construct($instance)
+	protected function buildDefaultTitle()
 	{
-		$this->instance = $instance;
+		return __('Today\'s events', 'rpbcalendar');
 	}
 
 
@@ -51,21 +41,6 @@ class RPBCalendarTraitWidgetToday extends RPBCalendarAbstractTrait
 	 */
 	public function getTodayWidgetFields()
 	{
-		return array('Title');
-	}
-
-
-	/**
-	 * Title of the widget.
-	 *
-	 * @return string
-	 */
-	public function getTitle()
-	{
-		if(!isset($this->title)) {
-			$value = isset($this->instance['title']) ? RPBCalendarHelperValidation::validateString($this->instance['title']) : null;
-			$this->title = isset($value) ? $value : __('Today\'s events', 'rpbcalendar');
-		}
-		return $this->title;
+		return $this->getWidgetFields();
 	}
 }
