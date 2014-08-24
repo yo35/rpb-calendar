@@ -13,19 +13,28 @@ This plugin allows you to list and schedule events, and to display them in a cal
 
 == Description ==
 
-TODO: description section
+RPB Calendar allows you to list and schedule events, and to display them
+in a calendar in a post or a page of your WordPress blog.
+
+= Features =
+
+ * Calendar table to browse the events. Use AJAX for smooth navigation.
+ * Customizable widgets to list the events of the current day and the upcoming ones.
+ * Color-based classification of events.
+ * Rich tool-tip system to attach information to events without overcrowding your blog posts/pages.
+ * Multi-language support.
 
 
 
 == Installation ==
 
-TODO: installation section
+1. Download [rpb-calendar.zip](http://downloads.wordpress.org/plugin/rpb-calendar.zip)
+and upload its content to the `/wp-content/plugins/` directory of your website.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Insert a `[rpbcalendar]` tag in a post or a page to display the event calendar.
 
-
-
-== Screenshots ==
-
-TODO: screenshots section
+For extensive details about plugin installation and management,
+please have a look to the general [plugin management page](http://codex.wordpress.org/Managing_Plugins).
 
 
 
