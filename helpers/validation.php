@@ -127,6 +127,10 @@ abstract class RPBCalendarHelperValidation
 	public static function validateIntegerArray($value)
 	{
 		if(is_string($value)) {
+			$value = trim($value);
+			if($value === '') {
+				return array();
+			}
 			$value = explode(',', $value);
 		}
 		if(!is_array($value)) {
