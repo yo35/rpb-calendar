@@ -47,7 +47,7 @@ class RPBCalendarEventClass
 				'not_found_in_trash' => __('No event found in trash', 'rpbcalendar')
 			),
 			'public'       => true,
-			'menu_icon'    => null, // TODO: icon for the event post type
+			'menu_icon'    => 'dashicons-calendar',
 			'hierarchical' => false,
 			'supports'     => array('title', 'editor', 'excerpt', 'author'),
 			'rewrite'      => array('slug' => 'event'),
