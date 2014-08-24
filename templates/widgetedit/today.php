@@ -22,4 +22,5 @@
 
 <?php
 	include(RPBCALENDAR_ABSPATH . 'templates/widgetedit/titlefield.php');
+	include(RPBCALENDAR_ABSPATH . 'templates/widgetedit/filterfields.php');
 ?>

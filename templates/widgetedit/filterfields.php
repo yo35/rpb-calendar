@@ -18,44 +18,33 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
+?>
 
+<p>
+	<label for="<?php echo htmlspecialchars($model->getInclusiveModeFieldID()); ?>"><?php
+		_e('Event category filter:', '');
+	?></label>
+	<select class="widefat"
+		id="<?php echo htmlspecialchars($model->getInclusiveModeFieldID()); ?>"
+		name="<?php echo htmlspecialchars($model->getInclusiveModeFieldName()); ?>"
+	>
+		<option value="0" <?php if(!$model->getInclusiveMode()): ?>selected="selected"<?php endif; ?>>
+			<?php _e('Hide the selected categories', 'rpbcalendar'); ?>
+		</option>
+		<option value="1" <?php if($model->getInclusiveMode()): ?>selected="selected"<?php endif; ?>>
+			<?php _e('Only show the selected categories', 'rpbcalendar'); ?>
+		</option>
+	</select>
+</p>
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/widgetupdate.php');
-require_once(RPBCALENDAR_ABSPATH . 'helpers/validation.php');
-
-
-/**
- * Model to update the settings of the upcoming events widget.
- */
-class RPBCalendarModelWidgetUpdateUpcoming extends RPBCalendarAbstractModelWidgetUpdate
-{
-	public function __construct($newInstance, $oldInstance)
-	{
-		parent::__construct($newInstance, $oldInstance);
-		$this->loadTrait('WidgetUpcoming', $this->instance);
-		$this->registerFields($this->getUpcomingWidgetFields());
-	}
-
-
-	protected function validateField($field, $value)
-	{
-		switch($field) {
-			case 'Title':
-				return RPBCalendarHelperValidation::validateString($value);
-
-			case 'TimeFrame':
-				return RPBCalendarHelperValidation::validateInteger($value, 1);
-
-			case 'WithToday':
-			case 'InclusiveMode':
-				return RPBCalendarHelperValidation::validateBoolean($value);
-
-			case 'FilteredCategories':
-				$value = RPBCalendarHelperValidation::validateIntegerArray($value);
-				return isset($value) ? implode(',', $value) : null;
-
-			default:
-				return parent::validateField($field, $value);
-		}
-	}
-}
+<p>
+	<!-- TODO: provide an easier way to selected categories -->
+	<label for="<?php echo htmlspecialchars($model->getFilteredCategoriesFieldID()); ?>"><?php
+		_e('IDs of the filtered categories (comma separated string):', 'rpbcalendar');
+	?></label>
+	<input type="text" class="widefat"
+		id="<?php echo htmlspecialchars($model->getFilteredCategoriesFieldID()); ?>"
+		name="<?php echo htmlspecialchars($model->getFilteredCategoriesFieldName()); ?>"
+		value="<?php echo htmlspecialchars($model->getFilteredCategories(true)); ?>"
+	/>
+</p>

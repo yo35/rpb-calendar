@@ -40,8 +40,18 @@ class RPBCalendarModelWidgetUpdateToday extends RPBCalendarAbstractModelWidgetUp
 	protected function validateField($field, $value)
 	{
 		switch($field) {
-			case 'Title': return RPBCalendarHelperValidation::validateString($value);
-			default: return parent::validateField($field, $value);
+			case 'Title':
+				return RPBCalendarHelperValidation::validateString($value);
+
+			case 'InclusiveMode':
+				return RPBCalendarHelperValidation::validateBoolean($value);
+
+			case 'FilteredCategories':
+				$value = RPBCalendarHelperValidation::validateIntegerArray($value);
+				return isset($value) ? implode(',', $value) : null;
+
+			default:
+				return parent::validateField($field, $value);
 		}
 	}
 }

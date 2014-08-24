@@ -46,3 +46,7 @@
 		_e('Show events of the current day', 'rpbcalendar');
 	?></label>
 </p>
+
+<?php
+	include(RPBCALENDAR_ABSPATH . 'templates/widgetedit/filterfields.php');
+?>

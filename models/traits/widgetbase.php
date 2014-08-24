@@ -31,6 +31,8 @@ abstract class RPBCalendarTraitWidgetBase extends RPBCalendarAbstractTrait
 {
 	protected $instance;
 	private $title;
+	private $inclusiveMode;
+	private $filteredCategories;
 
 
 	/**
@@ -53,7 +55,7 @@ abstract class RPBCalendarTraitWidgetBase extends RPBCalendarAbstractTrait
 	protected function getWidgetFields()
 	{
 		$args = func_get_args();
-		return array_merge(array('Title'), $args);
+		return array_merge(array('Title', 'InclusiveMode', 'FilteredCategories'), $args);
 	}
 
 
@@ -77,5 +79,37 @@ abstract class RPBCalendarTraitWidgetBase extends RPBCalendarAbstractTrait
 			$this->title = isset($value) ? $value : $this->buildDefaultTitle();
 		}
 		return $this->title;
+	}
+
+
+	/**
+	 * When true, only display events that belong to the categories returned by `getFilteredCategories()`.
+	 * When false, do not display events that belong to those categories.
+	 *
+	 * @return boolean
+	 */
+	public function getInclusiveMode()
+	{
+		if(!isset($this->inclusiveMode)) {
+			$value = isset($this->instance['inclusive-mode']) ? RPBCalendarHelperValidation::validateBoolean($this->instance['inclusive-mode']) : null;
+			$this->inclusiveMode = isset($value) ? $value : false;
+		}
+		return $this->inclusiveMode;
+	}
+
+
+	/**
+	 * List of event categories to include/exclude (depending on the value returned by `getInclusiveMode()`.
+	 *
+	 * @param boolean $asCommaSeparatedString True to return the result as a comma separated string (optional, default: false).
+	 * @return mixed List of event category IDs, either as a string or as an array.
+	 */
+	public function getFilteredCategories($asCommaSeparatedString = false)
+	{
+		if(!isset($this->filteredCategories)) {
+			$value = isset($this->instance['filtered-categories']) ? RPBCalendarHelperValidation::validateIntegerArray($this->instance['filtered-categories']) : null;
+			$this->filteredCategories = isset($value) ? $value : array();
+		}
+		return $asCommaSeparatedString ? implode(',', $this->filteredCategories) : $this->filteredCategories;
 	}
 }
