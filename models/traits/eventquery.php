@@ -208,7 +208,7 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	{
 		$this->ensureEventLoaded();
 		if(!isset($this->event->teaser)) {
-			$this->event->teaser = convert_chars(convert_smilies(wptexturize(get_the_excerpt())));
+			$this->event->teaser = has_excerpt() ? convert_chars(convert_smilies(wptexturize(get_the_excerpt()))) : '';
 		}
 		return $this->event->teaser;
 	}
