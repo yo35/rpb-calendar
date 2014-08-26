@@ -94,6 +94,10 @@ td.rpbevent_date_time .rpbcalendar-eventDateEnd {
 	top : 0px;
 }
 
+.rpbcalendar-datePickerPopup .ui-datepicker-title {
+	text-transform: capitalize;
+}
+
 
 
 /* -------------------------------------------------------------------------- */
