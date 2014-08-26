@@ -33,26 +33,26 @@ abstract class RPBCalendarScripts
 		$ext = WP_DEBUG ? '.js' : '.min.js';
 
 		// Moment.js (http://momentjs.com/)
-		wp_register_script('rpbcalendar-momentjs', RPBCALENDAR_URL . '/third-party-libs/moment-js/moment' . $ext);
+		wp_register_script('rpbcalendar-momentjs', RPBCALENDAR_URL . 'third-party-libs/moment-js/moment' . $ext);
 		$momentjs = self::localizeJavaScriptLib('rpbcalendar-momentjs', 'third-party-libs/moment-js/locales/%1$s.js');
 
 		// qTip2 (http://qtip2.com/)
-		wp_register_script('rpbcalendar-qtip2', RPBCALENDAR_URL . '/third-party-libs/qtip2/jquery.qtip' . $ext, array(
+		wp_register_script('rpbcalendar-qtip2', RPBCALENDAR_URL . 'third-party-libs/qtip2/jquery.qtip' . $ext, array(
 			'jquery'
 		));
 
 		// FullCalendar (http://arshaw.com/fullcalendar/)
-		wp_register_script('rpbcalendar-fullcalendar', RPBCALENDAR_URL . '/third-party-libs/fullcalendar/fullcalendar' . $ext, array(
+		wp_register_script('rpbcalendar-fullcalendar', RPBCALENDAR_URL . 'third-party-libs/fullcalendar/fullcalendar' . $ext, array(
 			'jquery-ui-widget'
 		));
 
 		// Loading indicator
-		wp_register_script('rpbcalendar-spinamin', RPBCALENDAR_URL . '/js/spinanim' . $ext, array(
+		wp_register_script('rpbcalendar-spinamin', RPBCALENDAR_URL . 'js/spinanim' . $ext, array(
 			'jquery-ui-widget'
 		));
 
 		// Color-picker
-		wp_register_script('rpbcalendar-iris2', RPBCALENDAR_URL . '/js/iris2' . $ext, array(
+		wp_register_script('rpbcalendar-iris2', RPBCALENDAR_URL . 'js/iris2' . $ext, array(
 			'jquery-ui-widget',
 			'iris'
 		));
@@ -61,7 +61,7 @@ abstract class RPBCalendarScripts
 		$jQueryDatePicker = self::localizeJavaScriptLib('jquery-ui-datepicker', 'third-party-libs/jquery/locales/jquery.ui.datepicker-%1$s.js');
 
 		// Plugin functions
-		wp_register_script('rpbcalendar-main', RPBCALENDAR_URL . '/js/main' . $ext, array(
+		wp_register_script('rpbcalendar-main', RPBCALENDAR_URL . 'js/main' . $ext, array(
 			$momentjs,
 			'jquery',
 			$jQueryDatePicker, // TODO: registration only in backend
@@ -108,7 +108,7 @@ abstract class RPBCalendarScripts
 
 			// If it exists, register it, and return a handle pointing to the localization file.
 			$localizedHandle = $handle . '-localized';
-			wp_register_script($localizedHandle, RPBCALENDAR_URL . '/' . $relativeFilePath, array($handle));
+			wp_register_script($localizedHandle, RPBCALENDAR_URL . $relativeFilePath, array($handle));
 			return $localizedHandle;
 		}
 

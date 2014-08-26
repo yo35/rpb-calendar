@@ -56,11 +56,11 @@
 	<h3><?php _e('Translation', 'rpbcalendar'); ?></h3>
 	<dl id="rpbcalendar-translatorList">
 		<div>
-			<dt><img src="<?php echo RPBCALENDAR_URL.'/images/flags/gb.png'; ?>" />English</dt>
+			<dt><img src="<?php echo RPBCALENDAR_URL . 'images/flags/gb.png'; ?>" />English</dt>
 			<dd>Yoann Le Montagner</dd>
 		</div>
 		<div>
-			<dt><img src="<?php echo RPBCALENDAR_URL.'/images/flags/fr.png'; ?>" />Français</dt>
+			<dt><img src="<?php echo RPBCALENDAR_URL . 'images/flags/fr.png'; ?>" />Français</dt>
 			<dd>Yoann Le Montagner</dd>
 		</div>
 	</dl>

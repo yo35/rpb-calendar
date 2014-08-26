@@ -31,24 +31,24 @@ abstract class RPBCalendarStyleSheets
 	public static function register()
 	{
 		// qTip2
-		wp_enqueue_style('rpbcalendar-qtip2', RPBCALENDAR_URL . '/third-party-libs/qtip2/jquery.qtip.min.css');
+		wp_enqueue_style('rpbcalendar-qtip2', RPBCALENDAR_URL . 'third-party-libs/qtip2/jquery.qtip.min.css');
 
 		// FullCalendar
-		wp_enqueue_style('rpbcalendar-fullcalendar', RPBCALENDAR_URL . '/third-party-libs/fullcalendar/fullcalendar.css');
+		wp_enqueue_style('rpbcalendar-fullcalendar', RPBCALENDAR_URL . 'third-party-libs/fullcalendar/fullcalendar.css');
 
 		// Main CSS
-		wp_enqueue_style('rpbcalendar-main', RPBCALENDAR_URL . '/css/main.css');
+		wp_enqueue_style('rpbcalendar-main', RPBCALENDAR_URL . 'css/main.css');
 
 		// Additional CSS for the backend.
 		if(is_admin()) {
-			wp_enqueue_style('rpbcalendar-jquery-ui', RPBCALENDAR_URL . '/third-party-libs/jquery/jquery-ui-1.10.4.custom.min.css');
-			wp_enqueue_style('rpbcalendar-iris2'    , RPBCALENDAR_URL . '/css/iris2.css');
-			wp_enqueue_style('rpbcalendar-backend'  , RPBCALENDAR_URL . '/css/backend.css');
+			wp_enqueue_style('rpbcalendar-jquery-ui', RPBCALENDAR_URL . 'third-party-libs/jquery/jquery-ui-1.10.4.custom.min.css');
+			wp_enqueue_style('rpbcalendar-iris2'    , RPBCALENDAR_URL . 'css/iris2.css');
+			wp_enqueue_style('rpbcalendar-backend'  , RPBCALENDAR_URL . 'css/backend.css');
 		}
 
 		// Additional CSS for the frontend.
 		else {
-			wp_enqueue_style('rpbcalendar-frontend', RPBCALENDAR_URL . '/css/frontend.css');
+			wp_enqueue_style('rpbcalendar-frontend', RPBCALENDAR_URL . 'css/frontend.css');
 		}
 	}
 }

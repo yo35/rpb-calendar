@@ -33,13 +33,12 @@ Version: 1.99.2
 
 
 // Directories
-define('RPBCALENDAR_PLUGIN_DIR', basename(dirname(__FILE__)));
-define('RPBCALENDAR_ABSPATH'   , ABSPATH.'wp-content/plugins/'.RPBCALENDAR_PLUGIN_DIR.'/');
-define('RPBCALENDAR_URL'       , site_url().'/wp-content/plugins/'.RPBCALENDAR_PLUGIN_DIR);
+define('RPBCALENDAR_ABSPATH', plugin_dir_path(__FILE__));
+define('RPBCALENDAR_URL'    , plugin_dir_url (__FILE__));
 
 
 // Enable internationalization
-load_plugin_textdomain('rpbcalendar', false, RPBCALENDAR_PLUGIN_DIR.'/languages/');
+load_plugin_textdomain('rpbcalendar', false, basename(dirname(__FILE__)) . '/languages');
 
 
 // MVC loading tools

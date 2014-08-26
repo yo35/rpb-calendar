@@ -37,8 +37,8 @@
 		}
 
 		// Configuration
-		RPBCalendar.config.FETCH_EVENTS_URL = <?php echo json_encode(RPBCALENDAR_URL . '/ajax/fetchevents.php'); ?>;
-		RPBCalendar.config.FETCH_EVENT_DATA_URL = <?php echo json_encode(RPBCALENDAR_URL . '/ajax/fetcheventdata.php'); ?>;
+		RPBCalendar.config.FETCH_EVENTS_URL = <?php echo json_encode(RPBCALENDAR_URL . 'ajax/fetchevents.php'); ?>;
+		RPBCalendar.config.FETCH_EVENT_DATA_URL = <?php echo json_encode(RPBCALENDAR_URL . 'ajax/fetcheventdata.php'); ?>;
 		RPBCalendar.config.FIRST_DAY_OF_WEEK = <?php echo get_option('start_of_week'); ?>;
 
 	})();

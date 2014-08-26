@@ -197,7 +197,7 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 		$lightness1 = RPBCalendarHelperColor::lightness($color1);
 		$lightness2 = RPBCalendarHelperColor::lightness($color2);
 		$textColor = ($lightness1 + $lightness2)/2 > 0.5 ? 'black' : 'white';
-		$url = RPBCALENDAR_URL . '/ajax/color2.php?c1=' . urlencode($color1) . '&c2=' . urlencode($color2);
+		$url = RPBCALENDAR_URL . 'ajax/color2.php?c1=' . urlencode($color1) . '&c2=' . urlencode($color2);
 		return "background-image:url($url); background-repeat:repeat; color:$textColor;";
 	}
 
@@ -209,7 +209,7 @@ class RPBCalendarTraitEvent extends RPBCalendarAbstractTrait
 	 */
 	private static function fallbackBackgroundStyle()
 	{
-		$url = RPBCALENDAR_URL . '/images/fallback-pattern.png';
+		$url = RPBCALENDAR_URL . 'images/fallback-pattern.png';
 		return "background-image:url($url); background-repeat:repeat; color:black;";
 	}
 
