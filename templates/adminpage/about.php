@@ -24,29 +24,44 @@
 
 	<p>
 		<?php _e(
-			'The RPB Calendar plugin allows you to create, organize, plan and publish events through your Wordpress blog.',
+			'RPB Calendar allows you to list and schedule events, and to display them ' .
+			'in a calendar in a post or a page of your WordPress blog.',
 			'rpbcalendar');
 		?>
 	</p>
 	<p>
-		<a href="#TODO" target="_blank">TODO: link to the Wordpress page</a>
-		<br/>
-		<a href="#TODO" target="_blank">TODO: link to the GitHub page</a>
-		<?php echo '('.__('developer link', 'rpbcalendar').')'; ?>
+		<a class="button" href="https://github.com/yo35/rpb-calendar/issues" target="_blank">
+			<?php echo sprintf('%1$s / %2$s', __('Ask for help', 'rpbcalendar'), __('Report a problem', 'rpbcalendar')); ?>
+		</a>
 	</p>
 	<p class="description">
 		<?php echo sprintf(
 			__(
 				'If you encounter some bugs with this plugin, or if you wish to get new features in the future versions, '.
-				'you can report/propose them in the bug tracker at %1$s.',
+				'you can report/propose them in the %1$sGitHub bug tracker%2$s.',
 			'rpbcalendar'),
-			'<a href="#TODO" target="_blank">TODO: link to the GitHub page/issues</a>');
+			'<a href="https://github.com/yo35/rpb-calendar/issues" target="_blank">',
+			'</a>');
 		?>
 	</p>
 
 
 	<h3><?php _e('Plugin version', 'rpbcalendar'); ?></h3>
 	<p><?php echo htmlspecialchars($model->getPluginVersion()); ?></p>
+
+
+	<h3><?php _e('Links', 'rpbcalendar'); ?></h3>
+	<ul>
+		<li><strong><a href="http://yo35.org/rpb-calendar/" target="_blank">http://yo35.org/rpb-calendar/</a></strong></li>
+		<li>
+			<a href="https://wordpress.org/plugins/rpb-calendar/" target="_blank">https://wordpress.org/plugins/rpb-calendar/</a>
+			<?php echo sprintf('(%1$s)', __('plugin page on WordPress.org', 'rpbcalendar')); ?>
+		</li>
+		<li>
+			<a href="https://github.com/yo35/rpb-calendar" target="_blank">https://github.com/yo35/rpb-calendar</a>
+			<?php echo sprintf('(%1$s)', __('source code on GitHub', 'rpbcalendar')); ?>
+		</li>
+	</ul>
 
 
 	<h3><?php _e('Author', 'rpbcalendar'); ?></h3>
