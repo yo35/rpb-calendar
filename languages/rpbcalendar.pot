@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-24 19:30+0200\n"
+"POT-Creation-Date: 2014-08-28 19:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,24 +90,40 @@ msgstr ""
 
 #: templates/adminpage/about.php
 msgid ""
-"The RPB Calendar plugin allows you to create, organize, plan and publish "
-"events through your Wordpress blog."
+"RPB Calendar allows you to list and schedule events, and to display them in "
+"a calendar in a post or a page of your WordPress blog."
 msgstr ""
 
 #: templates/adminpage/about.php
-msgid "developer link"
+msgid "Ask for help"
+msgstr ""
+
+#: templates/adminpage/about.php
+msgid "Report a problem"
 msgstr ""
 
 #: templates/adminpage/about.php
 #, php-format
 msgid ""
 "If you encounter some bugs with this plugin, or if you wish to get new "
-"features in the future versions, you can report/propose them in the bug "
-"tracker at %1$s."
+"features in the future versions, you can report/propose them in the "
+"%1$sGitHub bug tracker%2$s."
 msgstr ""
 
 #: templates/adminpage/about.php
 msgid "Plugin version"
+msgstr ""
+
+#: templates/adminpage/about.php
+msgid "Links"
+msgstr ""
+
+#: templates/adminpage/about.php
+msgid "plugin page on WordPress.org"
+msgstr ""
+
+#: templates/adminpage/about.php
+msgid "source code on GitHub"
 msgstr ""
 
 #: templates/adminpage/about.php
