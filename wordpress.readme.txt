@@ -16,6 +16,18 @@ This plugin allows you to list and schedule events, and to display them in a cal
 RPB Calendar allows you to list and schedule events, and to display them
 in a calendar in a post or a page of your WordPress blog.
 
+= Links =
+
+ * **http://yo35.org/rpb-calendar/**
+ * https://github.com/yo35/rpb-calendar (GitHub repository)
+
+[Ask for help or report a problem](https://github.com/yo35/rpb-calendar/issues).
+
+= Quick start guide =
+
+Install the the plugin on your website, and insert a `[rpbcalendar]` tag
+to display the event calendar.
+
 = Features =
 
  * Calendar table to browse the events. Use AJAX for smooth navigation.
@@ -23,6 +35,13 @@ in a calendar in a post or a page of your WordPress blog.
  * Color-based classification of events.
  * Rich tool-tip system to attach information to events without overcrowding your blog posts/pages.
  * Multi-language support.
+
+If you encounter some bugs with this plugin, or if you wish to get new features
+in the future versions, you can report/propose them
+in the [GitHub bug tracker](https://github.com/yo35/rpb-calendar/issues).
+
+If you are interested in translating this plugin into your language,
+please [contact the author](mailto:yo35@melix.net).
 
 
 
