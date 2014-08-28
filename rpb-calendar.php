@@ -21,8 +21,7 @@
 
 /*
 Plugin Name: RPB Calendar
-Plugin URI: http://wordpress.org/plugins/rpb-calendar/
-Description: Create and organize events, and display them in a calendar in post/page on your website.
+Plugin URI: http://yo35.org/rpb-calendar/
 Description: This plugin allows you to list and schedule events, and to display them in a calendar in a post or a page.
 Text Domain: rpbcalendar
 Author: Yoann Le Montagner
