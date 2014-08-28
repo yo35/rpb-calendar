@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 19:43+0200\n"
+"POT-Creation-Date: 2014-08-28 20:38+0200\n"
 "PO-Revision-Date: 2011-08-29 00:37+0200\n"
 "Last-Translator: Yoann <yoann.le-montagner@m4x.org>\n"
 "Language-Team: French\n"
@@ -413,22 +413,11 @@ msgstr "Une liste d'événements à venir dans un certain laps de temps."
 
 #: rpb-calendar.php
 msgid ""
-"Create and organize events, and display them in a calendar in post/page on "
-"your website."
-msgstr ""
-"Créez et organisez vos événements, et affichez-les sur un calendrier dans un "
-"article ou une page de votre site."
-
-#: rpb-calendar.php
-msgid ""
 "This plugin allows you to list and schedule events, and to display them in a "
 "calendar in a post or a page."
 msgstr ""
 "Ce plugin vous permets de répertorier et de planifier des événements, et de "
 "les afficher dans sur un calendrier dans un article ou une page."
-
-#~ msgid "Go back"
-#~ msgstr "Revenir"
 
 #~ msgid "Name"
 #~ msgstr "Nom"
@@ -450,21 +439,6 @@ msgstr ""
 
 #~ msgid "Last day"
 #~ msgstr "Dernier jour"
-
-#~ msgid "holiday"
-#~ msgstr "période de vacance"
-
-#~ msgid "Holidays"
-#~ msgstr "Vacances"
-
-#~ msgid "Add a new holiday"
-#~ msgstr "Ajouter une nouvelle période de vacances"
-
-#~ msgid "Edit the holiday"
-#~ msgstr "Éditer "
-
-#~ msgid "Delete a holiday"
-#~ msgstr "Supprimer une période de vacances"
 
 #~ msgid "Date this year"
 #~ msgstr "Date cette année"
@@ -557,15 +531,6 @@ msgstr ""
 #~ msgid "From %1$s to %2$s"
 #~ msgstr "Du %1$s au %2$s"
 
-#~ msgid "may"
-#~ msgstr "mai"
-
-#~ msgid "june"
-#~ msgstr "juin"
-
-#~ msgid "july"
-#~ msgstr "juillet"
-
 #~ msgid "Cannot print more than 12 months in the same PDF"
 #~ msgstr "Impossible d'imprimer plus de 12 mois dans un même PDF"
 
@@ -614,15 +579,8 @@ msgstr ""
 #~ msgid "Show today events:"
 #~ msgstr "Afficher les événements du jour :"
 
-#~ msgid "Use HTML hexa format (ex: #0000ff for blue or #ffff00 for yellow)"
-#~ msgstr ""
-#~ "Utilisez le format hex HTML (ex : #0000ff pour bleu ou #ffff00 pour jaune)"
-
 #~ msgid "Badly formatted color field: &quot;%s&quot;"
 #~ msgstr "Champ de couleur mal formaté : &quot;%s&quot;"
-
-#~ msgid "Use the following format: yyyy-mm-dd"
-#~ msgstr "Utilisez le format suivant : aaaa-mm-jj"
 
 #~ msgid "Select"
 #~ msgstr "Sélectionner"
