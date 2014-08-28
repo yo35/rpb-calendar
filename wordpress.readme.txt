@@ -59,4 +59,5 @@ please have a look to the general [plugin management page](http://codex.wordpres
 
 == Changelog ==
 
-TODO: changelog section
+= 1.99.3 (August 28, 2014) =
+* First public version.
