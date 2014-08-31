@@ -111,11 +111,17 @@ td.rpbevent_date_time .rpbcalendar-eventDateEnd {
 	-webkit-flex-direction: row;
 }
 
+.rpbcalendar-hBox.rpbcalendar-spaceAround {
+	justify-content: space-around;
+}
+
 .rpbcalendar-hBox > *,
 .wp-core-ui .rpbcalendar-hBox > * {
 	margin: 0px 0px 0px 5px;
 }
 
+.rpbcalendar-hBox.rpbcalendar-spaceAround > *,
+.wp-core-ui .rpbcalendar-hBox.rpbcalendar-spaceAround > *,
 .rpbcalendar-hBox > :first-child,
 .wp-core-ui .rpbcalendar-hBox > :first-child {
 	margin-left: 0px;
@@ -134,11 +140,17 @@ td.rpbevent_date_time .rpbcalendar-eventDateEnd {
 	-webkit-flex-direction: column;
 }
 
+.rpbcalendar-vBox.rpbcalendar-spaceAround {
+	justify-content: space-around;
+}
+
 .rpbcalendar-vBox > *,
 .wp-core-ui .rpbcalendar-vBox > * {
 	margin: 5px 0px 0px 0px;
 }
 
+.rpbcalendar-vBox.rpbcalendar-spaceAround > *,
+.wp-core-ui .rpbcalendar-vBox.rpbcalendar-spaceAround > *,
 .rpbcalendar-vBox > :first-child,
 .wp-core-ui .rpbcalendar-vBox > :first-child {
 	margin-top: 0px;
