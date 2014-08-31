@@ -156,7 +156,7 @@ td.rpbevent_date_time .rpbcalendar-eventDateEnd {
 
 .rpbcalendar-gridLayout > div {
 	display: table-row;
-	}
+}
 
 .rpbcalendar-gridLayout > div > div {
 	display: table-cell;
