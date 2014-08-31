@@ -62,12 +62,16 @@ abstract class RPBCalendarScripts
 
 		// Plugin functions
 		wp_register_script('rpbcalendar-main', RPBCALENDAR_URL . 'js/main' . $ext, array(
-			$momentjs,
 			'jquery',
-			$jQueryDatePicker, // TODO: registration only in backend
 			'rpbcalendar-spinamin',
 			'rpbcalendar-qtip2',
+			$momentjs,
 			'rpbcalendar-fullcalendar'
+		));
+		wp_register_script('rpbcalendar-backend', RPBCALENDAR_URL . 'js/backend' . $ext, array(
+			'rpbcalendar-main',
+			'jquery',
+			$jQueryDatePicker
 		));
 
 		// Enqueue the scripts.
@@ -76,6 +80,7 @@ abstract class RPBCalendarScripts
 		// Additional scripts for the backend.
 		if(is_admin()) {
 			wp_enqueue_script('rpbcalendar-iris2');
+			wp_enqueue_script('rpbcalendar-backend');
 		}
 
 		// Inlined scripts
