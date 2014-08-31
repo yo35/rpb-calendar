@@ -39,7 +39,7 @@
 	 * @param {jQuery} inputElement Input element associated to the date picker.
 	 * @param {object} options Parameter passed to the date picker widget.
 	 */
-	RPBCalendar.addDatePicker =  function(element, inputElement, options)
+	RPBCalendar.addDatePicker = function(element, inputElement, options)
 	{
 		// Default 'onSelect' callback
 		var callbackOnSelect = typeof options.onSelect === 'function' ? options.onSelect : null;
@@ -55,6 +55,9 @@
 				callbackOnSelect(value);
 			}
 		};
+
+		// Destroy the previously existing date-picker object if necessary
+		element.datepicker('destroy');
 
 		// Build the date picker
 		element.addClass('rpbcalendar-datePickerPopup').datepicker(options);
