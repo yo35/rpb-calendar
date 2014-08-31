@@ -62,20 +62,20 @@ abstract class RPBCalendarAdminPages
 	}
 
 
-	public static function callbackAddSeveral () { echo 'TODO'; }
-	public static function callbackPageOptions() { self::printAdminPage('AdminPageOptions'); }
-	public static function callbackPageAbout  () { self::printAdminPage('AdminPageAbout'  ); }
+	public static function callbackAddSeveral () { self::printAdminPage('AddSeveral'); }
+	public static function callbackPageOptions() { self::printAdminPage('Options'   ); }
+	public static function callbackPageAbout  () { self::printAdminPage('About'     ); }
 
 
 	/**
 	 * Load and print the plugin administration page defined by the model `$modelName`.
 	 *
-	 * @param string $modelName
+	 * @param string $adminPageName
 	 */
-	private static function printAdminPage($modelName)
+	private static function printAdminPage($adminPageName)
 	{
 		require_once(RPBCALENDAR_ABSPATH . 'controllers/adminpage.php');
-		$controller = new RPBCalendarControllerAdminPage($modelName);
+		$controller = new RPBCalendarControllerAdminPage($adminPageName);
 		$controller->run();
 	}
 

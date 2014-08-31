@@ -18,57 +18,10 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
+?>
 
+<div id="rpbcalendar-addSeveralPage">
 
-require_once(RPBCALENDAR_ABSPATH . 'controllers/abstractcontroller.php');
+	TODO
 
-
-/**
- * Show the requested plugin administration page.
- */
-class RPBCalendarControllerAdminPage extends RPBCalendarAbstractController
-{
-	/**
-	 * Constructor
-	 *
-	 * @param string $adminPageName Name of the administration page.
-	 */
-	public function __construct($adminPageName)
-	{
-		parent::__construct('AdminPage' . $adminPageName);
-	}
-
-
-	/**
-	 * Entry-point of the controller.
-	 */
-	public function run()
-	{
-		// Execute the action requested by the POST data, if any.
-		switch($this->getModel()->getPostAction()) {
-			case 'update-options': $this->executeAction('PostOptions', 'updateOptions'); break;
-			default: break;
-		}
-
-		// Create and display the view.
-		$this->getView()->display();
-	}
-
-
-	/**
-	 * Load the trait `$traitName`, and execute the method `$methodName` supposedly defined by the trait.
-	 *
-	 * @param string $traitName
-	 * @param string $methodName
-	 * @param string $capability Required capability to execute the action. Default is `'manage_options'`.
-	 */
-	private function executeAction($traitName, $methodName, $capability='manage_options')
-	{
-		if(!current_user_can($capability)) {
-			return;
-		}
-		$model = $this->getModel();
-		$model->loadTrait($traitName);
-		$model->setPostMessage($model->$methodName());
-	}
-}
+</div>
