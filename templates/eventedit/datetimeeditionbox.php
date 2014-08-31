@@ -55,33 +55,11 @@
 
 <script type="text/javascript">
 
-	jQuery(document).ready(function($)
-	{
-		$('#rpbcalendar-eventDateBeginField').prop('readonly', true);
-		$('#rpbcalendar-eventDateEndField'  ).prop('readonly', true);
-
-		$('#rpbcalendar-eventDateBeginField').change(function() {
-			$('#rpbcalendar-eventDateBeginWeekday').text('(' + moment($('#rpbcalendar-eventDateBeginField').val()).format('dddd') + ')');
-		}).change();
-
-		$('#rpbcalendar-eventDateEndField').change(function() {
-			$('#rpbcalendar-eventDateEndWeekday').text('(' + moment($('#rpbcalendar-eventDateEndField').val()).format('dddd') + ')');
-		}).change();
-
-		RPBCalendar.addDatePicker($('#rpbcalendar-eventDateBeginPicker'), $('#rpbcalendar-eventDateBeginField'), {
-			onSelect: function(dateBegin) {
-				$('#rpbcalendar-eventDateEndPicker').datepicker('option', 'minDate', dateBegin);
-				$('#rpbcalendar-eventDateBeginField').change();
-				$('#rpbcalendar-eventDateEndField').change();
-			}
-		});
-
-		RPBCalendar.addDatePicker($('#rpbcalendar-eventDateEndPicker'), $('#rpbcalendar-eventDateEndField'), {
-			minDate: $('#rpbcalendar-eventDateBeginField').val(),
-			onSelect: function() {
-				$('#rpbcalendar-eventDateEndField').change();
-			}
-		});
+	jQuery(document).ready(function($) {
+		RPBCalendar.setupEventDateFields(
+			$('#rpbcalendar-eventDateBeginField'), $('#rpbcalendar-eventDateBeginPicker'), $('#rpbcalendar-eventDateBeginWeekday'),
+			$('#rpbcalendar-eventDateEndField'  ), $('#rpbcalendar-eventDateEndPicker'  ), $('#rpbcalendar-eventDateEndWeekday'  )
+		);
 	});
 
 </script>

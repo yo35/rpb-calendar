@@ -32,30 +32,8 @@
 
 <script type="text/javascript">
 
-	jQuery(document).ready(function($)
-	{
-		// Preview window for the event link.
-		var previewWindow = null;
-
-		// Open the event link target in a dedicated window when the 'Preview' button is clicked.
-		$('#rpbcalendar-eventLinkPreview').click(function(e) {
-			e.preventDefault();
-
-			// Basic check on the URL
-			var url = $('#rpbcalendar-eventLinkField').val();
-			if(!url.match(/^https?:\/\//)) {
-				alert(<?php echo json_encode(__('The link must start with http:// or https://.', 'rpbcalendar')); ?>);
-				return;
-			}
-
-			// Open the link
-			if(previewWindow===null || previewWindow.closed) {
-				previewWindow = window.open(url);
-			}
-			else {
-				previewWindow.location.replace(url);
-			}
-		});
+	jQuery(document).ready(function($) {
+		RPBCalendar.setupEventLinkField($('#rpbcalendar-eventLinkField'), $('#rpbcalendar-eventLinkPreview'));
 	});
 
 </script>

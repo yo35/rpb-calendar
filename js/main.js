@@ -48,7 +48,14 @@ var RPBCalendar = (function(moment, $) /* exported RPBCalendar */
 		 * Today button text.
 		 * @type {string}
 		 */
-		TODAY: 'Today'
+		TODAY: 'Today',
+
+
+		/**
+		 * Error message in case of badly-formatted HTTP/HTTPS URL.
+		 * @type {string}
+		 */
+		BAD_LINK_MESSAGE: 'The link must start with http:// or https://.'
 	};
 
 

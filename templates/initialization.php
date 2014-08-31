@@ -27,6 +27,7 @@
 		// Localization
 		RPBCalendar.i18n.POSTED_ON_BY = <?php echo json_encode(__('Posted on %1$s by %2$s', 'rpbcalendar')); ?>;
 		RPBCalendar.i18n.TODAY = <?php echo json_encode(__('Today', 'rpbcalendar')); ?>;
+		RPBCalendar.i18n.BAD_LINK_MESSAGE = <?php echo json_encode(__('The link must start with http:// or https://.', 'rpbcalendar')); ?>;
 
 		// Color-picker localization
 		if(jQuery && jQuery.iris2) {

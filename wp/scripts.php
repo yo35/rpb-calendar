@@ -71,7 +71,8 @@ abstract class RPBCalendarScripts
 		wp_register_script('rpbcalendar-backend', RPBCALENDAR_URL . 'js/backend' . $ext, array(
 			'rpbcalendar-main',
 			'jquery',
-			$jQueryDatePicker
+			$jQueryDatePicker,
+			$momentjs
 		));
 
 		// Enqueue the scripts.

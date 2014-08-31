@@ -25,8 +25,9 @@
  * @requires main.js
  * @requires jQuery
  * @requires jQuery UI Date Picker
+ * @requires Moment.js {@link http://momentjs.com/}
  */
-(function(RPBCalendar, $)
+(function(RPBCalendar, moment, $)
 {
 	'use strict';
 
@@ -66,4 +67,74 @@
 		});
 	};
 
-})( /* global RPBCalendar */ RPBCalendar, /* global jQuery */ jQuery );
+
+	/**
+	 * Handle of the window used to preview the event link targets.
+	 */
+	var previewWindow = null;
+
+
+	/**
+	 * Set-up the event link field of an event add/edit form.
+	 *
+	 * @param {jQuery} linkField
+	 * @param {jQuery} previewButton
+	 */
+	RPBCalendar.setupEventLinkField = function(linkField, previewButton)
+	{
+		previewButton.click(function(e) {
+			e.preventDefault();
+
+			// Basic check off the URL
+			var url = linkField.val();
+			if(!url.match(/^https?:\/\//)) {
+				window.alert(RPBCalendar.i18n.BAD_LINK_MESSAGE);
+				return;
+			}
+
+			// Open the link
+			if(previewWindow===null || previewWindow.closed) {
+				previewWindow = window.open(url);
+			}
+			else {
+				previewWindow.location.replace(url);
+			}
+		});
+	};
+
+
+	/**
+	 * Set-up the date begin/end fields of an event add/edit form.
+	 *
+	 * @param {jQuery} beginField
+	 * @param {jQuery} beginDatePicker
+	 * @param {jQuery} beginWeekDay
+	 * @param {jQuery} endField
+	 * @param {jQuery} endDatePicker
+	 * @param {jQuery} endWeekDay
+	 */
+	RPBCalendar.setupEventDateFields = function(beginField, beginDatePicker, beginWeekDay, endField, endDatePicker, endWeekDay)
+	{
+		beginField.prop('readonly', true).change(function() {
+			beginWeekDay.text('(' + moment(beginField.val()).format('dddd') + ')');
+		}).change();
+
+		endField.prop('readonly', true).change(function() {
+			endWeekDay.text('(' + moment(endField.val()).format('dddd') + ')');
+		}).change();
+
+		RPBCalendar.addDatePicker(beginDatePicker, beginField, {
+			onSelect: function(dateBegin) {
+				endDatePicker.datepicker('option', 'minDate', dateBegin);
+				beginField.change();
+				endField.change();
+			}
+		});
+
+		RPBCalendar.addDatePicker(endDatePicker, endField, {
+			minDate: beginField.val(),
+			onSelect: function() { endField.change(); }
+		});
+	};
+
+})( /* global RPBCalendar */ RPBCalendar, /* global moment */ moment, /* global jQuery */ jQuery );
