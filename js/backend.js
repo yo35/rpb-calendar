@@ -140,4 +140,66 @@
 		});
 	};
 
+
+	/**
+	 * The row index to use the next time a row will be cloned.
+	 */
+	var suggestedRowIndex = 0;
+
+
+	/**
+	 * Set-up the dynamic fields for multiple event edit forms.
+	 *
+	 * @param {number} rowIndex
+	 */
+	RPBCalendar.setupEventRow = function(rowIndex)
+	{
+		var entry = $('#rpbcalendar-eventEntry-' + rowIndex);
+
+		// Update the row-index counter
+		suggestedRowIndex = Math.max(suggestedRowIndex, rowIndex) + 1;
+
+		// Setup the date picker widgets
+		RPBCalendar.setupEventDateFields(
+			$('.rpbcalendar-eventDateBeginField', entry), $('.rpbcalendar-eventDateBeginPicker', entry), $('.rpbcalendar-eventDateBeginWeekday', entry),
+			$('.rpbcalendar-eventDateEndField'  , entry), $('.rpbcalendar-eventDateEndPicker'  , entry), $('.rpbcalendar-eventDateEndWeekday'  , entry)
+		);
+
+		// Clone-row button
+		$('.rpbcalendar-cloneEntryButton', entry).click(function(e) {
+			e.preventDefault();
+
+			// Clone the current event row
+			var newEntry = entry.clone();
+			var newRowIndex = suggestedRowIndex;
+
+			// The value of the textareas must be cloned manually.
+			newEntry.find('textarea').each(function(index, elem) {
+				$(elem).val($('textarea[name="' + $(elem).attr('name') + '"]', entry).val());
+			});
+
+			// Change the IDs and FOR/NAME-attributes in the cloned row
+			newEntry.find('*[id$="-' + rowIndex + '"]').andSelf().each(function(index, elem) {
+				$(elem).attr('id', $(elem).attr('id').replace(new RegExp(rowIndex + '$'), newRowIndex));
+			});
+			newEntry.find('*[for$="-' + rowIndex + '"]').each(function(index, elem) {
+				$(elem).attr('for', $(elem).attr('for').replace(new RegExp(rowIndex + '$'), newRowIndex));
+			});
+			newEntry.find('*[name$="_' + rowIndex + '"]').each(function(index, elem) {
+				$(elem).attr('name', $(elem).attr('name').replace(new RegExp(rowIndex + '$'), newRowIndex));
+			});
+
+			// Append the cloned row, and initialize its widgets.
+			entry.after(newEntry);
+			RPBCalendar.setupEventRow(newRowIndex);
+
+		});
+
+		// Delete-row button
+		$('.rpbcalendar-removeEntryButton', entry).click(function(e) {
+			e.preventDefault();
+			entry.detach();
+		});
+	};
+
 })( /* global RPBCalendar */ RPBCalendar, /* global moment */ moment, /* global jQuery */ jQuery );
