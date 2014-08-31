@@ -212,6 +212,10 @@ a.rpbcalendar-removeEntryButton:hover {
 	color: #e55;
 }
 
+.rpbcalendar-eventEntry + .rpbcalendar-eventEntry {
+	margin-top: 25px;
+}
+
 
 
 /* -------------------------------------------------------------------------- */
