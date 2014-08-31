@@ -193,6 +193,28 @@ td.rpbevent_date_time .rpbcalendar-eventDateEnd {
 
 
 /* -------------------------------------------------------------------------- */
+/* "Add several" page */
+/* -------------------------------------------------------------------------- */
+
+a.rpbcalendar-cloneEntryButton {
+	color: #080;
+}
+
+a.rpbcalendar-cloneEntryButton:hover {
+	color: #2b2;
+}
+
+a.rpbcalendar-removeEntryButton {
+	color: #c00;
+}
+
+a.rpbcalendar-removeEntryButton:hover {
+	color: #e55;
+}
+
+
+
+/* -------------------------------------------------------------------------- */
 /* About page */
 /* -------------------------------------------------------------------------- */
 
