@@ -22,12 +22,12 @@
 
 <div id="rpbcalendar-addSeveralPage">
 
-	<form action="TODO" method="post">
+	<form action="<?php echo htmlspecialchars($model->getPageAddSeveralURL()); ?>" method="post">
 
 		<input type="hidden" name="rpbcalendar_action" value="add-several-events" />
 		<?php wp_nonce_field('rpbcalendar-add-several-events'); ?>
 
-		<!-- TODO: field author ID -->
+		<input type="hidden" name="rpbevent_author" value="<?php echo htmlspecialchars($model->getCurrentUserID()); ?>" />
 
 		<div class="rpbcalendar-vBox" id="rpbcalendar-eventEntries">
 
@@ -64,7 +64,9 @@
 								<label for="rpbcalendar-eventDateBeginField-0"><?php _e('From:', 'rpbcalendar'); ?></label>
 							</div>
 							<div>
-								<input type="text" name="rpbevent_date_begin_0" class="rpbcalendar-eventDateBeginField" id="rpbcalendar-eventDateBeginField-0" value="" size="10" />
+								<input type="text" name="rpbevent_date_begin_0" class="rpbcalendar-eventDateBeginField" id="rpbcalendar-eventDateBeginField-0" value="<?php
+									echo htmlspecialchars($model->getInitialEventDateFields());
+								?>" size="10" />
 							</div>
 							<div>
 								<span class="rpbcalendar-eventDateBeginWeekday"></span>
@@ -75,7 +77,9 @@
 								<label for="rpbcalendar-eventDateEndField-0"><?php _e('To:', 'rpbcalendar'); ?></label>
 							</div>
 							<div>
-								<input type="text" name="rpbevent_date_end_0" class="rpbcalendar-eventDateEndField" id="rpbcalendar-eventDateEndField-0" value="" size="10" />
+								<input type="text" name="rpbevent_date_end_0" class="rpbcalendar-eventDateEndField" id="rpbcalendar-eventDateEndField-0" value="<?php
+									echo htmlspecialchars($model->getInitialEventDateFields());
+								?>" size="10" />
 							</div>
 							<div>
 								<span class="rpbcalendar-eventDateEndWeekday"></span>
@@ -101,6 +105,11 @@
 
 		</div>
 
+
+		<p class="submit">
+			<input class="button button-primary" type="submit" value="<?php _e('Add events', 'rpbcalendar'); ?>" />
+		</p>
+
 	</form>
 
 </div>
@@ -108,9 +117,7 @@
 <script type="text/javascript">
 
 	jQuery(document).ready(function($) {
-
 		RPBCalendar.setupEventRow(0);
-
 	});
 
 </script>

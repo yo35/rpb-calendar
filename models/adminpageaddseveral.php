@@ -21,6 +21,7 @@
 
 
 require_once(RPBCALENDAR_ABSPATH . 'models/abstract/adminpage.php');
+require_once(RPBCALENDAR_ABSPATH . 'helpers/date.php');
 
 
 /**
@@ -28,5 +29,37 @@ require_once(RPBCALENDAR_ABSPATH . 'models/abstract/adminpage.php');
  */
 class RPBCalendarModelAdminPageAddSeveral extends RPBCalendarAbstractModelAdminPage
 {
-	// TODO
+	private $initialEventDateFields;
+
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->loadTrait('AdminPageURLs');
+	}
+
+
+	/**
+	 * ID of the current user.
+	 *
+	 * @return int
+	 */
+	public function getCurrentUserID()
+	{
+		return get_current_user_id();
+	}
+
+
+	/**
+	 * Initial value of the event begin/end fields.
+	 *
+	 * @return string
+	 */
+	public function getInitialEventDateFields()
+	{
+		if(!isset($this->initialEventDateFields)) {
+			$this->initialEventDateFields = date_i18n('Y-m-d', RPBCalendarHelperDate::today());
+		}
+		return $this->initialEventDateFields;
+	}
 }

@@ -28,7 +28,22 @@ require_once(RPBCALENDAR_ABSPATH . 'models/traits/abstracttrait.php');
  */
 class RPBCalendarTraitAdminPageURLs extends RPBCalendarAbstractTrait
 {
+	private static $pageAddSeveralURL;
 	private static $pageOptionsURL;
+
+
+	/**
+	 * URL to the "add-several" page.
+	 *
+	 * @return string
+	 */
+	public function getPageAddSeveralURL()
+	{
+		if(!isset(self::$pageAddSeveralURL)) {
+			self::$pageAddSeveralURL = site_url() . '/wp-admin/edit.php?post_type=rpbevent&page=rpbcalendar-add-several';
+		}
+		return self::$pageAddSeveralURL;
+	}
 
 
 	/**
