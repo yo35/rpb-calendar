@@ -34,8 +34,8 @@
 			<div class="rpbcalendar-hBox rpbcalendar-eventEntry" id="rpbcalendar-eventEntry-0">
 
 				<div class="rpbcalendar-vBox rpbcalendar-spaceAround">
-					<a href="#" class="dashicons dashicons-plus-alt rpbcalendar-cloneEntryButton"></a>
-					<a href="#" class="dashicons dashicons-dismiss rpbcalendar-removeEntryButton"></a>
+					<a href="#" class="dashicons dashicons-plus-alt rpbcalendar-cloneEntryButton" title="<?php _e('Copy this event', 'rpbcalendar'); ?>"></a>
+					<a href="#" class="dashicons dashicons-dismiss rpbcalendar-removeEntryButton" title="<?php _e('Remove this event', 'rpbcalendar'); ?>"></a>
 				</div>
 
 				<div class="rpbcalendar-gridLayout">
@@ -90,6 +90,12 @@
 					<label for="rpbcalendar-eventTeaser-0"><?php _e('Excerpt:', 'rpbcalendar'); ?></label>
 				</div>
 				<textarea name="rpbevent_teaser_0" class="rpbcalendar-eventTeaser" id="rpbcalendar-eventTeaser-0"></textarea>
+
+				<div class="rpbcalendar-vBox">
+					<label for="rpbcalendar-eventCategoryField-0"><?php _e('IDs of the categories (comma separated string):', 'rpbcalendar'); ?></label>
+					<input type="text" name="rpbevent_categories_0" class="rpbcalendar-eventCategoryField" id="rpbcalendar-eventCategoryField-0" value="" />
+					<!-- TODO: provide an easier way to selected categories -->
+				</div>
 
 			</div>
 
