@@ -40,17 +40,6 @@ class RPBCalendarModelAdminPageAddSeveral extends RPBCalendarAbstractModelAdminP
 
 
 	/**
-	 * ID of the current user.
-	 *
-	 * @return int
-	 */
-	public function getCurrentUserID()
-	{
-		return get_current_user_id();
-	}
-
-
-	/**
 	 * Initial value of the event begin/end fields.
 	 *
 	 * @return string
