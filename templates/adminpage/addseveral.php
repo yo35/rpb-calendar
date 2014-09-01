@@ -27,78 +27,82 @@
 		<input type="hidden" name="rpbcalendar_action" value="add-several-events" />
 		<?php wp_nonce_field('rpbcalendar-add-several-events'); ?>
 
-		<input type="hidden" name="rpbevent_author" value="<?php echo htmlspecialchars($model->getCurrentUserID()); ?>" />
-
 		<div class="rpbcalendar-vBox" id="rpbcalendar-eventEntries">
 
-			<div class="rpbcalendar-hBox rpbcalendar-eventEntry" id="rpbcalendar-eventEntry-0">
+			<div class="rpbcalendar-eventEntry" id="rpbcalendar-eventEntry-0">
 
-				<div class="rpbcalendar-vBox rpbcalendar-spaceAround">
-					<a href="#" class="dashicons dashicons-plus-alt rpbcalendar-cloneEntryButton" title="<?php _e('Copy this event', 'rpbcalendar'); ?>"></a>
-					<a href="#" class="dashicons dashicons-dismiss rpbcalendar-removeEntryButton" title="<?php _e('Remove this event', 'rpbcalendar'); ?>"></a>
-				</div>
+				<input type="hidden" name="rpbevent_id_0" value="0" />
 
-				<div class="rpbcalendar-gridLayout">
-					<div>
-						<div>
-							<label for="rpbcalendar-eventTitleField-0"><?php _e('Title:', 'rpbcalendar'); ?></label>
-						</div>
-						<div>
-							<input type="text" name="rpbevent_title_0" class="rpbcalendar-eventTitleField" id="rpbcalendar-eventTitleField-0" value="" />
-						</div>
+				<div class="rpbcalendar-hBox">
+
+					<div class="rpbcalendar-vBox rpbcalendar-spaceAround">
+						<a href="#" class="dashicons dashicons-plus-alt rpbcalendar-cloneEntryButton" title="<?php _e('Copy this event', 'rpbcalendar'); ?>"></a>
+						<a href="#" class="dashicons dashicons-dismiss rpbcalendar-removeEntryButton" title="<?php _e('Remove this event', 'rpbcalendar'); ?>"></a>
 					</div>
-					<div>
-						<div>
-							<label for="rpbcalendar-eventLinkField-0"><?php _e('Link:', 'rpbcalendar'); ?></label>
-						</div>
-						<div>
-							<input type="text" name="rpbevent_link_0" class="rpbcalendar-eventLinkField" id="rpbcalendar-eventLinkField-0" value="" />
-						</div>
-					</div>
-				</div>
 
-				<div>
 					<div class="rpbcalendar-gridLayout">
 						<div>
 							<div>
-								<label for="rpbcalendar-eventDateBeginField-0"><?php _e('From:', 'rpbcalendar'); ?></label>
+								<label for="rpbcalendar-eventTitleField-0"><?php _e('Title:', 'rpbcalendar'); ?></label>
 							</div>
 							<div>
-								<input type="text" name="rpbevent_date_begin_0" class="rpbcalendar-eventDateBeginField" id="rpbcalendar-eventDateBeginField-0" value="<?php
-									echo htmlspecialchars($model->getInitialEventDateFields());
-								?>" size="10" />
-							</div>
-							<div>
-								<span class="rpbcalendar-eventDateBeginWeekday"></span>
+								<input type="text" name="rpbevent_title_0" class="rpbcalendar-eventTitleField" id="rpbcalendar-eventTitleField-0" value="" />
 							</div>
 						</div>
 						<div>
 							<div>
-								<label for="rpbcalendar-eventDateEndField-0"><?php _e('To:', 'rpbcalendar'); ?></label>
+								<label for="rpbcalendar-eventLinkField-0"><?php _e('Link:', 'rpbcalendar'); ?></label>
 							</div>
 							<div>
-								<input type="text" name="rpbevent_date_end_0" class="rpbcalendar-eventDateEndField" id="rpbcalendar-eventDateEndField-0" value="<?php
-									echo htmlspecialchars($model->getInitialEventDateFields());
-								?>" size="10" />
-							</div>
-							<div>
-								<span class="rpbcalendar-eventDateEndWeekday"></span>
+								<input type="text" name="rpbevent_link_0" class="rpbcalendar-eventLinkField" id="rpbcalendar-eventLinkField-0" value="" />
 							</div>
 						</div>
 					</div>
-					<div class="rpbcalendar-eventDateBeginPicker rpbcalendar-jQuery-enableSmoothness"></div>
-					<div class="rpbcalendar-eventDateEndPicker rpbcalendar-jQuery-enableSmoothness"></div>
-				</div>
 
-				<div class="rpbcalendar-vBox">
-					<label for="rpbcalendar-eventTeaser-0"><?php _e('Excerpt:', 'rpbcalendar'); ?></label>
-				</div>
-				<textarea name="rpbevent_teaser_0" class="rpbcalendar-eventTeaser" id="rpbcalendar-eventTeaser-0"></textarea>
+					<div>
+						<div class="rpbcalendar-gridLayout">
+							<div>
+								<div>
+									<label for="rpbcalendar-eventDateBeginField-0"><?php _e('From:', 'rpbcalendar'); ?></label>
+								</div>
+								<div>
+									<input type="text" name="rpbevent_date_begin_0" class="rpbcalendar-eventDateBeginField" id="rpbcalendar-eventDateBeginField-0" value="<?php
+										echo htmlspecialchars($model->getInitialEventDateFields());
+									?>" size="10" />
+								</div>
+								<div>
+									<span class="rpbcalendar-eventDateBeginWeekday"></span>
+								</div>
+							</div>
+							<div>
+								<div>
+									<label for="rpbcalendar-eventDateEndField-0"><?php _e('To:', 'rpbcalendar'); ?></label>
+								</div>
+								<div>
+									<input type="text" name="rpbevent_date_end_0" class="rpbcalendar-eventDateEndField" id="rpbcalendar-eventDateEndField-0" value="<?php
+										echo htmlspecialchars($model->getInitialEventDateFields());
+									?>" size="10" />
+								</div>
+								<div>
+									<span class="rpbcalendar-eventDateEndWeekday"></span>
+								</div>
+							</div>
+						</div>
+						<div class="rpbcalendar-eventDateBeginPicker rpbcalendar-jQuery-enableSmoothness"></div>
+						<div class="rpbcalendar-eventDateEndPicker rpbcalendar-jQuery-enableSmoothness"></div>
+					</div>
 
-				<div class="rpbcalendar-vBox">
-					<label for="rpbcalendar-eventCategoryField-0"><?php _e('IDs of the categories (comma separated string):', 'rpbcalendar'); ?></label>
-					<input type="text" name="rpbevent_categories_0" class="rpbcalendar-eventCategoryField" id="rpbcalendar-eventCategoryField-0" value="" />
-					<!-- TODO: provide an easier way to selected categories -->
+					<div class="rpbcalendar-vBox">
+						<label for="rpbcalendar-eventTeaser-0"><?php _e('Excerpt:', 'rpbcalendar'); ?></label>
+					</div>
+					<textarea name="rpbevent_teaser_0" class="rpbcalendar-eventTeaser" id="rpbcalendar-eventTeaser-0"></textarea>
+
+					<div class="rpbcalendar-vBox">
+						<label for="rpbcalendar-eventCategoryField-0"><?php _e('IDs of the categories (comma separated string):', 'rpbcalendar'); ?></label>
+						<input type="text" name="rpbevent_categories_0" class="rpbcalendar-eventCategoryField" id="rpbcalendar-eventCategoryField-0" value="" />
+						<!-- TODO: provide an easier way to selected categories -->
+					</div>
+
 				</div>
 
 			</div>
