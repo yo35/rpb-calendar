@@ -88,8 +88,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="rpbcalendar-eventDateBeginPicker rpbcalendar-jQuery-enableSmoothness"></div>
-						<div class="rpbcalendar-eventDateEndPicker rpbcalendar-jQuery-enableSmoothness"></div>
+						<div class="rpbcalendar-jQuery-enableSmoothness rpbcalendar-eventDateBeginPicker" id="rpbcalendar-eventDateBeginPicker-0"></div>
+						<div class="rpbcalendar-jQuery-enableSmoothness rpbcalendar-eventDateEndPicker" id="rpbcalendar-eventDateEndPicker-0"></div>
 					</div>
 
 					<div class="rpbcalendar-vBox">
