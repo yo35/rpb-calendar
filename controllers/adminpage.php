@@ -46,6 +46,7 @@ class RPBCalendarControllerAdminPage extends RPBCalendarAbstractController
 	{
 		// Execute the action requested by the POST data, if any.
 		switch($this->getModel()->getPostAction()) {
+			case 'add-several-events': $this->executeAction('PostSeveralEvents', 'updateEvents', 'edit_posts', 'rpbcalendar-add-several-events'); break;
 			case 'update-options': $this->executeAction('PostOptions', 'updateOptions'); break;
 			default: break;
 		}
@@ -61,12 +62,20 @@ class RPBCalendarControllerAdminPage extends RPBCalendarAbstractController
 	 * @param string $traitName
 	 * @param string $methodName
 	 * @param string $capability Required capability to execute the action. Default is `'manage_options'`.
+	 * @param string $nonce_action If non-null, check that the nonce field correspond to the given action code.
 	 */
-	private function executeAction($traitName, $methodName, $capability='manage_options')
+	private function executeAction($traitName, $methodName, $capability='manage_options', $nonce_action=null)
 	{
 		if(!current_user_can($capability)) {
 			return;
 		}
+
+		if($nonce_action !== null) {
+			if(!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], $nonce_action)) {
+				return;
+			}
+		}
+
 		$model = $this->getModel();
 		$model->loadTrait($traitName);
 		$model->setPostMessage($model->$methodName());
