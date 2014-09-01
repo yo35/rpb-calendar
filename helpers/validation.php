@@ -104,6 +104,20 @@ abstract class RPBCalendarHelperValidation
 
 
 	/**
+	 * Validate a non-empty string.
+	 *
+	 * @param mixed $value
+	 * @param boolean $trim Whether the value should be trimmed (true by default).
+	 * @return string
+	 */
+	public static function validateNonEmptyString($value, $trim=true)
+	{
+		$value = self::validateString($value, $trim);
+		return $value === '' ? null : $value;
+	}
+
+
+	/**
 	 * Validate an integer.
 	 *
 	 * @param mixed $value
