@@ -59,5 +59,9 @@ please have a look to the general [plugin management page](http://codex.wordpres
 
 == Changelog ==
 
+= 1.99.4 (September 2, 2014) =
+* German translation (thanks to Kay Zeisberg).
+* Add page to create several similar events in one click (beta feature).
+
 = 1.99.3 (August 28, 2014) =
 * First public version.

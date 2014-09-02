@@ -27,7 +27,7 @@ Text Domain: rpbcalendar
 Author: Yoann Le Montagner
 Author URI: http://yo35.org/
 License: GPLv3
-Version: 1.99.3
+Version: 1.99.4
 */
 
 
