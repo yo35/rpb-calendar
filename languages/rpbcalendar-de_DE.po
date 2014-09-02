@@ -44,37 +44,37 @@ msgstr "Farbe"
 #. Date format, full (e.g. "Sunday, August 3, 2014")
 #: helpers/date.php
 msgid "%w$s, %m$s %d$s, %y$s"
-msgstr "%w$s, %d$s %m$s %y$s"
+msgstr "%w$s, %d$s. %m$s %y$s"
 
 #. Date format, without year (e.g. "Sunday, August 3")
 #: helpers/date.php
 msgid "%w$s, %m$s %d$s"
-msgstr "%w$s, %d$s %m$s"
+msgstr "%w$s, %d$s. %m$s"
 
 #. Date format, without weekday (e.g. "August 3, 2014")
 #: helpers/date.php
 msgid "%m$s %d$s, %y$s"
-msgstr "%d$s %m$s %y$s"
+msgstr "%d$s. %m$s %y$s"
 
 #. Date format, only month and day (e.g. "August 3")
 #: helpers/date.php
 msgid "%m$s %d$s"
-msgstr "%d$s %m$s"
+msgstr "%d$s. %m$s"
 
 #. Date range format, same begin/end month
 #: helpers/date.php
 msgid "%m1$s %d1$s–%d2$s, %y1$s"
-msgstr "%d1$s–%d2$s %m1$s %y1$s"
+msgstr "%d1$s–%d2$s. %m1$s %y1$s"
 
 #. Date range format, same begin/end year
 #: helpers/date.php
 msgid "%m1$s %d1$s – %m2$s %d2$s, %y1$s"
-msgstr "%d1$s %m1$s – %d2$s %m2$s %y1$s"
+msgstr "%d1$s. %m1$s – %d2$s. %m2$s %y1$s"
 
 #. Date range format, large range
 #: helpers/date.php
 msgid "%m1$s %d1$s, %y1$s – %m2$s %d2$s, %y2$s"
-msgstr "%d1$s %m1$s %y1$s – %d2$s %m2$s %y2$s"
+msgstr "%d1$s. %m1$s %y1$s – %d2$s. %m2$s %y2$s"
 
 #: models/traits/postseveralevents.php
 msgid "No event added"
