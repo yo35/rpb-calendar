@@ -1,0 +1,467 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: RPB Calendar Plugin deutsch\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-02 20:58+0200\n"
+"PO-Revision-Date: 2014-09-01 13:10+0100\n"
+"Last-Translator: Kay Zeisberg <kay.zeisberg@gmail.com>\n"
+"Language-Team: Kay Zeisberg, Leipzig <kay.zeisberg@gmail.com>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: controllers/eventlist.php controllers/eventedit.php
+msgid "Date/time"
+msgstr "Datum/Uhrzeit"
+
+#: controllers/eventlist.php controllers/eventedit.php
+msgid "Link"
+msgstr "Link"
+
+#: controllers/eventlist.php
+msgid "Categories"
+msgstr "Kategorien"
+
+#: controllers/eventlist.php
+msgid "State"
+msgstr "Status"
+
+#: controllers/eventlist.php
+msgid "View all categories"
+msgstr "Zeige alle Kategorien"
+
+#: controllers/categorylist.php templates/categoryedit/colorfield.php
+msgid "Color"
+msgstr "Farbe"
+
+#. Date format, full (e.g. "Sunday, August 3, 2014")
+#: helpers/date.php
+msgid "%w$s, %m$s %d$s, %y$s"
+msgstr "%w$s, %d$s %m$s %y$s"
+
+#. Date format, without year (e.g. "Sunday, August 3")
+#: helpers/date.php
+msgid "%w$s, %m$s %d$s"
+msgstr "%w$s, %d$s %m$s"
+
+#. Date format, without weekday (e.g. "August 3, 2014")
+#: helpers/date.php
+msgid "%m$s %d$s, %y$s"
+msgstr "%d$s %m$s %y$s"
+
+#. Date format, only month and day (e.g. "August 3")
+#: helpers/date.php
+msgid "%m$s %d$s"
+msgstr "%d$s %m$s"
+
+#. Date range format, same begin/end month
+#: helpers/date.php
+msgid "%m1$s %d1$s–%d2$s, %y1$s"
+msgstr "%d1$s–%d2$s %m1$s %y1$s"
+
+#. Date range format, same begin/end year
+#: helpers/date.php
+msgid "%m1$s %d1$s – %m2$s %d2$s, %y1$s"
+msgstr "%d1$s %m1$s – %d2$s %m2$s %y1$s"
+
+#. Date range format, large range
+#: helpers/date.php
+msgid "%m1$s %d1$s, %y1$s – %m2$s %d2$s, %y2$s"
+msgstr "%d1$s %m1$s %y1$s – %d2$s %m2$s %y2$s"
+
+#: models/traits/postseveralevents.php
+msgid "No event added"
+msgstr ""
+
+#: models/traits/postseveralevents.php
+msgid "1 event added"
+msgstr ""
+
+#: models/traits/postseveralevents.php
+#, php-format
+msgid "%1$d events added"
+msgstr ""
+
+#: models/traits/widgettoday.php wp/widgettoday.php
+msgid "Today's events"
+msgstr "Heutige Ereignisse"
+
+#: models/traits/postoptions.php
+msgid "Settings saved."
+msgstr "Einstellungen gespeichert."
+
+#: models/traits/widgetupcoming.php wp/widgetupcoming.php
+msgid "Upcoming events"
+msgstr "Kommende Ereignisse"
+
+#: templates/adminpage/about.php
+msgid ""
+"RPB Calendar allows you to list and schedule events, and to display them in "
+"a calendar in a post or a page of your WordPress blog."
+msgstr ""
+"Mit RPB Kalender können Sie Ereignisse auflisten und planen, um sie als "
+"Kalender in einem Beitrag oder einer Seite Ihres Wordpress-Blogs anzuzeigen."
+
+#: templates/adminpage/about.php
+msgid "Ask for help"
+msgstr "Um Hilfe bitten"
+
+#: templates/adminpage/about.php
+msgid "Report a problem"
+msgstr "Ein Problem berichten"
+
+#: templates/adminpage/about.php
+#, php-format
+msgid ""
+"If you encounter some bugs with this plugin, or if you wish to get new "
+"features in the future versions, you can report/propose them in the "
+"%1$sGitHub bug tracker%2$s."
+msgstr ""
+"Wenn Sie Fehler in diesem Plugin bemerken oder wenn Sie neue Funktionen für "
+"zukünftige Versionen erhalten möchten, können Sie diese berichten/"
+"vorschlagen im %1$sGitHub bug tracker%2$s."
+
+#: templates/adminpage/about.php
+msgid "Plugin version"
+msgstr "Plugin-Version"
+
+#: templates/adminpage/about.php
+msgid "Links"
+msgstr "Links"
+
+#: templates/adminpage/about.php
+msgid "plugin page on WordPress.org"
+msgstr "Plugin-Seite bei WordPress.org"
+
+#: templates/adminpage/about.php
+msgid "source code on GitHub"
+msgstr "Quellcode auf GitHub"
+
+#: templates/adminpage/about.php
+msgid "Author"
+msgstr "Autor"
+
+#: templates/adminpage/about.php
+msgid "Translation"
+msgstr "Übersetzung"
+
+#: templates/adminpage/about.php
+#, php-format
+msgid ""
+"If you are interested in translating this plugin into your language, please "
+"%1$scontact the author%2$s."
+msgstr ""
+"Wenn Sie Interesse an der Übersetzung dieses Plugin in Ihrer Sprache haben, "
+"nehmen Sie bitte mit dem %1$sKontakt mit dem Autor%2$s auf."
+
+#: templates/adminpage/about.php
+msgid "License"
+msgstr "Lizenz"
+
+#: templates/adminpage/about.php
+#, php-format
+msgid ""
+"This plugin is distributed under the terms of the %1$sGNU General Public "
+"License version 3%3$s (GPLv3), as published by the %2$sFree Software "
+"Foundation%3$s. The full text of this license is available at %4$s. A copy "
+"of this document is also provided with the plugin source code."
+msgstr ""
+"Dieses Plugin wird unter den Bedingungen der %1$sGNU General Public License "
+"Version 3%3$s (GPLv3) verteilt, wie sie die %2$sFree Software Foundation%3$s "
+"veröffentlicht. Der vollständige Text der Lizenz ist unter %4$s verfügbar. "
+"Eine Kopie dieses Dokuments wird auch mit dem Plugin-Quellcode zur Verfügung "
+"gestellt."
+
+#: templates/adminpage/about.php
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for "
+"more details."
+msgstr ""
+"Dieses Programm wird in der Hoffnung verteilt, dass es nützlich ist, aber "
+"OHNE JEDE GARANTIE, auch ohne die implizite Garantie der MARKTREIFE oder "
+"VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Lesen Sie die GNU General Public "
+"License für weitere Details."
+
+#: templates/adminpage/options.php
+msgid "Default category color"
+msgstr "Standard-Kategoriefarbe"
+
+#: templates/adminpage/options.php
+msgid ""
+"The default category color is used to display the events that belong to "
+"categories with no color."
+msgstr ""
+"Die Standard-Kategoriefarbe wird benutzt, um die Ereignisse in Kategorien "
+"ohne Farbe darzustellen."
+
+#: templates/adminpage/options.php
+msgid "Default event color"
+msgstr "Standard-Ereignisfarbe"
+
+#: templates/adminpage/options.php
+msgid ""
+"The default event color is used to display the events that do not belong to "
+"any category."
+msgstr ""
+"Die Standard-Ereignisfarbe wird benutzt, um die Ereignisse, die zu keiner "
+"Kategorie gehören, darzustellen."
+
+#: templates/adminpage/options.php
+msgid "Date format in events"
+msgstr "Datumsformat von Ereignissen"
+
+#: templates/adminpage/options.php
+msgid "Show weekday"
+msgstr "Zeige Wochentag"
+
+#: templates/adminpage/options.php
+msgid "Show year"
+msgstr "Zeige Jahr"
+
+#: templates/adminpage/options.php
+msgid "Save changes"
+msgstr "Änderungen speichern"
+
+#: templates/adminpage/addseveral.php
+msgid "Copy this event"
+msgstr ""
+
+#: templates/adminpage/addseveral.php
+msgid "Remove this event"
+msgstr ""
+
+#: templates/adminpage/addseveral.php templates/widgetedit/titlefield.php
+msgid "Title:"
+msgstr "Titel:"
+
+#: templates/adminpage/addseveral.php
+msgid "Link:"
+msgstr "Link:"
+
+#: templates/adminpage/addseveral.php
+#: templates/eventedit/datetimeeditionbox.php
+msgid "From:"
+msgstr "Von:"
+
+#: templates/adminpage/addseveral.php
+#: templates/eventedit/datetimeeditionbox.php
+msgid "To:"
+msgstr "An:"
+
+#: templates/adminpage/addseveral.php
+msgid "Excerpt:"
+msgstr ""
+
+#: templates/adminpage/addseveral.php
+msgid "IDs of the categories (comma separated string):"
+msgstr ""
+
+#: templates/adminpage/addseveral.php
+msgid "Add events"
+msgstr ""
+
+#: templates/adminpage/header.php
+msgid ""
+"To work properly, the RPB Calendar plugin needs JavaScript to be activated "
+"in your browser."
+msgstr ""
+"Das RPB Calendar Plugin benötigt die Aktivierung von JavaScript in Ihrem "
+"Browser."
+
+#: templates/eventlist/datetimecolumn.php
+msgid "Until:"
+msgstr "Bis:"
+
+#: templates/initialization.php
+#, php-format
+msgid "Posted on %1$s by %2$s"
+msgstr "Eingetragen am %1$s von %2$s"
+
+#: templates/initialization.php
+msgid "Today"
+msgstr "Heute"
+
+#: templates/initialization.php
+msgid "The link must start with http:// or https://."
+msgstr "Der Link muss beginnen mit http:// oder https://."
+
+#: templates/initialization.php
+msgid "Random"
+msgstr "Zufällig"
+
+#: templates/initialization.php
+msgid "Clear"
+msgstr "Löschen"
+
+#: templates/initialization.php
+msgid "Select a color at random"
+msgstr "Wähle eine zufällige Farbe"
+
+#: templates/initialization.php
+msgid "Unselect the current color"
+msgstr "Deaktivieren Sie die aktuelle Farbe"
+
+#: templates/widgetedit/filterfields.php
+msgid "Event category filter:"
+msgstr "Ereigniskategorie-Filter"
+
+#: templates/widgetedit/filterfields.php
+msgid "Hide the selected categories"
+msgstr "Gewählte Kategorien verbergen"
+
+#: templates/widgetedit/filterfields.php
+msgid "Only show the selected categories"
+msgstr "Nur die gewählten Kategorien zeigen"
+
+#: templates/widgetedit/filterfields.php
+msgid "IDs of the filtered categories (comma separated string):"
+msgstr "IDs der gefilterten Kategorien (durch Kommata getrennt):"
+
+#: templates/widgetedit/upcoming.php
+msgid "Length of the time frame (in days):"
+msgstr "Länge des Zeitrahmens (in Tagen):"
+
+#: templates/widgetedit/upcoming.php
+msgid "Show events of the current day"
+msgstr "Zeige Ereignisse des aktuellen Tages"
+
+#: templates/categorylist/colorcolumn.php
+msgid "Displayed as:"
+msgstr "Angezeigt als:"
+
+#: templates/eventedit/linkeditionbox.php
+msgid "Preview the link target in a new window"
+msgstr "Vorschau des Linkziels in einem neuen Fenster"
+
+#: templates/eventedit/linkeditionbox.php
+msgid "Preview"
+msgstr "Vorschau"
+
+#: templates/categoryedit/colorfield.php
+#, php-format
+msgid ""
+"The color is used to display the events that belong to the category. The "
+"events belonging to a category for which no color is defined are displayed "
+"either with the color associated to the category parent (if the latter "
+"exists), or with a default color (see the %1$splugin settings%2$s)."
+msgstr ""
+"Die Farbe wird verwendet, um die zur Kategorie gehörenden Ereignisse "
+"anzuzeigen. Die zu einer Kategorie gehörenden Ereignisse, für die keine "
+"Farbe definiert ist, werden entweder mit der Farbe der übergeordneten "
+"Kategorie (sofern vorhanden) verbunden oder mit einer Standardfarbe (siehe "
+"%1$s Plugin-Einstellungen%2$s)."
+
+#: wp/eventclass.php
+msgid "Events"
+msgstr "Ereignisse"
+
+#: wp/eventclass.php
+msgid "Event"
+msgstr "Ereignis"
+
+#: wp/eventclass.php
+msgid "Add new event"
+msgstr "Neues Ereignis hinzufügen"
+
+#: wp/eventclass.php
+msgid "Edit event"
+msgstr "Ereignis bearbeiten"
+
+#: wp/eventclass.php
+msgid "New event"
+msgstr "Neues Ereignis"
+
+#: wp/eventclass.php
+msgid "View event"
+msgstr "Zeige Ereignis"
+
+#: wp/eventclass.php
+msgid "Search events"
+msgstr "Suche Ereignisse"
+
+#: wp/eventclass.php
+msgid "No event found"
+msgstr "Kein Ereignis gefunden"
+
+#: wp/eventclass.php
+msgid "No event found in trash"
+msgstr "Kein Ereignis im Papierkorb gefunden"
+
+#: wp/eventclass.php
+msgid "Event categories"
+msgstr "Ereigniskategorien"
+
+#: wp/eventclass.php
+msgid "Event category"
+msgstr "Ereigniskategorie"
+
+#: wp/eventclass.php
+msgid "Add new event category"
+msgstr "Neue Ereigniskategorie hinzufügen"
+
+#: wp/eventclass.php
+msgid "Edit event category"
+msgstr "Ereigniskategorie bearbeiten"
+
+#: wp/eventclass.php
+msgid "View event category"
+msgstr "Zeige Ereigniskategorie"
+
+#: wp/eventclass.php
+msgid "Search event categories"
+msgstr "Suche Ereigniskategorien"
+
+#: wp/eventclass.php
+msgid "No event category found"
+msgstr "Keine Ereigniskategorie gefunden"
+
+#: wp/widgettoday.php
+msgid "A list of the current day events."
+msgstr "Liste der Ereignisse des aktuellen Tages."
+
+#: wp/adminpages.php
+msgid "Add several events"
+msgstr ""
+
+#: wp/adminpages.php
+msgid "Add several"
+msgstr ""
+
+#: wp/adminpages.php
+#, php-format
+msgid "Settings of the %1$s plugin"
+msgstr "Einstellungen des %1$s Plugins"
+
+#: wp/adminpages.php
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: wp/adminpages.php
+#, php-format
+msgid "About %1$s"
+msgstr "Über %1$s"
+
+#: wp/adminpages.php
+msgid "About"
+msgstr "Über"
+
+#: wp/widgetupcoming.php
+msgid "A list of the upcoming events within a certain date range."
+msgstr "Liste der Ereignisse in einem bestimmten Zeitraum."
+
+#: rpb-calendar.php
+msgid ""
+"This plugin allows you to list and schedule events, and to display them in a "
+"calendar in a post or a page."
+msgstr ""
+"Mit diesem Plugin können Sie Ereignisse auflisten und planen, um sie als "
+"Kalender in einem Beitrag oder einer Seite anzuzeigen."
