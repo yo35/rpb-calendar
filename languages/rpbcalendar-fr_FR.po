@@ -1,7 +1,6 @@
-# French translations for PACKAGE package.
-# Copyright (C) 2011 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# Yoann <yoann.le-montagner@m4x.org>, 2011.
+# French translations for RPB Calendar package.
+# Copyright (C) 2014  Yoann Le Montagner <yo35@melix.net>
+# This file is distributed under the same license as the RPB Calendar package.
 #
 msgid ""
 msgstr ""
