@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 20:38+0200\n"
+"POT-Creation-Date: 2014-09-02 20:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,6 +74,19 @@ msgstr ""
 #. Date range format, large range
 #: helpers/date.php
 msgid "%m1$s %d1$s, %y1$s – %m2$s %d2$s, %y2$s"
+msgstr ""
+
+#: models/traits/postseveralevents.php
+msgid "No event added"
+msgstr ""
+
+#: models/traits/postseveralevents.php
+msgid "1 event added"
+msgstr ""
+
+#: models/traits/postseveralevents.php
+#, php-format
+msgid "%1$d events added"
 msgstr ""
 
 #: models/traits/widgettoday.php wp/widgettoday.php
@@ -198,6 +211,45 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
+#: templates/adminpage/addseveral.php
+msgid "Copy this event"
+msgstr ""
+
+#: templates/adminpage/addseveral.php
+msgid "Remove this event"
+msgstr ""
+
+#: templates/adminpage/addseveral.php
+#: templates/widgetedit/titlefield.php
+msgid "Title:"
+msgstr ""
+
+#: templates/adminpage/addseveral.php
+msgid "Link:"
+msgstr ""
+
+#: templates/adminpage/addseveral.php
+#: templates/eventedit/datetimeeditionbox.php
+msgid "From:"
+msgstr ""
+
+#: templates/adminpage/addseveral.php
+#: templates/eventedit/datetimeeditionbox.php
+msgid "To:"
+msgstr ""
+
+#: templates/adminpage/addseveral.php
+msgid "Excerpt:"
+msgstr ""
+
+#: templates/adminpage/addseveral.php
+msgid "IDs of the categories (comma separated string):"
+msgstr ""
+
+#: templates/adminpage/addseveral.php
+msgid "Add events"
+msgstr ""
+
 #: templates/adminpage/header.php
 msgid ""
 "To work properly, the RPB Calendar plugin needs JavaScript to be activated "
@@ -215,6 +267,10 @@ msgstr ""
 
 #: templates/initialization.php
 msgid "Today"
+msgstr ""
+
+#: templates/initialization.php
+msgid "The link must start with http:// or https://."
 msgstr ""
 
 #: templates/initialization.php
@@ -249,10 +305,6 @@ msgstr ""
 msgid "IDs of the filtered categories (comma separated string):"
 msgstr ""
 
-#: templates/widgetedit/titlefield.php
-msgid "Title:"
-msgstr ""
-
 #: templates/widgetedit/upcoming.php
 msgid "Length of the time frame (in days):"
 msgstr ""
@@ -271,18 +323,6 @@ msgstr ""
 
 #: templates/eventedit/linkeditionbox.php
 msgid "Preview"
-msgstr ""
-
-#: templates/eventedit/linkeditionbox.php
-msgid "The link must start with http:// or https://."
-msgstr ""
-
-#: templates/eventedit/datetimeeditionbox.php
-msgid "From:"
-msgstr ""
-
-#: templates/eventedit/datetimeeditionbox.php
-msgid "To:"
 msgstr ""
 
 #: templates/categoryedit/colorfield.php
@@ -360,6 +400,14 @@ msgstr ""
 
 #: wp/widgettoday.php
 msgid "A list of the current day events."
+msgstr ""
+
+#: wp/adminpages.php
+msgid "Add several events"
+msgstr ""
+
+#: wp/adminpages.php
+msgid "Add several"
 msgstr ""
 
 #: wp/adminpages.php
