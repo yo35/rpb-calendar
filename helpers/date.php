@@ -56,8 +56,8 @@ abstract class RPBCalendarHelperDate
 		$date = getdate($date);
 
 		$res = $showWeekday ? ($showYear ?
-			/*i18n Date format, full (e.g. "Sunday, August 3, 2014")    */ __('%w$s, %m$s %d$s, %y$s', 'rpbcalendar') :
-			/*i18n Date format, without year (e.g. "Sunday, August, 3") */ __('%w$s, %m$s %d$s'      , 'rpbcalendar')
+			/*i18n Date format, full (e.g. "Sunday, August 3, 2014")   */ __('%w$s, %m$s %d$s, %y$s', 'rpbcalendar') :
+			/*i18n Date format, without year (e.g. "Sunday, August 3") */ __('%w$s, %m$s %d$s'      , 'rpbcalendar')
 		) : ($showYear ?
 			/*i18n Date format, without weekday (e.g. "August 3, 2014") */ __('%m$s %d$s, %y$s'      , 'rpbcalendar') :
 			/*i18n Date format, only month and day (e.g. "August 3")    */ __('%m$s %d$s'            , 'rpbcalendar')

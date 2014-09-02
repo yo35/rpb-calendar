@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-02 20:11+0200\n"
+"POT-Creation-Date: 2014-09-02 20:58+0200\n"
 "PO-Revision-Date: 2011-08-29 00:37+0200\n"
 "Last-Translator: Yoann <yoann.le-montagner@m4x.org>\n"
 "Language-Team: French\n"
@@ -45,7 +45,7 @@ msgstr "Couleur"
 msgid "%w$s, %m$s %d$s, %y$s"
 msgstr "%w$s %d$s %m$s %y$s"
 
-#. Date format, without year (e.g. "Sunday, August, 3")
+#. Date format, without year (e.g. "Sunday, August 3")
 #: helpers/date.php
 msgid "%w$s, %m$s %d$s"
 msgstr "%w$s %d$s %m$s"
