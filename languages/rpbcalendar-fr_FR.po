@@ -433,7 +433,7 @@ msgstr "Ajouter plusieurs événements"
 
 #: wp/adminpages.php
 msgid "Add several"
-msgstr "Ajout multiple"
+msgstr "Ajouts multiples"
 
 #: wp/adminpages.php
 #, php-format
