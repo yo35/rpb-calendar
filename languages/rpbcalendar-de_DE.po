@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: RPB Calendar Plugin deutsch\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-02 20:58+0200\n"
-"PO-Revision-Date: 2014-09-01 13:10+0100\n"
+"PO-Revision-Date: 2014-09-03 08:25+0100\n"
 "Last-Translator: Kay Zeisberg <kay.zeisberg@gmail.com>\n"
 "Language-Team: Kay Zeisberg, Leipzig <kay.zeisberg@gmail.com>\n"
 "Language: de_DE\n"
@@ -78,16 +78,16 @@ msgstr "%d1$s. %m1$s %y1$s – %d2$s. %m2$s %y2$s"
 
 #: models/traits/postseveralevents.php
 msgid "No event added"
-msgstr ""
+msgstr "Kein Ereignis hinzugefügt"
 
 #: models/traits/postseveralevents.php
 msgid "1 event added"
-msgstr ""
+msgstr "1 Ereignis hinzugefügt"
 
 #: models/traits/postseveralevents.php
 #, php-format
 msgid "%1$d events added"
-msgstr ""
+msgstr "%1$d Ereignisse hinzugefügt"
 
 #: models/traits/widgettoday.php wp/widgettoday.php
 msgid "Today's events"
@@ -125,7 +125,7 @@ msgid ""
 "%1$sGitHub bug tracker%2$s."
 msgstr ""
 "Wenn Sie Fehler in diesem Plugin bemerken oder wenn Sie neue Funktionen für "
-"zukünftige Versionen erhalten möchten, können Sie diese berichten/"
+"zukünftige Versionen erhalten möchten, können Sie diese berichten / "
 "vorschlagen im %1$sGitHub bug tracker%2$s."
 
 #: templates/adminpage/about.php
@@ -233,11 +233,11 @@ msgstr "Änderungen speichern"
 
 #: templates/adminpage/addseveral.php
 msgid "Copy this event"
-msgstr ""
+msgstr "Kopiere dieses Ereignis"
 
 #: templates/adminpage/addseveral.php
 msgid "Remove this event"
-msgstr ""
+msgstr "Lösche dieses Ereignis"
 
 #: templates/adminpage/addseveral.php templates/widgetedit/titlefield.php
 msgid "Title:"
@@ -259,15 +259,15 @@ msgstr "An:"
 
 #: templates/adminpage/addseveral.php
 msgid "Excerpt:"
-msgstr ""
+msgstr "Auszug:"
 
 #: templates/adminpage/addseveral.php
 msgid "IDs of the categories (comma separated string):"
-msgstr ""
+msgstr "IDs der Kategorien (durch Kommata getrennt)"
 
 #: templates/adminpage/addseveral.php
 msgid "Add events"
-msgstr ""
+msgstr "Ereignisse hinzufügen"
 
 #: templates/adminpage/header.php
 msgid ""
@@ -430,11 +430,11 @@ msgstr "Liste der Ereignisse des aktuellen Tages."
 
 #: wp/adminpages.php
 msgid "Add several events"
-msgstr ""
+msgstr "Mehrere Ereignisse hinzufügen"
 
 #: wp/adminpages.php
 msgid "Add several"
-msgstr ""
+msgstr "Mehrere hinzufügen"
 
 #: wp/adminpages.php
 #, php-format
