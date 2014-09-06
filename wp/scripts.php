@@ -96,7 +96,7 @@ abstract class RPBCalendarScripts
 
 
 	/**
-	 * Determine the language code to use to configure the jQuery date picker widget, and enqueue the required file.
+	 * Determine the language code to use to configure a given JavaScript library, and enqueue the required file.
 	 *
 	 * @param string $handle Handle of the file to localize.
 	 * @param string $relativeFilePathTemplate Where the localized files should be searched.
