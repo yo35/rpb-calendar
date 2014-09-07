@@ -18,38 +18,28 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                            *
  ******************************************************************************/
+?>
 
+<?php if($model->hasCategory()): ?>
+	<ul>
+		<?php while($model->fetchCategory()): ?>
 
-require_once(RPBCALENDAR_ABSPATH . 'models/abstract/adminpage.php');
-require_once(RPBCALENDAR_ABSPATH . 'helpers/date.php');
+			<li>
+				<input type="checkbox" name="rpbevent_categories_0[]" value="<?php echo htmlspecialchars($model->getCategoryID()); ?>"
+					id="rpbcalendar-eventCategoryField-category<?php echo htmlspecialchars($model->getCategoryID()); ?>-0"
+				/>
+				<label for="rpbcalendar-eventCategoryField-category<?php echo htmlspecialchars($model->getCategoryID()); ?>-0">
+					<span class="rpbcalendar-categoryTag" style="background-color:<?php echo htmlspecialchars($model->getCategoryInheritedColor()); ?>"></span>
+					<?php echo htmlspecialchars($model->getCategoryName()); ?>
+				</label>
+			</li>
 
+			<?php
+				$model->beginFetchCategoryChildren();
+				include(RPBCALENDAR_ABSPATH . 'templates/adminpage/addseveral-categoryselector.php');
+				$model->endFetchCategoryChildren();
+			?>
 
-/**
- * Model for the "Add several events" page.
- */
-class RPBCalendarModelAdminPageAddSeveral extends RPBCalendarAbstractModelAdminPage
-{
-	private $initialEventDateFields;
-
-
-	public function __construct()
-	{
-		parent::__construct();
-		$this->loadTrait('AdminPageURLs');
-		$this->loadTrait('CategoryQuery');
-	}
-
-
-	/**
-	 * Initial value of the event begin/end fields.
-	 *
-	 * @return string
-	 */
-	public function getInitialEventDateFields()
-	{
-		if(!isset($this->initialEventDateFields)) {
-			$this->initialEventDateFields = date_i18n('Y-m-d', RPBCalendarHelperDate::today());
-		}
-		return $this->initialEventDateFields;
-	}
-}
+		<?php endwhile; ?>
+	</ul>
+<?php endif; ?>

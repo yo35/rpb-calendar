@@ -188,6 +188,9 @@
 			newEntry.find('*[name$="_' + rowIndex + '"]').each(function(index, elem) {
 				$(elem).attr('name', $(elem).attr('name').replace(new RegExp(rowIndex + '$'), newRowIndex));
 			});
+			newEntry.find('*[name$="_' + rowIndex + '[]"]').each(function(index, elem) {
+				$(elem).attr('name', $(elem).attr('name').replace(new RegExp(rowIndex + '\\[\\]$'), newRowIndex + '[]'));
+			});
 
 			// Append the cloned row, and initialize its widgets.
 			entry.after(newEntry);

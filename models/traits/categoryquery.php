@@ -125,4 +125,15 @@ class RPBCalendarTraitCategoryQuery extends RPBCalendarTraitCategory
 			$this->setCategoryID(-1);
 		}
 	}
+
+
+	/**
+	 * Return the name of the currently selected event category.
+	 *
+	 * @return string
+	 */
+	public function getCategoryName()
+	{
+		return $this->currentCategory->name;
+	}
 }
