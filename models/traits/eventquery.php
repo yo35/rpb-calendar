@@ -130,16 +130,15 @@ class RPBCalendarTraitEventQuery extends RPBCalendarTraitEvent
 	 */
 	public function fetchEvent()
 	{
-		// Return false if there is no more events.
-		if(!$this->query->have_posts()) {
+		if($this->query->have_posts()) {
+			$this->query->the_post();
+			$this->setEventID($this->query->post->ID);
+			return true;
+		}
+		else {
 			$this->setEventID(-1);
 			return false;
 		}
-
-		// Otherwise, fetch the next event, set its ID, and return true.
-		$this->query->the_post();
-		$this->setEventID($this->query->post->ID);
-		return true;
 	}
 
 
