@@ -22,9 +22,10 @@
 
 <?php if($model->hasCategory()): ?>
 	<ul>
-		<?php while($model->fetchCategory()): ?>
 
+		<?php while($model->fetchCategory()): ?>
 			<li>
+
 				<input type="checkbox" name="rpbevent_categories_0[]" value="<?php echo htmlspecialchars($model->getCategoryID()); ?>"
 					id="rpbcalendar-eventCategoryField-category<?php echo htmlspecialchars($model->getCategoryID()); ?>-0"
 				/>
@@ -32,14 +33,15 @@
 					<span class="rpbcalendar-categoryTag" style="background-color:<?php echo htmlspecialchars($model->getCategoryInheritedColor()); ?>"></span>
 					<?php echo htmlspecialchars($model->getCategoryName()); ?>
 				</label>
+
+				<?php
+					$model->beginFetchCategoryChildren();
+					include(RPBCALENDAR_ABSPATH . 'templates/adminpage/addseveral-categoryselector.php');
+					$model->endFetchCategoryChildren();
+				?>
+
 			</li>
-
-			<?php
-				$model->beginFetchCategoryChildren();
-				include(RPBCALENDAR_ABSPATH . 'templates/adminpage/addseveral-categoryselector.php');
-				$model->endFetchCategoryChildren();
-			?>
-
 		<?php endwhile; ?>
+
 	</ul>
 <?php endif; ?>
