@@ -39,7 +39,8 @@ class RPBCalendarTraitCategoryQuery extends RPBCalendarTraitCategory
 	 */
 	public function __construct() {
 		$this->currentCategoryList = get_terms('rpbevent_category', array(
-			'parent' => 0 // Fetch the top-level category only.
+			'hide_empty' => false,
+			'parent'     => 0 // Fetch the top-level category only.
 		));
 	}
 
@@ -82,7 +83,8 @@ class RPBCalendarTraitCategoryQuery extends RPBCalendarTraitCategory
 
 		// Fetch the children of the current category.
 		$this->currentCategoryList = get_terms('rpbevent_category', array(
-			'parent' => $this->getCategoryID()
+			'hide_empty' => false,
+			'parent'     => $this->getCategoryID()
 		));
 		$this->currentCategoryIndex = -1;
 		$this->resetCurrentCategory();
