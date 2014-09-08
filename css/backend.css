@@ -101,6 +101,32 @@ td.rpbevent_date_time .rpbcalendar-eventDateEnd {
 
 
 /* -------------------------------------------------------------------------- */
+/* Category selector */
+/* -------------------------------------------------------------------------- */
+
+.rpbcalendar-eventCategorySelector {
+	border: solid 1px #ddd;
+	background-color: #fff;
+	padding: 0px 0.9em;
+	overflow: auto;
+}
+
+.rpbcalendar-eventCategorySelector ul ul {
+	margin-left: 18px;
+}
+
+.rpbcalendar-eventCategorySelector li {
+	margin: 0px;
+	line-height: 1.75em;
+}
+
+.rpbcalendar-eventCategorySelector input[type="checkbox"] {
+	vertical-align: -0.32em;
+}
+
+
+
+/* -------------------------------------------------------------------------- */
 /* Horizontal box layout */
 /* -------------------------------------------------------------------------- */
 
