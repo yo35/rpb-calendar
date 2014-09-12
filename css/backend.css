@@ -127,7 +127,7 @@ td.rpbevent_date_time .rpbcalendar-eventDateEnd {
 
 
 /* -------------------------------------------------------------------------- */
-/* Horizontal box layout */
+/* Box layout */
 /* -------------------------------------------------------------------------- */
 
 .rpbcalendar-hBox {
@@ -137,6 +137,14 @@ td.rpbevent_date_time .rpbcalendar-eventDateEnd {
 	-webkit-flex-direction: row;
 }
 
+.rpbcalendar-vBox {
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: column;
+	-webkit-flex-direction: column;
+}
+
+.rpbcalendar-vBox.rpbcalendar-spaceAround,
 .rpbcalendar-hBox.rpbcalendar-spaceAround {
 	justify-content: space-around;
 }
@@ -146,33 +154,16 @@ td.rpbevent_date_time .rpbcalendar-eventDateEnd {
 	margin: 0px 0px 0px 5px;
 }
 
+.rpbcalendar-vBox > *,
+.wp-core-ui .rpbcalendar-vBox > * {
+	margin: 5px 0px 0px 0px;
+}
+
 .rpbcalendar-hBox.rpbcalendar-spaceAround > *,
 .wp-core-ui .rpbcalendar-hBox.rpbcalendar-spaceAround > *,
 .rpbcalendar-hBox > :first-child,
 .wp-core-ui .rpbcalendar-hBox > :first-child {
 	margin-left: 0px;
-}
-
-
-
-/* -------------------------------------------------------------------------- */
-/* Vertical box layout */
-/* -------------------------------------------------------------------------- */
-
-.rpbcalendar-vBox {
-	display: flex;
-	display: -webkit-flex;
-	flex-direction: column;
-	-webkit-flex-direction: column;
-}
-
-.rpbcalendar-vBox.rpbcalendar-spaceAround {
-	justify-content: space-around;
-}
-
-.rpbcalendar-vBox > *,
-.wp-core-ui .rpbcalendar-vBox > * {
-	margin: 5px 0px 0px 0px;
 }
 
 .rpbcalendar-vBox.rpbcalendar-spaceAround > *,
@@ -238,8 +229,47 @@ a.rpbcalendar-removeEntryButton:hover {
 	color: #e55;
 }
 
+#rpbcalendar-addSeveralPage .rpbcalendar-cloneEntryButton,
+#rpbcalendar-addSeveralPage .rpbcalendar-removeEntryButton {
+	margin-top: 20px;
+}
+
 .rpbcalendar-eventEntry + .rpbcalendar-eventEntry {
 	margin-top: 25px;
+}
+
+#rpbcalendar-addSeveralPage .rpbcalendar-labelCell {
+	text-align: right;
+	font-weight: bold;
+}
+
+#rpbcalendar-addSeveralPage .rpbcalendar-eventTitleField,
+#rpbcalendar-addSeveralPage .rpbcalendar-eventLinkField,
+#rpbcalendar-addSeveralPage .rpbcalendar-eventCategorySelector {
+	width: 250px;
+}
+
+#rpbcalendar-addSeveralPage .rpbcalendar-eventCategorySelector {
+	height: 100px;
+}
+
+#rpbcalendar-addSeveralPage .rpbcalendar-eventContentField {
+	width: 100%;
+}
+
+#rpbcalendar-addSeveralPage .rpbcalendar-eventDateBeginPicker,
+#rpbcalendar-addSeveralPage .rpbcalendar-eventDateEndPicker {
+	margin-top: 5px;
+	margin-bottom: -5px;
+}
+
+#rpbcalendar-addSeveralPage .rpbcalendar-eventDateBeginWeekday,
+#rpbcalendar-addSeveralPage .rpbcalendar-eventDateEndWeekday {
+	margin-left: 5px;
+}
+
+#rpbcalendar-addSeveralPage .rpbcalendar-hBox > div + div {
+	margin-left: 20px;
 }
 
 

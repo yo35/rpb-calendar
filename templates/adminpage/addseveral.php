@@ -35,23 +35,47 @@
 
 				<div class="rpbcalendar-hBox">
 
-					<div class="rpbcalendar-vBox rpbcalendar-spaceAround">
+					<div class="rpbcalendar-vBox">
 						<a href="#" class="dashicons dashicons-plus-alt rpbcalendar-cloneEntryButton" title="<?php _e('Copy this event', 'rpbcalendar'); ?>"></a>
 						<a href="#" class="dashicons dashicons-dismiss rpbcalendar-removeEntryButton" title="<?php _e('Remove this event', 'rpbcalendar'); ?>"></a>
 					</div>
 
 					<div class="rpbcalendar-gridLayout">
 						<div>
-							<div>
-								<label for="rpbcalendar-eventTitleField-0"><?php _e('Title:', 'rpbcalendar'); ?></label>
+							<div class="rpbcalendar-labelCell">
+								<label for="rpbcalendar-eventTitleField-0"><?php _e('Title', 'rpbcalendar'); ?></label>
 							</div>
 							<div>
 								<input type="text" name="rpbevent_title_0" class="rpbcalendar-eventTitleField" id="rpbcalendar-eventTitleField-0" value="" />
 							</div>
 						</div>
 						<div>
+							<div class="rpbcalendar-labelCell">
+								<label for="rpbcalendar-eventDateBeginField-0"><?php _e('From', 'rpbcalendar'); ?></label>
+							</div>
 							<div>
-								<label for="rpbcalendar-eventLinkField-0"><?php _e('Link:', 'rpbcalendar'); ?></label>
+								<input type="text" name="rpbevent_date_begin_0" class="rpbcalendar-eventDateBeginField" id="rpbcalendar-eventDateBeginField-0" value="<?php
+									echo htmlspecialchars($model->getInitialEventDateFields());
+								?>" size="10" />
+								<span class="rpbcalendar-eventDateBeginWeekday"></span>
+							</div>
+						</div>
+						<div>
+							<div class="rpbcalendar-labelCell">
+								<label for="rpbcalendar-eventDateEndField-0"><?php _e('To', 'rpbcalendar'); ?></label>
+							</div>
+							<div>
+								<input type="text" name="rpbevent_date_end_0" class="rpbcalendar-eventDateEndField" id="rpbcalendar-eventDateEndField-0" value="<?php
+									echo htmlspecialchars($model->getInitialEventDateFields());
+								?>" size="10" />
+								<span class="rpbcalendar-eventDateEndWeekday"></span>
+								<div class="rpbcalendar-jQuery-enableSmoothness rpbcalendar-eventDateBeginPicker" id="rpbcalendar-eventDateBeginPicker-0"></div>
+								<div class="rpbcalendar-jQuery-enableSmoothness rpbcalendar-eventDateEndPicker" id="rpbcalendar-eventDateEndPicker-0"></div>
+							</div>
+						</div>
+						<div>
+							<div class="rpbcalendar-labelCell">
+								<label for="rpbcalendar-eventLinkField-0"><?php _e('Link', 'rpbcalendar'); ?></label>
 							</div>
 							<div>
 								<input type="text" name="rpbevent_link_0" class="rpbcalendar-eventLinkField" id="rpbcalendar-eventLinkField-0" value="" />
@@ -59,43 +83,24 @@
 						</div>
 					</div>
 
-					<div>
-						<div class="rpbcalendar-gridLayout">
-							<div>
-								<div>
-									<label for="rpbcalendar-eventDateBeginField-0"><?php _e('From:', 'rpbcalendar'); ?></label>
-								</div>
-								<div>
-									<input type="text" name="rpbevent_date_begin_0" class="rpbcalendar-eventDateBeginField" id="rpbcalendar-eventDateBeginField-0" value="<?php
-										echo htmlspecialchars($model->getInitialEventDateFields());
-									?>" size="10" />
-								</div>
-								<div>
-									<span class="rpbcalendar-eventDateBeginWeekday"></span>
-								</div>
+					<div class="rpbcalendar-gridLayout">
+						<div>
+							<div class="rpbcalendar-labelCell">
+								<label for="rpbcalendar-eventTeaserField-0"><?php _e('Excerpt', 'rpbcalendar'); ?></label>
 							</div>
 							<div>
-								<div>
-									<label for="rpbcalendar-eventDateEndField-0"><?php _e('To:', 'rpbcalendar'); ?></label>
-								</div>
-								<div>
-									<input type="text" name="rpbevent_date_end_0" class="rpbcalendar-eventDateEndField" id="rpbcalendar-eventDateEndField-0" value="<?php
-										echo htmlspecialchars($model->getInitialEventDateFields());
-									?>" size="10" />
-								</div>
-								<div>
-									<span class="rpbcalendar-eventDateEndWeekday"></span>
-								</div>
+								<textarea name="rpbevent_teaser_0" class="rpbcalendar-eventTeaserField" id="rpbcalendar-eventTeaserField-0"></textarea>
 							</div>
 						</div>
-						<div class="rpbcalendar-jQuery-enableSmoothness rpbcalendar-eventDateBeginPicker" id="rpbcalendar-eventDateBeginPicker-0"></div>
-						<div class="rpbcalendar-jQuery-enableSmoothness rpbcalendar-eventDateEndPicker" id="rpbcalendar-eventDateEndPicker-0"></div>
+						<div>
+							<div class="rpbcalendar-labelCell">
+								<label for="rpbcalendar-eventContentField-0"><?php _e('Content', 'rpbcalendar'); ?></label>
+							</div>
+							<div>
+								<input type="text" name="rpbevent_content_0" class="rpbcalendar-eventContentField" id="rpbcalendar-eventContentField-0" value="" />
+							</div>
+						</div>
 					</div>
-
-					<div class="rpbcalendar-vBox">
-						<label for="rpbcalendar-eventTeaser-0"><?php _e('Excerpt:', 'rpbcalendar'); ?></label>
-					</div>
-					<textarea name="rpbevent_teaser_0" class="rpbcalendar-eventTeaser" id="rpbcalendar-eventTeaser-0"></textarea>
 
 					<div class="rpbcalendar-eventCategorySelector">
 						<input type="hidden" name="rpbevent_categories_0[]" value="0" />
