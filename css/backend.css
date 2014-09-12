@@ -254,7 +254,7 @@ a.rpbcalendar-removeEntryButton:hover {
 }
 
 #rpbcalendar-addSeveralPage .rpbcalendar-eventTeaserField {
-	height: 94px; /* TODO: avoid fixed height */
+	height: 127px; /* TODO: avoid fixed height */
 }
 
 #rpbcalendar-addSeveralPage .rpbcalendar-eventContentField {

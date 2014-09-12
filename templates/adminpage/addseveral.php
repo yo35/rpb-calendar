@@ -92,14 +92,6 @@
 								<textarea name="rpbevent_teaser_0" class="rpbcalendar-eventTeaserField" id="rpbcalendar-eventTeaserField-0"></textarea>
 							</div>
 						</div>
-						<div>
-							<div class="rpbcalendar-labelCell">
-								<label for="rpbcalendar-eventContentField-0"><?php _e('Content', 'rpbcalendar'); ?></label>
-							</div>
-							<div>
-								<input type="text" name="rpbevent_content_0" class="rpbcalendar-eventContentField" id="rpbcalendar-eventContentField-0" value="" />
-							</div>
-						</div>
 					</div>
 
 					<div class="rpbcalendar-eventCategorySelector">
