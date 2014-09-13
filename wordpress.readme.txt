@@ -59,6 +59,9 @@ please have a look to the general [plugin management page](http://codex.wordpres
 
 == Changelog ==
 
+= 1.99.5 (September 13, 2014) =
+* Improve the "add several events" page.
+
 = 1.99.4 (September 2, 2014) =
 * German translation (thanks to Kay Zeisberg).
 * Add page to create several similar events in one click (beta feature).
