@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-02 20:58+0200\n"
+"POT-Creation-Date: 2014-09-13 08:56+0200\n"
 "PO-Revision-Date: 2011-08-29 00:37+0200\n"
 "Last-Translator: Yoann <yoann.le-montagner@m4x.org>\n"
 "Language-Team: French\n"
@@ -21,6 +21,7 @@ msgid "Date/time"
 msgstr "Date/heure"
 
 #: controllers/eventlist.php controllers/eventedit.php
+#: templates/adminpage/addseveral.php
 msgid "Link"
 msgstr "Lien"
 
@@ -238,35 +239,25 @@ msgstr "Copier cet événement"
 msgid "Remove this event"
 msgstr "Supprimer cet événement"
 
-#: templates/adminpage/addseveral.php templates/widgetedit/titlefield.php
-msgid "Title:"
-msgstr "Titre&nbsp;:"
+#: templates/adminpage/addseveral.php
+msgid "Title"
+msgstr "Titre"
 
 #: templates/adminpage/addseveral.php
-msgid "Link:"
-msgstr "Lien&nbsp;:"
+msgid "From"
+msgstr "Début"
 
 #: templates/adminpage/addseveral.php
-#: templates/eventedit/datetimeeditionbox.php
-msgid "From:"
-msgstr "Du&nbsp;:"
+msgid "To"
+msgstr "Fin"
 
 #: templates/adminpage/addseveral.php
-#: templates/eventedit/datetimeeditionbox.php
-msgid "To:"
-msgstr "Au&nbsp;:"
-
-#: templates/adminpage/addseveral.php
-msgid "Excerpt:"
-msgstr ""
-
-#: templates/adminpage/addseveral.php
-msgid "IDs of the categories (comma separated string):"
+msgid "Excerpt"
 msgstr ""
 
 #: templates/adminpage/addseveral.php
 msgid "Add events"
-msgstr ""
+msgstr "Ajouter des événements"
 
 #: templates/adminpage/header.php
 msgid ""
@@ -325,6 +316,10 @@ msgstr "Afficher seulement les catégories sélectionnées"
 msgid "IDs of the filtered categories (comma separated string):"
 msgstr ""
 
+#: templates/widgetedit/titlefield.php
+msgid "Title:"
+msgstr "Titre&nbsp;:"
+
 #: templates/widgetedit/upcoming.php
 msgid "Length of the time frame (in days):"
 msgstr "Durée de la période à afficher (en jours)&nbsp;:"
@@ -344,6 +339,14 @@ msgstr "Afficher la cible du lien dans une nouvelle fenêtre"
 #: templates/eventedit/linkeditionbox.php
 msgid "Preview"
 msgstr "Aperçu"
+
+#: templates/eventedit/datetimeeditionbox.php
+msgid "From:"
+msgstr "Début&nbsp;:"
+
+#: templates/eventedit/datetimeeditionbox.php
+msgid "To:"
+msgstr "Fin&nbsp;:"
 
 #: templates/categoryedit/colorfield.php
 #, php-format
@@ -465,6 +468,9 @@ msgstr ""
 "Ce plugin vous permets de répertorier et de planifier des événements, et de "
 "les afficher dans sur un calendrier dans un article ou une page."
 
+#~ msgid "Link:"
+#~ msgstr "Lien&nbsp;:"
+
 #~ msgid "Name"
 #~ msgstr "Nom"
 
@@ -516,9 +522,6 @@ msgstr ""
 
 #~ msgid "No category"
 #~ msgstr "Aucune catégorie"
-
-#~ msgid "Title"
-#~ msgstr "Titre"
 
 #~ msgid "Description"
 #~ msgstr "Description"

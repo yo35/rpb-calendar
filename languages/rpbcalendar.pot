@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-02 20:58+0200\n"
+"POT-Creation-Date: 2014-09-13 08:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,7 @@ msgid "Date/time"
 msgstr ""
 
 #: controllers/eventlist.php controllers/eventedit.php
+#: templates/adminpage/addseveral.php
 msgid "Link"
 msgstr ""
 
@@ -220,30 +221,19 @@ msgid "Remove this event"
 msgstr ""
 
 #: templates/adminpage/addseveral.php
-#: templates/widgetedit/titlefield.php
-msgid "Title:"
+msgid "Title"
 msgstr ""
 
 #: templates/adminpage/addseveral.php
-msgid "Link:"
+msgid "From"
 msgstr ""
 
 #: templates/adminpage/addseveral.php
-#: templates/eventedit/datetimeeditionbox.php
-msgid "From:"
+msgid "To"
 msgstr ""
 
 #: templates/adminpage/addseveral.php
-#: templates/eventedit/datetimeeditionbox.php
-msgid "To:"
-msgstr ""
-
-#: templates/adminpage/addseveral.php
-msgid "Excerpt:"
-msgstr ""
-
-#: templates/adminpage/addseveral.php
-msgid "IDs of the categories (comma separated string):"
+msgid "Excerpt"
 msgstr ""
 
 #: templates/adminpage/addseveral.php
@@ -305,6 +295,10 @@ msgstr ""
 msgid "IDs of the filtered categories (comma separated string):"
 msgstr ""
 
+#: templates/widgetedit/titlefield.php
+msgid "Title:"
+msgstr ""
+
 #: templates/widgetedit/upcoming.php
 msgid "Length of the time frame (in days):"
 msgstr ""
@@ -323,6 +317,14 @@ msgstr ""
 
 #: templates/eventedit/linkeditionbox.php
 msgid "Preview"
+msgstr ""
+
+#: templates/eventedit/datetimeeditionbox.php
+msgid "From:"
+msgstr ""
+
+#: templates/eventedit/datetimeeditionbox.php
+msgid "To:"
 msgstr ""
 
 #: templates/categoryedit/colorfield.php
