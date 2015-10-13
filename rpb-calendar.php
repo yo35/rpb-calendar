@@ -26,7 +26,7 @@ Description: This plugin allows you to list and schedule events, and to display 
 Text Domain: rpbcalendar
 Author: Yoann Le Montagner
 License: GPLv3
-Version: 1.99.5
+Version: 1.99.6
 */
 
 

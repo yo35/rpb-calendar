@@ -2,7 +2,7 @@
 Contributors: yo35
 Tags: calendar, dates, events, event management, event organizer
 Requires at least: 3.9
-Tested up to: 4.0
+Tested up to: 4.3.1
 Stable tag: trunk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -56,6 +56,9 @@ please have a look to the general [plugin management page](http://codex.wordpres
 
 
 == Changelog ==
+
+= 1.99.6 (October 13, 2015) =
+* Fix bug occurring on WP 4.3.
 
 = 1.99.5 (September 13, 2014) =
 * Improve the "add several events" page.
