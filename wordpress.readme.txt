@@ -18,10 +18,8 @@ in a calendar in a post or a page of your WordPress blog.
 
 = Links =
 
- * **http://yo35.org/rpb-calendar/**
- * https://github.com/yo35/rpb-calendar (GitHub repository)
-
-[Ask for help or report a problem](https://github.com/yo35/rpb-calendar/issues).
+* [Ask for help or report a problem](https://github.com/yo35/rpb-calendar/issues)
+* [Source code (GitHub repository)](https://github.com/yo35/rpb-calendar)
 
 = Quick start guide =
 
@@ -30,11 +28,11 @@ to display the event calendar.
 
 = Features =
 
- * Calendar table to browse the events. Use AJAX for smooth navigation.
- * Customizable widgets to list the events of the current day and the upcoming ones.
- * Color-based classification of events.
- * Rich tool-tip system to attach information to events without overcrowding your blog posts/pages.
- * Multi-language support.
+* Calendar table to browse the events. Use AJAX for smooth navigation.
+* Customizable widgets to list the events of the current day and the upcoming ones.
+* Color-based classification of events.
+* Rich tool-tip system to attach information to events without overcrowding your blog posts/pages.
+* Multi-language support.
 
 If you encounter some bugs with this plugin, or if you wish to get new features
 in the future versions, you can report/propose them

@@ -6,9 +6,7 @@ the popular blog [CMS](http://en.wikipedia.org/wiki/Content_management_system).
 It allows to list and schedule events in WordPress blogs,
 and to display them in a calendar in a post or a page.
 
-**http://yo35.org/rpb-calendar/**  
-https://wordpress.org/plugins/rpb-calendar/ (plugin page on WordPress.org)  
-https://github.com/yo35/rpb-calendar (source code on GitHub)
+https://wordpress.org/plugins/rpb-calendar/
 
 
 

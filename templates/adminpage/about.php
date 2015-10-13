@@ -52,10 +52,8 @@
 
 	<h3><?php _e('Links', 'rpbcalendar'); ?></h3>
 	<ul>
-		<li><strong><a href="http://yo35.org/rpb-calendar/" target="_blank">http://yo35.org/rpb-calendar/</a></strong></li>
 		<li>
-			<a href="https://wordpress.org/plugins/rpb-calendar/" target="_blank">https://wordpress.org/plugins/rpb-calendar/</a>
-			<?php echo sprintf('(%1$s)', __('plugin page on WordPress.org', 'rpbcalendar')); ?>
+			<strong><a href="https://wordpress.org/plugins/rpb-calendar/" target="_blank">https://wordpress.org/plugins/rpb-calendar/</a></strong>
 		</li>
 		<li>
 			<a href="https://github.com/yo35/rpb-calendar" target="_blank">https://github.com/yo35/rpb-calendar</a>
