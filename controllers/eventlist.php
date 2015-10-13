@@ -29,6 +29,7 @@ require_once(RPBCALENDAR_ABSPATH . 'controllers/abstractcontroller.php');
 class RPBCalendarControllerEventList extends RPBCalendarAbstractController
 {
 	private $defaultColumns; // Default set of columns as defined by the WP engine.
+	private static $initialized = false;
 
 
 	public function __construct($defaultColumns)
@@ -40,14 +41,18 @@ class RPBCalendarControllerEventList extends RPBCalendarAbstractController
 
 	public function run()
 	{
-		// Register the callback to use to print the content of the custom columns.
-		add_action('manage_rpbevent_posts_custom_column', array($this, 'printCell'), 10, 2);
+		if(!self::$initialized) {
+			self::$initialized = true;
 
-		// Register the callback to filter the events based on their categories.
-		add_action('restrict_manage_posts', array($this, 'registerCategoryFilter'));
+			// Register the callback to use to print the content of the custom columns.
+			add_action('manage_rpbevent_posts_custom_column', array($this, 'printCell'), 10, 2);
 
-		// Register the filter that defines the sortable columns.
-		add_filter('manage_edit-rpbevent_sortable_columns', array($this, 'registerSortableColumns'));
+			// Register the callback to filter the events based on their categories.
+			add_action('restrict_manage_posts', array($this, 'registerCategoryFilter'));
+
+			// Register the filter that defines the sortable columns.
+			add_filter('manage_edit-rpbevent_sortable_columns', array($this, 'registerSortableColumns'));
+		}
 
 		// New set of columns.
 		return array(
@@ -57,7 +62,6 @@ class RPBCalendarControllerEventList extends RPBCalendarAbstractController
 			'rpbevent_link'       => __('Link', 'rpbcalendar'),
 			'author'              => $this->defaultColumns['author'  ],
 			'rpbevent_categories' => __('Categories', 'rpbcalendar'),
-			'comments'            => $this->defaultColumns['comments'],
 			'date'                => __('State', 'rpbcalendar')
 		);
 	}
